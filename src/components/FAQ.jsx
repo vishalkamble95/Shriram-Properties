@@ -111,11 +111,11 @@ const FAQ = () => {
 
               <h2 className="text-4xl font-bold text-white mb-6">{heading}</h2>
 
-              <p className="text-slate-300 mb-8 text-lg">
+              {/* <p className="text-slate-300 mb-8 text-lg">
                 Find answers to commonly asked questions about Ceratec Tower 1o8
                 Balewadi. Can't find what you're looking for? Contact our
                 support team.
-              </p>
+              </p> */}
 
               <div className="hidden md:block">
                 <div className="bg-gradient-to-br from-slate-800 to-slate-800/60 p-6 rounded-lg border border-slate-700">
