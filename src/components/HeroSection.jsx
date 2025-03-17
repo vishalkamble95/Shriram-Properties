@@ -22,7 +22,7 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
   };
 
   return (
-    <section className="relative bg-slate-900">
+    <section className="relative bg-slate-900 md:pt-0 pt-56">
       {/* Hero Image Container */}
       <div className="h-screen w-full relative overflow-hidden">
         {loading ? (

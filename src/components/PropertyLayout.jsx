@@ -235,11 +235,12 @@ const PropertyLayouts = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                   {/* Image Side */}
                   <div className="relative group order-2 md:order-1">
-                    <div className="aspect-w-16 aspect-h-12 bg-slate-800/60 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/40 shadow-lg">
+                    {/* Adjusted image container with a responsive aspect ratio */}
+                    <div className="aspect-video bg-slate-800/60 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/40 shadow-lg">
                       <img
                         src={activeLayouts[currentSlide]?.layout_image}
                         alt={activeLayouts[currentSlide]?.layout_name}
-                        className="object-contain w-full h-full p-2"
+                        className="object-cover w-full h-full"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent"></div>
                     </div>
@@ -424,20 +425,23 @@ const PropertyLayouts = () => {
         </div>
       </div>
 
-      {/* Expanded Image Modal */}
+      {/* Expanded Image Modal with backdrop closing functionality */}
       {expandedImage && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          <div className="relative">
+        <div
+          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+          onClick={() => setExpandedImage(null)}
+        >
+          <div className="relative" onClick={(e) => e.stopPropagation()}>
             <button
-              className="absolute top-2 right-2 p-2 text-white"
+              className="absolute top-2 right-2 p-2 text-red rounded-full bg-slate-800/80 backdrop-blur-sm shadow-lg hover:bg-red-500 transition-colors duration-300"
               onClick={() => setExpandedImage(null)}
             >
-              <X size={24} />
+              <X size={24} className="text-teal-600"/>
             </button>
             <img
               src={expandedImage}
               alt="Expanded Layout"
-              className="max-w-full max-h-screen"
+              className="max-w-full max-h-screen object-contain"
             />
           </div>
         </div>
