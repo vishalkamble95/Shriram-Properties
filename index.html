@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preload" href="/public/seodata.json" as="fetch" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <meta name="description" content="<%= description %>" />
+    <meta name="keywords" content="<%= keywords %>" />
+    
+    <meta property="og:title" content="<%= og_title %>" />
+    <meta property="og:description" content="<%= og_description %>" />
+    <meta property="og:image" content="<%= og_image %>" />
+    <meta property="og:type" content="<%= og_type %>" />
+    
+    <link rel="icon" href="<%= favicon %>" />
+    <link rel="canonical" href="<%= domain %>" />
+    <meta name="robots" content="index, follow">
+
+    <!-- Inject JSON-LD Structured Data -->
+  <script type="application/ld+json">
+    <%= script_1 %>
+  </script>
+  <script type="application/ld+json">
+    <%= script_2 %>
+  </script>
+
+  
+</head>
+
+<body>
+  <h1 style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+    <%= h1_text %>
+  </h1>
+  <h2 style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+    <%= h2_text %>
+  </h2>
+
+  <div id="root">
+  </div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>
