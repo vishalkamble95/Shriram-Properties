@@ -171,11 +171,11 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="#floor-plans"
+                    href="#layouts"
                     className="text-slate-300 hover:text-teal-400 transition-colors duration-200 flex items-center gap-2"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-teal-400"></span>
-                    Floor Plans
+                    Layout Plans
                   </a>
                 </li>
                 <li>
@@ -220,7 +220,7 @@ const Footer = () => {
                     </a>
                   </div>
                 </li>
-                <li className="flex items-start gap-3">
+                {/* <li className="flex items-start gap-3">
                   <Mail
                     size={18}
                     className="text-teal-400 mt-1 flex-shrink-0"
@@ -246,7 +246,7 @@ const Footer = () => {
                       {g_setting.footer_address}
                     </address>
                   </div>
-                </li>
+                </li> */}
                 <li className="flex items-start gap-3">
                   <Clock
                     size={18}
