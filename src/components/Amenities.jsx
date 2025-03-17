@@ -13,6 +13,12 @@ import {
   Loader,
   Volleyball,
   AlertCircle,
+  Wifi,
+  TentTree,
+  Plug,
+  Footprints,
+  Theater,
+  Dog,
 } from "lucide-react";
 import { ContactDialog } from "./Contact";
 import config from "../../config";
@@ -69,6 +75,15 @@ const Amenities = () => {
       Lift: <Forklift size={24} className="text-teal-400" />,
       "Security Gaurd": <Shield size={24} className="text-teal-400" />,
       "Solid Waste management": <Recycle size={24} className="text-teal-400" />,
+      "Free Wifi": <Wifi size={24} className="text-teal-400" />,
+      Amphitheater: <TentTree size={24} className="text-teal-400" />,
+      "Electical Vehical Charging Point": (
+        <Plug size={24} className="text-teal-400" />
+      ),
+      "Jogging Track": <Footprints size={24} className="text-teal-400" />,
+      "Mini Theater": <Theater size={24} className="text-teal-400" />,
+      Football: <Volleyball size={24} className="text-teal-400" />,
+      "Pet Play Area": <Dog size={24} className="text-teal-400" />,
     };
 
     return (
