@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Home, Building, Clock, Calendar, MapPin, Tag } from "lucide-react";
+import { Home, Building, Calendar, MapPin, Tag } from "lucide-react";
 
 function HeroSection({ propertyData, loading, error, openDialog }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
