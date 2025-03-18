@@ -8,9 +8,7 @@ import {
   Camera,
 } from "lucide-react";
 import config from "../../config";
-// import Lightbox from "./Lightbox";
-// import React, { useEffect,  } from "react";
-// import { ChevronLeft, ChevronRight, X, Camera } from "lucide-react";
+
 
 const Gallery = () => {
   const [images, setImages] = useState([]);
@@ -254,5 +252,5 @@ const Lightbox = ({ images, currentIndex, setCurrentIndex, closeLightbox }) => {
   );
 };
 
-// export default Lightbox;
+
 export default Gallery;
