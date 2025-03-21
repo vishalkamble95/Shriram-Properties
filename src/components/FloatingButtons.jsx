@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { MessageCircle, Phone, User } from "lucide-react";
 import seodata from "../../seodata.json";
+import { ContactDialog } from "./Contact";
+
 
 const FloatingButtons = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const [isOpen, setIsOpen] = useState(false);
+  
+    const openDialog = () => setIsOpen(true);
+    const closeDialog = () => setIsOpen(false);
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -29,12 +36,13 @@ const FloatingButtons = () => {
       id: "contact",
       icon: <User size={20} />,
       label: "Contact",
-      href: "#contact",
+      // href: "#contact",
       color: "bg-teal-600 hover:bg-teal-700 active:bg-teal-800",
+      openDialog: () => openDialog(),
     },
   ];
 
-  return (
+  return (<>
     <div className="fixed bottom-12 right-8 z-50 flex flex-col-reverse items-end gap-4">
       {/* Expanded buttons */}
       {isExpanded && (
@@ -42,7 +50,8 @@ const FloatingButtons = () => {
           {buttons.map((button) => (
             <a
               key={button.id}
-              href={button.href}
+              href={button?.href}
+              onClick={button?.openDialog}
               className="flex items-center gap-2 p-3 rounded-full bg-slate-800 shadow-lg text-white transition-all duration-300 hover:bg-slate-700 border border-slate-700"
               target={button.id === "whatsapp" ? "_blank" : "_self"}
               rel={button.id === "whatsapp" ? "noopener noreferrer" : ""}
@@ -82,6 +91,9 @@ const FloatingButtons = () => {
         </svg>
       </button>
     </div>
+         <ContactDialog isOpen={isOpen} onClose={closeDialog} />
+  
+  </>
   );
 };
 

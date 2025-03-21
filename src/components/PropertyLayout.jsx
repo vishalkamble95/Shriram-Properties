@@ -32,6 +32,7 @@ const PropertyLayouts = () => {
   const [error, setError] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [expandedImage, setExpandedImage] = useState(null);
+  
   const [isOpen, setIsOpen] = useState(false);
 
   const openDialog = () => setIsOpen(true);
@@ -447,8 +448,9 @@ const PropertyLayouts = () => {
         </div>
       )}
 
-      {/* Contact Dialog */}
-      {isOpen && <ContactDialog closeDialog={closeDialog} />}
+{/* Contact Dialog */}
+       <ContactDialog isOpen={isOpen} onClose={closeDialog} />
+ 
     </>
   );
 };
