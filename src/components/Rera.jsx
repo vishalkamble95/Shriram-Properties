@@ -83,6 +83,8 @@ const ReraInformation = () => {
       </div>
     );
   }
+  if (!reraData && !reraData?.rera_id) return;
+
 
   return (
     <>
