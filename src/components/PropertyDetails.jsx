@@ -328,7 +328,7 @@ const PropertyDetails = () => {
                       className="w-full mt-6 py-3 px-6 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-lg text-white font-medium flex items-center justify-center hover:from-teal-600 hover:to-emerald-600 transition-all"
                     >
                       <Phone size={18} className="mr-2" />
-                      Contact Agent
+                      Contact
                     </button>
                   </div>
                 </div>
