@@ -15,9 +15,12 @@ import {
   Clock,
 } from "lucide-react";
 import config from "../../config";
+import { QRCodeCanvas } from "qrcode.react";
 
 const Footer = () => {
   const [footerData, setFooterData] = useState(null);
+  const [reraData, setReraData] = useState(null);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -42,6 +45,20 @@ const Footer = () => {
         setLoading(false);
       }
     };
+
+         const fetchReraData = async () => {
+           try {
+             const response = await fetch(
+               `${config.API_URL}/rera?website=${config.SLUG_URL}`
+             );
+             if (!response.ok) throw new Error("Failed to fetch RERA data");
+             const data = await response.json();
+             setReraData(data.rera[0]);
+           } catch (err) {
+             console.error("Error fetching RERA data:", err);
+           }
+         };
+         fetchReraData();
 
     fetchFooterData();
   }, []);
@@ -110,6 +127,42 @@ const Footer = () => {
 
       {/* Main footer section with links */}
       <div className="container mx-auto px-4 py-12 max-w-6xl relative z-10">
+        {reraData?.rera_url && (
+          <>
+            <div
+              className={`flex flex-col items-center mb-4`}
+              style={{ transitionDelay: "150ms" }}
+            >
+              <QRCodeCanvas
+                value={reraData.rera_url}
+                height={120}
+                width={120}
+                className="p-3 bg-[#ffffff] rounded-xl"
+              />
+            </div>
+            <div className="mb-4">
+              <p className="text-xs sm:text-sm break-words text-center">
+                <span className="block sm:inline">
+                  Agent RERA: {footerData?.g_setting?.footer_agent_rera}
+                </span>
+                <span className="hidden sm:inline"> | </span>
+                <span className="block sm:inline">
+                  Project RERA: {reraData?.rera_id}
+                </span>
+                {reraData?.rera_url && (
+                  <a
+                    href={reraData.rera_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#696969] block sm:inline overflow-hidden text-ellipsis hover:text-[#555555] transition-colors duration-300"
+                  >
+                    ({reraData.rera_url})
+                  </a>
+                )}
+              </p>
+            </div>
+          </>
+        )}
         <div className="md:flex md:flex-wrap lg:flex-nowrap gap-8 lg:gap-12">
           {/* Company Info Column */}
           <div className="md:w-full lg:w-3/12 mb-8 md:mb-12 lg:mb-0">
