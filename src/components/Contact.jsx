@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   User,
   Mail,
@@ -25,6 +25,34 @@ export const ContactDialog = ({ isOpen, onClose }) => {
   const [submitting, setSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // null, 'success', 'error'
   const [errorMessage, setErrorMessage] = useState("");
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+   useEffect(() => {
+     const fetchData = async () => {
+       try {
+         setLoading(true);
+         const response = await fetch(
+           `${config.API_URL}/header?website=${config.SLUG_URL}`
+         );
+
+         if (!response.ok) {
+           throw new Error("Failed to fetch header data");
+         }
+
+         const result = await response.json();
+         setData(result);
+       } catch (err) {
+         setError(err.message);
+       } finally {
+         setLoading(false);
+       }
+     };
+
+     fetchData();
+   }, []);
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -128,14 +156,31 @@ export const ContactDialog = ({ isOpen, onClose }) => {
       }}
     >
       <div className="bg-white rounded-lg w-full max-w-md shadow-2xl animate-fadeIn">
-        <div className="flex items-center justify-between p-5 border-b border-slate-100">
-          <h3 className="text-xl font-semibold text-slate-800">Contact Us</h3>
+        <div className="relative p-5 border-b border-[#423a37] flex flex-col items-center text-center">
+          {/* Close Button - Positioned at the top-right */}
           <button
             onClick={onClose}
-            className="text-slate-500 hover:text-slate-800 transition-colors"
+            className="absolute top-10 right-5 text-[#dbb49b] hover:text-[#ffffff] transition-colors"
           >
             <X size={24} />
           </button>
+
+          {/* Centered Content */}
+          <div className="flex flex-col items-center w-full">
+            {data?.logo && (
+              <img
+                src={data.logo}
+                alt={data.property_name || "Amberwood"}
+                className="h-12 max-w-[120px] mb-3"
+              />
+            )}
+            <h1 className="text-[#515151] text-lg sm:text-xl md:text-2xl font-semibold">
+              {data.hero_banner_heading}
+            </h1>
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-400 mt-2">
+              Contact Us
+            </h3>
+          </div>
         </div>
 
         <div className="p-6">
