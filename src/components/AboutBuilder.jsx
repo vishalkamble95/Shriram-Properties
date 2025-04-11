@@ -191,12 +191,26 @@ const AboutBuilder = ({
         <style jsx>{`
           .about-builder h1 {
             font-size: 1.5rem;
+            margin-bottom: 16px;
+            font-weight: bold;
           }
           .about-builder h2 {
             font-size: 1.3rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
           }
           .about-builder h3 {
             font-size: 1.1rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+          }
+          .about-builder p {
+            margin-bottom: 14px;
+          }
+          .about-builder strong {
+            font-weight: bold;
           }
         `}</style>
       </>

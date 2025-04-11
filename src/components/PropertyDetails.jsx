@@ -357,16 +357,29 @@ const PropertyDetails = () => {
         {/* Contact Dialog */}
         <ContactDialog isOpen={isOpen} onClose={closeDialog} />
       </div>
-
       <style jsx>{`
         .property-description h1 {
           font-size: 1.5rem;
+          margin-bottom: 16px;
+          font-weight: bold;
         }
         .property-description h2 {
           font-size: 1.3rem;
+          margin-top: 20px;
+          margin-bottom: 10px;
+          font-weight: bold;
         }
         .property-description h3 {
           font-size: 1.1rem;
+          margin-top: 20px;
+          margin-bottom: 10px;
+          font-weight: bold;
+        }
+        .property-description p {
+          margin-bottom: 14px;
+        }
+        .property-description strong {
+          font-weight: bold;
         }
       `}</style>
     </>
