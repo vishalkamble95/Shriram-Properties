@@ -90,20 +90,7 @@ const VideoTour = () => {
   }
 
   if (!videos || videos.length === 0) {
-    return (
-      <div className="bg-slate-900 min-h-[400px] p-8 text-center flex items-center justify-center">
-        <div className="bg-slate-800/60 p-8 rounded-lg inline-block max-w-lg border border-slate-700">
-          <Video size={48} className="text-slate-500 mx-auto mb-4" />
-          <h3 className="text-xl font-medium text-white mb-2">
-            No Tours Available
-          </h3>
-          <p className="text-slate-300">
-            Virtual property tours are not available at the moment. Please check
-            back later.
-          </p>
-        </div>
-      </div>
-    );
+    return null;
   }
 
   return (
