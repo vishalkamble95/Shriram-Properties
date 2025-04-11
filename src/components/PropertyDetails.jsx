@@ -277,7 +277,7 @@ const PropertyDetails = () => {
                     </div>
                     <div className="prose prose-invert max-w-none text-slate-300">
                       <div
-                        className="max-h-[300px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-teal-500 scrollbar-track-slate-700"
+                        className="max-h-[300px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-teal-500 scrollbar-track-slate-700 property-description"
                         dangerouslySetInnerHTML={createMarkup(
                           propertyData?.property_description
                         )}
@@ -357,6 +357,18 @@ const PropertyDetails = () => {
         {/* Contact Dialog */}
         <ContactDialog isOpen={isOpen} onClose={closeDialog} />
       </div>
+
+      <style jsx>{`
+        .property-description h1 {
+          font-size: 1.5rem;
+        }
+        .property-description h2 {
+          font-size: 1.3rem;
+        }
+        .property-description h3 {
+          font-size: 1.1rem;
+        }
+      `}</style>
     </>
   );
 };
