@@ -222,7 +222,7 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                         ? "border-red-700"
                         : "border-slate-100"
                     } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent`}
-                    placeholder="First Name"
+                    placeholder="First Name*"
                   />
                 </div>
                 {formErrors.first_name && (
@@ -255,7 +255,7 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                         ? "border-red-700"
                         : "border-slate-100"
                     } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent`}
-                    placeholder="Last Name"
+                    placeholder="Last Name*"
                   />
                 </div>
                 {formErrors.last_name && (
@@ -314,7 +314,7 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                       ? "border-red-700"
                       : "border-slate-100"
                   } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent`}
-                  placeholder="Your phone number"
+                  placeholder="Your phone number*"
                 />
               </div>
               {formErrors.phone_number && (
