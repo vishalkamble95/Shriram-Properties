@@ -12,6 +12,7 @@ import LocationAdvantages from '../components/LocationAdvantages'
 import Blogs from '../components/Blogs'
 import ContactUs from '../components/ContactUs'
 import Location from '../components/Location'
+import Advertisement from '../components/Advertisement'
 
 const HomePage = () => {
   return (
@@ -19,6 +20,7 @@ const HomePage = () => {
           <PropertyHeader />
           <ReraInformation />
           <PropertyDetails />
+          <Advertisement />
           
           <VideoTour />
           <PropertyPriceTable />
