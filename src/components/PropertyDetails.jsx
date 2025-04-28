@@ -66,7 +66,7 @@ const PropertyDetails = () => {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.substring(1);
-      if (["overview", "amenities", "gallery", "location"].includes(hash)) {
+      if (["overview","information", "amenities", "gallery", "location"].includes(hash)) {
         setActiveTab(hash);
       }
     };
@@ -242,7 +242,7 @@ const PropertyDetails = () => {
             id="property-details"
           >
             <nav className="flex space-x-1 p-1 bg-slate-800/60 rounded-full">
-              {["overview", "amenities", "gallery", "location"].map((tab) => (
+              {["overview","information", "amenities", "gallery", "location"].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => {
@@ -318,7 +318,75 @@ const PropertyDetails = () => {
                       </div>
                       <div className="flex justify-between items-center py-3">
                         <span className="text-slate-400">Status:</span>
-                        <span className="text-white font-medium bg-teal-500/20 px-3 py-1 rounded-full text-teal-300 text-sm">
+                        <span className=" font-medium bg-teal-500/20 px-3 py-1 rounded-full text-teal-300 text-sm">
+                          {propertyData?.property_status}
+                        </span>
+                      </div>
+                    </div>
+                    <button
+                      onClick={openDialog}
+                      className="w-full mt-6 py-3 px-6 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-lg text-white font-medium flex items-center justify-center hover:from-teal-600 hover:to-emerald-600 transition-all"
+                    >
+                      <Phone size={18} className="mr-2" />
+                      Contact
+                    </button>
+                  </div>
+                </div>
+              )}
+              {activeTab === "information" && (
+                <div className="md:flex">
+                  {/* Left Column - Description */}
+                  <div className="md:w-3/5 p-6 md:p-8 border-b md:border-b-0 md:border-r border-slate-700">
+                    <div className="flex items-center mb-6">
+                      <div className="w-1 h-8 bg-gradient-to-b from-teal-400 to-emerald-400 rounded-full mr-3"></div>
+                      <h2 className="text-2xl font-bold text-white">
+                        Property Information
+                      </h2>
+                    </div>
+                    <div className="prose prose-invert max-w-none text-slate-300">
+                      <div
+                        className="max-h-[300px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-teal-500 scrollbar-track-slate-700 property-description"
+                        dangerouslySetInnerHTML={createMarkup(
+                          propertyData?.property_information
+                        )}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Right Column - Specifications */}
+                  <div className="md:w-2/5 p-6 md:p-8 bg-slate-900/50">
+                    <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
+                      <Building size={18} className="text-teal-400 mr-2" />
+                      Property Specifications
+                    </h3>
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center py-3 border-b border-slate-700">
+                        <span className="text-slate-400">Property ID:</span>
+                        <span className="text-white font-medium">
+                          {propertyData?.id}
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center py-3 border-b border-slate-700">
+                        <span className="text-slate-400">Property Type:</span>
+                        <span className="text-white font-medium">
+                          {propertyData?.property_type}
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center py-3 border-b border-slate-700">
+                        <span className="text-slate-400">Developer:</span>
+                        <span className="text-white font-medium">
+                          {propertyData?.builder_name}
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center py-3 border-b border-slate-700">
+                        <span className="text-slate-400">Last Updated:</span>
+                        <span className="text-white font-medium">
+                          {propertyData?.last_updated}
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center py-3">
+                        <span className="text-slate-400">Status:</span>
+                        <span className=" font-medium bg-teal-500/20 px-3 py-1 rounded-full text-teal-300 text-sm">
                           {propertyData?.property_status}
                         </span>
                       </div>
