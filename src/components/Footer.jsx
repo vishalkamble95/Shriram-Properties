@@ -127,44 +127,40 @@ const Footer = () => {
 
       {/* Main footer section with links */}
       <div className="container mx-auto px-4 py-12 max-w-6xl relative z-10">
-        {reraData?.rera_url && (
-          <>
-            <div
-              className={`flex flex-col items-center mb-4`}
-              style={{ transitionDelay: "150ms" }}
-            >
-              <QRCodeCanvas
-                value={reraData.rera_url}
-                height={120}
-                width={120}
-                className="p-3 bg-[#ffffff] rounded-xl"
-              />
-            </div>{" "}
-          </>
-        )}
+        <div
+          className={`flex flex-col items-center mb-4`}
+          style={{ transitionDelay: "150ms" }}
+        >
+          <QRCodeCanvas
+            value={reraData?.rera_url || "https://maharera.maharashtra.gov.in/"}
+            height={120}
+            width={120}
+            className="p-3 bg-[#ffffff] rounded-xl"
+          />
+        </div>
+
         <div className="mb-4">
           <p className="text-xs sm:text-sm break-words text-center">
             <span className="block sm:inline">
               Agent RERA: {footerData?.g_setting?.footer_agent_rera}
             </span>
-            {reraData?.rera_url && (
-              <>
-                <span className="hidden sm:inline"> | </span>
-                <span className="block sm:inline">
-                  Project RERA: {reraData?.rera_id}
-                </span>
-                {reraData?.rera_url && (
-                  <a
-                    href={reraData.rera_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#696969] block sm:inline overflow-hidden text-ellipsis hover:text-[#555555] transition-colors duration-300"
-                  >
-                    ({reraData.rera_url})
-                  </a>
-                )}
-              </>
-            )}
+
+            <span className="hidden sm:inline"> | </span>
+            <span className="block sm:inline">
+              Project RERA: {reraData?.rera_id || "Comming Soon"}
+            </span>
+            {" "}
+
+            <a
+              href={
+                reraData?.rera_url || "https://maharera.maharashtra.gov.in/"
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#696969] block sm:inline overflow-hidden text-ellipsis hover:text-[#555555] transition-colors duration-300"
+            >
+              ({reraData?.rera_url || "https://maharera.maharashtra.gov.in/"})
+            </a>
           </p>
         </div>
 
@@ -278,33 +274,7 @@ const Footer = () => {
                     </a>
                   </div>
                 </li>
-                {/* <li className="flex items-start gap-3">
-                  <Mail
-                    size={18}
-                    className="text-teal-400 mt-1 flex-shrink-0"
-                  />
-                  <div>
-                    <div className="text-slate-400 text-sm mb-1">Email</div>
-                    <a
-                      href={`mailto:${g_setting.footer_email}`}
-                      className="text-white hover:text-teal-400 transition-colors duration-200"
-                    >
-                      {g_setting.footer_email}
-                    </a>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <MapPin
-                    size={18}
-                    className="text-teal-400 mt-1 flex-shrink-0"
-                  />
-                  <div>
-                    <div className="text-slate-400 text-sm mb-1">Address</div>
-                    <address className="text-white not-italic">
-                      {g_setting.footer_address}
-                    </address>
-                  </div>
-                </li> */}
+
                 <li className="flex items-start gap-3">
                   <Clock
                     size={18}
@@ -366,6 +336,10 @@ const Footer = () => {
                   {g_setting.footer_agent_rera}
                 </div>
               )}
+
+              <a href="/privacy-policy" className="underline">
+                Privacy Policy
+              </a>
             </div>
 
             <div className="flex justify-end order-1 md:order-3 w-full md:w-auto">
