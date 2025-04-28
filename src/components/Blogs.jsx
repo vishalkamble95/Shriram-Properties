@@ -191,10 +191,7 @@ const Blogs = () => {
             Latest Insights
           </h2>
           <div className="w-24 h-1 bg-teal-600 mx-auto rounded-full mb-6"></div>
-          <p className="text-slate-300 max-w-2xl mx-auto">
-            Stay updated with our latest articles about
-            commercial property market.
-          </p>
+          
         </div>
 
         {/* Blog Grid */}
