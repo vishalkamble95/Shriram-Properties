@@ -8,6 +8,11 @@ on:
     branches:
       - main
   workflow_dispatch:  # 👈 This enables manual triggering from GitHub UI
+    inputs:
+      domain:
+        description: 'Deployment domain'
+        required: true
+        default: 'smp-amberwoodrahatani.com'
 
 jobs:
   build:
@@ -31,10 +36,10 @@ jobs:
         run: npm install
 
       - name: Trigger SEO Generator
-        run: curl https://queenstowernibmannex.com/seo-generator.php
+        run: curl https://${{ inputs.domain }}/seo-generator.php
 
       - name: Fetch seodata.json from server
-        run: curl -o public/seodata.json https://queenstowernibmannex.com/seodata.json
+        run: curl -o public/seodata.json https://${{ inputs.domain }}/seodata.json
 
       - name: Build React app
         run: npm run build
@@ -47,7 +52,7 @@ jobs:
           sshpass -p "kkK8!PSJRUgX" rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./dist/ q2g3j98i4rdo@184.168.112.42:/home/q2g3j98i4rdo/TEST/
      
       - name: Trigger Sitemap generator
-        run: curl https://queenstowernibmannex.com/sitemap-generator.php
+        run: curl https://${{ inputs.domain }}/sitemap-generator.php
 
       - name: Trigger .htaccess generator
-        run: curl https://queenstowernibmannex.com/generate-htaccess.php
+        run: curl https://${{ inputs.domain }}/generate-htaccess.php
