@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:  # Enables manual triggering from GitHub UI
+  workflow_dispatch:  # 👈 This enables manual triggering from GitHub UI
 
 jobs:
   build:
@@ -19,14 +19,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set TERM environment variable
-        run: echo "TERM=dumb" >> $GITHUB_ENV
-
-      - name: Print SSH password (first 10 characters for debugging)
-        run: echo "${{ secrets.SERVER_SSH_PASSWORD }}" | head -c 10
-
-      - name: Debug TERM variable
-        run: echo $TERM
+      - name: Print SSH key (first 10 characters)
+        run: echo "${{ secrets.SERVER_SSH_KEY }}" | head -c 10
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -39,11 +33,9 @@ jobs:
       - name: Build React app
         run: npm run build
 
-      - name: Upload dist folder to server via SCP using password
-        uses: appleboy/scp-action@master
-        with:
-          host: "184.168.112.42"
-          username: "q2g3j98i4rdo"
-          password: "kkK8!PSJRUgX"
-          source: "dist/*"
-          target: "/home/q2g3j98i4rdo/TEST"
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+
+      - name: Upload dist folder to server via SCP with password
+        run: |
+          sshpass -p "kkK8!PSJRUgX" scp -o StrictHostKeyChecking=no -r ./dist/* q2g3j98i4rdo@$184.168.112.42:/home/q2g3j98i4rdo/TEST/
