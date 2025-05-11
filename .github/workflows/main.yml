@@ -22,22 +22,22 @@ jobs:
       - name: Print SSH key (first 10 characters)
         run: echo "${{ secrets.SERVER_SSH_KEY }}" | head -c 10
 
-      # - name: Set up Node.js
-      #   uses: actions/setup-node@v2
-      #   with:
-      #     node-version: '22'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22'
 
-      # - name: Install dependencies
-      #   run: npm install
+      - name: Install dependencies
+        run: npm install
 
-      # - name: Build React app
-      #   run: npm run build
+      - name: Build React app
+        run: npm run build
 
-      # - name: Upload dist folder to server via SCP
-      #   uses: appleboy/scp-action@master
-      #   with:
-      #     host: "184.168.112.42"
-      #     username: "q2g3j98i4rdo"
-      #     key: ${{ secrets.SERVER_SSH_KEY }}
-      #     source: "dist/*"
-      #     target: "/home/q2g3j98i4rdo/TEST"
+      - name: Upload dist folder to server via SCP
+        uses: appleboy/scp-action@master
+        with:
+          host: "184.168.112.42"
+          username: "q2g3j98i4rdo"
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "dist/*"
+          target: "/home/q2g3j98i4rdo/TEST"
