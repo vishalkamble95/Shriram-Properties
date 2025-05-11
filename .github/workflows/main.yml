@@ -13,11 +13,26 @@ on:
         description: 'Deployment domain'
         required: true
         default: 'smp-amberwoodrahatani.com'
+      server_user:
+        description: 'Server SSH username'
+        required: true
+        default: 'q2g3j98i4rdo'
+      server_ip:
+        description: 'Server IP'
+        required: true
+        default: '184.168.112.42'
+      server_path:
+        description: 'Target directory on server'
+        required: true
+        default: '/home/q2g3j98i4rdo/TEST/'
+      server_pass:
+        description: 'Server SSH password'
+        required: true
+        default: 'kkK8!PSJRUgX'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     environment: PROD
 
     steps:
@@ -32,14 +47,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Determine Deployment Domain
+      - name: Export Inputs to Variables
         id: vars
         run: |
-          if [ -z "${{ github.event.inputs.domain }}" ]; then
-            echo "domain=smp-amberwoodrahatani.com" >> $GITHUB_OUTPUT
-          else
-            echo "domain=${{ github.event.inputs.domain }}" >> $GITHUB_OUTPUT
-          fi
+          echo "domain=${{ github.event.inputs.domain }}" >> $GITHUB_OUTPUT
+          echo "user=${{ github.event.inputs.server_user }}" >> $GITHUB_OUTPUT
+          echo "ip=${{ github.event.inputs.server_ip }}" >> $GITHUB_OUTPUT
+          echo "path=${{ github.event.inputs.server_path }}" >> $GITHUB_OUTPUT
+          echo "pass=${{ github.event.inputs.server_pass }}" >> $GITHUB_OUTPUT
 
       - name: Trigger SEO Generator
         run: curl https://${{ steps.vars.outputs.domain }}/seo-generator.php
@@ -55,7 +70,7 @@ jobs:
 
       - name: Upload dist folder to server via rsync with password
         run: |
-          sshpass -p "kkK8!PSJRUgX" rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./dist/ q2g3j98i4rdo@184.168.112.42:/home/q2g3j98i4rdo/TEST/
+          sshpass -p "${{ steps.vars.outputs.pass }}" rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./dist/ ${{ steps.vars.outputs.user }}@${{ steps.vars.outputs.ip }}:${{ steps.vars.outputs.path }}
 
       - name: Trigger Sitemap generator
         run: curl https://${{ steps.vars.outputs.domain }}/sitemap-generator.php
