@@ -36,6 +36,6 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get install -y sshpass
 
-      - name: Upload dist folder to server via SCP with password
+      - name: Upload dist folder to server via rsync with password
         run: |
-          sshpass -p "kkK8!PSJRUgX" scp -o StrictHostKeyChecking=no -r ./dist/* q2g3j98i4rdo@$184.168.112.42:/home/q2g3j98i4rdo/TEST/
+          sshpass -p "kkK8!PSJRUgX" rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./dist/ q2g3j98i4rdo@184.168.112.42:/home/q2g3j98i4rdo/TEST/
