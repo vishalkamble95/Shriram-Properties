@@ -30,6 +30,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Trigger SEO Generator
+        run: curl https://queenstowernibmannex.com/seo-generator.php
+
       - name: Fetch seodata.json from server
         run: curl -o public/seodata.json https://queenstowernibmannex.com/seodata.json
 
