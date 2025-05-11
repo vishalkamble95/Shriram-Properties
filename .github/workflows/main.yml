@@ -25,6 +25,9 @@ jobs:
       - name: Print SSH password (first 10 characters for debugging)
         run: echo "${{ secrets.SERVER_SSH_PASSWORD }}" | head -c 10
 
+      - name: Debug TERM variable
+        run: echo $TERM
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
