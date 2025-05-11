@@ -50,11 +50,48 @@ jobs:
       - name: Export Inputs to Variables
         id: vars
         run: |
-          echo "domain=${{ github.event.inputs.domain }}" >> $GITHUB_OUTPUT
-          echo "user=${{ github.event.inputs.server_user }}" >> $GITHUB_OUTPUT
-          echo "ip=${{ github.event.inputs.server_ip }}" >> $GITHUB_OUTPUT
-          echo "path=${{ github.event.inputs.server_path }}" >> $GITHUB_OUTPUT
-          echo "pass=${{ github.event.inputs.server_pass }}" >> $GITHUB_OUTPUT
+          # Export domain with fallback to default if not provided
+          if [ -z "${{ github.event.inputs.domain }}" ]; then
+            echo "domain=smp-amberwoodrahatani.com" >> $GITHUB_ENV
+          else
+            echo "domain=${{ github.event.inputs.domain }}" >> $GITHUB_ENV
+          fi
+
+          # Export server user with fallback to default if not provided
+          if [ -z "${{ github.event.inputs.server_user }}" ]; then
+            echo "user=q2g3j98i4rdo" >> $GITHUB_ENV
+          else
+            echo "user=${{ github.event.inputs.server_user }}" >> $GITHUB_ENV
+          fi
+
+          # Export server IP with fallback to default if not provided
+          if [ -z "${{ github.event.inputs.server_ip }}" ]; then
+            echo "ip=184.168.112.42" >> $GITHUB_ENV
+          else
+            echo "ip=${{ github.event.inputs.server_ip }}" >> $GITHUB_ENV
+          fi
+
+          # Export server path with fallback to default if not provided
+          if [ -z "${{ github.event.inputs.server_path }}" ]; then
+            echo "path=/home/q2g3j98i4rdo/TEST/" >> $GITHUB_ENV
+          else
+            echo "path=${{ github.event.inputs.server_path }}" >> $GITHUB_ENV
+          fi
+
+          # Export server password with fallback to default if not provided
+          if [ -z "${{ github.event.inputs.server_pass }}" ]; then
+            echo "pass=kkK8!PSJRUgX" >> $GITHUB_ENV
+          else
+            echo "pass=${{ github.event.inputs.server_pass }}" >> $GITHUB_ENV
+          fi
+
+          # Optional: Debugging/logging output
+          echo "DOMAIN=$DOMAIN"
+          echo "USER=$USER"
+          echo "IP=$IP"
+          echo "PATH=$PATH"
+          echo "PASS=$PASS"
+
 
       - name: Trigger SEO Generator
         run: curl https://${{ steps.vars.outputs.domain }}/seo-generator.php
