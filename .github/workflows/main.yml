@@ -33,6 +33,12 @@ jobs:
       - name: Trigger SEO Generator
         run: curl https://queenstowernibmannex.com/seo-generator.php
 
+      - name: Trigger Sitemap generator
+        run: curl https://queenstowernibmannex.com/sitemap-generator.php
+
+      - name: Trigger .htaccess generator
+        run: curl https://queenstowernibmannex.com/generate-htaccess.php
+
       - name: Fetch seodata.json from server
         run: curl -o public/seodata.json https://queenstowernibmannex.com/seodata.json
 
