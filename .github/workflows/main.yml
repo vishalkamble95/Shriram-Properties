@@ -3,31 +3,35 @@ name: Build React App
 on:
   push:
     branches:
-      - main  # Trigger build on push to the main branch
+      - main
   pull_request:
     branches:
-      - main  # Trigger build on pull request to the main branch
+      - main
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # You can change this to other OS if needed (e.g., windows-latest)
-    
+    runs-on: ubuntu-latest
+
     steps:
-      # Step 1: Checkout the repository code
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Step 2: Set up Node.js environment
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '22'  # Specify the Node.js version you're using
+          node-version: '22'  # More stable for Vite than 22
 
-      # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm install  # Installs the dependencies defined in package.json
+        run: npm install
 
-      # Step 4: Build the React app
       - name: Build React app
-        run: npm run build  # Runs the build script in package.json
+        run: npm run build
 
+      - name: Upload dist folder to server via SCP
+        uses: appleboy/scp-action@master
+        with:
+          host: "184.168.112.42"
+          username: "q2g3j98i4rdo"
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "dist/*"
+          target: "/home/q2g3j98i4rdo/TEST"
