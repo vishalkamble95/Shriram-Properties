@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:  # 👈 This enables manual triggering from GitHub UI
+  workflow_dispatch:
     inputs:
       domain:
         description: 'Deployment domain'
@@ -24,9 +24,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Print SSH key (first 10 characters)
-        run: echo "${{ secrets.SERVER_SSH_KEY }}" | head -c 10
-
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
@@ -35,11 +32,20 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Determine Deployment Domain
+        id: vars
+        run: |
+          if [ -z "${{ github.event.inputs.domain }}" ]; then
+            echo "domain=smp-amberwoodrahatani.com" >> $GITHUB_OUTPUT
+          else
+            echo "domain=${{ github.event.inputs.domain }}" >> $GITHUB_OUTPUT
+          fi
+
       - name: Trigger SEO Generator
-        run: curl https://${{ inputs.domain }}/seo-generator.php
+        run: curl https://${{ steps.vars.outputs.domain }}/seo-generator.php
 
       - name: Fetch seodata.json from server
-        run: curl -o public/seodata.json https://${{ inputs.domain }}/seodata.json
+        run: curl -o public/seodata.json https://${{ steps.vars.outputs.domain }}/seodata.json
 
       - name: Build React app
         run: npm run build
@@ -50,9 +56,9 @@ jobs:
       - name: Upload dist folder to server via rsync with password
         run: |
           sshpass -p "kkK8!PSJRUgX" rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./dist/ q2g3j98i4rdo@184.168.112.42:/home/q2g3j98i4rdo/TEST/
-     
+
       - name: Trigger Sitemap generator
-        run: curl https://${{ inputs.domain }}/sitemap-generator.php
+        run: curl https://${{ steps.vars.outputs.domain }}/sitemap-generator.php
 
       - name: Trigger .htaccess generator
-        run: curl https://${{ inputs.domain }}/generate-htaccess.php
+        run: curl https://${{ steps.vars.outputs.domain }}/generate-htaccess.php
