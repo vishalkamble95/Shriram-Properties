@@ -94,7 +94,7 @@ jobs:
 
 
       - name: Trigger SEO Generator
-        run: curl https://$DOMAIN/seo-generator.php
+        run: curl https://${{ DOMAIN }}/seo-generator.php
 
       - name: Fetch seodata.json from server
         run: curl -o public/seodata.json https://${{ steps.vars.outputs.domain }}/seodata.json
