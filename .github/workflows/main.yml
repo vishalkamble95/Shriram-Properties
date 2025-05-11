@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Print SSH key (first 10 characters)
-        run: echo "${{ secrets..PROD.SERVER_SSH_KEY }}" | head -c 10
+        run: echo "${{ secrets.PROD.SERVER_SSH_KEY }}" | head -c 10
 
       # - name: Set up Node.js
       #   uses: actions/setup-node@v2
