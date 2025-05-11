@@ -36,8 +36,8 @@ jobs:
       - name: Upload dist folder to server via SCP
         uses: appleboy/scp-action@master
         with:
-          host: "joyonthetreetops.com"
+          host: "184.168.112.42"
           username: "q2g3j98i4rdo"
-          key: ${{ secrets.SERVER_SSH_KEY }}
+          password: "kkK8!PSJRUgX"
           source: "dist/*"
           target: "/home/q2g3j98i4rdo/TEST"
