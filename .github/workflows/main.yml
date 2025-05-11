@@ -33,12 +33,6 @@ jobs:
       - name: Trigger SEO Generator
         run: curl https://queenstowernibmannex.com/seo-generator.php
 
-      - name: Trigger Sitemap generator
-        run: curl https://queenstowernibmannex.com/sitemap-generator.php
-
-      - name: Trigger .htaccess generator
-        run: curl https://queenstowernibmannex.com/generate-htaccess.php
-
       - name: Fetch seodata.json from server
         run: curl -o public/seodata.json https://queenstowernibmannex.com/seodata.json
 
@@ -51,3 +45,9 @@ jobs:
       - name: Upload dist folder to server via rsync with password
         run: |
           sshpass -p "kkK8!PSJRUgX" rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./dist/ q2g3j98i4rdo@184.168.112.42:/home/q2g3j98i4rdo/TEST/
+     
+      - name: Trigger Sitemap generator
+        run: curl https://queenstowernibmannex.com/sitemap-generator.php
+
+      - name: Trigger .htaccess generator
+        run: curl https://queenstowernibmannex.com/generate-htaccess.php
