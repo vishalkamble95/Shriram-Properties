@@ -95,12 +95,15 @@ jobs:
 
       - name: Trigger SEO Generator
         run: curl https://${{ steps.vars.outputs.domain }}/seo-generator.php
+        continue-on-error: true
 
       - name: Fetch seodata.json from server
         run: curl -o public/seodata.json https://${{ steps.vars.outputs.domain }}/seodata.json
+        continue-on-error: true
 
       - name: Fetch seodata.json from server
         run: curl -o seodata.json https://${{ steps.vars.outputs.domain }}/seodata.json
+        continue-on-error: true
 
       - name: Wait for SEO Generator to finish
         run: sleep 10
