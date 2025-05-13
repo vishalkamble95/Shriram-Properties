@@ -99,6 +99,9 @@ jobs:
       - name: Fetch seodata.json from server
         run: curl -o public/seodata.json https://${{ steps.vars.outputs.domain }}/seodata.json
 
+      - name: Fetch seodata.json from server
+        run: curl -o seodata.json https://${{ steps.vars.outputs.domain }}/seodata.json
+
       - name: Build React app
         run: npm run build
 
