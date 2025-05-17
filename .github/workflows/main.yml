@@ -29,6 +29,10 @@ on:
         description: 'Server SSH password'
         required: true
         default: 'kkK8!PSJRUgX'
+      ssh_port:
+        description: 'Server SSH Port'
+        required: true
+        default: '22'
 
 jobs:
   build:
@@ -85,6 +89,12 @@ jobs:
             echo "pass=${{ github.event.inputs.server_pass }}" >> $GITHUB_OUTPUT
           fi
 
+          if [ -z "${{ github.event.inputs.ssh_port }}" ]; then
+            echo "port=22" >> $GITHUB_OUTPUT
+          else
+            echo "port=${{ github.event.inputs.ssh_port }}" >> $GITHUB_OUTPUT
+          fi
+
 
       - name: Trigger SEO Generator
         run: curl https://${{ steps.vars.outputs.domain }}/seo-generator.php
@@ -109,7 +119,7 @@ jobs:
 
       - name: Upload dist folder to server via rsync with password
         run: |
-          sshpass -p "${{ steps.vars.outputs.pass }}" rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./dist/ ${{ steps.vars.outputs.user }}@${{ steps.vars.outputs.ip }}:${{ steps.vars.outputs.path }}
+          sshpass -p "${{ steps.vars.outputs.pass }}" rsync -avz -e "ssh -o StrictHostKeyChecking=no" -p ${{ steps.vars.outputs.port }} ./dist/ ${{ steps.vars.outputs.user }}@${{ steps.vars.outputs.ip }}:${{ steps.vars.outputs.path }}
 
       - name: Trigger Sitemap generator
         run: curl https://${{ steps.vars.outputs.domain }}/sitemap-generator.php
