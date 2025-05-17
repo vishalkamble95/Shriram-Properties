@@ -95,6 +95,7 @@ jobs:
             echo "port=${{ github.event.inputs.ssh_port }}" >> $GITHUB_OUTPUT
           fi
 
+      
 
       - name: Trigger SEO Generator
         run: curl https://${{ steps.vars.outputs.domain }}/seo-generator.php
@@ -112,6 +113,8 @@ jobs:
         run: sleep 10
 
       - name: Build React app
+        env:
+          VITE_SLUG_URL: ${{ steps.vars.outputs.domain }}
         run: npm run build
 
       - name: Install sshpass
