@@ -119,7 +119,7 @@ jobs:
 
       - name: Upload dist folder to server via rsync with password
         run: |
-          sshpass -p "${{ steps.vars.outputs.pass }}" rsync -avz -e "ssh -o StrictHostKeyChecking=no" -p ${{ steps.vars.outputs.port }} ./dist/ ${{ steps.vars.outputs.user }}@${{ steps.vars.outputs.ip }}:${{ steps.vars.outputs.path }}
+          sshpass -p "${{ steps.vars.outputs.pass }}" rsync -avz -e "ssh -o StrictHostKeyChecking=no -p ${{ steps.vars.outputs.port }}"  ./dist/ ${{ steps.vars.outputs.user }}@${{ steps.vars.outputs.ip }}:${{ steps.vars.outputs.path }}
 
       - name: Trigger Sitemap generator
         run: curl https://${{ steps.vars.outputs.domain }}/sitemap-generator.php
