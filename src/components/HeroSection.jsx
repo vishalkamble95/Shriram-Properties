@@ -130,9 +130,9 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
                       {propertyData.location}
                     </p>
                   </div>
-                  <p className="text-xs sm:text-sm md:text-xl mb-2 md:mb-6 text-slate-300">
+                  {/* <p className="text-xs sm:text-sm md:text-xl mb-2 md:mb-6 text-slate-300">
                     {propertyData.hero_banner_subheading}
-                  </p>
+                  </p> */}
 
                   {/* Property details - Extremely compact on mobile */}
                   <div className="flex flex-wrap justify-center md:justify-start gap-2 md:gap-6 mt-2 md:mt-8">
@@ -202,7 +202,7 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-2xs md:text-sm text-slate-300">
-                    Price Range
+                    Type Range
                   </span>
                   <span className="text-2xs md:text-base font-medium text-teal-300">
                     {propertyData.property_type_price_range_text}
