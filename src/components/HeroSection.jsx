@@ -94,7 +94,7 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
             <div className="bg-teal-500/20 backdrop-blur-sm px-2 py-0.5 md:px-4 md:py-1.5 rounded-full flex items-center border border-teal-500/30">
               <Tag size={10} className="text-teal-400 mr-1 md:mr-2" />
               <span className="text-2xs md:text-sm font-medium text-teal-300">
-                RERA Approved
+                MahaRERA Approved
               </span>
             </div>
             <div className="bg-teal-500/20 backdrop-blur-sm px-2 py-0.5 md:px-4 md:py-1.5 rounded-full flex items-center border border-teal-500/30">

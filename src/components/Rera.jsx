@@ -112,7 +112,7 @@ const ReraInformation = () => {
                   <div className="inline-flex items-center bg-teal-500/10 border border-teal-500/30 px-3 py-1 rounded-full text-sm">
                     <CheckCircle size={14} className="text-teal-400 mr-2" />
                     <span className="text-teal-300">
-                      RERA Registered Project
+                      MahaRERA Registered Project
                     </span>
                   </div>
                 </div>
@@ -145,7 +145,7 @@ const ReraInformation = () => {
                         </div>
                         <div>
                           <span className="text-slate-300 text-sm">
-                            RERA ID
+                            MahaRERA ID
                           </span>
                           <p className="text-white font-medium">
                             {reraData.rera_id}
@@ -233,7 +233,7 @@ const ReraInformation = () => {
                           <div className="flex items-center">
                             <Tag size={18} className="text-teal-400 mr-2" />
                             <h3 className="text-lg font-medium text-white">
-                              RERA Registration Details
+                              MahaRERA Registration Details
                             </h3>
                           </div>
                           <div className="flex space-x-2">
@@ -244,7 +244,7 @@ const ReraInformation = () => {
                         </div>
                       </div>
 
-                      {/* RERA Info */}
+                      {/* MahaRERA Info */}
                       <div className="p-6">
                         <div className="mb-6">
                           <h4 className="text-white font-semibold mb-4 flex items-center">
@@ -252,7 +252,7 @@ const ReraInformation = () => {
                               size={18}
                               className="text-teal-400 mr-2"
                             />
-                            RERA Compliance Information
+                            MahaRERA Compliance Information
                           </h4>
                           <div className="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
                             <ul className="space-y-3">
@@ -266,7 +266,7 @@ const ReraInformation = () => {
                               <li className="flex items-start">
                                 <div className="w-2 h-2 rounded-full bg-teal-400 mt-1.5 mr-2"></div>
                                 <span className="text-slate-300 text-sm">
-                                  RERA Registration: {reraData.rera_id}
+                                  MahaRERA Registration: {reraData.rera_id}
                                 </span>
                               </li>
                             </ul>
