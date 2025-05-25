@@ -134,14 +134,14 @@ const PropertyDetails = () => {
           />
           <div className="absolute bottom-0 left-0 w-full p-6 md:p-8 z-20 max-w-7xl mx-auto right-0">
             <div className="flex flex-wrap items-center gap-2 mb-4">
-              <span className="px-3 py-1 bg-teal-500/20 border border-teal-500/30 text-teal-300 text-sm font-medium rounded-full flex items-center">
+              {/* <span className="px-3 py-1 bg-teal-500/20 border border-teal-500/30 text-teal-300 text-sm font-medium rounded-full flex items-center">
                 <Tag size={14} className="mr-1" />
                 {propertyData?.property_status}
               </span>
               <span className="px-3 py-1 bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-sm font-medium rounded-full flex items-center">
                 <Home size={14} className="mr-1" />
                 {propertyData?.property_type}
-              </span>
+              </span> */}
               <span className="px-3 py-1 bg-slate-700/60 text-slate-300 text-sm font-medium rounded-full flex items-center">
                 <Calendar size={14} className="mr-1" />
                 Last Updated: {propertyData?.last_updated}
