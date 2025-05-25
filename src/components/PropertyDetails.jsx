@@ -304,12 +304,12 @@ const PropertyDetails = () => {
                           {propertyData?.property_type}
                         </span>
                       </div>
-                      <div className="flex justify-between items-center py-3 border-b border-slate-700">
+                      {/* <div className="flex justify-between items-center py-3 border-b border-slate-700">
                         <span className="text-slate-400">Developer:</span>
                         <span className="text-white font-medium">
                           {propertyData?.builder_name}
                         </span>
-                      </div>
+                      </div> */}
                       <div className="flex justify-between items-center py-3 border-b border-slate-700">
                         <span className="text-slate-400">Last Updated:</span>
                         <span className="text-white font-medium">
@@ -360,12 +360,12 @@ const PropertyDetails = () => {
                       Property Specifications
                     </h3>
                     <div className="space-y-3">
-                      <div className="flex justify-between items-center py-3 border-b border-slate-700">
+                      {/* <div className="flex justify-between items-center py-3 border-b border-slate-700">
                         <span className="text-slate-400">Property ID:</span>
                         <span className="text-white font-medium">
                           {propertyData?.id}
                         </span>
-                      </div>
+                      </div> */}
                       <div className="flex justify-between items-center py-3 border-b border-slate-700">
                         <span className="text-slate-400">Property Type:</span>
                         <span className="text-white font-medium">
@@ -384,12 +384,12 @@ const PropertyDetails = () => {
                           {propertyData?.last_updated}
                         </span>
                       </div>
-                      <div className="flex justify-between items-center py-3">
+                      {/* <div className="flex justify-between items-center py-3">
                         <span className="text-slate-400">Status:</span>
                         <span className=" font-medium bg-teal-500/20 px-3 py-1 rounded-full text-teal-300 text-sm">
                           {propertyData?.property_status}
                         </span>
-                      </div>
+                      </div> */}
                     </div>
                     <button
                       onClick={openDialog}
