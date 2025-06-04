@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { MessageCircle, Phone, User } from "lucide-react";
 import seodata from "../../seodata.json";
 import { ContactDialog } from "./Contact";
+import useContact from "../hooks/useContact";
 
 
 const FloatingButtons = () => {
@@ -10,7 +11,10 @@ const FloatingButtons = () => {
   const [isOpen, setIsOpen] = useState(false);
   
     const openDialog = () => setIsOpen(true);
-    const closeDialog = () => setIsOpen(false);
+  const closeDialog = () => setIsOpen(false);
+  
+   const { contact } = useContact();
+
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -29,7 +33,7 @@ const FloatingButtons = () => {
       id: "phone",
       icon: <Phone size={20} />,
       label: "Call",
-      href: "tel:+918181817136",
+      href: `tel:${contact?.footer_phone}`,
       color: "bg-teal-600 hover:bg-teal-700 active:bg-teal-800",
     },
     {

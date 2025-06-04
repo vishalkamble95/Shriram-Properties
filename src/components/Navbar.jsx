@@ -11,11 +11,13 @@ import {
   Clock,
   Tag,
 } from "lucide-react";
+import useContact from "../hooks/useContact";
 
 function Navbar({ propertyData, loading, openDialog }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
+   const { contact } = useContact();
 
   // Handle scroll effect for sticky header styling
   useEffect(() => {
@@ -75,11 +77,11 @@ function Navbar({ propertyData, loading, openDialog }) {
               <span className="text-sm text-slate-300">RERA Registered</span>
             </div>
             <a
-              href="tel:+918181817136"
+              href={`tel:${contact?.footer_phone}`}
               className="text-sm hover:text-teal-300 transition-colors flex items-center text-slate-300"
             >
               <Phone size={16} className="mr-2" />
-              +91 818181 7136
+              {contact?.footer_phone}
             </a>
           </div>
         </div>
@@ -141,7 +143,7 @@ function Navbar({ propertyData, loading, openDialog }) {
             </nav>
             <div className="hidden md:flex space-x-3">
               <a
-                href="tel:+918181817136"
+                href={`tel:${contact?.footer_phone}`}
                 className="bg-slate-800 text-white hover:bg-slate-700 font-medium py-2 px-4 rounded-lg transition-colors flex items-center text-sm"
               >
                 <Phone size={14} className="mr-2 text-teal-300" />
@@ -267,7 +269,7 @@ function Navbar({ propertyData, loading, openDialog }) {
                   Book Site Visit
                 </button>
                 <a
-                  href="tel:+918181817136"
+                  href={`tel:${contact?.footer_phone}`}
                   className="w-full flex justify-center items-center bg-slate-800 text-white hover:bg-slate-700 font-medium py-3.5 px-4 rounded-lg transition-colors"
                 >
                   <Phone size={18} className="mr-2 text-teal-300" />
