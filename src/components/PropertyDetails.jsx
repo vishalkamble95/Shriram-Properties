@@ -206,7 +206,7 @@ const PropertyDetails = () => {
                     <div>
                       <p className="text-slate-400 text-sm">Property Type</p>
                       <p className="text-white font-medium">
-                        {propertyData?.property_type}
+                        {propertyData?.property_type_price_range}
                       </p>
                     </div>
                   </div>
@@ -301,7 +301,7 @@ const PropertyDetails = () => {
                       <div className="flex justify-between items-center py-3 border-b border-slate-700">
                         <span className="text-slate-400">Property Type:</span>
                         <span className="text-white font-medium">
-                          {propertyData?.property_type}
+                          {propertyData?.property_type_price_range}
                         </span>
                       </div>
                       {/* <div className="flex justify-between items-center py-3 border-b border-slate-700">
