@@ -329,7 +329,7 @@ const Footer = () => {
               )}
               {g_setting.footer_agent_rera && (
                 <div className="mt-2">
-                  <span className="font-semibold">RERA:</span>{" "}
+                  <span className="font-semibold">Agent MahaRera:</span>{" "}
                   {g_setting.footer_agent_rera}
                 </div>
               )}

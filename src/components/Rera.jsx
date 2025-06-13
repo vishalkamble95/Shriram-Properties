@@ -252,7 +252,7 @@ const ReraInformation = () => {
                               size={18}
                               className="text-teal-400 mr-2"
                             />
-                            MahaRERA Compliance Information
+                            MahaRera Compliance Information
                           </h4>
                           <div className="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
                             <ul className="space-y-3">
@@ -260,13 +260,13 @@ const ReraInformation = () => {
                                 <div className="w-2 h-2 rounded-full bg-teal-400 mt-1.5 mr-2"></div>
                                 <span className="text-slate-300 text-sm">
                                   This project is registered under Maharashtra
-                                  RERA
+                                  MahaRera
                                 </span>
                               </li>
                               <li className="flex items-start">
                                 <div className="w-2 h-2 rounded-full bg-teal-400 mt-1.5 mr-2"></div>
                                 <span className="text-slate-300 text-sm">
-                                  MahaRERA Registration: {reraData.rera_id}
+                                  MahaRera Registration: {reraData.rera_id}
                                 </span>
                               </li>
                             </ul>
@@ -320,7 +320,7 @@ const ReraInformation = () => {
             Need More Information?
           </h4>
           <p className="text-slate-300 text-sm mb-4">
-            Request detailed property documents and specifications for this RERA
+            Request detailed property documents and specifications for this MahaRera
             registered project.
           </p>
           <button
