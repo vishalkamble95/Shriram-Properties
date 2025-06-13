@@ -173,7 +173,7 @@ const PropertyDetails = () => {
                     <div>
                       <p className="text-slate-400 text-sm">Location</p>
                       <p className="text-white font-medium">
-                        {propertyData?.location || "Pune, Maharashtra"}
+                        {propertyData?.property_location_name || "Pune, Maharashtra"}
                       </p>
                     </div>
                   </div>
