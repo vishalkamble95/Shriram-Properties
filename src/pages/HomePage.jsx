@@ -1,6 +1,8 @@
 import React from 'react'
 import PropertyHeader from '../components/Header'
 import PropertyDetails from '../components/PropertyDetails'
+import Amenities from "../components/Amenities";
+import Gallary from "../components/Gallary";
 import PropertyPriceTable from '../components/PropertyPrice'
 import Footer from '../components/Footer'
 import ReraInformation from '../components/Rera'
@@ -20,10 +22,13 @@ const HomePage = () => {
           <PropertyHeader />
           <ReraInformation />
           <PropertyDetails />
-          <Advertisement />
           
+          <Amenities />
+          <Gallary />
           <VideoTour />
+          
           <PropertyPriceTable />
+          <Advertisement />
           
           <Banks />
           <UnitLayout />

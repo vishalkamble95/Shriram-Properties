@@ -36,7 +36,7 @@ export default function PropertyHeader() {
 
   return (
     <>
-      <div className="bg-gradient-to-b from-slate-900 to-slate-800 text-slate-100 min-h-screen">
+      <div className="bg-gradient-to-b from-[#622569] to-[#5b9aa0] text-[#d6d4e0] min-h-screen">
         <Navbar
           propertyData={propertyData}
           loading={loading}

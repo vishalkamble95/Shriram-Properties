@@ -1,5 +1,14 @@
 import React, { useRef } from "react";
-import { Building, ChevronDown, Factory, Home, Info, Landmark, Store, Warehouse } from "lucide-react";
+import {
+  Building,
+  ChevronDown,
+  Factory,
+  Home,
+  Info,
+  Landmark,
+  Store,
+  Warehouse,
+} from "lucide-react";
 
 const AboutBuilder = ({
   heading = "About Builder",
@@ -13,80 +22,73 @@ const AboutBuilder = ({
     return { __html: content };
   };
 
-  const scrollDown = () => {
-    if (contentRef.current) {
-      contentRef.current.scrollBy({
-        top: 100,
-        behavior: "smooth",
-      });
-    }
-  };
+  // const scrollDown = () => {
+  //   if (contentRef.current) {
+  //     contentRef.current.scrollBy({
+  //       top: 100,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // };
 
   return (
     htmlContent && (
       <>
-        <div
-          className="bg-slate-900 border border-slate-800 overflow-hidden"
-          id="about-builder"
-        >
-          <div className="max-w-7xl mx-auto p-6">
             {/* Two-column layout for medium screens and up */}
-            <div className="flex flex-col md:flex-row gap-8">
+            {/* <h2 className="text-4xl flex justify-center font-bold text-white mb-8">
+              {heading}
+            </h2>
+            <hr className="w-3/4 border-t-2 border-teal-500 mx-auto mb-8" /> */}
               {/* Left content area */}
-              <div className="md:w-1/2">
                 {/* Section heading with badge */}
-                <div className="flex items-center mb-6">
+                {/* <div className="flex items-center mb-6">
                   <div className="flex items-center">
                     <Info size={20} className="text-teal-300 mr-2" />
                     <span className="bg-teal-400/10 text-teal-300 text-xs px-3 py-1 rounded-full border border-teal-300/30">
                       Information
                     </span>
                   </div>
-                </div>
+                </div> */}
 
-                <h2 className="text-4xl font-bold text-white mb-4">
+                {/* <h2 className="text-4xl font-bold text-white mb-4">
                   {heading}
-                </h2>
+                </h2> */}
 
                 {/* Content Container */}
-                <div className="relative">
+                <div className="relative rounded-xl bg-slate-800/50 backdrop-blur-md border border-slate-700 shadow-lg p-6 overflow-hidden">
+                  {/* Scrollable Content Area */}
                   <div
                     ref={contentRef}
-                    className="text-slate-300 overflow-y-auto pr-4 custom-scrollbar about-builder"
-                    style={{
-                      maxHeight,
-                    }}
+                    className="text-slate-300 text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar about-builder scroll-smooth"
+                    style={{ maxHeight }}
                     dangerouslySetInnerHTML={createMarkup(htmlContent)}
                   />
 
-                  {/* Gradient overlay for bottom fade effect */}
-                  <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent pointer-events-none"></div>
+                  {/* Gradient Overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent pointer-events-none transition-opacity duration-500" />
 
-                  {/* Navigation dots */}
-                  <div className="flex items-center justify-center mt-6 space-x-2">
-                    <div className="w-8 h-2 rounded-full bg-teal-400"></div>
-                    <div className="w-2 h-2 rounded-full bg-white/30"></div>
-                    <div className="w-2 h-2 rounded-full bg-white/30"></div>
-                  </div>
+                  {/* Navigation Dots */}
+                  {/* <div className="flex items-center justify-center mt-6 space-x-2">
+                    <span className="w-8 h-2 rounded-full bg-teal-400 shadow-md transition" />
+                    <span className="w-2 h-2 rounded-full bg-white/30 hover:bg-white/50 transition" />
+                    <span className="w-2 h-2 rounded-full bg-white/30 hover:bg-white/50 transition" />
+                  </div> */}
                 </div>
-              </div>
 
               {/* Right action area */}
-              <div className="md:w-1/2 bg-slate-800 rounded-lg p-6 relative overflow-hidden">
-                {/* Background gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-800/95 to-slate-900/90 z-10"></div>
+              {/* <div className="md:w-1/2 bg-slate-800 rounded-lg p-6 relative overflow-hidden"> */}
+                {/* <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-800/95 to-slate-900/90 z-10"></div> */}
 
-                {/* Building icons pattern background */}
-                <div className="absolute inset-0 grid grid-cols-6 grid-rows-6 gap-1 p-2 opacity-20">
+                {/* <div className="absolute inset-0 grid grid-cols-6 grid-rows-6 gap-1 p-2 opacity-20">
                   {[...Array(36)].map((_, i) => (
                     <div key={i} className="flex items-center justify-center">
                       <Building size={16} className="text-slate-400" />
                     </div>
                   ))}
-                </div>
+                </div> */}
 
                 {/* Main content with building icons */}
-                <div className="relative z-20 h-full flex flex-col">
+                {/* <div className="relative z-20 h-full flex flex-col"> */}
                   {/* Top section with large building icon */}
                   {/* <div className="flex-1 flex items-center justify-center mb-8">
                   <div className="relative">
@@ -100,57 +102,80 @@ const AboutBuilder = ({
                       className="text-emerald-500/90 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                       strokeWidth={1.5}
                     />
-                  </div>
-                </div> */}
+                    </div>
+                  </div> */}
 
                   {/* Middle section with architectural pattern */}
-                  <div className="grid grid-cols-3 gap-2 mb-4">
-                    <div className="aspect-square bg-slate-900/50 rounded-lg flex items-center justify-center border border-teal-400/20">
-                      <Building
-                        size={32}
-                        className="text-teal-300"
-                        strokeWidth={1.5}
-                      />
+                  {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="w-full h-28 rounded-2xl bg-gradient-to-br from-slate-800/50 to-slate-900/70 border border-teal-400/20 shadow-[0_4px_20px_rgba(0,255,255,0.1)] hover:shadow-[0_6px_24px_rgba(0,255,255,0.2)] transition-all duration-300 flex items-center justify-center group overflow-hidden relative">
+                      <div className="absolute inset-0 bg-gradient-to-tr from-teal-500/5 to-emerald-500/5 opacity-30 group-hover:opacity-40 transition-all duration-300"></div>
+                      <div className="z-10 w-14 h-14 rounded-full bg-teal-400/10 border border-teal-300/30 flex items-center justify-center shadow-inner shadow-teal-500/10 group-hover:bg-teal-300/10 transition">
+                        <Building
+                          size={30}
+                          className="text-teal-300 group-hover:text-teal-200 transition"
+                          strokeWidth={1.5}
+                        />
+                      </div>
                     </div>
-                    <div className="aspect-square bg-slate-900/50 rounded-lg flex items-center justify-center border border-emerald-500/20">
-                      <Home
-                        size={32}
-                        className="text-emerald-400"
-                        strokeWidth={1.5}
-                      />
+
+                    <div className="w-full h-28 rounded-2xl bg-gradient-to-br from-slate-800/50 to-slate-900/70 border border-emerald-400/20 shadow-[0_4px_20px_rgba(0,255,127,0.1)] hover:shadow-[0_6px_24px_rgba(0,255,127,0.2)] transition-all duration-300 flex items-center justify-center group overflow-hidden relative">
+                      <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/5 to-emerald-400/5 opacity-30 group-hover:opacity-40 transition-all duration-300"></div>
+                      <div className="z-10 w-14 h-14 rounded-full bg-emerald-400/10 border border-emerald-300/30 flex items-center justify-center shadow-inner shadow-emerald-500/10 group-hover:bg-emerald-300/10 transition">
+                        <Home
+                          size={30}
+                          className="text-emerald-400 group-hover:text-emerald-200 transition"
+                          strokeWidth={1.5}
+                        />
+                      </div>
                     </div>
-                    <div className="aspect-square bg-slate-900/50 rounded-lg flex items-center justify-center border border-teal-400/20">
-                      <Warehouse
-                        size={32}
-                        className="text-teal-300"
-                        strokeWidth={1.5}
-                      />
+
+                    <div className="w-full h-28 rounded-2xl bg-gradient-to-br from-slate-800/50 to-slate-900/70 border border-teal-400/20 shadow-[0_4px_20px_rgba(0,255,255,0.1)] hover:shadow-[0_6px_24px_rgba(0,255,255,0.2)] transition-all duration-300 flex items-center justify-center group overflow-hidden relative">
+                      <div className="absolute inset-0 bg-gradient-to-tr from-teal-500/5 to-teal-400/5 opacity-30 group-hover:opacity-40 transition-all duration-300"></div>
+                      <div className="z-10 w-14 h-14 rounded-full bg-teal-400/10 border border-teal-300/30 flex items-center justify-center shadow-inner shadow-teal-500/10 group-hover:bg-teal-300/10 transition">
+                        <Warehouse
+                          size={30}
+                          className="text-teal-300 group-hover:text-teal-200 transition"
+                          strokeWidth={1.5}
+                        />
+                      </div>
                     </div>
-                    <div className="aspect-square bg-slate-900/50 rounded-lg flex items-center justify-center border border-emerald-500/20">
-                      <Factory
-                        size={32}
-                        className="text-emerald-400"
-                        strokeWidth={1.5}
-                      />
+
+                    <div className="w-full h-28 rounded-2xl bg-gradient-to-br from-slate-800/50 to-slate-900/70 border border-emerald-400/20 shadow-[0_4px_20px_rgba(0,255,127,0.1)] hover:shadow-[0_6px_24px_rgba(0,255,127,0.2)] transition-all duration-300 flex items-center justify-center group overflow-hidden relative">
+                      <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/5 to-emerald-400/5 opacity-30 group-hover:opacity-40 transition-all duration-300"></div>
+                      <div className="z-10 w-14 h-14 rounded-full bg-emerald-400/10 border border-emerald-300/30 flex items-center justify-center shadow-inner shadow-emerald-500/10 group-hover:bg-emerald-300/10 transition">
+                        <Factory
+                          size={30}
+                          className="text-emerald-400 group-hover:text-emerald-200 transition"
+                          strokeWidth={1.5}
+                        />
+                      </div>
                     </div>
-                    <div className="aspect-square bg-slate-900/50 rounded-lg flex items-center justify-center border border-teal-400/20">
-                      <Landmark
-                        size={32}
-                        className="text-teal-300"
-                        strokeWidth={1.5}
-                      />
+
+                    <div className="w-full h-28 rounded-2xl bg-gradient-to-br from-slate-800/50 to-slate-900/70 border border-teal-400/20 shadow-[0_4px_20px_rgba(0,255,255,0.1)] hover:shadow-[0_6px_24px_rgba(0,255,255,0.2)] transition-all duration-300 flex items-center justify-center group overflow-hidden relative">
+                      <div className="absolute inset-0 bg-gradient-to-tr from-teal-500/5 to-teal-400/5 opacity-30 group-hover:opacity-40 transition-all duration-300"></div>
+                      <div className="z-10 w-14 h-14 rounded-full bg-teal-400/10 border border-teal-300/30 flex items-center justify-center shadow-inner shadow-teal-500/10 group-hover:bg-teal-300/10 transition">
+                        <Landmark
+                          size={30}
+                          className="text-teal-300 group-hover:text-teal-200 transition"
+                          strokeWidth={1.5}
+                        />
+                      </div>
                     </div>
-                    <div className="aspect-square bg-slate-900/50 rounded-lg flex items-center justify-center border border-emerald-500/20">
-                      <Store
-                        size={32}
-                        className="text-emerald-400"
-                        strokeWidth={1.5}
-                      />
+
+                    <div className="w-full h-28 rounded-2xl bg-gradient-to-br from-slate-800/50 to-slate-900/70 border border-emerald-400/20 shadow-[0_4px_20px_rgba(0,255,127,0.1)] hover:shadow-[0_6px_24px_rgba(0,255,127,0.2)] transition-all duration-300 flex items-center justify-center group overflow-hidden relative">
+                      <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/5 to-emerald-400/5 opacity-30 group-hover:opacity-40 transition-all duration-300"></div>
+                      <div className="z-10 w-14 h-14 rounded-full bg-emerald-400/10 border border-emerald-300/30 flex items-center justify-center shadow-inner shadow-emerald-500/10 group-hover:bg-emerald-300/10 transition">
+                        <Store
+                          size={30}
+                          className="text-emerald-400 group-hover:text-emerald-200 transition"
+                          strokeWidth={1.5}
+                        />
+                      </div>
                     </div>
-                  </div>
+                  </div> */}
 
                   {/* Bottom section with horizontal building pattern */}
-                  <div className="flex justify-between items-end mb-6 h-12">
+                  {/* <div className="flex justify-between items-end mb-6 h-12">
                     {[...Array(8)].map((_, i) => {
                       const height = 12 + Math.abs(Math.sin(i * 0.8) * 36);
                       return (
@@ -170,10 +195,10 @@ const AboutBuilder = ({
                         </div>
                       );
                     })}
-                  </div>
+                  </div> */}
 
                   {/* Button area */}
-                  <div className="mt-auto">
+                  {/* <div className="mt-auto">
                     <button
                       onClick={scrollDown}
                       className="w-full py-3 px-4 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 rounded-lg flex items-center justify-center transition-all duration-200"
@@ -181,12 +206,9 @@ const AboutBuilder = ({
                       <span className="text-white">Learn More...</span>
                       <ChevronDown size={16} className="text-white" />
                     </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                  </div> */}
+                {/* </div> */}
+              {/* </div> */}
 
         <style jsx>{`
           .about-builder h1 {

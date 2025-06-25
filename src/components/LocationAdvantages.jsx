@@ -230,42 +230,42 @@ const LocationAdvantages = () => {
   return (
     <>
       {loading ? (
-        <div className="bg-gradient-to-b from-slate-900 to-slate-800 min-h-[400px] flex items-center justify-center">
-          <Loader size={30} className="text-teal-600 animate-spin" />
+        <div className="bg-gradient-to-b from-[#622569] via-[#5b9aa0] to-[#b8a9c9] min-h-[400px] flex items-center justify-center">
+          <Loader size={30} className="text-white animate-spin" />
         </div>
       ) : error ? (
-        <div className="bg-gradient-to-b from-slate-900 to-slate-800 p-8 rounded-lg">
-          <div className="bg-red-700/10 p-4 rounded-lg text-red-700">
+        <div className="bg-gradient-to-b from-[#622569] to-[#5b9aa0] p-8 rounded-lg">
+          <div className="bg-red-700/10 p-4 rounded-lg text-red-500 border border-red-500/20 shadow-md">
             <p>Failed to load location data: {error}</p>
           </div>
         </div>
       ) : (
-        <div className="bg-gradient-to-b from-slate-900 to-slate-800 p-8">
+        <div className="bg-gradient-to-br from-[#622569] via-[#5b9aa0] to-[#b8a9c9] p-10 sm:p-14">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-white mb-2">{heading}</h2>
-              <div className="w-24 h-1 bg-teal-600 mx-auto rounded-full"></div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3 tracking-tight">
+                {heading}
+              </h2>
+              <div className="w-28 h-1 bg-gradient-to-r from-[#5b9aa0] to-[#b8a9c9] mx-auto rounded-full shadow-md"></div>
             </div>
 
             {/* Carousel Navigation Header */}
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-xl font-medium text-slate-200">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
+              <h3 className="text-2xl text-center font-semibold text-[#d6d4e0] leading-snug">
                 Strategic Location{" "}
-                <span className="text-teal-600">Advantages</span>
+                <span className="text-[#b8a9c9]">Advantages</span>
               </h3>
-              <div className="flex gap-2">
+              <div className="flex justify-between gap-3">
                 <button
                   onClick={prevSlide}
-                  className="p-2 rounded-full bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition-colors duration-300"
-                  aria-label="Previous slide"
+                  className="p-2 rounded-full bg-white/10 hover:bg-[#5b9aa0]/60 text-white border border-[#b8a9c9]/30 hover:border-[#5b9aa0] transition-all duration-300 shadow-md"
                 >
                   <ChevronLeft size={20} />
                 </button>
                 <button
                   onClick={nextSlide}
-                  className="p-2 rounded-full bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition-colors duration-300"
-                  aria-label="Next slide"
+                  className="p-2 rounded-full bg-white/10 hover:bg-[#5b9aa0]/60 text-white border border-[#b8a9c9]/30 hover:border-[#5b9aa0] transition-all duration-300 shadow-md"
                 >
                   <ChevronRight size={20} />
                 </button>
@@ -317,36 +317,35 @@ const LocationAdvantages = () => {
                         index >= currentIndex &&
                         index < currentIndex + visibleCount
                           ? "scale(1)"
-                          : "scale(0.9)",
-                      transition:
-                        "opacity 500ms cubic-bezier(0.4, 0, 0.2, 1), transform 500ms cubic-bezier(0.4, 0, 0.2, 1)",
+                          : "scale(0.94)",
+                      transition: "opacity 500ms ease, transform 500ms ease",
                     }}
                   >
-                    <div className="bg-slate-800/60 rounded-lg overflow-hidden h-full border border-slate-700 group hover:border-teal-600 transition-colors duration-300 shadow-lg">
+                    <div className="bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden h-full border border-[#b8a9c9]/30 group hover:border-[#5b9aa0] transition-colors duration-300 shadow-lg hover:shadow-[#5b9aa0]/20">
                       <div className="p-6 flex flex-col h-full">
-                        <div className="flex items-center mb-4">
-                          <div className="w-12 h-12 rounded-full bg-teal-100 flex items-center justify-center mr-4">
+                        <div className="flex items-center mb-5">
+                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#5b9aa0] to-[#b8a9c9] text-white flex items-center justify-center mr-4 shadow-md">
                             {getLocationIcon(item.location)}
                           </div>
                           <div>
-                            <h4 className="text-lg font-medium text-slate-100 group-hover:text-teal-600 transition-colors duration-300">
+                            <h4 className="text-lg font-semibold text-white group-hover:text-[#5b9aa0] transition-colors duration-300">
                               {item.location}
                             </h4>
-                            <p className="text-slate-400 flex items-center">
-                              <MapPin size={14} className="mr-1" />{" "}
+                            <p className="text-[#d6d4e0] text-sm flex items-center">
+                              <MapPin size={14} className="mr-1" />
                               {item.distance}
                             </p>
                           </div>
                         </div>
 
-                        <p className="text-slate-300 mb-6 flex-grow">
+                        <p className="text-[#d6d4e0]/90 mb-6 flex-grow text-sm leading-relaxed">
                           {item.description}
                         </p>
 
                         <div className="mt-auto">
                           <a
                             href="#"
-                            className="inline-flex items-center text-teal-600 hover:text-teal-500"
+                            className="inline-flex items-center text-[#b8a9c9] hover:text-white text-sm font-medium transition-colors"
                           >
                             View on map{" "}
                             <ExternalLink size={14} className="ml-1" />
@@ -360,26 +359,25 @@ const LocationAdvantages = () => {
             </div>
 
             {/* Dots Indicator */}
-            <div className="flex justify-center mt-4">
+            <div className="flex justify-center mt-6 space-x-2">
               {locationAdvantages.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index + 1)}
-                  className={`h-2 w-2 mx-1 rounded-full transition-colors duration-300 ${
+                  className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
                     getActiveDotIndex() === index
-                      ? "bg-teal-600"
-                      : "bg-slate-600"
+                      ? "bg-[#5b9aa0] scale-110"
+                      : "bg-white/20 hover:bg-white/30"
                   }`}
-                  aria-label={`Go to slide ${index + 1}`}
                 />
               ))}
             </div>
 
             {/* Enquiry Button */}
-            <div className="mt-10 text-center">
+            <div className="mt-12 text-center">
               <button
                 onClick={openDialog}
-                className="px-8 py-3 rounded-full bg-teal-600 text-white font-medium hover:bg-teal-700 active:bg-teal-800 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                className="px-8 py-3 rounded-full bg-gradient-to-r from-[#5b9aa0] to-[#b8a9c9] text-white font-semibold text-base hover:from-[#5b9aa0]/90 hover:to-[#b8a9c9]/90 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-[#5b9aa0]/30"
               >
                 Enquiry About All Locations
               </button>

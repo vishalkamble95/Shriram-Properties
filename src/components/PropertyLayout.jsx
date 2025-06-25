@@ -32,7 +32,7 @@ const PropertyLayouts = () => {
   const [error, setError] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [expandedImage, setExpandedImage] = useState(null);
-  
+
   const [isOpen, setIsOpen] = useState(false);
 
   const openDialog = () => setIsOpen(true);
@@ -143,249 +143,212 @@ const PropertyLayouts = () => {
   return (
     <>
       <div
-        className="bg-slate-900 relative py-16 px-6 md:px-10 overflow-hidden"
+        className="relative bg-[#622569] py-16 px-6 md:px-10 overflow-hidden"
         id="layouts"
       >
         {/* Background gradient effects */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-teal-500/10 rounded-full filter blur-3xl"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full filter blur-3xl"></div>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#b8a9c9]/20 rounded-full filter blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#5b9aa0]/20 rounded-full filter blur-3xl"></div>
         </div>
 
         <div className="relative z-10">
-          {/* Section Header */}
-          <div className="mb-12 text-center max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 font-medium text-sm mb-4">
-              <Map size={16} />
-              <span>Property Layouts</span>
+          <div>
+            {/* Section Header */}
+            <div className="mb-12 text-center max-w-2xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                {getCurrentHeading()}
+              </h2>
+              <p className="text-[#d6d4e0]">
+                Explore detailed layouts and floor plans to visualize your
+                future living space
+              </p>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              {getCurrentHeading()}
-            </h2>
-            <p className="text-slate-300">
-              Explore detailed layouts and floor plans to visualize your future
-              living space
-            </p>
-          </div>
 
-          {/* Tab Navigation */}
-          <div className="flex justify-center mb-10 ">
-            <div className="inline-flex bg-slate-800/80 p-1.5 rounded-xl backdrop-blur-sm border border-slate-700/30 shadow-lg">
-              <button
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition mx-0.5 ${
-                  activeTab === "unit"
-                    ? "bg-gradient-to-r from-teal-600 to-emerald-600 text-white shadow-lg"
-                    : "text-slate-300 hover:text-white hover:bg-slate-700/50"
-                }`}
-                onClick={() => {
-                  setActiveTab("unit");
-                  setCurrentSlide(0);
-                }}
-              >
-                <Building size={18} />
-                <span>Unit Layouts</span>
-              </button>
-              <button
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition mx-0.5 ${
-                  activeTab === "floor"
-                    ? "bg-gradient-to-r from-teal-600 to-emerald-600 text-white shadow-lg"
-                    : "text-slate-300 hover:text-white hover:bg-slate-700/50"
-                }`}
-                onClick={() => {
-                  setActiveTab("floor");
-                  setCurrentSlide(0);
-                }}
-              >
-                <LayoutGrid size={18} />
-                <span>Floor Plans</span>
-              </button>
-              <button
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition mx-0.5 ${
-                  activeTab === "master"
-                    ? "bg-gradient-to-r from-teal-600 to-emerald-600 text-white shadow-lg"
-                    : "text-slate-300 hover:text-white hover:bg-slate-700/50"
-                }`}
-                onClick={() => {
-                  setActiveTab("master");
-                  setCurrentSlide(0);
-                }}
-              >
-                <Map size={18} />
-                <span>Master Layout</span>
-              </button>
+            {/* Tab Navigation */}
+            <div className="flex justify-center mb-10">
+              <div className="inline-flex flex-col sm:flex-row justify-center sm:justify-center items-stretch sm:items-center bg-[#d6d4e0]/80 p-1.5 rounded-2xl backdrop-blur-sm border border-[#b8a9c9] shadow-xl w-full max-w-2xl mx-auto gap-2 sm:gap-2">
+                {/* Unit Layout Tab */}
+                <button
+                  className={`flex items-center justify-center gap-2 px-5 py-3 rounded-xl transition-all mx-0.5 font-medium text-sm sm:text-base ${
+                    activeTab === "unit"
+                      ? "bg-gradient-to-r from-[#5b9aa0] to-[#b8a9c9] text-white shadow-md shadow-[#5b9aa0]/30"
+                      : "text-[#622569] hover:text-white hover:bg-[#b8a9c9]/50"
+                  }`}
+                  onClick={() => {
+                    setActiveTab("unit");
+                    setCurrentSlide(0);
+                  }}
+                >
+                  <Building size={18} />
+                  <span>Unit Layouts</span>
+                </button>
+
+                {/* Floor Plans Tab */}
+                <button
+                  className={`flex items-center justify-center gap-2 px-5 py-3 rounded-xl transition-all mx-0.5 font-medium text-sm sm:text-base ${
+                    activeTab === "floor"
+                      ? "bg-gradient-to-r from-[#5b9aa0] to-[#b8a9c9] text-white shadow-md shadow-[#5b9aa0]/30"
+                      : "text-[#622569] hover:text-white hover:bg-[#b8a9c9]/50"
+                  }`}
+                  onClick={() => {
+                    setActiveTab("floor");
+                    setCurrentSlide(0);
+                  }}
+                >
+                  <LayoutGrid size={18} />
+                  <span>Floor Plans</span>
+                </button>
+
+                {/* Master Layout Tab */}
+                <button
+                  className={`flex items-center justify-center gap-2 px-5 py-3 rounded-xl transition-all mx-0.5 font-medium text-sm sm:text-base ${
+                    activeTab === "master"
+                      ? "bg-gradient-to-r from-[#5b9aa0] to-[#b8a9c9] text-white shadow-md shadow-[#5b9aa0]/30"
+                      : "text-[#622569] hover:text-white hover:bg-[#b8a9c9]/50"
+                  }`}
+                  onClick={() => {
+                    setActiveTab("master");
+                    setCurrentSlide(0);
+                  }}
+                >
+                  <Map size={18} />
+                  <span>Master Layout</span>
+                </button>
+              </div>
             </div>
           </div>
 
           {/* Content Area */}
           <div className="relative max-w-6xl mx-auto">
             {activeLayouts.length === 0 ? (
-              <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/30 p-10 rounded-2xl text-center shadow-lg">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-700/60 flex items-center justify-center">
-                  <AlertTriangle size={24} className="text-teal-300" />
+              <div className="bg-[#d6d4e0]/30 backdrop-blur-sm border border-[#b8a9c9] p-10 rounded-2xl text-center shadow-lg">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#b8a9c9]/60 flex items-center justify-center">
+                  <AlertTriangle size={24} className="text-[#5b9aa0]" />
                 </div>
-                <p className="text-slate-300 text-lg mb-2">
+                <p className="text-[#622569] text-lg mb-2 font-semibold">
                   No layouts available
                 </p>
-                <p className="text-slate-400">
+                <p className="text-[#622569]/80">
                   There are currently no layouts available in this category.
                 </p>
               </div>
             ) : (
               <div className="relative">
                 {/* Layout Display */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-                  {/* Image Side */}
-                  <div className="relative group order-2 md:order-1">
-                    {/* Adjusted image container with a responsive aspect ratio */}
-                    <div className="aspect-video bg-slate-800/60 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/40 shadow-lg">
-                      <img
-                        src={activeLayouts[currentSlide]?.layout_image}
-                        alt={activeLayouts[currentSlide]?.layout_name}
-                        className="object-cover w-full h-full"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent"></div>
-                    </div>
-
-                    <button
-                      className="absolute top-3 right-3 p-2 bg-slate-800/80 backdrop-blur-sm rounded-lg text-white shadow-lg border border-slate-700/40 opacity-90 hover:opacity-100 transition transform hover:scale-105"
-                      onClick={() =>
-                        setExpandedImage(
-                          activeLayouts[currentSlide]?.layout_image
-                        )
-                      }
-                    >
-                      <Maximize2 size={20} />
-                    </button>
-
-                    {activeLayouts.length > 1 && (
-                      <>
-                        <button
-                          className="absolute left-3 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-slate-800/80 backdrop-blur-sm text-white flex items-center justify-center border border-slate-700/40 shadow-lg hover:bg-teal-600 transition-all"
-                          onClick={handlePrev}
-                        >
-                          <ArrowLeft size={20} />
-                        </button>
-                        <button
-                          className="absolute right-3 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-slate-800/80 backdrop-blur-sm text-white flex items-center justify-center border border-slate-700/40 shadow-lg hover:bg-teal-600 transition-all"
-                          onClick={handleNext}
-                        >
-                          <ArrowRight size={20} />
-                        </button>
-                      </>
-                    )}
-
-                    {/* Image Source Badge */}
-                    <div className="absolute bottom-3 left-3 px-3 py-1.5 bg-slate-800/80 backdrop-blur-sm rounded-full text-xs text-slate-300 border border-slate-700/40">
-                      Layout {currentSlide + 1} of {activeLayouts.length}
-                    </div>
-                  </div>
-
+                <div className="flex flex-col gap-12 items-center">
                   {/* Details Side */}
-                  <div className="flex flex-col order-1 md:order-2">
-                    {activeTab === "unit" && (
-                      <>
-                        <div className="mb-6">
-                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-medium mb-3">
-                            <Tag size={12} />
-                            <span>Unit Details</span>
-                          </div>
-                          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-                            {activeLayouts[currentSlide]?.unit_layout_heading ||
-                              activeLayouts[currentSlide]?.layout_name}
-                          </h3>
-                          <p className="text-slate-300">
-                            Premium apartment design with optimal space
-                            utilization and modern amenities.
-                          </p>
-                        </div>
-
-                        <div className="space-y-6 mt-2">
-                          <div className="flex items-center gap-4 p-4 rounded-xl bg-slate-800/40 backdrop-blur-sm border border-slate-700/30">
-                            <div className="p-3 rounded-lg bg-teal-500/10 text-teal-400">
-                              <PenSquare size={22} />
-                            </div>
-                            <div>
-                              <p className="text-slate-400 text-sm">
-                                Layout Type
-                              </p>
-                              <p className="text-white font-medium text-lg">
-                                {activeLayouts[currentSlide]?.layout_name}
-                              </p>
-                            </div>
+                  <div className="w-full flex flex-col items-center">
+                    <div>
+                      {activeTab === "unit" && (
+                        <>
+                          <div className="mb-8 text-center">
+                            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+                              {activeLayouts[currentSlide]
+                                ?.unit_layout_heading ||
+                                activeLayouts[currentSlide]?.layout_name}
+                            </h3>
+                            <p className="text-[#d6d4e0] max-w-2xl mx-auto sm:mx-0">
+                              Premium apartment design with optimal space
+                              utilization and modern amenities.
+                            </p>
                           </div>
 
-                          {activeLayouts[currentSlide]
-                            ?.unit_layout_carpet_area && (
-                            <div className="flex items-center gap-4 p-4 rounded-xl bg-slate-800/40 backdrop-blur-sm border border-slate-700/30">
-                              <div className="p-3 rounded-lg bg-teal-500/10 text-teal-400">
-                                <Ruler size={22} />
+                          {/* Info Cards */}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {/* Layout Type */}
+                            <div className="flex items-start gap-4 p-5 rounded-2xl bg-gradient-to-br from-[#d6d4e0] to-[#b8a9c9] border border-[#b8a9c9] shadow-md hover:shadow-[#5b9aa0]/40 transition-all">
+                              <div className="p-3 rounded-lg bg-[#5b9aa0]/20 text-[#622569]">
+                                <PenSquare size={22} />
                               </div>
                               <div>
-                                <p className="text-slate-400 text-sm">
-                                  Carpet Area
+                                <p className="text-sm text-[#622569]/70 mb-1">
+                                  Layout Type
                                 </p>
-                                <p className="text-white font-medium text-lg">
-                                  {
-                                    activeLayouts[currentSlide]
-                                      ?.unit_layout_carpet_area
-                                  }
+                                <p className="text-lg font-semibold text-[#622569]">
+                                  {activeLayouts[currentSlide]?.layout_name}
                                 </p>
                               </div>
                             </div>
-                          )}
 
-                          {activeLayouts[currentSlide]?.unit_layout_price && (
-                            <div className="flex items-center gap-4 p-4 rounded-xl bg-slate-800/40 backdrop-blur-sm border border-slate-700/30">
-                              <div className="p-3 rounded-lg bg-teal-500/10 text-teal-400">
-                                <Tag size={22} />
+                            {/* Carpet Area */}
+                            {activeLayouts[currentSlide]
+                              ?.unit_layout_carpet_area && (
+                              <div className="flex items-start gap-4 p-5 rounded-2xl bg-gradient-to-br from-[#d6d4e0] to-[#b8a9c9] border border-[#b8a9c9] shadow-md hover:shadow-[#5b9aa0]/40 transition-all">
+                                <div className="p-3 rounded-lg bg-[#5b9aa0]/20 text-[#622569]">
+                                  <Ruler size={22} />
+                                </div>
+                                <div>
+                                  <p className="text-sm text-[#622569]/70 mb-1">
+                                    Carpet Area
+                                  </p>
+                                  <p className="text-lg font-semibold text-[#622569]">
+                                    {
+                                      activeLayouts[currentSlide]
+                                        ?.unit_layout_carpet_area
+                                    }
+                                  </p>
+                                </div>
                               </div>
-                              <div>
-                                <p className="text-slate-400 text-sm">Price</p>
-                                <p className="text-white font-medium text-lg">
-                                  {
-                                    activeLayouts[currentSlide]
-                                      ?.unit_layout_price
-                                  }
-                                </p>
-                              </div>
-                            </div>
-                          )}
-                        </div>
+                            )}
 
-                        <div className="mt-8">
-                          <button
-                            onClick={openDialog}
-                            className="w-full inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-medium hover:from-teal-600 hover:to-emerald-600 transition-all duration-300"
-                          >
-                            Enquire Now
-                          </button>
-                        </div>
-                      </>
-                    )}
+                            {/* Price */}
+                            {activeLayouts[currentSlide]?.unit_layout_price && (
+                              <div className="flex items-start gap-4 p-5 rounded-2xl bg-gradient-to-br from-[#d6d4e0] to-[#b8a9c9] border border-[#b8a9c9] shadow-md hover:shadow-[#5b9aa0]/40 transition-all">
+                                <div className="p-3 rounded-lg bg-[#5b9aa0]/20 text-[#622569]">
+                                  <Tag size={22} />
+                                </div>
+                                <div>
+                                  <p className="text-sm text-[#622569]/70 mb-1">
+                                    Price
+                                  </p>
+                                  <p className="text-lg font-semibold text-[#622569]">
+                                    {
+                                      activeLayouts[currentSlide]
+                                        ?.unit_layout_price
+                                    }
+                                  </p>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Enquire Button */}
+                          <div className="mt-8 text-center">
+                            <button
+                              onClick={openDialog}
+                              className="relative inline-flex items-center justify-center px-8 py-3 rounded-xl bg-gradient-to-r from-[#5b9aa0] to-[#622569] text-white font-semibold text-base transition-all duration-300 ease-in-out shadow-xl shadow-[#5b9aa0]/30 hover:from-[#4e8c91] hover:to-[#51194e] hover:shadow-[#5b9aa0]/50 active:scale-95 group overflow-hidden"
+                            >
+                              <span className="z-10">Enquire Now</span>
+                              <span className="absolute inset-0 rounded-xl bg-white/10 opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-sm"></span>
+                              <span className="absolute left-[-40%] top-0 w-2/3 h-full bg-white/10 rotate-12 group-hover:translate-x-[150%] transition-transform duration-700 ease-out blur-lg" />
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </div>
 
                     {activeTab === "floor" && (
                       <>
-                        <div className="mb-6">
-                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-medium mb-3">
-                            <Calendar size={12} />
-                            <span>Floor Details</span>
-                          </div>
+                        <div className="mb-2 text-center">
                           <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
                             {activeLayouts[currentSlide]
                               ?.floor_layout_heading ||
                               activeLayouts[currentSlide]?.layout_name}
                           </h3>
-                          <p className="text-slate-300">
+                          <p className="text-[#d6d4e0]">
                             Detailed floor plan with comprehensive layout
                             information.
                           </p>
                         </div>
-                        <div className="mt-8">
+                        <div className="mt-4">
                           <button
                             onClick={openDialog}
-                            className="w-full inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-medium hover:from-teal-600 hover:to-emerald-600 transition-all duration-300"
+                            className="relative inline-flex items-center justify-center px-8 py-3 rounded-xl bg-gradient-to-r from-[#5b9aa0] to-[#622569] text-white font-semibold text-base transition-all duration-300 ease-in-out shadow-xl shadow-[#5b9aa0]/30 hover:from-[#4e8c91] hover:to-[#51194e] hover:shadow-[#5b9aa0]/50 active:scale-95 group overflow-hidden"
                           >
-                            Enquire Now
+                            <span className="z-10">Enquire Now</span>
+                            <span className="absolute inset-0 rounded-xl bg-white/10 opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-sm"></span>
+                            <span className="absolute left-[-40%] top-0 w-2/3 h-full bg-white/10 rotate-12 group-hover:translate-x-[150%] transition-transform duration-700 ease-out blur-lg" />
                           </button>
                         </div>
                       </>
@@ -393,31 +356,70 @@ const PropertyLayouts = () => {
 
                     {activeTab === "master" && (
                       <>
-                        <div className="mb-6">
-                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-medium mb-3">
-                            <Tag size={12} />
-                            <span>Master Layout Details</span>
-                          </div>
+                        <div className="mb-2 text-center">
                           <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
                             {activeLayouts[currentSlide]
                               ?.master_layout_heading ||
                               activeLayouts[currentSlide]?.layout_name}
                           </h3>
-                          <p className="text-slate-300">
+                          <p className="text-[#d6d4e0]">
                             Overview of the master layout offering a complete
                             view of the property.
                           </p>
                         </div>
-                        <div className="mt-8">
+                        <div className="mt-4">
                           <button
                             onClick={openDialog}
-                            className="w-full inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-medium hover:from-teal-600 hover:to-emerald-600 transition-all duration-300"
+                            className="relative inline-flex items-center justify-center px-8 py-3 rounded-xl bg-gradient-to-r from-[#5b9aa0] to-[#622569] text-white font-semibold text-base transition-all duration-300 ease-in-out shadow-xl shadow-[#5b9aa0]/30 hover:from-[#4e8c91] hover:to-[#51194e] hover:shadow-[#5b9aa0]/50 active:scale-95 group overflow-hidden"
                           >
-                            Enquire Now
+                            <span className="z-10">Enquire Now</span>
+                            <span className="absolute inset-0 rounded-xl bg-white/10 opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-sm"></span>
+                            <span className="absolute left-[-40%] top-0 w-2/3 h-full bg-white/10 rotate-12 group-hover:translate-x-[150%] transition-transform duration-700 ease-out blur-lg" />
                           </button>
                         </div>
                       </>
                     )}
+                  </div>
+
+                  {/* Image Side */}
+                  <div className="w-full relative group">
+                    <div className="aspect-video bg-[#d6d4e0]/40 backdrop-blur-md rounded-2xl overflow-hidden border border-[#b8a9c9] shadow-2xl shadow-[#622569]/30 transition-all duration-300">
+                      <img
+                        src={activeLayouts[currentSlide]?.layout_image}
+                        alt={activeLayouts[currentSlide]?.layout_name}
+                        className="object-cover w-full h-full scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#622569]/60 via-[#622569]/10 to-transparent pointer-events-none" />
+                    </div>
+                    <button
+                      onClick={() =>
+                        setExpandedImage(
+                          activeLayouts[currentSlide]?.layout_image
+                        )
+                      }
+                      className="absolute top-3 right-3 p-2 rounded-lg bg-[#b8a9c9]/80 backdrop-blur-sm border border-[#622569]/40 text-[#622569] shadow-md hover:bg-[#5b9aa0] hover:text-white hover:scale-110 transition-all duration-300"
+                    >
+                      <Maximize2 size={20} />
+                    </button>
+                    {activeLayouts.length > 1 && (
+                      <>
+                        <button
+                          onClick={handlePrev}
+                          className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[#b8a9c9]/80 backdrop-blur-sm border border-[#622569]/40 text-[#622569] flex items-center justify-center shadow-md hover:bg-[#5b9aa0] hover:text-white hover:scale-110 transition-all duration-300"
+                        >
+                          <ArrowLeft size={20} />
+                        </button>
+                        <button
+                          onClick={handleNext}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[#b8a9c9]/80 backdrop-blur-sm border border-[#622569]/40 text-[#622569] flex items-center justify-center shadow-md hover:bg-[#5b9aa0] hover:text-white hover:scale-110 transition-all duration-300"
+                        >
+                          <ArrowRight size={20} />
+                        </button>
+                      </>
+                    )}
+                    <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-gradient-to-r from-[#b8a9c9]/70 to-[#d6d4e0]/70 backdrop-blur-sm text-xs text-[#622569] border border-[#622569]/30 shadow-inner shadow-black/10">
+                      Layout {currentSlide + 1} of {activeLayouts.length}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -437,7 +439,7 @@ const PropertyLayouts = () => {
               className="absolute top-2 right-2 p-2 text-red rounded-full bg-slate-800/80 backdrop-blur-sm shadow-lg hover:bg-red-500 transition-colors duration-300"
               onClick={() => setExpandedImage(null)}
             >
-              <X size={24} className="text-teal-600"/>
+              <X size={24} className="text-teal-600" />
             </button>
             <img
               src={expandedImage}
@@ -448,9 +450,8 @@ const PropertyLayouts = () => {
         </div>
       )}
 
-{/* Contact Dialog */}
-       <ContactDialog isOpen={isOpen} onClose={closeDialog} />
- 
+      {/* Contact Dialog */}
+      <ContactDialog isOpen={isOpen} onClose={closeDialog} />
     </>
   );
 };

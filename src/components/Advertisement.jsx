@@ -73,34 +73,40 @@ const Advertisement = () => {
   if (!ads || !ads?.length) return null;
 
   return (
-    <div id="advertisements" className="bg-gray-800 py-16 px-4">
+    <div id="advertisements" className="bg-[#b8a9c9]/20 py-16 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-50">
+          <h2 className="text-3xl font-bold text-[#622569]">
             {pageInfo.heading || "Featured Advertisements"}
           </h2>
           {pageInfo.subheading && (
-            <p className="text-gray-600 mt-2">{pageInfo.subheading}</p>
+            <p className="text-[#5b9aa0] mt-2 text-base sm:text-lg">
+              {pageInfo.subheading}
+            </p>
           )}
-          <div className="w-24 h-1 bg-blue-500 mx-auto mt-4 rounded-full"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-[#5b9aa0] to-[#b8a9c9] mx-auto mt-4 rounded-full"></div>
         </div>
 
         {/* Ads Grid */}
-        <div className="flex flex-col justify-center items-center gap-6">
-          {ads.map((ad) => (
+        <div className="flex flex-col justify-center items-center gap-8">
+          {ads.map((ad, index) => (
             <a
               key={ad.id}
               href={ad.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="block overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className={`relative group block overflow-hidden rounded-2xl border border-[#b8a9c9] shadow-md hover:shadow-[#622569]/30 transition-all duration-500
+          ${index === 0 ? "w-[95%] sm:w-[60%]" : "w-[95%] sm:w-[70%]"}
+          bg-gradient-to-br from-white via-[#d6d4e0]/30 to-[#5b9aa0]/10`}
             >
               <img
                 src={ad.image}
                 alt={pageInfo.heading}
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover transition-transform duration-500 ease-in-out group-hover:scale-[1.02]"
               />
+              <div className="absolute inset-0 bg-[#622569]/10 group-hover:bg-[#622569]/30 transition duration-300 rounded-2xl"></div>
+              <div className="absolute inset-0 group-hover:ring-2 group-hover:ring-[#5b9aa0]/40 rounded-2xl transition-all duration-300"></div>
             </a>
           ))}
         </div>

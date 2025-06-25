@@ -66,21 +66,21 @@ const FAQ = () => {
 
   if (error) {
     return (
-      <div className="bg-slate-900 min-h-[400px] p-8 flex items-center justify-center">
-        <div className="bg-slate-800/80 p-6 rounded-lg border-l-4 border-red-500 max-w-2xl w-full">
+      <div className="bg-[#622569] min-h-[400px] p-8 flex items-center justify-center">
+        <div className="bg-[#5b9aa0]/80 p-6 rounded-lg border-l-4 border-[#b8a9c9] max-w-2xl w-full">
           <div className="flex items-start gap-4">
             <AlertCircle
               size={24}
-              className="text-red-400 flex-shrink-0 mt-1"
+              className="text-[#d6d4e0] flex-shrink-0 mt-1"
             />
             <div>
               <h3 className="text-lg font-medium text-white mb-2">
                 Error Loading FAQ
               </h3>
-              <p className="text-slate-300">{error}</p>
+              <p className="text-[#d6d4e0]">{error}</p>
               <button
                 onClick={() => window.location.reload()}
-                className="mt-4 px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-white transition-colors duration-200 flex items-center gap-2"
+                className="mt-4 px-4 py-2 bg-[#b8a9c9] hover:bg-[#5b9aa0] rounded-lg text-white transition-colors duration-200 flex items-center gap-2"
               >
                 <span>Retry</span>
               </button>
@@ -91,118 +91,105 @@ const FAQ = () => {
     );
   }
 
+  const half = Math.ceil(faqs.length / 2);
+  const leftFAQs = faqs.slice(0, half);
+  const rightFAQs = faqs.slice(half);
+
   return (
-    <div className="bg-slate-900 relative py-16 px-4 md:px-8 lg:px-12 overflow-hidden">
+    <div className="bg-[#712d79] relative py-16 px-4 md:px-8 lg:px-12 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 right-0 bg-teal-400 w-64 h-64 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 bg-emerald-400 w-64 h-64 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 bg-[#5b9aa0] w-64 h-64 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 bg-[#b8a9c9] w-64 h-64 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="md:flex gap-8 lg:gap-16">
-          {/* Left column - Header and intro */}
-          <div className="md:w-5/12 mb-8 md:mb-0">
-            <div className="sticky top-24">
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-teal-400/10 border border-teal-400/20 text-teal-300 text-sm font-medium mb-4">
-                <HelpCircle size={16} className="mr-2" />
-                <span>Knowledge Base</span>
-              </div>
-
-              <h2 className="text-4xl font-bold text-white mb-6">{heading}</h2>
-
-              {/* <p className="text-slate-300 mb-8 text-lg">
-                Find answers to commonly asked questions about Ceratec Tower 1o8
-                Balewadi. Can't find what you're looking for? Contact our
-                support team.
-              </p> */}
-
-              <div className="hidden md:block">
-                <div className="bg-gradient-to-br from-slate-800 to-slate-800/60 p-6 rounded-lg border border-slate-700">
-                  <div className="flex items-start gap-4">
-                    <div className="h-10 w-10 rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 flex items-center justify-center flex-shrink-0">
-                      <MessageCircle size={20} className="text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-white mb-2">
-                        Still have questions?
-                      </h3>
-                      <p className="text-slate-300 mb-4">
-                        Our team is ready to assist you with any further queries
-                      </p>
-                      <a
-                        href="#contact"
-                        className="px-6 py-2.5 rounded-lg bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-medium hover:from-teal-600 hover:to-emerald-600 active:from-teal-700 active:to-emerald-700 transition-all duration-300 inline-flex items-center gap-2"
-                      >
-                        Contact Us
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        {/* Header */}
+        <div className="mb-12 text-center">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#b8a9c9]/10 border border-[#b8a9c9]/20 text-[#d6d4e0] text-sm font-semibold mb-5 shadow-sm backdrop-blur-md">
+            <HelpCircle size={16} className="mr-2" />
+            <span>Knowledge Base</span>
           </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight tracking-tight">
+            {heading}
+          </h2>
+        </div>
 
-          {/* Right column - FAQ Accordion */}
-          <div className="md:w-7/12">
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700/50">
-              <div className="divide-y divide-slate-700/70">
-                {faqs.map((faq, index) => (
-                  <div key={faq.id} className="py-4 first:pt-1 last:pb-1">
+        {/* Two-column layout for FAQs */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {[leftFAQs, rightFAQs].map((column, colIndex) => (
+            <div
+              key={colIndex}
+              className="bg-gradient-to-br from-[#5b9aa0]/30 to-[#b8a9c9]/10 p-6 rounded-xl border border-white/10 backdrop-blur-md shadow-lg"
+            >
+              {column.map((faq, index) => {
+                const faqIndex = colIndex === 0 ? index : index + half;
+                return (
+                  <div
+                    key={faq.id}
+                    className="py-4 first:pt-1 last:pb-1 transition-all duration-300"
+                  >
                     <button
-                      onClick={() => toggleFAQ(index)}
+                      onClick={() => toggleFAQ(faqIndex)}
                       className="flex justify-between items-center w-full text-left focus:outline-none group"
-                      aria-expanded={activeIndex === index}
-                      aria-controls={`faq-content-${index}`}
+                      aria-expanded={activeIndex === faqIndex}
+                      aria-controls={`faq-content-${faqIndex}`}
                     >
                       <span
-                        className={`text-lg font-medium ${
-                          activeIndex === index ? "text-teal-300" : "text-white"
-                        } group-hover:text-teal-300 transition-colors duration-200`}
+                        className={`text-lg font-medium flex items-center gap-2 transition-colors duration-200 ${
+                          activeIndex === faqIndex
+                            ? "text-[#d6d4e0]"
+                            : "text-white"
+                        }`}
                       >
+                        <MessageCircle size={18} className="text-[#b8a9c9]" />
                         {faq.faq_title}
                       </span>
-                      <span className="ml-6 flex-shrink-0 p-1 rounded-full bg-slate-700/50 group-hover:bg-teal-400/20 transition-colors duration-200">
-                        {activeIndex === index ? (
-                          <ChevronUp className="h-5 w-5 text-teal-300" />
+                      <span
+                        className={`ml-4 flex-shrink-0 p-1 rounded-full transition-transform duration-300 bg-white/10 group-hover:bg-[#b8a9c9]/20 ${
+                          activeIndex === faqIndex ? "rotate-180" : ""
+                        }`}
+                      >
+                        {activeIndex === faqIndex ? (
+                          <ChevronUp className="h-5 w-5 text-[#d6d4e0]" />
                         ) : (
-                          <ChevronDown className="h-5 w-5 text-slate-400 group-hover:text-teal-300 transition-colors duration-200" />
+                          <ChevronDown className="h-5 w-5 text-white group-hover:text-[#d6d4e0]" />
                         )}
                       </span>
                     </button>
-                    {activeIndex === index && (
+                    {activeIndex === faqIndex && (
                       <div
-                        id={`faq-content-${index}`}
+                        id={`faq-content-${faqIndex}`}
                         className="mt-3 animate-fadeIn"
                       >
-                        <div className="text-slate-300 bg-slate-800/80 p-5 rounded-lg border-l-2 border-teal-500">
+                        <div className="text-[#d6d4e0] bg-[#5b9aa0]/90 p-5 rounded-lg border-l-2 border-[#b8a9c9]">
                           {stripHtml(faq.faq_content)}
                         </div>
                       </div>
                     )}
                   </div>
-                ))}
-              </div>
+                );
+              })}
             </div>
+          ))}
+        </div>
 
-            {/* Mobile "Still have questions" section */}
-            <div className="md:hidden mt-8">
-              <div className="bg-gradient-to-br from-slate-800 to-slate-800/60 p-6 rounded-lg border border-slate-700">
-                <div className="text-center">
-                  <h3 className="text-xl font-semibold text-white mb-2">
-                    Still have questions?
-                  </h3>
-                  <p className="text-slate-300 mb-4">
-                    Our team is ready to assist you with any further queries
-                  </p>
-                  <a
-                    href="#contact"
-                    className="px-6 py-2.5 rounded-lg bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-medium hover:from-teal-600 hover:to-emerald-600 active:from-teal-700 active:to-emerald-700 transition-all duration-300 inline-flex items-center gap-2"
-                  >
-                    Contact Us
-                  </a>
-                </div>
-              </div>
+        {/* Mobile "Still have questions" section */}
+        <div className="mt-8">
+          <div className="bg-gradient-to-br from-[#5b9aa0] to-[#b8a9c9]/40 p-6 rounded-lg border border-white/10">
+            <div className="text-center">
+              <h3 className="text-xl font-semibold text-white mb-2">
+                Still have questions?
+              </h3>
+              <p className="text-[#d6d4e0] mb-4">
+                Our team is ready to assist you with any further queries
+              </p>
+              <a
+                href="#contact"
+                className="px-6 py-2.5 rounded-lg bg-gradient-to-r from-[#5b9aa0] to-[#b8a9c9] text-white font-medium hover:from-[#5b9aa0]/90 hover:to-[#b8a9c9]/90 active:scale-[.98] transition-all duration-300 inline-flex items-center gap-2"
+              >
+                Contact Us
+              </a>
             </div>
           </div>
         </div>

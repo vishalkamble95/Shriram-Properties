@@ -64,66 +64,72 @@ const Lightbox = ({ images, currentIndex, setCurrentIndex, closeLightbox }) => {
 
   // Create the lightbox content
   const lightboxContent = (
-    <div className="fixed inset-0 w-full h-full bg-slate-900/95 z-[9999] flex items-center justify-center">
+    <div className="fixed inset-0 w-full h-full bg-[#622569]/95 z-[9999] flex items-center justify-center">
       <div
         ref={lightboxContentRef}
-        className="bg-slate-800 rounded-lg border border-slate-700 w-full max-w-2xl h-auto max-h-[90vh] flex flex-col"
+        className="bg-[#5b9aa0] rounded-lg border border-[#b8a9c9] w-full max-w-2xl h-auto max-h-[90vh] flex flex-col"
       >
         {/* Close button */}
-        <div className="absolute top-2 right-2 z-10">
+        <div className="absolute top-3 right-3 z-10">
           <button
-            className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full lightbox-control flex items-center justify-center"
             onClick={closeLightbox}
+            className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400"
           >
             <X size={20} />
           </button>
         </div>
 
         {/* Image viewer with navigation */}
-        <div className="flex-1 relative flex items-center justify-center overflow-hidden p-4">
+        <div className="flex-1 relative flex items-center justify-center overflow-hidden p-6 sm:p-8 bg-gradient-to-br from-[#5b9aa0] via-[#622569] to-black rounded-b-lg">
+          {/* Left Arrow */}
           <button
-            className="absolute left-2 top-1/2 -translate-y-1/2 bg-slate-700 p-2 rounded-full text-white hover:bg-teal-500 transition-colors duration-300 z-10 border border-slate-600 lightbox-control"
             onClick={goToPrevious}
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-[#b8a9c9] hover:bg-[#d6d4e0] text-white p-3 rounded-full border border-[#d6d4e0] hover:shadow-lg transition-all duration-300 z-10"
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={22} />
           </button>
 
+          {/* Enlarged Image */}
           <img
             src={selectedImage.photo}
             alt="Enlarged view"
-            className="max-h-[60vh] max-w-full object-contain"
+            className="max-h-[65vh] max-w-full object-contain transition-transform duration-500 group-hover:scale-105 rounded-md"
           />
 
+          {/* Right Arrow */}
           <button
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-slate-700 p-2 rounded-full text-white hover:bg-teal-500 transition-colors duration-300 z-10 border border-slate-600 lightbox-control"
             onClick={goToNext}
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-[#b8a9c9] hover:bg-[#d6d4e0] text-white p-3 rounded-full border border-[#d6d4e0] hover:shadow-lg transition-all duration-300 z-10"
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={22} />
           </button>
         </div>
 
         {/* Image counter */}
-        <div className="text-slate-300 bg-slate-700 px-4 py-2 flex items-center justify-center">
-          <Camera size={16} className="text-teal-400 mr-2" />
+        <div className="text-[#d6d4e0] bg-[#622569]/90 px-5 py-2 flex items-center justify-center text-sm font-medium tracking-wide border-t border-[#b8a9c9]">
+          <Camera size={16} className="text-[#b8a9c9] mr-2" />
           <span>
-            Image {currentIndex + 1} of {images.length}
+            Image <span className="text-white">{currentIndex + 1}</span> of{" "}
+            <span className="text-white">{images.length}</span>
           </span>
         </div>
 
         {/* Thumbnails */}
-        <div className="flex space-x-2 overflow-x-auto p-2 bg-slate-900">
+        <div className="flex space-x-3 overflow-x-auto p-3 bg-gradient-to-r from-[#622569] via-[#5b9aa0] to-[#622569] rounded-b-lg scrollbar-thin scrollbar-thumb-[#b8a9c9] scrollbar-track-transparent">
           {images.map((img, idx) => (
             <div
               key={img.id}
-              className={`w-12 h-12 flex-shrink-0 rounded-md overflow-hidden cursor-pointer border-2 ${
-                idx === currentIndex ? "border-teal-500" : "border-slate-700"
-              } hover:border-emerald-500 transition-colors duration-200`}
               onClick={() => setCurrentIndex(idx)}
+              className={`w-14 h-14 flex-shrink-0 rounded-md overflow-hidden cursor-pointer border-2 transition-all duration-200 ${
+                idx === currentIndex
+                  ? "border-[#d6d4e0] ring-2 ring-[#5b9aa0]/50 scale-105"
+                  : "border-[#b8a9c9] hover:border-[#5b9aa0]"
+              }`}
             >
               <img
                 src={img.photo}
                 alt={`Thumbnail ${idx + 1}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-200"
               />
             </div>
           ))}
@@ -199,39 +205,46 @@ const Gallery = () => {
   }
 
   return (
-    <div className="bg-slate-800 p-6" id="gallery">
+    <div className="bg-[#622569] p-6" id="gallery">
       {/* Header Section */}
-      <div className="mb-6">
-        <div className="flex items-center justify-center mb-3">
-          <div className="w-1 h-8 bg-gradient-to-b from-teal-400 to-emerald-400 rounded-full mr-3"></div>
-          <h2 className="text-2xl font-bold text-white">
+      <div className="mb-10 text-center px-4 sm:px-6">
+        <div className="flex items-center justify-center mb-4 relative">
+          <div className="w-1 h-10 bg-gradient-to-b from-[#b8a9c9] to-[#d6d4e0] rounded-full mr-3 shadow-lg animate-pulse"></div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white drop-shadow-md tracking-tight">
             {heading || "Property Gallery"}
           </h2>
         </div>
-        <p className="text-slate-400 text-center">
-          Explore the stunning views of this premium property
+        <p className="text-[#d6d4e0] text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+          Explore the stunning views of this premium property, designed to
+          inspire and impress.
         </p>
       </div>
 
-      {/* Gallery Grid - Fixed Height with Scroll */}
-      <div className=" pr-2 custom-scrollbar">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* Gallery Grid Section */}
+      <div className="pr-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {images.map((image, index) => (
             <div
               key={image.id}
-              className="relative group overflow-hidden rounded-lg aspect-square cursor-pointer border border-slate-700 hover:border-teal-500 transition-colors duration-200"
+              className="relative group overflow-hidden rounded-3xl aspect-square cursor-pointer border border-[#5b9aa0] hover:border-[#d6d4e0] transition-all duration-300 shadow-lg hover:shadow-[#5b9aa0]/30 bg-gradient-to-tr from-[#5b9aa0]/60 to-[#b8a9c9]/60"
               onClick={() => openLightbox(image, index)}
             >
               <img
                 src={image.photo}
                 alt={`Property image ${index + 1}`}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 group-hover:rotate-[0.3deg]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-slate-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <div className="bg-teal-500/20 p-3 rounded-full border border-teal-500/40">
-                  <Maximize size={24} className="text-teal-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 backdrop-blur-sm flex items-center justify-center">
+                <div className="bg-[#d6d4e0]/10 p-3 rounded-full border border-[#b8a9c9]/30 shadow-lg backdrop-blur-md transform scale-90 group-hover:scale-100 transition-all duration-300 ease-in-out">
+                  <Maximize
+                    size={28}
+                    className="text-[#5b9aa0] drop-shadow-sm"
+                  />
                 </div>
               </div>
+
+              {/* Glow Border Effect */}
+              <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-[#5b9aa0]/0 group-hover:ring-[#b8a9c9]/30 transition-all duration-500 pointer-events-none" />
             </div>
           ))}
         </div>

@@ -59,42 +59,49 @@ const Location = () => {
   }
 
   return (
-    <div className="bg-slate-800 p-5 md:p-6" id="location">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex items-center mb-4">
-          <div className="w-1 h-8 bg-gradient-to-b from-teal-400 to-emerald-400 rounded-full mr-3"></div>
-          <h2 className="text-xl font-bold text-white">
-            {locationData.heading || "Prime Location"}
-          </h2>
-        </div>
-
-        {locationData.subheading && (
-          <p className="text-slate-300 mb-4">{locationData.subheading}</p>
-        )}
-
-        <div className="rounded-xl overflow-hidden shadow-lg border border-slate-700 w-full h-64 md:h-80 mb-4">
-          {locationData.map ? (
-            <div
-              dangerouslySetInnerHTML={renderMap()}
-              className="w-full h-full"
-            />
-          ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center bg-slate-900 text-slate-500">
-              <MapIcon size={40} className="mb-2 text-teal-400/50" />
-              <p>Map not available</p>
-            </div>
-          )}
-        </div>
-
-        <a
-          href="#contact"
-          className="px-4 py-2 rounded-lg bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-medium hover:from-teal-600 hover:to-emerald-600 transition-all duration-300 flex items-center gap-2 justify-center max-w-sm mx-auto"
-        >
-          <MapPin size={16} />
-          <span>Get Directions</span>
-        </a>
-      </div>
+    <div className="bg-[#b8a9c9] p-6 md:p-10" id="location">
+  <div className="max-w-6xl mx-auto">
+    {/* Section Heading */}
+    <div className="flex items-center mb-6">
+      <div className="w-1 h-8 bg-gradient-to-b from-[#622569] to-[#5b9aa0] rounded-full mr-3"></div>
+      <h2 className="text-2xl font-bold text-[#622569] tracking-wide drop-shadow">
+        {locationData.heading || "Prime Location"}
+      </h2>
     </div>
+
+    {/* Subheading */}
+    {locationData.subheading && (
+      <p className="text-[#5b9aa0] mb-6 text-base sm:text-lg leading-relaxed">
+        {locationData.subheading}
+      </p>
+    )}
+
+    {/* Map Display */}
+    <div className="rounded-2xl overflow-hidden shadow-xl border border-[#622569]/20 w-full h-64 md:h-80 mb-6 bg-[#d6d4e0]/30 backdrop-blur-sm">
+      {locationData.map ? (
+        <div
+          dangerouslySetInnerHTML={renderMap()}
+          className="w-full h-full"
+        />
+      ) : (
+        <div className="w-full h-full flex flex-col items-center justify-center bg-[#d6d4e0]/30 text-[#622569]">
+          <MapIcon size={40} className="mb-2 text-[#5b9aa0]" />
+          <p>Map not available</p>
+        </div>
+      )}
+    </div>
+
+    {/* CTA Button */}
+    <a
+      href="#contact"
+      className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#5b9aa0] to-[#622569] text-white font-semibold hover:from-[#5b9aa0]/90 hover:to-[#622569]/90 active:scale-[.98] transition-all duration-300 flex items-center gap-2 justify-center max-w-sm mx-auto shadow-md"
+    >
+      <MapPin size={18} />
+      <span>Get Directions</span>
+    </a>
+  </div>
+</div>
+
   );
 };
 

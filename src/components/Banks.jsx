@@ -68,73 +68,30 @@ const Banks = () => {
   }
 
   return (
-    <div className="bg-slate-900 py-16 px-4">
+    <div className="bg-[#d6d4e0] py-16 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="md:flex md:justify-between md:items-start mb-12">
           {/* Left content area */}
-          <div className="md:w-1/2 mb-8 md:mb-0">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-teal-400/10 border border-teal-400/20 text-teal-300 text-sm mb-4">
-              <Tag className="w-4 h-4 mr-2" />
-              <span>Financial Partners</span>
+          <div className="text-center max-w-2xl mx-auto">
+            <div className="inline-block mb-2 px-5 py-1.5 rounded-full bg-gradient-to-r from-[#b8a9c9]/20 to-[#5b9aa0]/20 border border-[#5b9aa0]/30 text-[#622569] text-sm font-semibold shadow-sm backdrop-blur-sm transition-all duration-300 hover:shadow-[#5b9aa0]/30 tracking-wide uppercase">
+              Financial Partners
             </div>
 
-            <h2 className="text-3xl font-bold mb-4 text-white">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-[#622569] leading-tight tracking-tight mb-4">
               {heading || "Approved Home Loan Partners"}
             </h2>
 
-            <div className="h-1 w-24 bg-gradient-to-r from-teal-400 to-emerald-400 rounded-full mb-6"></div>
+            <div className="h-1 w-24 mx-auto bg-gradient-to-r from-[#5b9aa0] to-[#b8a9c9] rounded-full mb-6"></div>
 
-            {/* <p className="text-slate-300 mb-6">
-              Choose from our network of trusted banking partners for
-              hassle-free home loan approvals with competitive interest rates
-              and flexible repayment options.
+            <p className="text-[#5b9aa0] text-base md:text-lg leading-relaxed">
+              Choose from our trusted banking partners for quick, reliable home
+              loan approvals with competitive interest rates and flexible
+              repayment options.
             </p>
-
-            <div className="flex items-center text-slate-300 mb-3">
-              <Check className="w-5 h-5 mr-3 text-teal-300" />
-              <span>Pre-approved projects for faster loan processing</span>
-            </div>
-
-            <div className="flex items-center text-slate-300">
-              <Check className="w-5 h-5 mr-3 text-teal-300" />
-              <span>Special rates for our property buyers</span>
-            </div> */}
           </div>
-
-          {/* Right action area */}
-          {/* <div className="md:w-1/2 md:pl-8">
-            <div className="bg-slate-800 rounded-lg p-6 shadow-lg border border-slate-700">
-              <div className="flex items-center mb-4">
-                <CreditCard className="w-5 h-5 text-teal-300 mr-3" />
-                <h3 className="text-white font-medium">Loan Eligibility</h3>
-              </div>
-
-              <p className="text-slate-300 text-sm mb-4">
-                Our banking partners offer competitive interest rates starting
-                from 6.5% with loan tenures up to 30 years and up to 90%
-                financing on property value.
-              </p>
-
-              <div className="flex justify-between items-center">
-                <div className="flex space-x-1">
-                  {[1, 2, 3].map((dot) => (
-                    <div
-                      key={dot}
-                      className={`h-2 rounded-full ${
-                        dot === 1 ? "w-8 bg-teal-400" : "w-2 bg-white/30"
-                      }`}
-                    ></div>
-                  ))}
-                </div>
-                <span className="text-sm text-slate-400">
-                  {banks.length} approved partners
-                </span>
-              </div>
-            </div>
-          </div> */}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {banks.slice(0, visibleBanks).map((bank) => (
             <a
               href={bank.bank_slug}
@@ -143,37 +100,45 @@ const Banks = () => {
               key={bank.id}
               className="group"
             >
-              <div className="bg-slate-800 border border-slate-700 rounded-lg overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-teal-600/10 h-full flex flex-col">
-                <div className="relative h-40 bg-slate-900 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-slate-900/40 to-slate-900/70"></div>
+              <div className="relative bg-gradient-to-br from-[#d6d4e0] via-[#b8a9c9]/50 to-[#5b9aa0]/20 border border-[#b8a9c9] rounded-3xl overflow-hidden shadow-lg hover:shadow-[#5b9aa0]/30 transition-all duration-300 transform hover:-translate-y-2 hover:scale-[1.02] h-full flex flex-col">
+                {/* Image Section */}
+                <div className="relative h-48 overflow-hidden bg-[#b8a9c9]/10">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#622569]/20 to-[#622569]/40 z-10" />
+
                   {bank.property_bank_photo ? (
                     <img
                       src={bank.property_bank_photo}
                       alt={bank.bank_name}
-                      className="w-full h-full object-contain p-6"
+                      className="w-full h-full object-contain p-6 relative z-20 scale-100 group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <Building size={64} className="text-slate-500" />
+                    <div className="w-full h-full flex items-center justify-center relative z-20">
+                      <Building size={64} className="text-[#5b9aa0]" />
                     </div>
                   )}
-                  <div className="absolute top-3 right-3">
-                    <div className="bg-teal-400/10 border border-teal-400/20 text-teal-300 text-xs px-2 py-1 rounded-full">
+
+                  {/* Partner Badge */}
+                  <div className="absolute top-4 right-4 z-30">
+                    <span className="px-3 py-1.5 text-xs text-[#622569] font-semibold uppercase tracking-wide rounded-full bg-gradient-to-r from-[#b8a9c9]/30 to-[#5b9aa0]/30 border border-[#622569]/20 shadow-md backdrop-blur-sm transition-all duration-300 hover:shadow-[#5b9aa0]/40">
                       Partner
-                    </div>
+                    </span>
                   </div>
                 </div>
-                <div className="p-5 flex flex-col flex-grow">
-                  <h3 className="text-white font-medium text-lg mb-2 group-hover:text-teal-300 transition-colors duration-300">
+
+                {/* Card Content */}
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="text-[#622569] font-semibold text-xl mb-3 group-hover:text-[#5b9aa0] transition-colors duration-300">
                     {bank.bank_name}
                   </h3>
-                  <div className="mt-auto pt-4 flex items-center justify-between text-slate-400 group-hover:text-slate-300 transition-colors duration-300">
-                    <span className="text-sm flex items-center">
-                      <CreditCard size={16} className="mr-2 text-teal-300" />
+
+                  <div className="mt-auto pt-4 flex items-center justify-between text-[#622569]/80 group-hover:text-[#622569] transition-all duration-300">
+                    <span className="text-sm flex items-center font-medium">
+                      <CreditCard size={16} className="mr-2 text-[#5b9aa0]" />
                       Home Loan Provider
                     </span>
-                    <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <ArrowRight size={14} />
+
+                    <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-br from-[#5b9aa0] to-[#622569] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md">
+                      <ArrowRight size={16} />
                     </div>
                   </div>
                 </div>
@@ -183,13 +148,13 @@ const Banks = () => {
         </div>
 
         {visibleBanks < banks.length && (
-          <div className="mt-10 text-center">
+          <div className="mt-12 text-center">
             <button
               onClick={loadMore}
-              className="px-8 py-3 rounded-lg bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-medium hover:from-teal-600 hover:to-emerald-600 active:from-teal-700 active:to-emerald-700 transition-all duration-300 transform hover:scale-105 flex items-center mx-auto"
+              className="px-8 py-3 rounded-full bg-gradient-to-r from-[#5b9aa0] to-[#622569] text-white font-semibold hover:from-[#4c868c] hover:to-[#501753] active:from-[#3d6f74] active:to-[#401244] transition-all duration-300 transform hover:scale-105 flex items-center mx-auto shadow-md"
             >
               Load More Partners
-              <ArrowRight size={16} className="ml-2" />
+              <ArrowRight size={18} className="ml-3" />
             </button>
           </div>
         )}
