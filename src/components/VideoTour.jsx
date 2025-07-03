@@ -65,23 +65,23 @@ const VideoTour = () => {
 
   if (loading) {
     return (
-      <div className="bg-slate-900 min-h-[400px] p-8 flex items-center justify-center">
-        <Loader size={32} className="text-teal-400 animate-spin" />
+      <div className="bg-[#06202B] min-h-[400px] p-8 flex items-center justify-center">
+        <Loader size={32} className="text-[#7AE2CF] animate-spin" />
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="bg-slate-900 min-h-[400px] p-8 flex items-center justify-center">
-        <div className="bg-slate-800 border border-red-900/30 p-6 rounded-lg max-w-lg">
+      <div className="bg-[#06202B] min-h-[400px] p-8 flex items-center justify-center">
+        <div className="bg-[#077A7D]/20 border border-red-500/40 p-6 rounded-lg max-w-lg">
           <div className="flex items-center gap-3 mb-3">
             <AlertCircle size={24} className="text-red-400" />
             <h3 className="text-lg font-medium text-red-300">
               Error Loading Tours
             </h3>
           </div>
-          <p className="text-slate-300">
+          <p className="text-[#F5EEDD]">
             We couldn't load the virtual tours: {error}
           </p>
         </div>
@@ -94,9 +94,9 @@ const VideoTour = () => {
   }
 
   return (
-    <div className="bg-[#622569] relative overflow-hidden">
+    <div className="bg-[#06202B] relative overflow-hidden">
       {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#5b9aa0]/30 to-[#622569]/90 z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-[#077A7D]/40 to-[#06202B]/95 z-0"></div>
 
       {/* Main content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-12 py-12 sm:py-16 md:py-20 lg:py-24">
@@ -112,13 +112,13 @@ const VideoTour = () => {
           </div>
         </div> */}
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#d6d4e0] leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#F5EEDD] leading-tight">
               {heading || "Immersive Property Tour"}
             </h2>
 
-            <div className="w-16 h-1 bg-gradient-to-r from-[#5b9aa0] to-[#b8a9c9] rounded-full"></div>
+            <div className="w-16 h-1 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] rounded-full"></div>
 
-            <p className="text-[#d6d4e0]/90 text-base sm:text-lg leading-relaxed max-w-xl">
+            <p className="text-[#F5EEDD]/90 text-base sm:text-lg leading-relaxed max-w-xl">
               Experience our premium property from anywhere in the world. Our
               virtual tour puts you in control, allowing you to explore every
               detail and envision your future home.
@@ -126,14 +126,14 @@ const VideoTour = () => {
 
             <div className="space-y-3">
               <div className="flex items-center justify-center lg:justify-start gap-3">
-                <Clock size={20} className="text-[#5b9aa0]" />
-                <span className="text-[#d6d4e0] text-sm sm:text-base">
+                <Clock size={20} className="text-[#7AE2CF]" />
+                <span className="text-[#F5EEDD] text-sm sm:text-base">
                   Available 24/7 for your convenience
                 </span>
               </div>
               <div className="flex items-center justify-center lg:justify-start gap-3">
-                <Tag size={20} className="text-[#5b9aa0]" />
-                <span className="text-[#d6d4e0] text-sm sm:text-base">
+                <Tag size={20} className="text-[#7AE2CF]" />
+                <span className="text-[#F5EEDD] text-sm sm:text-base">
                   High-definition quality visuals
                 </span>
               </div>
@@ -143,16 +143,19 @@ const VideoTour = () => {
               href={`https://www.youtube.com/watch?v=${videos[0]?.youtube_video_id}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gradient-to-r from-[#5b9aa0] to-[#b8a9c9] text-white font-medium text-sm sm:text-base hover:from-[#5b9aa0]/90 hover:to-[#b8a9c9]/90 active:from-[#5b9aa0]/80 active:to-[#b8a9c9]/80 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#5b9aa0]/30"
+              className="relative group inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] text-white font-medium text-sm sm:text-base hover:from-[#077A7D]/90 hover:to-[#7AE2CF]/90 active:from-[#077A7D]/80 active:to-[#7AE2CF]/80 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#077A7D]/30 overflow-hidden"
             >
-              <span>View All Tours on YouTube</span>
-              <ExternalLink size={16} />
+              <span className="relative z-10">View All Tours on YouTube</span>
+              <ExternalLink size={16} className="relative z-10" />
+
+              {/* Shine sweep effect */}
+              <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none z-0" />
             </a>
           </div>
 
           {/* ✅ Right Video Player Area */}
           <div className="w-full lg:w-3/5">
-            <div className="bg-[#b8a9c9]/10 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl border border-[#d6d4e0]/20">
+            <div className="bg-[#F5EEDD]/10 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl border border-[#7AE2CF]/20">
               {/* Video Thumbnail */}
               <div className="relative aspect-video group overflow-hidden rounded-xl">
                 {/* Thumbnail Image */}
@@ -173,9 +176,9 @@ const VideoTour = () => {
                     <button
                       onClick={() => openModal(activeVideo, activeIndex)}
                       className="h-16 w-16 sm:h-20 sm:w-20 rounded-full 
-                  bg-gradient-to-br from-[#5b9aa0] to-[#b8a9c9] 
+                  bg-gradient-to-br from-[#077A7D] to-[#7AE2CF] 
                   text-white shadow-xl 
-                  hover:scale-110 hover:shadow-[#5b9aa0]/40 
+                  hover:scale-110 hover:shadow-[#077A7D]/40 
                   transition-transform duration-300 
                   flex items-center justify-center"
                       aria-label="Play video"
@@ -189,15 +192,15 @@ const VideoTour = () => {
               {/* Metadata */}
               <div className="p-4 sm:p-6">
                 <div className="flex flex-col sm:flex-row items-center sm:items-center justify-center sm:justify-between text-center sm:text-left mb-4 gap-4 sm:gap-0">
-                  <div className="flex items-center gap-2 text-[#d6d4e0]">
-                    <Youtube size={20} className="text-[#5b9aa0]" />
+                  <div className="flex items-center gap-2 text-[#F5EEDD]">
+                    <Youtube size={20} className="text-[#7AE2CF]" />
                     <span className="font-medium tracking-wide text-sm sm:text-base">
                       Featured Tour
                     </span>
                   </div>
                   <button
                     onClick={() => openModal(activeVideo, activeIndex)}
-                    className="px-4 py-2 bg-[#622569]/80 hover:bg-[#5b9aa0] text-white rounded-lg transition-colors duration-300 flex items-center gap-2 text-sm sm:text-base shadow-sm hover:shadow-md"
+                    className="px-4 py-2 bg-[#077A7D]/90 hover:bg-[#7AE2CF]/90 text-white rounded-lg transition-colors duration-300 flex items-center gap-2 text-sm sm:text-base shadow-sm hover:shadow-md"
                   >
                     <span>Watch Now</span>
                     <Play size={16} />
@@ -216,8 +219,8 @@ const VideoTour = () => {
                         }}
                         className={`relative aspect-video rounded-xl overflow-hidden transition-all duration-300 group ${
                           activeVideo?.id === video.id
-                            ? "border-2 border-[#5b9aa0] shadow-lg shadow-[#5b9aa0]/30 scale-105"
-                            : "opacity-80 hover:opacity-100 border border-[#d6d4e0]/20 hover:scale-105"
+                            ? "border-2 border-[#077A7D] shadow-lg shadow-[#077A7D]/30 scale-105"
+                            : "opacity-80 hover:opacity-100 border border-[#F5EEDD]/20 hover:scale-105"
                         }`}
                       >
                         <img
@@ -241,11 +244,11 @@ const VideoTour = () => {
       {/* Video Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center px-4 py-10">
-          <div className="relative bg-[#622569] rounded-2xl overflow-hidden w-full max-w-4xl border border-[#d6d4e0]/20 shadow-2xl shadow-black/70">
+          <div className="relative bg-[#06202B] rounded-2xl overflow-hidden w-full max-w-4xl border border-[#7AE2CF]/20 shadow-2xl shadow-black/70">
             {/* Close Button in Top-Right */}
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 p-2 bg-[#b8a9c9]/30 text-white rounded-full hover:text-red-400 hover:bg-[#b8a9c9]/50 transition-colors z-50"
+              className="absolute top-4 right-4 p-2 bg-[#7AE2CF]/20 text-white rounded-full hover:text-red-400 hover:bg-[#7AE2CF]/40 transition-colors z-50"
               aria-label="Close modal"
             >
               <X size={20} />
@@ -264,9 +267,9 @@ const VideoTour = () => {
             </div>
 
             {/* Footer Metadata */}
-            <div className="p-4 bg-[#b8a9c9]/10 border-t border-[#d6d4e0]/20 flex items-center justify-between">
+            <div className="p-4 bg-[#7AE2CF]/10 border-t border-[#7AE2CF]/20 flex items-center justify-between">
               <div className="flex items-center gap-2 text-white text-sm sm:text-base">
-                <Youtube size={18} className="text-[#5b9aa0]" />
+                <Youtube size={18} className="text-[#7AE2CF]" />
                 <span>
                   Tour <span className="font-semibold">{activeIndex + 1}</span>{" "}
                   of <span className="font-semibold">{videos.length}</span>

@@ -45,22 +45,22 @@ function Navbar({ propertyData, loading, openDialog }) {
   return (
     <>
       {/* Top info bar with full-width gradient background */}
-      <div className="bg-[#d6d4e0] text-[#622569] py-1.5 hidden md:block border-b border-[#b8a9c9] shadow-sm font-serif">
+      <div className="bg-[#F5EEDD] text-[#06202B] py-1.5 hidden md:block border-b border-[#7AE2CF] shadow-sm font-serif">
         <div className="container mx-auto px-6 flex justify-between items-center text-sm leading-relaxed">
           <div className="flex items-center space-x-6">
-            <div className="flex items-center text-[#622569] font-medium">
-              <MapPin size={16} className="mr-2 text-[#5b9aa0]" />
+            <div className="flex items-center text-[#06202B] font-medium">
+              <MapPin size={16} className="mr-2 text-[#077A7D]" />
               <span>{propertyData.location}</span>
             </div>
-            <div className="flex items-center text-[#622569] font-medium">
-              <Building size={16} className="mr-2 text-[#5b9aa0]" />
+            <div className="flex items-center text-[#06202B] font-medium">
+              <Building size={16} className="mr-2 text-[#077A7D]" />
               <span>{propertyData.builder_name}</span>
             </div>
-            <div className="flex items-center text-[#622569] font-medium">
-              <Star size={16} className="mr-2 text-[#5b9aa0]" />
+            <div className="flex items-center text-[#06202B] font-medium">
+              <Star size={16} className="mr-2 text-[#077A7D]" />
               <span>
-                4.8/5{" "}
-                <span className="text-[#b8a9c9] font-normal text-xs ml-1">
+                4.8/5
+                <span className="text-[#7AE2CF] font-normal text-xs ml-1">
                   (120 reviews)
                 </span>
               </span>
@@ -68,13 +68,13 @@ function Navbar({ propertyData, loading, openDialog }) {
           </div>
 
           <div className="flex items-center space-x-6">
-            <div className="flex items-center text-[#622569] font-medium">
-              <Calendar size={16} className="mr-2 text-[#5b9aa0]" />
+            <div className="flex items-center text-[#06202B] font-medium">
+              <Calendar size={16} className="mr-2 text-[#077A7D]" />
               <span>RERA Registered</span>
             </div>
             <a
               href={`tel:${contact?.footer_phone}`}
-              className="flex items-center text-[#622569] hover:text-[#5b9aa0] transition-colors font-medium"
+              className="flex items-center text-[#06202B] hover:text-[#077A7D] transition-colors font-medium"
             >
               <Phone size={16} className="mr-2" />
               <span>{contact?.footer_phone}</span>
@@ -85,8 +85,8 @@ function Navbar({ propertyData, loading, openDialog }) {
 
       {/* Main header */}
       <header
-        className={`bg-[#622569] backdrop-blur-md sticky top-0 z-40 transition-all duration-300 ${
-          scrolled ? "shadow-lg shadow-[#5b9aa0]/10" : ""
+        className={`bg-[#06202B] backdrop-blur-md sticky top-0 z-40 transition-all duration-300 ${
+          scrolled ? "shadow-lg shadow-[#077A7D]/10" : ""
         }`}
       >
         <div className="container mx-auto px-6">
@@ -94,7 +94,7 @@ function Navbar({ propertyData, loading, openDialog }) {
             <div className="flex items-center space-x-3 md:space-x-6">
               <div className="relative">
                 {loading ? (
-                  <div className="h-10 md:h-12 w-32 bg-[#b8a9c9] animate-pulse rounded-md"></div>
+                  <div className="h-10 md:h-12 w-32 bg-[#7AE2CF] animate-pulse rounded-md"></div>
                 ) : (
                   <div className="flex items-center">
                     <img
@@ -108,7 +108,7 @@ function Navbar({ propertyData, loading, openDialog }) {
                       <h1 className="text-white font-semibold text-lg">
                         {propertyData.property_name}
                       </h1>
-                      <p className="text-[#d6d4e0] text-xs">Premium Property</p>
+                      <p className="text-[#F5EEDD] text-xs">Premium Property</p>
                     </div>
                   </div>
                 )}
@@ -123,8 +123,8 @@ function Navbar({ propertyData, loading, openDialog }) {
                       onClick={() => handleSetActive(item.id)}
                       className={`px-3 lg:px-4 py-2 text-xs font-medium transition-colors rounded-md ${
                         activeSection === item.id
-                          ? "text-[#622569] bg-[#d6d4e0] border border-[#b8a9c9]"
-                          : "text-white hover:text-[#d6d4e0] hover:bg-[#5b9aa0]/30 border border-[#b8a9c9]"
+                          ? "text-[#06202B] bg-[#F5EEDD] border border-[#7AE2CF]"
+                          : "text-white hover:text-[#F5EEDD] hover:bg-[#077A7D]/30 border border-[#7AE2CF]"
                       }`}
                     >
                       {item.label}
@@ -136,20 +136,20 @@ function Navbar({ propertyData, loading, openDialog }) {
             <div className="hidden md:flex space-x-3">
               <a
                 href={`tel:${contact?.footer_phone}`}
-                className="bg-[#5b9aa0] text-white hover:bg-[#b8a9c9] font-bold py-2 px-4 rounded-lg transition-colors flex items-center text-sm"
+                className="bg-[#077A7D] text-white hover:bg-[#7AE2CF] font-bold py-2 px-4 rounded-lg transition-colors flex items-center text-sm"
               >
-                <Phone size={14} className="mr-2 text-[#d6d4e0]" />
+                <Phone size={14} className="mr-2 text-[#F5EEDD]" />
                 <span>Call Now</span>
               </a>
               <button
                 onClick={openDialog}
-                className="bg-gradient-to-r from-[#5b9aa0] to-[#b8a9c9] hover:from-[#5b9aa0]/90 hover:to-[#b8a9c9]/90 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm shadow-lg shadow-[#5b9aa0]/30"
+                className="bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#077A7D]/90 hover:to-[#7AE2CF]/90 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm shadow-lg shadow-[#077A7D]/30"
               >
                 Book Site Visit
               </button>
             </div>
             <button
-              className="md:hidden text-white focus:outline-none p-2 bg-[#5b9aa0] rounded-lg"
+              className="md:hidden text-white focus:outline-none p-2 bg-[#077A7D] rounded-lg"
               onClick={toggleMenu}
               aria-label="Toggle menu"
             >
@@ -161,14 +161,14 @@ function Navbar({ propertyData, loading, openDialog }) {
 
       {/* Mobile menu overlay */}
       <div
-        className={`fixed inset-0 bg-[#622569] backdrop-blur-md z-50 transition-all duration-300 ${
+        className={`fixed inset-0 bg-[#06202B] backdrop-blur-md z-50 transition-all duration-300 ${
           menuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         } md:hidden`}
       >
         <div className="flex flex-col h-full">
-          <div className="flex justify-between items-center p-6 border-b border-[#b8a9c9]">
+          <div className="flex justify-between items-center p-6 border-b border-[#7AE2CF]">
             <div className="flex items-center space-x-3">
               <img
                 src={propertyData.logo}
@@ -179,14 +179,14 @@ function Navbar({ propertyData, loading, openDialog }) {
                 <h2 className="text-lg text-white font-semibold">
                   {propertyData.property_name}
                 </h2>
-                <p className="text-[#d6d4e0] text-xs font-medium">
+                <p className="text-[#F5EEDD] text-xs font-medium">
                   Premium Property
                 </p>
               </div>
             </div>
             <button
               onClick={toggleMenu}
-              className="p-2 rounded-full hover:bg-[#b8a9c9] bg-[#5b9aa0]/40"
+              className="p-2 rounded-full hover:bg-[#7AE2CF] bg-[#077A7D]/40"
               aria-label="Close menu"
             >
               <X size={20} className="text-white" />
@@ -201,8 +201,8 @@ function Navbar({ propertyData, loading, openDialog }) {
                     onClick={() => handleSetActive(item.id)}
                     className={`w-full text-left py-4 px-5 flex justify-between items-center rounded-lg transition-colors ${
                       activeSection === item.id
-                        ? "text-[#622569] bg-[#d6d4e0] border border-[#b8a9c9] font-medium"
-                        : "text-white hover:text-[#d6d4e0] hover:bg-[#5b9aa0]/30 border border-[#b8a9c9]"
+                        ? "text-[#06202B] bg-[#F5EEDD] border border-[#7AE2CF] font-medium"
+                        : "text-white hover:text-[#F5EEDD] hover:bg-[#077A7D]/30 border border-[#7AE2CF]"
                     }`}
                   >
                     <span>{item.label}</span>
@@ -210,7 +210,7 @@ function Navbar({ propertyData, loading, openDialog }) {
                       size={16}
                       className={`transition-transform ${
                         activeSection === item.id
-                          ? "rotate-180 text-[#b8a9c9]"
+                          ? "rotate-180 text-[#7AE2CF]"
                           : "text-white"
                       }`}
                     />
@@ -218,11 +218,11 @@ function Navbar({ propertyData, loading, openDialog }) {
                 </li>
               ))}
             </ul>
-            <div className="p-6 space-y-4 mt-4 border-t border-[#b8a9c9]">
+            <div className="p-6 space-y-4 mt-4 border-t border-[#7AE2CF]">
               <div className="flex items-center">
                 <MapPin
                   size={18}
-                  className="text-[#b8a9c9] mr-3 flex-shrink-0"
+                  className="text-[#7AE2CF] mr-3 flex-shrink-0"
                 />
                 <span className="text-white text-sm">
                   {propertyData.location}
@@ -231,23 +231,23 @@ function Navbar({ propertyData, loading, openDialog }) {
               <div className="flex items-center">
                 <Building
                   size={18}
-                  className="text-[#b8a9c9] mr-3 flex-shrink-0"
+                  className="text-[#7AE2CF] mr-3 flex-shrink-0"
                 />
                 <span className="text-white text-sm">
                   {propertyData.builder_name}
                 </span>
               </div>
               <div className="flex items-center">
-                <Star size={18} className="text-[#b8a9c9] mr-3 flex-shrink-0" />
+                <Star size={18} className="text-[#7AE2CF] mr-3 flex-shrink-0" />
                 <span className="text-white text-sm">
                   {4.8}/5{" "}
-                  <span className="text-[#d6d4e0] text-xs">(120 reviews)</span>
+                  <span className="text-[#F5EEDD] text-xs">(120 reviews)</span>
                 </span>
               </div>
               <div className="flex items-center">
                 <Clock
                   size={18}
-                  className="text-[#b8a9c9] mr-3 flex-shrink-0"
+                  className="text-[#7AE2CF] mr-3 flex-shrink-0"
                 />
                 <span className="text-white text-sm">
                   Last updated:{" "}
@@ -259,16 +259,23 @@ function Navbar({ propertyData, loading, openDialog }) {
               <div className="pt-6 space-y-3 sticky bottom-0 pb-8">
                 <button
                   onClick={openDialog}
-                  className="w-full bg-gradient-to-r from-[#5b9aa0] to-[#b8a9c9] hover:from-[#5b9aa0]/90 hover:to-[#b8a9c9]/90 text-white font-medium py-3.5 px-4 rounded-lg transition-colors shadow-lg shadow-[#5b9aa0]/20"
+                  className="relative group w-full bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#077A7D]/90 hover:to-[#7AE2CF]/90 text-white font-medium py-3.5 px-4 rounded-lg transition-all shadow-lg shadow-[#077A7D]/20 overflow-hidden"
                 >
-                  Book Site Visit
+                  <span className="relative z-10">Book Site Visit</span>
+                  {/* Shine sweep effect */}
+                  <span className="absolute inset-0 -left-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
                 </button>
+
                 <a
                   href={`tel:${contact?.footer_phone}`}
-                  className="w-full flex justify-center items-center bg-[#5b9aa0] text-white hover:bg-[#b8a9c9] font-bold py-3.5 px-4 rounded-lg transition-colors"
+                  className="relative group w-full flex justify-center items-center bg-[#077A7D] text-white hover:bg-[#7AE2CF] font-bold py-3.5 px-4 rounded-lg transition-all overflow-hidden"
                 >
-                  <Phone size={18} className="mr-2 text-[#d6d4e0]" />
-                  Call Now
+                  <span className="relative z-10 flex items-center">
+                    <Phone size={18} className="mr-2 text-[#F5EEDD]" />
+                    Call Now
+                  </span>
+                  {/* Shine sweep effect */}
+                  <span className="absolute inset-0 -left-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
                 </a>
               </div>
             </div>

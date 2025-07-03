@@ -64,23 +64,23 @@ const BlogContent = () => {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 p-4">
-        <div className="w-16 h-16 border-4 border-teal-600 border-t-transparent rounded-full animate-spin"></div>
-        <p className="mt-4 text-slate-300">Loading blog content...</p>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#06202B] via-[#077A7D] to-[#06202B] p-4">
+        <div className="w-16 h-16 border-4 border-[#7AE2CF] border-t-transparent rounded-full animate-spin"></div>
+        <p className="mt-4 text-[#F5EEDD]/80">Loading blog content...</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 p-4">
-        <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full p-6">
-          <h2 className="text-xl text-red-700 font-medium mb-2">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#06202B] via-[#077A7D] to-[#06202B] p-4">
+        <div className="bg-[#F5EEDD]/10 rounded-lg shadow-lg max-w-2xl w-full p-6 border border-[#7AE2CF]/20 backdrop-blur-md">
+          <h2 className="text-xl text-red-500 font-medium mb-2">
             Error Loading Content
           </h2>
-          <p className="text-slate-600">{error}</p>
+          <p className="text-[#F5EEDD]/80">{error}</p>
           <button
-            className="mt-4 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors"
+            className="mt-4 px-4 py-2 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] text-white rounded-md hover:from-[#077A7D]/90 hover:to-[#7AE2CF]/90 transition-colors shadow-md"
             onClick={() => window.location.reload()}
           >
             Try Again
@@ -92,16 +92,16 @@ const BlogContent = () => {
 
   if (!blog) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 p-4">
-        <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full p-6">
-          <h2 className="text-xl text-slate-800 font-medium mb-2">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#06202B] via-[#077A7D] to-[#06202B] p-4">
+        <div className="bg-[#F5EEDD]/10 rounded-lg shadow-lg max-w-2xl w-full p-6 border border-[#7AE2CF]/20 backdrop-blur-md">
+          <h2 className="text-xl text-[#F5EEDD] font-medium mb-2">
             No Blog Found
           </h2>
-          <p className="text-slate-600">
+          <p className="text-[#F5EEDD]/80">
             The requested blog content could not be found.
           </p>
           <button
-            className="mt-4 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors"
+            className="mt-4 px-4 py-2 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] text-white rounded-md hover:from-[#077A7D]/90 hover:to-[#7AE2CF]/90 transition-colors shadow-md"
             onClick={() => navigate(-1)}
           >
             Return to Blogs
@@ -113,10 +113,10 @@ const BlogContent = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-gradient-to-b from-[#06202B] via-[#077A7D] to-[#06202B] py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <button
-            className="mb-8 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 text-slate-300 hover:text-teal-400 hover:bg-white/20 transition-all duration-300 shadow-sm border border-white/10"
+            className="mb-8 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 text-[#F5EEDD]/80 hover:text-[#7AE2CF] hover:bg-white/20 transition-all duration-300 shadow-sm border border-white/10"
             onClick={() => navigate(-1)}
           >
             <ArrowLeft size={18} />
@@ -131,7 +131,7 @@ const BlogContent = () => {
               className="w-full h-64 sm:h-96 object-cover scale-100 group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 z-20">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/80 text-teal-700 rounded-full text-xs sm:text-sm font-semibold backdrop-blur-sm border border-white/60 shadow-md">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#F5EEDD]/90 text-[#06202B] rounded-full text-xs sm:text-sm font-semibold backdrop-blur-sm border border-white/60 shadow-md">
                 <Calendar size={14} />
                 <span>{formatDate(blog.created_at)}</span>
               </div>
@@ -142,16 +142,16 @@ const BlogContent = () => {
           </div>
 
           {/* Blog Short Description */}
-          <div className="bg-slate-800 rounded-xl p-6 mb-6 shadow-md border border-slate-700/40">
-            <p className="text-slate-300 text-lg leading-relaxed font-medium">
+          <div className="bg-[#06202B]/60 rounded-xl p-6 mb-6 shadow-md border border-[#7AE2CF]/20">
+            <p className="text-[#F5EEDD]/90 text-lg leading-relaxed font-medium">
               {blog.post_content_short}
             </p>
           </div>
 
           {/* Blog Full Content */}
-          <div className="bg-slate-800 rounded-xl p-6 mb-10 shadow-md border border-slate-700/40 relative">
+          <div className="bg-[#06202B]/60 rounded-xl p-6 mb-10 shadow-md border border-[#7AE2CF]/20 relative">
             <div
-              className="prose max-w-none text-slate-300 prose-p:leading-relaxed"
+              className="prose max-w-none text-[#F5EEDD]/90 prose-p:leading-relaxed"
               style={{
                 maxHeight: expanded ? "none" : "18rem",
                 overflow: "hidden",
@@ -166,14 +166,14 @@ const BlogContent = () => {
 
             {/* Gradient overlay */}
             {!expanded && (
-              <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900 to-transparent pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#06202B] to-transparent pointer-events-none"></div>
             )}
 
             {/* Read More / Less */}
             <div className="flex justify-center mt-4">
               <button
                 onClick={() => setExpanded(!expanded)}
-                className="flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-medium hover:from-teal-600 hover:to-emerald-600 active:scale-95 transition-all duration-300 shadow-md"
+                className="flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] text-white font-medium hover:from-[#077A7D]/90 hover:to-[#7AE2CF]/90 active:scale-95 transition-all duration-300 shadow-md"
               >
                 <span>{expanded ? "Read Less" : "Read More"}</span>
                 {expanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
@@ -185,40 +185,24 @@ const BlogContent = () => {
           <div className="flex flex-col sm:flex-row gap-4 mb-14">
             <button
               onClick={openDialog}
-              className="flex-1 py-4 text-center rounded-xl bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-semibold hover:from-teal-600 hover:to-emerald-600 transition-all duration-300 shadow-lg"
+              className="relative group flex-1 py-4 text-center rounded-xl bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] text-white font-semibold hover:from-[#077A7D]/90 hover:to-[#7AE2CF]/90 transition-all duration-300 shadow-lg overflow-hidden"
             >
-              Check Pricing & Availability
+              <span className="relative z-10">
+                Check Pricing & Availability
+              </span>
+              {/* Shine sweep effect */}
+              <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
             </button>
+
             <button
               onClick={openDialog}
-              className="flex-1 py-4 text-center rounded-xl border-2 border-teal-600 bg-transparent text-teal-500 font-semibold hover:bg-teal-50/10 hover:text-teal-400 transition-all duration-300 shadow-sm"
+              className="relative group flex-1 py-4 text-center rounded-xl border-2 border-[#7AE2CF] bg-transparent text-[#7AE2CF] font-semibold hover:bg-[#7AE2CF]/10 hover:text-white transition-all duration-300 shadow-sm overflow-hidden"
             >
-              Contact for Site Visit
+              <span className="relative z-10">Contact for Site Visit</span>
+              {/* Shine sweep effect */}
+              <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
             </button>
           </div>
-
-          {/* Additional engagement section */}
-          {/* 
-    <div className="bg-slate-50 rounded-xl p-6 mb-8 shadow-md">
-      <h3 className="text-slate-800 font-medium text-xl mb-4">
-        Stay Updated
-      </h3>
-      <p className="text-slate-600 mb-4">
-        Subscribe to our newsletter for the latest property updates and
-        exclusive offers.
-      </p>
-      <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
-        <input
-          type="email"
-          placeholder="Your email address"
-          className="flex-1 px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:border-teal-500"
-        />
-        <button className="px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors">
-          Subscribe
-        </button>
-      </div>
-    </div> 
-    */}
         </div>
       </div>
       <ContactDialog isOpen={isOpen} onClose={closeDialog} />

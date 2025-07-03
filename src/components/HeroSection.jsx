@@ -22,7 +22,7 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
   };
 
   return (
-    <section className="relative bg-[#622569]">
+    <section className="relative bg-[#06202B]">
       {/* Hero Image Container - Significantly reduced height on mobile */}
       <div className="h-[60vh] md:h-screen w-full relative overflow-hidden">
         {loading ? (
@@ -86,123 +86,128 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
         )}
       </div>
 
-      {/* Content Overlay - Centered with reduced padding and sizes */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center text-white pt-12 pb-28 md:pb-16 px-3">
-        <div className=" w-full max-w-6xl mx-auto flex flex-col items-center md:pt-0 pt-46">
-          <div className="grid md:grid-cols-2 gap-3 md:gap-8 items-center w-full">
-            {/* Left Content - Property Info - Greatly reduced text sizes */}
-            <div className="bg-[#5b9aa0]/10 backdrop-blur-2xl border border-white/10 rounded-2xl p-4 md:p-8 shadow-xl shadow-black/10">
-              {/* Property Details */}
-              <div className="flex justify-center items-stretch mb-4 md:mb-6">
-                {/* Builder Info */}
-                <div className="w-1/2 flex flex-col items-center justify-center px-4 text-center">
-                  <Building className="text-[#5b9aa0] mb-1" size={20} />
-                  <p className="text-xs md:text-sm text-[#d6d4e0]">
-                    {propertyData.builder_name}
+      {/* Content Overlay - Reduced margins for compact and professional spacing */}
+      <div className="flex flex-col justify-center items-center text-[#06202B] pt-12 pb-12 px-4 sm:px-6 md:px-10 bg-[#F5EEDD]">
+        {/* Right Content */}
+        <div className="text-center md:text-left w-full max-w-6xl mb-8">
+          {loading ? (
+            <>
+              <div className="h-6 md:h-12 w-36 md:w-64 bg-[#7AE2CF]/30 animate-pulse rounded mb-4 mx-auto md:mx-0"></div>
+              <div className="h-3 md:h-6 w-24 md:w-48 bg-[#7AE2CF]/30 animate-pulse rounded mb-6 mx-auto md:mx-0"></div>
+            </>
+          ) : (
+            <>
+              <div className="bg-[#06202B]/10 backdrop-blur-md p-6 md:p-8 rounded-xl shadow-lg w-full max-w-3xl mx-auto text-center">
+                <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 text-[#06202B] drop-shadow-md">
+                  {propertyData.hero_banner_heading}
+                </h1>
+                <div className="flex items-center justify-center text-[#077A7D] drop-shadow-sm">
+                  <MapPin size={16} className="mr-2" />
+                  <p className="text-sm md:text-lg font-medium">
+                    {propertyData.location}
                   </p>
-                  <div className="flex items-center justify-center text-white mt-1">
-                    <MapPin size={12} className="mr-1 md:mr-2" />
-                    <p className="text-xs md:text-sm">
-                      {propertyData.location}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Property Info with Divider */}
-                <div className="w-1/2 flex flex-col items-center justify-center px-4 text-center border-l border-white/20">
-                  <Home className="text-[#5b9aa0] mb-1" size={20} />
-                  <p className="text-xs md:text-sm text-[#d6d4e0] mb-1">
-                    {propertyData.property_type_price_range_text}
-                  </p>
-                  <span className="text-xs md:text-base text-white font-semibold">
-                    {propertyData.property_area_min_max}
-                  </span>
                 </div>
               </div>
+            </>
+          )}
+        </div>
 
-              {/* CTA Buttons */}
-              <div className="mt-2 mb-6 md:mt-6 flex flex-col md:flex-row gap-3">
-                <button
-                  onClick={openDialog}
-                  className="w-full md:w-1/2 bg-gradient-to-r from-[#5b9aa0] to-[#b8a9c9] hover:from-[#5b9aa0]/90 hover:to-[#b8a9c9]/90 text-white font-semibold py-2.5 md:py-3.5 px-4 md:px-6 rounded-lg transition-all flex items-center justify-center text-sm md:text-base shadow-md hover:shadow-lg"
-                >
-                  <Calendar className="mr-2" size={16} />
-                  Book Site Visit
-                </button>
-
-                <a
-                  href="#price"
-                  className="w-full md:w-1/2 bg-white/10 hover:bg-white/20 text-white font-semibold py-2.5 md:py-3.5 px-4 md:px-6 rounded-lg transition-all flex items-center justify-center text-sm md:text-base shadow-sm"
-                >
-                  View Details
-                </a>
+        {/* Cards Section */}
+        <div className="w-full max-w-6xl mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 bg-[#7AE2CF]/10 p-6 sm:p-8 md:p-10 rounded-2xl">
+            {/* Card 1 */}
+            <div className="bg-white shadow-md hover:shadow-xl border border-[#7AE2CF]/30 p-5 md:p-6 rounded-2xl transition-transform hover:scale-[1.015] flex flex-col items-center justify-center text-center space-y-2">
+              <Building className="text-[#077A7D]" size={24} />
+              <p className="text-sm font-medium text-[#06202B]">
+                {propertyData.builder_name}
+              </p>
+              <div className="flex items-center justify-center text-sm text-[#06202B]">
+                <MapPin size={14} className="mr-1" />
+                <span>{propertyData.location}</span>
               </div>
+            </div>
 
-              {/* Status Tags */}
-              <div className="flex flex-wrap justify-center md:justify-start gap-2 md:gap-3 mb-4 md:mb-6">
+            {/* Card 2 */}
+            <div className="bg-white shadow-md hover:shadow-xl border border-[#7AE2CF]/30 p-5 md:p-6 rounded-2xl transition-transform hover:scale-[1.015] flex flex-col items-center justify-center text-center space-y-2">
+              <Home className="text-[#077A7D]" size={24} />
+              <p className="text-sm font-medium text-[#06202B]">
+                {propertyData.property_type_price_range_text}
+              </p>
+              <span className="text-base font-semibold text-[#06202B]">
+                {propertyData.property_area_min_max}
+              </span>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-white shadow-md hover:shadow-xl border border-[#7AE2CF]/30 p-5 md:p-6 rounded-2xl transition-transform hover:scale-[1.015] flex flex-col items-center justify-center text-center space-y-3">
+              <h4 className="text-sm font-semibold text-[#06202B]">
+                Project Highlights
+              </h4>
+              <div className="flex flex-wrap justify-center gap-2">
                 {["MahaRERA Approved", "Bank Approved", "Special Offer"].map(
                   (label, index) => (
                     <div
                       key={index}
-                      className="bg-[#b8a9c9]/80 backdrop-blur-sm px-3 py-1 rounded-full flex items-center border border-[#d6d4e0]/60 shadow-sm"
+                      className="bg-[#077A7D] backdrop-blur-sm px-3 py-1 rounded-full flex items-center border border-[#7AE2CF]/20 shadow-sm hover:scale-105 transition-transform"
                     >
-                      <Tag size={12} className="text-[#d6d4e0] mr-2" />
-                      <span className="text-xs md:text-sm font-medium text-white">
+                      <Tag size={12} className="text-white mr-2" />
+                      <span className="text-xs font-medium text-white">
                         {label}
                       </span>
                     </div>
                   )
                 )}
               </div>
+            </div>
 
-              <div className="flex items-center justify-center space-x-3">
-                <Calendar className="text-[#5b9aa0] mt-0.5" size={16} />
-                <h3 className="font-medium text-xs md:text-base text-white">
-                  Last Updated :
-                </h3>
-                <p className="text-xs md:text-sm text-[#d6d4e0]">
-                  {new Date(
-                    propertyData.property_last_updated
-                  ).toLocaleDateString()}
-                </p>
+            {/* Card 4 */}
+            <div className="bg-white shadow-md hover:shadow-xl border border-[#7AE2CF]/30 p-5 md:p-6 rounded-2xl transition-transform hover:scale-[1.015] flex flex-col items-center justify-center text-center space-y-3">
+              <div className="flex items-center justify-center space-x-2 text-[#06202B]">
+                <Calendar className="text-[#077A7D]" size={16} />
+                <h3 className="text-sm font-medium">Last Updated:</h3>
               </div>
-
-              {/* Error */}
-              {error && (
-                <div className="mt-4 text-yellow-300 text-xs md:text-sm bg-yellow-400/10 p-2 rounded-md border border-yellow-300/20">
-                  {error}
-                </div>
-              )}
+              <p className="text-sm text-[#06202B]">
+                {new Date(
+                  propertyData.property_last_updated
+                ).toLocaleDateString()}
+              </p>
             </div>
 
-            {/* Right Content - CTA Card - Ultra compact on mobile */}
-            <div className="text-center md:text-left">
-              {loading ? (
-                <>
-                  <div className="h-6 md:h-12 w-36 md:w-64 bg-[#5b9aa0]/20 animate-pulse rounded mb-2 md:mb-4 mx-auto md:mx-0"></div>
-                  <div className="h-3 md:h-6 w-24 md:w-48 bg-[#5b9aa0]/20 animate-pulse rounded mb-3 md:mb-6 mx-auto md:mx-0"></div>
-                </>
-              ) : (
-                <>
-                  <div className="bg-black/40 backdrop-blur-sm p-4 md:p-6 rounded-xl shadow-lg w-full max-w-3xl mx-auto">
-                    <h1 className="text-xl sm:text-2xl md:text-5xl lg:text-6xl font-bold leading-tight mb-2 md:mb-4 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">
-                      {propertyData.hero_banner_heading}
-                    </h1>
-
-                    <div className="flex items-center justify-center md:justify-start text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
-                      <MapPin size={16} className="mr-2" />
-                      <p className="text-sm md:text-lg font-medium">
-                        {propertyData.location}
-                      </p>
-                    </div>
-                  </div>
-                  {/* <p className="text-xs sm:text-sm md:text-xl mb-2 md:mb-6 text-slate-300">
-                {propertyData.hero_banner_subheading}
-              </p> */}
-                </>
-              )}
-            </div>
+            {/* Error Message */}
+            {error && (
+              <div className="col-span-full text-[#06202B] text-sm bg-[#7AE2CF]/40 p-4 rounded-md border border-[#077A7D]/30">
+                {error}
+              </div>
+            )}
           </div>
+        </div>
+
+        {/* CTA Buttons */}
+        <div className="w-full max-w-4xl mt-2 mb-8 flex flex-col md:flex-row gap-4 px-4">
+          {/* Book Site Visit Button */}
+          <button
+            onClick={openDialog}
+            className="relative group w-full md:w-1/2 bg-gradient-to-r from-[#077A7D] via-[#7AE2CF] to-[#F5EEDD] text-[#06202B] font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 flex items-center justify-center text-base shadow-md hover:shadow-lg hover:scale-105 overflow-hidden"
+          >
+            <span className="relative z-10 flex items-center">
+              <Calendar className="mr-2" size={18} />
+              Book Site Visit
+            </span>
+
+            {/* Shine sweep effect */}
+            <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/30 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+          </button>
+
+          {/* View Details Link */}
+          <a
+            href="#price"
+            className="relative group w-full md:w-1/2 border border-[#06202B]/20 bg-white/60 hover:bg-[#F5EEDD]/80 text-[#06202B] font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 flex items-center justify-center text-base shadow-md hover:shadow-lg hover:scale-105 overflow-hidden"
+          >
+            <span className="relative z-10">View Details</span>
+
+            {/* Shine sweep effect */}
+            <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/20 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+          </a>
         </div>
       </div>
     </section>

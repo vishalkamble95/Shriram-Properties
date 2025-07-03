@@ -147,18 +147,18 @@ export const ContactDialog = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#622569]/80 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#06202B]/80 backdrop-blur-sm"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           onClose();
         }
       }}
     >
-      <div className="bg-[#d6d4e0] rounded-lg w-full max-w-md shadow-2xl animate-fadeIn">
-        <div className="relative p-5 border-b border-[#b8a9c9] flex flex-col items-center text-center">
+      <div className="bg-[#F5EEDD] rounded-lg w-full max-w-md shadow-2xl animate-fadeIn">
+        <div className="relative p-5 border-b border-[#7AE2CF] flex flex-col items-center text-center">
           <button
             onClick={onClose}
-            className="absolute top-10 right-5 text-[#5b9aa0] hover:text-[#622569] transition-colors"
+            className="absolute top-10 right-5 text-[#077A7D] hover:text-[#06202B] transition-colors"
           >
             <X size={24} />
           </button>
@@ -171,10 +171,10 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                 className="h-12 max-w-[120px] mb-3"
               />
             )}
-            <h1 className="text-[#622569] text-lg sm:text-xl md:text-2xl font-semibold">
+            <h1 className="text-[#06202B] text-lg sm:text-xl md:text-2xl font-semibold">
               {data.hero_banner_heading}
             </h1>
-            <h3 className="text-lg sm:text-xl font-semibold text-[#5b9aa0] mt-2">
+            <h3 className="text-lg sm:text-xl font-semibold text-[#077A7D] mt-2">
               Contact Us
             </h3>
           </div>
@@ -182,7 +182,7 @@ export const ContactDialog = ({ isOpen, onClose }) => {
 
         <div className="p-6">
           {submitStatus === "success" && (
-            <div className="mb-6 bg-[#5b9aa0]/10 border border-[#5b9aa0] text-[#5b9aa0] p-4 rounded-lg flex items-center">
+            <div className="mb-6 bg-[#077A7D]/10 border border-[#077A7D] text-[#077A7D] p-4 rounded-lg flex items-center">
               <CheckCircle size={18} className="mr-2" />
               Thank you for your message! We'll get back to you shortly.
             </div>
@@ -200,13 +200,13 @@ export const ContactDialog = ({ isOpen, onClose }) => {
               <div>
                 <label
                   htmlFor="first_name"
-                  className="block text-[#622569] mb-2 text-sm font-medium"
+                  className="block text-[#06202B] mb-2 text-sm font-medium"
                 >
                   First Name
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <User size={16} className="text-[#5b9aa0]" />
+                    <User size={16} className="text-[#077A7D]" />
                   </div>
                   <input
                     type="text"
@@ -214,11 +214,11 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                     name="first_name"
                     value={formData.first_name}
                     onChange={handleInputChange}
-                    className={`w-full bg-[#f9f9fa] text-[#622569] border ${
+                    className={`w-full bg-[#F5EEDD] text-[#06202B] border ${
                       formErrors.first_name
                         ? "border-red-700"
-                        : "border-[#b8a9c9]"
-                    } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#5b9aa0] focus:border-transparent`}
+                        : "border-[#7AE2CF]"
+                    } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#077A7D] focus:border-transparent`}
                     placeholder="First Name*"
                   />
                   {formErrors.first_name && (
@@ -233,13 +233,13 @@ export const ContactDialog = ({ isOpen, onClose }) => {
               <div>
                 <label
                   htmlFor="last_name"
-                  className="block text-[#622569] mb-2 text-sm font-medium"
+                  className="block text-[#06202B] mb-2 text-sm font-medium"
                 >
                   Last Name
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <User size={16} className="text-[#5b9aa0]" />
+                    <User size={16} className="text-[#077A7D]" />
                   </div>
                   <input
                     type="text"
@@ -247,11 +247,11 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                     name="last_name"
                     value={formData.last_name}
                     onChange={handleInputChange}
-                    className={`w-full bg-[#f9f9fa] text-[#622569] border ${
+                    className={`w-full bg-[#F5EEDD] text-[#06202B] border ${
                       formErrors.last_name
                         ? "border-red-700"
-                        : "border-[#b8a9c9]"
-                    } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#5b9aa0] focus:border-transparent`}
+                        : "border-[#7AE2CF]"
+                    } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#077A7D] focus:border-transparent`}
                     placeholder="Last Name*"
                   />
                   {formErrors.last_name && (
@@ -267,13 +267,13 @@ export const ContactDialog = ({ isOpen, onClose }) => {
             <div className="mb-4">
               <label
                 htmlFor="email_id"
-                className="block text-[#622569] mb-2 text-sm font-medium"
+                className="block text-[#06202B] mb-2 text-sm font-medium"
               >
                 Email Address
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <Mail size={16} className="text-[#5b9aa0]" />
+                  <Mail size={16} className="text-[#077A7D]" />
                 </div>
                 <input
                   type="email"
@@ -281,9 +281,9 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                   name="email_id"
                   value={formData.email_id}
                   onChange={handleInputChange}
-                  className={`w-full bg-[#f9f9fa] text-[#622569] border ${
-                    formErrors.email_id ? "border-red-700" : "border-[#b8a9c9]"
-                  } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#5b9aa0] focus:border-transparent`}
+                  className={`w-full bg-[#F5EEDD] text-[#06202B] border ${
+                    formErrors.email_id ? "border-red-700" : "border-[#7AE2CF]"
+                  } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#077A7D] focus:border-transparent`}
                   placeholder="email@example.com"
                 />
               </div>
@@ -292,13 +292,13 @@ export const ContactDialog = ({ isOpen, onClose }) => {
             <div className="mb-4">
               <label
                 htmlFor="phone_number"
-                className="block text-[#622569] mb-2 text-sm font-medium"
+                className="block text-[#06202B] mb-2 text-sm font-medium"
               >
                 Phone Number
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <Phone size={16} className="text-[#5b9aa0]" />
+                  <Phone size={16} className="text-[#077A7D]" />
                 </div>
                 <input
                   type="tel"
@@ -306,11 +306,11 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                   name="phone_number"
                   value={formData.phone_number}
                   onChange={handleInputChange}
-                  className={`w-full bg-[#f9f9fa] text-[#622569] border ${
+                  className={`w-full bg-[#F5EEDD] text-[#06202B] border ${
                     formErrors.phone_number
                       ? "border-red-700"
-                      : "border-[#b8a9c9]"
-                  } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#5b9aa0] focus:border-transparent`}
+                      : "border-[#7AE2CF]"
+                  } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#077A7D] focus:border-transparent`}
                   placeholder="Your phone number*"
                 />
               </div>
@@ -325,13 +325,13 @@ export const ContactDialog = ({ isOpen, onClose }) => {
             <div className="mb-5">
               <label
                 htmlFor="message"
-                className="block text-[#622569] mb-2 text-sm font-medium"
+                className="block text-[#06202B] mb-2 text-sm font-medium"
               >
                 Your Message
               </label>
               <div className="relative">
                 <div className="absolute top-3 left-3 pointer-events-none">
-                  <MessageSquare size={16} className="text-[#5b9aa0]" />
+                  <MessageSquare size={16} className="text-[#077A7D]" />
                 </div>
                 <textarea
                   id="message"
@@ -339,26 +339,30 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                   value={formData.message}
                   onChange={handleInputChange}
                   rows="3"
-                  className={`w-full bg-[#f9f9fa] text-[#622569] border ${
-                    formErrors.message ? "border-red-700" : "border-[#b8a9c9]"
-                  } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#5b9aa0] focus:border-transparent`}
+                  className={`w-full bg-[#F5EEDD] text-[#06202B] border ${
+                    formErrors.message ? "border-red-700" : "border-[#7AE2CF]"
+                  } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#077A7D] focus:border-transparent`}
                   placeholder="Tell us about your requirements..."
                 ></textarea>
               </div>
             </div>
 
-            <div className="flex items-center justify-end pt-4 border-t border-[#b8a9c9]">
+            <div className="flex items-center justify-end pt-4 border-t border-[#7AE2CF]">
               <button
                 type="button"
                 onClick={onClose}
-                className="mr-3 px-4 py-2 text-[#5b9aa0] hover:text-[#622569] transition-colors text-sm font-medium"
+                className="mr-3 px-4 py-2 text-[#077A7D] hover:text-[#06202B] transition-colors text-sm font-medium"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={submitting}
-                className="py-2 px-4 rounded-lg bg-gradient-to-r from-[#b8a9c9] to-[#5b9aa0] text-white text-sm font-medium hover:from-[#b8a9c9]/90 hover:to-[#5b9aa0]/90 transition-all duration-300 flex items-center"
+                className={`relative group py-2 px-4 rounded-lg bg-gradient-to-r from-[#7AE2CF] to-[#077A7D] text-white text-sm font-medium transition-all duration-300 flex items-center overflow-hidden ${
+                  submitting
+                    ? "opacity-60 cursor-not-allowed"
+                    : "hover:from-[#7AE2CF]/90 hover:to-[#077A7D]/90"
+                }`}
               >
                 {submitting ? (
                   <Loader size={16} className="animate-spin mr-2" />
@@ -366,6 +370,10 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                   <Send size={16} className="mr-2" />
                 )}
                 {submitting ? "Sending..." : "Send Message"}
+                {!submitting && (
+                  // Shine sweep effect
+                  <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+                )}
               </button>
             </div>
           </form>
@@ -386,9 +394,11 @@ const ContactDialogButton = () => {
     <>
       <button
         onClick={openDialog}
-        className="py-2 px-4 rounded-lg bg-[#5b9aa0] text-white font-medium hover:bg-[#4e868b] active:bg-[#417378] transition-all duration-300"
+        className="relative group py-2 px-4 rounded-lg bg-[#077A7D] text-[#F5EEDD] font-medium hover:bg-[#06686a] active:bg-[#06202B] transition-all duration-300 overflow-hidden"
       >
-        Contact Us
+        <span className="relative z-10">Contact Us</span>
+        {/* Shine sweep effect */}
+        <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#F5EEDD]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
       </button>
 
       <ContactDialog isOpen={isOpen} onClose={closeDialog} />

@@ -34,14 +34,14 @@ const AboutBuilder = ({
   return (
     htmlContent && (
       <>
-            {/* Two-column layout for medium screens and up */}
-            {/* <h2 className="text-4xl flex justify-center font-bold text-white mb-8">
+        {/* Two-column layout for medium screens and up */}
+        {/* <h2 className="text-4xl flex justify-center font-bold text-white mb-8">
               {heading}
             </h2>
             <hr className="w-3/4 border-t-2 border-teal-500 mx-auto mb-8" /> */}
-              {/* Left content area */}
-                {/* Section heading with badge */}
-                {/* <div className="flex items-center mb-6">
+        {/* Left content area */}
+        {/* Section heading with badge */}
+        {/* <div className="flex items-center mb-6">
                   <div className="flex items-center">
                     <Info size={20} className="text-teal-300 mr-2" />
                     <span className="bg-teal-400/10 text-teal-300 text-xs px-3 py-1 rounded-full border border-teal-300/30">
@@ -50,36 +50,36 @@ const AboutBuilder = ({
                   </div>
                 </div> */}
 
-                {/* <h2 className="text-4xl font-bold text-white mb-4">
+        {/* <h2 className="text-4xl font-bold text-white mb-4">
                   {heading}
                 </h2> */}
 
-                {/* Content Container */}
-                <div className="relative rounded-xl bg-slate-800/50 backdrop-blur-md border border-slate-700 shadow-lg p-6 overflow-hidden">
-                  {/* Scrollable Content Area */}
-                  <div
-                    ref={contentRef}
-                    className="text-slate-300 text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar about-builder scroll-smooth"
-                    style={{ maxHeight }}
-                    dangerouslySetInnerHTML={createMarkup(htmlContent)}
-                  />
+        {/* Content Container */}
+        <div className="relative rounded-xl bg-[#06202B]/80 backdrop-blur-md border border-[#077A7D] shadow-lg p-6 overflow-hidden">
+          {/* Scrollable Content Area */}
+          <div
+            ref={contentRef}
+            className="text-[#F5EEDD] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar about-builder scroll-smooth"
+            style={{ maxHeight }}
+            dangerouslySetInnerHTML={createMarkup(htmlContent)}
+          />
 
-                  {/* Gradient Overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent pointer-events-none transition-opacity duration-500" />
+          {/* Gradient Overlay */}
+          <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-[#06202B] via-[#06202B]/80 to-transparent pointer-events-none transition-opacity duration-500" />
 
-                  {/* Navigation Dots */}
-                  {/* <div className="flex items-center justify-center mt-6 space-x-2">
+          {/* Navigation Dots */}
+          {/* <div className="flex items-center justify-center mt-6 space-x-2">
                     <span className="w-8 h-2 rounded-full bg-teal-400 shadow-md transition" />
                     <span className="w-2 h-2 rounded-full bg-white/30 hover:bg-white/50 transition" />
                     <span className="w-2 h-2 rounded-full bg-white/30 hover:bg-white/50 transition" />
                   </div> */}
-                </div>
+        </div>
 
-              {/* Right action area */}
-              {/* <div className="md:w-1/2 bg-slate-800 rounded-lg p-6 relative overflow-hidden"> */}
-                {/* <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-800/95 to-slate-900/90 z-10"></div> */}
+        {/* Right action area */}
+        {/* <div className="md:w-1/2 bg-slate-800 rounded-lg p-6 relative overflow-hidden"> */}
+        {/* <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-800/95 to-slate-900/90 z-10"></div> */}
 
-                {/* <div className="absolute inset-0 grid grid-cols-6 grid-rows-6 gap-1 p-2 opacity-20">
+        {/* <div className="absolute inset-0 grid grid-cols-6 grid-rows-6 gap-1 p-2 opacity-20">
                   {[...Array(36)].map((_, i) => (
                     <div key={i} className="flex items-center justify-center">
                       <Building size={16} className="text-slate-400" />
@@ -87,10 +87,10 @@ const AboutBuilder = ({
                   ))}
                 </div> */}
 
-                {/* Main content with building icons */}
-                {/* <div className="relative z-20 h-full flex flex-col"> */}
-                  {/* Top section with large building icon */}
-                  {/* <div className="flex-1 flex items-center justify-center mb-8">
+        {/* Main content with building icons */}
+        {/* <div className="relative z-20 h-full flex flex-col"> */}
+        {/* Top section with large building icon */}
+        {/* <div className="flex-1 flex items-center justify-center mb-8">
                   <div className="relative">
                     <Building
                       size={120}
@@ -105,8 +105,8 @@ const AboutBuilder = ({
                     </div>
                   </div> */}
 
-                  {/* Middle section with architectural pattern */}
-                  {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* Middle section with architectural pattern */}
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="w-full h-28 rounded-2xl bg-gradient-to-br from-slate-800/50 to-slate-900/70 border border-teal-400/20 shadow-[0_4px_20px_rgba(0,255,255,0.1)] hover:shadow-[0_6px_24px_rgba(0,255,255,0.2)] transition-all duration-300 flex items-center justify-center group overflow-hidden relative">
                       <div className="absolute inset-0 bg-gradient-to-tr from-teal-500/5 to-emerald-500/5 opacity-30 group-hover:opacity-40 transition-all duration-300"></div>
                       <div className="z-10 w-14 h-14 rounded-full bg-teal-400/10 border border-teal-300/30 flex items-center justify-center shadow-inner shadow-teal-500/10 group-hover:bg-teal-300/10 transition">
@@ -174,8 +174,8 @@ const AboutBuilder = ({
                     </div>
                   </div> */}
 
-                  {/* Bottom section with horizontal building pattern */}
-                  {/* <div className="flex justify-between items-end mb-6 h-12">
+        {/* Bottom section with horizontal building pattern */}
+        {/* <div className="flex justify-between items-end mb-6 h-12">
                     {[...Array(8)].map((_, i) => {
                       const height = 12 + Math.abs(Math.sin(i * 0.8) * 36);
                       return (
@@ -197,8 +197,8 @@ const AboutBuilder = ({
                     })}
                   </div> */}
 
-                  {/* Button area */}
-                  {/* <div className="mt-auto">
+        {/* Button area */}
+        {/* <div className="mt-auto">
                     <button
                       onClick={scrollDown}
                       className="w-full py-3 px-4 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 rounded-lg flex items-center justify-center transition-all duration-200"
@@ -207,8 +207,8 @@ const AboutBuilder = ({
                       <ChevronDown size={16} className="text-white" />
                     </button>
                   </div> */}
-                {/* </div> */}
-              {/* </div> */}
+        {/* </div> */}
+        {/* </div> */}
 
         <style jsx>{`
           .about-builder h1 {

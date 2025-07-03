@@ -5,8 +5,7 @@ import { ContactDialog } from "./Contact";
 import useContact from "../hooks/useContact";
 
 const FloatingButtons = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
+  const [isExpanded, setIsExpanded] = useState(true); // Set to true by default since toggle is hidden
   const [isOpen, setIsOpen] = useState(false);
 
   const openDialog = () => setIsOpen(true);
@@ -18,35 +17,33 @@ const FloatingButtons = () => {
     setIsExpanded(!isExpanded);
   };
 
-  // Button data for easy mapping
   const buttons = [
     {
       id: "whatsapp",
       icon: <MessageCircle size={20} />,
       label: "WhatsApp",
       href: `https://wa.me/918181817136?text=I%20am%20interested%20in%20${seodata?.data?.property_name}`,
-      color: "bg-[#5b9aa0] hover:bg-[#4c8b90] active:bg-[#41787c]",
+      color: "bg-[#077A7D] hover:bg-[#06686a] active:bg-[#055154]",
     },
     {
       id: "phone",
       icon: <Phone size={20} />,
       label: "Call",
       href: `tel:${contact?.footer_phone}`,
-      color: "bg-[#5b9aa0] hover:bg-[#4c8b90] active:bg-[#41787c]",
+      color: "bg-[#077A7D] hover:bg-[#06686a] active:bg-[#055154]",
     },
     {
       id: "contact",
       icon: <User size={20} />,
       label: "Contact",
-      // href: "#contact",
-      color: "bg-[#5b9aa0] hover:bg-[#4c8b90] active:bg-[#41787c]",
+      color: "bg-[#077A7D] hover:bg-[#06686a] active:bg-[#055154]",
       openDialog: () => openDialog(),
     },
   ];
 
   return (
     <>
-      <div className="fixed bottom-12 right-8 z-50 flex flex-col-reverse items-end gap-4">
+      <div className="fixed bottom-12 left-8 z-50 flex flex-col-reverse items-start gap-4">
         {/* Expanded buttons */}
         {isExpanded && (
           <div className="flex flex-col-reverse gap-3 transition-all duration-300 ease-in-out">
@@ -55,25 +52,21 @@ const FloatingButtons = () => {
                 key={button.id}
                 href={button?.href}
                 onClick={button?.openDialog}
-                className="flex items-center gap-2 p-3 rounded-full bg-[#b8a9c9] shadow-lg text-white transition-all duration-300 hover:bg-[#a395b3] border border-[#9e8fb0]"
+                className={`p-3 rounded-full shadow-lg text-white transition-all duration-300 border border-[#055154] ${button.color}`}
                 target={button.id === "whatsapp" ? "_blank" : "_self"}
                 rel={button.id === "whatsapp" ? "noopener noreferrer" : ""}
               >
-                <span className="text-sm font-medium">{button.label}</span>
-                <span
-                  className={`flex items-center justify-center p-2 rounded-full ${button.color}`}
-                >
-                  {button.icon}
-                </span>
+                {button.icon}
               </a>
             ))}
           </div>
         )}
 
-        {/* Main toggle button */}
+        {/* Main toggle button - hidden by commenting */}
+        {/*
         <button
           onClick={toggleExpand}
-          className="p-4 rounded-full bg-[#5b9aa0] text-white shadow-lg border border-[#41787c] hover:bg-[#4c8b90] active:bg-[#41787c] transition-all duration-300 ease-in-out transform hover:scale-105"
+          className="p-4 rounded-full bg-[#077A7D] text-white shadow-lg border border-[#055154] hover:bg-[#06686a] active:bg-[#055154] transition-all duration-300 ease-in-out transform hover:scale-105"
           aria-label="Toggle floating menu"
         >
           <svg
@@ -93,6 +86,7 @@ const FloatingButtons = () => {
             />
           </svg>
         </button>
+        */}
       </div>
       <ContactDialog isOpen={isOpen} onClose={closeDialog} />
     </>

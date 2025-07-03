@@ -85,13 +85,13 @@ const PropertyDetails = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+      <div className="min-h-screen bg-[#06202B] flex items-center justify-center">
         <div className="text-center">
           <Loader
             size={40}
-            className="text-teal-400 animate-spin mx-auto mb-4"
+            className="text-[#7AE2CF] animate-spin mx-auto mb-4"
           />
-          <p className="text-slate-300">Loading property details...</p>
+          <p className="text-[#F5EEDD]">Loading property details...</p>
         </div>
       </div>
     );
@@ -99,16 +99,16 @@ const PropertyDetails = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
-        <div className="bg-slate-800 border border-red-900/30 p-6 rounded-xl max-w-md w-full text-center">
+      <div className="min-h-screen bg-[#06202B] flex items-center justify-center p-4">
+        <div className="bg-[#077A7D]/10 border border-red-500/30 p-6 rounded-xl max-w-md w-full text-center">
           <AlertCircle size={40} className="text-red-500 mx-auto mb-4" />
-          <h2 className="text-xl font-bold text-white mb-2">
+          <h2 className="text-xl font-bold text-[#F5EEDD] mb-2">
             Error Loading Data
           </h2>
-          <p className="text-slate-300 mb-4">{error}</p>
+          <p className="text-[#F5EEDD] mb-4">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-gradient-to-r from-teal-500 to-emerald-500 text-white rounded-lg hover:from-teal-600 hover:to-emerald-600 transition-all"
+            className="px-4 py-2 bg-gradient-to-r from-[#077A7D] to-[#06202B] text-[#F5EEDD] rounded-lg hover:from-[#06686a] hover:to-[#04161f] transition-all"
           >
             Try Again
           </button>
@@ -123,7 +123,7 @@ const PropertyDetails = () => {
         heading={propertyData?.about_builder_title}
         htmlContent={propertyData?.property_specification}
       /> */}
-      <div className="min-h-screen bg-[#832c8d] text-white">
+      <div className="min-h-screen bg-[#06202B] text-white">
         {/* Hero Section with background image */}
         <div className="relative h-96 lg:h-[550px] overflow-hidden">
           {/* <div className="absolute inset-0 bg-gradient-to-b from-[#622569]/80 via-[#5b9aa0]/60 to-[#b8a9c9] z-10"></div> */}
@@ -135,26 +135,25 @@ const PropertyDetails = () => {
           <div className="absolute bottom-0 left-0 right-0 w-full z-20 px-4 sm:px-6 lg:px-8 pb-6">
             <div className="flex flex-wrap items-center gap-2 mb-4">
               {/* <span className="px-3 py-1 bg-[#5b9aa0]/20 border border-[#5b9aa0]/30 text-[#5b9aa0] text-sm font-medium rounded-full flex items-center">
-                <Tag size={14} className="mr-1" />
-                {propertyData?.property_status}
-              </span>
-              <span className="px-3 py-1 bg-[#b8a9c9]/20 border border-[#b8a9c9]/30 text-[#b8a9c9] text-sm font-medium rounded-full flex items-center">
-                <Home size={14} className="mr-1" />
-                {propertyData?.property_type}
-              </span> */}
+            <Tag size={14} className="mr-1" />
+            {propertyData?.property_status}
+          </span>
+          <span className="px-3 py-1 bg-[#b8a9c9]/20 border border-[#b8a9c9]/30 text-[#b8a9c9] text-sm font-medium rounded-full flex items-center">
+            <Home size={14} className="mr-1" />
+            {propertyData?.property_type}
+          </span> */}
               {/* <span className="px-3 py-1 bg-[#d6d4e0]/20 text-[#d6d4e0] text-sm font-medium rounded-full flex items-center">
-                <Calendar size={14} className="mr-1" />
-                Last Updated: {propertyData?.last_updated}
-              </span> */}
+            <Calendar size={14} className="mr-1" />
+            Last Updated: {propertyData?.last_updated}
+          </span> */}
             </div>
             <div className="max-w-7xl mx-auto text-center sm:text-left">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)] tracking-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#F5EEDD] drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)] tracking-tight">
                 {propertyData?.property_name}
               </h1>
-
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 mt-5">
-                <span className="px-4 py-1.5 bg-[#5b9aa0]/60 text-[#d6d4e0] text-sm sm:text-base font-medium rounded-full flex items-center backdrop-blur-sm shadow-md transition">
-                  <Calendar size={16} className="mr-2 text-[#b8a9c9]" />
+                <span className="px-4 py-1.5 bg-[#077A7D]/50 text-[#F5EEDD] text-sm sm:text-base font-medium rounded-full flex items-center backdrop-blur-sm shadow-md transition">
+                  <Calendar size={16} className="mr-2 text-[#7AE2CF]" />
                   Last Updated: {propertyData?.last_updated}
                 </span>
               </div>
@@ -163,20 +162,20 @@ const PropertyDetails = () => {
         </div>
 
         {/* Main Content */}
-        <div className="max-w-7xl mx-auto px-4 py-10" id="property-details">
+        <div
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16"
+          id="property-details"
+        >
           {/* Tab Content */}
-          <div className="bg-[#5b9aa0]/30 rounded-xl shadow-xl backdrop-blur-sm mb-12 overflow-hidden border border-[#b8a9c9]/40">
-            <div className="flex flex-col md:flex-row">
-              {/* Left Column */}
-              <div
-                id="overview"
-                className="md:w-3/5 mx-auto px-4 sm:px-6 lg:px-8 py-4 border-b md:border-b-0 md:border-r border-[#b8a9c9]/30"
-              >
+          <div className="bg-[#077A7D]/30 rounded-xl shadow-xl backdrop-blur-sm mb-14 overflow-hidden border border-[#7AE2CF]/40">
+            <div className="flex flex-col gap-2">
+              {/* Overview Section */}
+              <div id="overview" className="w-full px-4 sm:px-6 lg:px-8 pt-6">
                 {/* Navigation + Content Wrapper */}
-                <div className="flex flex-col space-y-2">
+                <div className="flex flex-col space-y-4">
                   {/* Navigation Tabs */}
                   <div className="w-full flex justify-center">
-                    <nav className="flex flex-wrap justify-center items-center gap-2 max-w-xl w-full bg-[#b8a9c9]/10 border border-[#d6d4e0]/20 rounded-xl px-4 py-2 shadow-md backdrop-blur-sm">
+                    <nav className="flex flex-wrap justify-center items-center gap-2 max-w-xl w-full bg-[#7AE2CF]/10 border border-[#F5EEDD]/20 rounded-xl px-4 py-2 shadow-md backdrop-blur-sm">
                       {["overview", "information", "about_builder"].map(
                         (tab) => (
                           <button
@@ -187,8 +186,8 @@ const PropertyDetails = () => {
                             }}
                             className={`text-sm sm:text-base font-medium px-4 py-2 rounded-full transition-all duration-200 whitespace-nowrap ${
                               activeTab === tab
-                                ? "bg-gradient-to-r from-[#5b9aa0] to-[#b8a9c9] text-white shadow-md"
-                                : "text-[#d6d4e0] hover:bg-[#b8a9c9]/10 hover:text-white underline underline-offset-4"
+                                ? "bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] text-[#06202B] shadow-md"
+                                : "text-[#F5EEDD] hover:bg-[#7AE2CF]/10 hover:text-white underline underline-offset-4"
                             }`}
                           >
                             {tab
@@ -205,190 +204,152 @@ const PropertyDetails = () => {
                     {activeTab === "overview" && (
                       <div className="px-4 py-6 sm:px-6 sm:py-6 md:px-8 md:py-8">
                         <div className="flex items-center mb-6">
-                          <div className="w-1 h-8 bg-gradient-to-b from-[#5b9aa0] to-[#b8a9c9] rounded-full mr-6"></div>
-                          <h2 className="text-2xl font-bold text-white">
+                          <div className="w-1 h-8 bg-gradient-to-b from-[#077A7D] to-[#7AE2CF] rounded-full mr-6"></div>
+                          <h2 className="text-2xl font-bold text-[#F5EEDD]">
                             Property Overview
                           </h2>
                         </div>
-
-                        <div className="relative rounded-xl bg-[#622569]/50 backdrop-blur-md border border-[#d6d4e0]/20 shadow-lg px-4 py-5 sm:px-6 sm:py-6 md:px-8 md:py-6 overflow-hidden">
+                        <div className="relative rounded-xl bg-[#06202B]/50 backdrop-blur-md border border-[#F5EEDD]/20 shadow-lg px-4 py-5 sm:px-6 sm:py-6 md:px-8 md:py-6 overflow-hidden">
                           <div
-                            className="text-[#d6d4e0] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth"
+                            className="text-[#F5EEDD] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth"
                             style={{ maxHeight: "300px" }}
                             dangerouslySetInnerHTML={createMarkup(
                               propertyData?.property_description
                             )}
                           />
-                          <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-[#622569] via-[#622569]/80 to-transparent pointer-events-none transition-opacity duration-500" />
+                          <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-[#06202B] via-[#06202B]/80 to-transparent pointer-events-none transition-opacity duration-500" />
                         </div>
                       </div>
                     )}
                     {activeTab === "information" && (
                       <div className="p-6 md:p-8">
                         <div className="flex items-center mb-6">
-                          <div className="w-1 h-8 bg-gradient-to-b from-[#5b9aa0] to-[#b8a9c9] rounded-full mr-3"></div>
-                          <h2 className="text-2xl font-bold text-white">
+                          <div className="w-1 h-8 bg-gradient-to-b from-[#077A7D] to-[#7AE2CF] rounded-full mr-3"></div>
+                          <h2 className="text-2xl font-bold text-[#F5EEDD]">
                             Property Information
                           </h2>
                         </div>
-                        <div className="relative rounded-xl bg-[#622569]/50 backdrop-blur-md border border-[#d6d4e0]/20 shadow-lg p-6 overflow-hidden">
+                        <div className="relative rounded-xl bg-[#06202B]/50 backdrop-blur-md border border-[#F5EEDD]/20 shadow-lg p-6 overflow-hidden">
                           <div
-                            className="text-[#d6d4e0] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth"
+                            className="text-[#F5EEDD] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth"
                             style={{ maxHeight: "300px" }}
                             dangerouslySetInnerHTML={createMarkup(
                               propertyData?.property_information
                             )}
                           />
-                          <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-[#622569] via-[#622569]/80 to-transparent pointer-events-none transition-opacity duration-500" />
+                          <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-[#06202B] via-[#06202B]/80 to-transparent pointer-events-none transition-opacity duration-500" />
                         </div>
                       </div>
                     )}
                     {activeTab === "about_builder" && (
                       <div className="p-6 md:p-8">
                         <div className="flex items-center mb-6">
-                          <div className="w-1 h-8 bg-gradient-to-b from-[#5b9aa0] to-[#b8a9c9] rounded-full mr-3"></div>
-                          <h2 className="text-2xl font-bold text-white">
+                          <div className="w-1 h-8 bg-gradient-to-b from-[#077A7D] to-[#7AE2CF] rounded-full mr-3"></div>
+                          <h2 className="text-2xl font-bold text-[#F5EEDD]">
                             {propertyData?.about_builder_title ||
                               "About Builder"}
                           </h2>
                         </div>
-                        <div className="relative rounded-xl bg-[#622569]/50 backdrop-blur-md border border-[#d6d4e0]/20 shadow-lg p-6 overflow-hidden">
+                        <div className="relative rounded-xl bg-[#06202B]/50 backdrop-blur-md border border-[#F5EEDD]/20 shadow-lg p-6 overflow-hidden">
                           <div
-                            className="text-[#d6d4e0] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth"
+                            className="text-[#F5EEDD] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth"
                             style={{ maxHeight: "300px" }}
                             dangerouslySetInnerHTML={createMarkup(
                               propertyData?.property_specification
                             )}
                           />
-                          <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-[#622569] via-[#622569]/80 to-transparent pointer-events-none transition-opacity duration-500" />
+                          <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-[#06202B] via-[#06202B]/80 to-transparent pointer-events-none transition-opacity duration-500" />
                         </div>
                       </div>
                     )}
                   </div>
                 </div>
               </div>
-
-              {/* Right Column - Specifications */}
-              <div className="md:w-2/5 space-y-4 mx-4 md:mx-8 lg:mx-12 mt-6 mb-10 px-4 py-4 sm:px-4 sm:py-4 md:px-4 md:py-3 lg:px-6 bg-gradient-to-br from-[#5b9aa0]/40 to-[#b8a9c9]/40 rounded-2xl shadow-xl border border-[#d6d4e0]/20 backdrop-blur-sm transition-all duration-300 flex flex-col items-center justify-center text-center">
-                <h3 className="text-2xl font-semibold text-white mb-6 flex items-center space-x-2">
-                  <Building size={22} className="text-[#c0d6d8]" />
-                  <span className="bg-[#5b9aa0]/10 text-[#c0d6d8] px-3 py-1 text-sm rounded-full border border-[#5b9aa0]/20">
-                    Property Specifications
-                  </span>
-                </h3>
-                <div className="w-full space-y-4 text-sm text-left text-[#d6d4e0]">
-                  <div className="flex justify-between items-center border-b border-[#d6d4e0]/20 pb-2">
-                    <span>Property Type:</span>
-                    <span className="text-white font-medium">
-                      {propertyData?.property_type_price_range}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center border-b border-[#d6d4e0]/20 pb-2">
-                    <span>Developer:</span>
-                    <span className="text-white font-medium">
-                      {propertyData?.builder_name}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center border-b border-[#d6d4e0]/20 pb-2">
-                    <span>Project Status:</span>
-                    <span className="px-3 py-1 bg-[#d6d4e0]/10 border border-[#d6d4e0]/20 text-[#d6d4e0] text-sm font-medium rounded-xl flex items-center">
-                      {propertyData?.property_status}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center border-b border-[#d6d4e0]/20 pb-2">
-                    <span>Location:</span>
-                    <span className="px-3 py-1 bg-[#d6d4e0]/10 border border-[#d6d4e0]/20 text-[#d6d4e0] text-sm font-medium rounded-xl flex items-center">
-                      {propertyData?.property_location_name ||
-                        "Pune, Maharashtra"}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center border-b border-[#d6d4e0]/20 pb-2">
-                    <span>Last Updated:</span>
-                    <span className="text-white font-medium">
-                      {propertyData?.last_updated}
-                    </span>
-                  </div>
-                </div>
-                <button
-                  onClick={openDialog}
-                  className="w-full mt-4 py-3 px-6 bg-gradient-to-r from-[#5b9aa0] to-[#b8a9c9] hover:from-[#4c7e85] hover:to-[#a68cc0] active:from-[#3e6e73] active:to-[#9675b2] rounded-lg text-white font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#5b9aa0]/20"
-                >
-                  <Download size={18} className="mr-2" />
-                  Download Brochure
-                </button>
-                <button
-                  onClick={openDialog}
-                  className="w-full mt-4 py-3 px-6 bg-gradient-to-r from-[#5b9aa0] to-[#b8a9c9] hover:from-[#4c7e85] hover:to-[#a68cc0] active:from-[#3e6e73] active:to-[#9675b2] rounded-lg text-white font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#5b9aa0]/20"
-                >
-                  <Phone size={18} className="mr-2" />
-                  Contact
-                </button>
-              </div>
             </div>
           </div>
-          {/* Right Column - Specifications */}
-          {/* <div className="md:w-2/5 p-6 md:p-8 bg-slate-900/50">
-            <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
-              <Building size={18} className="text-teal-400 mr-2" />
-              Property Specifications
-            </h3> */}
-          {/* <div className="space-y-3"> */}
-          {/* <div className="flex justify-between items-center py-3 border-b border-slate-700">
-                        <span className="text-slate-400">Property ID:</span>
-                        <span className="text-white font-medium">
-                          {propertyData?.id}
-                        </span>
-                      </div> */}
-          {/* <div className="flex justify-between items-center py-3 border-b border-slate-700">
-                <span className="text-slate-400">Property Type:</span>
-                <span className="text-white font-medium">
-                  {propertyData?.property_type_price_range}
+
+          {/* Specifications Section */}
+          <div className="w-full space-y-8 px-4 sm:px-6 lg:px-12 py-10 bg-gradient-to-br from-[#077A7D]/40 to-[#7AE2CF]/30 rounded-2xl shadow-2xl border border-[#F5EEDD]/20 backdrop-blur-md transition-all duration-300 text-center">
+            <h3 className="text-2xl sm:text-3xl font-bold text-[#F5EEDD] mb-10 flex items-center space-x-3 justify-center">
+              <Building size={26} className="text-[#7AE2CF]" />
+              <span className="bg-[#077A7D]/10 text-[#7AE2CF] px-5 py-2 text-base rounded-full border border-[#7AE2CF]/20 shadow-sm">
+                Property Specifications
+              </span>
+            </h3>
+
+            <div className="flex flex-wrap justify-center gap-6">
+              {[
+                {
+                  label: "Property Type",
+                  value: propertyData?.property_type_price_range,
+                },
+                {
+                  label: "Developer",
+                  value: propertyData?.builder_name,
+                },
+                {
+                  label: "Project Status",
+                  value: propertyData?.property_status,
+                  badge: true,
+                },
+                {
+                  label: "Location",
+                  value:
+                    propertyData?.property_location_name || "Pune, Maharashtra",
+                  badge: true,
+                },
+                {
+                  label: "Last Updated",
+                  value: propertyData?.last_updated,
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="w-[90%] sm:w-[45%] md:w-[30%] xl:w-[18%] max-w-[300px] bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md shadow-md hover:shadow-lg transition-all duration-300 text-center"
+                >
+                  <span className="text-sm font-medium text-[#7AE2CF] mb-1 block">
+                    {item.label}
+                  </span>
+                  {item.badge ? (
+                    <span className="inline-block px-3 py-1 bg-[#F5EEDD]/10 text-[#F5EEDD] border border-[#F5EEDD]/20 text-xs font-semibold rounded-md">
+                      {item.value}
+                    </span>
+                  ) : (
+                    <span className="text-white font-semibold text-base">
+                      {item.value}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 flex flex-col sm:flex-row sm:justify-center sm:items-center gap-4">
+              <button
+                onClick={openDialog}
+                className="relative group w-full sm:w-60 py-3 px-6 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#066568] hover:to-[#64c9b9] active:from-[#044e50] active:to-[#4db0a0] rounded-lg text-[#06202B] font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#077A7D]/20 overflow-hidden"
+              >
+                <span className="relative z-10 flex items-center">
+                  <Download size={18} className="mr-2" />
+                  Download Brochure
                 </span>
-              </div> */}
-          {/* <div className="flex justify-between items-center py-3 border-b border-slate-700">
-                        <span className="text-slate-400">Developer:</span>
-                        <span className="text-white font-medium">
-                          {propertyData?.builder_name}
-                        </span>
-                      </div> */}
-          {/* <div className="flex justify-between items-center py-3 border-b border-slate-700">
-                <span className="text-slate-400">Last Updated:</span>
-                <span className="text-white font-medium">
-                  {propertyData?.last_updated}
+                {/* Shine sweep effect */}
+                <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+              </button>
+
+              <button
+                onClick={openDialog}
+                className="relative group w-full sm:w-60 py-3 px-6 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#066568] hover:to-[#64c9b9] active:from-[#044e50] active:to-[#4db0a0] rounded-lg text-[#06202B] font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#077A7D]/20 overflow-hidden"
+              >
+                <span className="relative z-10 flex items-center">
+                  <Phone size={18} className="mr-2" />
+                  Contact
                 </span>
-              </div> */}
-          {/* <div className="flex justify-between items-center py-3">
-                        <span className="text-slate-400">Status:</span>
-                        <span className=" font-medium bg-teal-500/20 px-3 py-1 rounded-full text-teal-300 text-sm">
-                          {propertyData?.property_status}
-                        </span>
-                      </div> */}
-          {/* </div> */}
-          {/* <button
-              onClick={openDialog}
-              className="w-full mt-6 py-3 px-6 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-lg text-white font-medium flex items-center justify-center hover:from-teal-600 hover:to-emerald-600 transition-all"
-            >
-              <Phone size={18} className="mr-2" />
-              Contact
-            </button> */}
+                {/* Shine sweep effect */}
+                <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+              </button>
+            </div>
+          </div>
         </div>
-        {/* Amenities Tab */}
-        {/* <div id="amenities" className="p-6 md:p-8">
-          {activeTab === "amenities" && <Amenities />}
-        </div> */}
-        {/* Gallery Tab */}
-        {/* <div id="gallery" className="p-6 md:p-8">
-          {activeTab === "gallery" && <Gallary />}
-        </div> */}
-        {/* Location Tab */}
-        {/* <div id="location" className="p-6 md:p-8">
-          {activeTab === "location" && (
-            <Location
-              mapIframe={propertyData?.property_map}
-              propertyName={propertyData?.property_name}
-            />
-          )}
-        </div> */}
       </div>
 
       {/* Contact Dialog */}
