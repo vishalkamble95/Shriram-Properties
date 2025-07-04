@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import config from "../../config";
 import { QRCodeCanvas } from "qrcode.react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const [footerData, setFooterData] = useState(null);
@@ -325,12 +326,12 @@ const Footer = () => {
                 </div>
               )}
 
-              <a
-                href="/privacy-policy"
+              <Link
+                to="/privacy-policy"
                 className="underline hover:text-[#7AE2CF] transition-colors duration-200"
               >
                 Privacy Policy
-              </a>
+              </Link>
             </div>
 
             <div className="flex justify-end order-1 md:order-3 w-full md:w-auto">

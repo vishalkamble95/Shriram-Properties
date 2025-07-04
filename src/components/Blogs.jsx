@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   Calendar,
   ArrowRight,
@@ -69,8 +70,8 @@ const BlogCard = ({ blog }) => {
 
         {/* Read More */}
         <div className="mt-auto pt-4 border-t border-[#7AE2CF]/20">
-          <a
-            href={`/blogs/${blog.post_slug}`}
+          <Link
+            to={`/blogs/${blog.post_slug}`}
             className="inline-flex items-center text-[#7AE2CF] hover:text-[#F5EEDD] transition-colors font-medium group"
           >
             <span className="mr-2">Read Article</span>
@@ -78,7 +79,7 @@ const BlogCard = ({ blog }) => {
               size={16}
               className="transition-transform duration-300 transform group-hover:translate-x-1"
             />
-          </a>
+          </Link>
         </div>
       </div>
     </div>

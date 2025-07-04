@@ -6,6 +6,7 @@ import BlogContent from "./components/BlogContent";
 import Footer from "./components/Footer";
 import FloatingButtons from "./components/FloatingButtons";
 import { Loader } from "lucide-react";
+import ScrollManager from "./ScrollManager";
 
 // Import static SEO data directly
 import seoData from "../public/seodata.json";
@@ -28,7 +29,8 @@ function App() {
         <script type="application/ld+json">{seoData.data.script_2}</script>
       </Helmet>
       <>
-        <Router>
+        <Router basename="/SMP-Amberwood">
+          <ScrollManager />
           <Routes>
             <Route path="/" element={<HomePage />} exact />
             <Route path="/blogs/:id" element={<BlogContent />} exact />
