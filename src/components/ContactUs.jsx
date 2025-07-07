@@ -292,125 +292,105 @@ const ContactUs = () => {
                 </label>
 
                 <div className="relative">
-                  {/* Flag replaces icon on the left */}
-                  <div
-                    className="absolute inset-y-0 left-0 flex items-center pl-3 z-10"
-                    style={{ pointerEvents: "none" }}
-                  >
-                    <div
-                      className="rounded-full shadow-md transition-all duration-300"
-                      style={{
-                        background:
-                          "linear-gradient(to right, #06202Bcc, #077A7Db3)",
-                        padding: "6px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {/* PhoneInput renders the flag on top, this area remains just spacing */}
-                    </div>
-                  </div>
                   <style>
-  {`
-    .country-list {
-      background-color: #06202B !important;
-      color: #F5EEDD !important;
-      z-index: 50 !important;
-      border-radius: 0.75rem;
-      overflow-y: auto !important;
-      overflow-x: hidden !important;
-      white-space: normal !important;
-      max-height: 180px !important;
-      width: 245px !important;
-      min-width: 245px !important;
-      max-width: 245px !important;
-      scrollbar-width: thin !important;
-      scrollbar-color: #7AE2CF transparent !important;
-    }
+                  {`
+                    .country-list {
+                      background-color: #06202B !important;
+                      color: #F5EEDD !important;
+                      z-index: 50 !important;
+                      border-radius: 0.75rem;
+                      overflow-y: auto !important;
+                      overflow-x: hidden !important;
+                      white-space: normal !important;
+                      max-height: 180px !important;
+                      width: 245px !important;
+                      min-width: 245px !important;
+                      max-width: 245px !important;
+                      scrollbar-width: thin !important;
+                      scrollbar-color: #7AE2CF transparent !important;
+                    }
 
-    /* ✅ Scrollbar styling for WebKit browsers (Chrome, Safari, Edge) */
-    .country-list::-webkit-scrollbar {
-      height: 6px;
-      width: 6px;
-      background: transparent !important;
-    }
+                    /* ✅ Scrollbar styling for WebKit browsers (Chrome, Safari, Edge) */
+                    .country-list::-webkit-scrollbar {
+                      height: 6px;
+                      width: 6px;
+                      background: transparent !important;
+                    }
 
-    .country-list::-webkit-scrollbar-track {
-      background: transparent !important;
-    }
+                    .country-list::-webkit-scrollbar-track {
+                      background: transparent !important;
+                    }
 
-    .country-list::-webkit-scrollbar-thumb {
-      background-color: #7AE2CF !important;
-      border-radius: 4px;
-      border: none !important;
-      background-clip: padding-box;
-    }
+                    .country-list::-webkit-scrollbar-thumb {
+                      background-color: #7AE2CF !important;
+                      border-radius: 4px;
+                      border: none !important;
+                      background-clip: padding-box;
+                    }
 
-    /* ✅ Positioning on tablet/smaller screens */
-    @media (max-width: 1024px) {
-      .country-list {
-        right: auto !important;
-        left: 0 !important;
-        transform: none !important;
-        position: absolute !important;
-      }
-    }
+                    /* ✅ Positioning on tablet/smaller screens */
+                    @media (max-width: 1024px) {
+                      .country-list {
+                        right: auto !important;
+                        left: 0 !important;
+                        transform: none !important;
+                        position: absolute !important;
+                      }
+                    }
 
-    .country-list .country {
-      padding-top: 0.4rem !important;
-      padding-bottom: 0.4rem !important;
-      flex-shrink: 0 !important;
-      min-width: 100% !important;
-    }
+                    .country-list .country {
+                      padding-top: 0.4rem !important;
+                      padding-bottom: 0.4rem !important;
+                      flex-shrink: 0 !important;
+                      min-width: 100% !important;
+                    }
 
-    .country-list .country:hover,
-    .country-list .country.highlight {
-      background-color: #0A3D4A !important;
-      color: #F5EEDD !important;
-    }
+                    .country-list .country:hover,
+                    .country-list .country.highlight {
+                      background-color: #0A3D4A !important;
+                      color: #F5EEDD !important;
+                    }
 
-    .flag-dropdown {
-      border: none !important;
-      background: transparent !important;
-      padding-top: 0.25rem !important;
-      padding-bottom: 0.25rem !important;
-      transition: background-color 0.3s ease, padding 0.2s ease !important;
-    }
+                    .flag-dropdown {
+                      border: none !important;
+                      background: transparent !important;
+                      padding-top: 0.25rem !important;
+                      padding-bottom: 0.25rem !important;
+                      transition: background-color 0.3s ease, padding 0.2s ease !important;
+                    }
 
-    .flag-dropdown:hover {
-      background-color: #0D515F !important;
-      border-radius: 0.75rem !important;
-      padding-top: 0.25rem !important;
-      padding-bottom: 0.25rem !important;
-    }
+                    .flag-dropdown:hover {
+                      background-color: #0D515F !important;
+                      border-radius: 0.75rem !important;
+                      padding-top: 0.25rem !important;
+                      padding-bottom: 0.25rem !important;
+                    }
 
-    .flag-dropdown.open {
-      background-color: #0A3D4A !important;
-      border-radius: 0.75rem !important;
-      padding-top: 0.25rem !important;
-      padding-bottom: 0.25rem !important;
-    }
+                    .flag-dropdown.open {
+                      background-color: #0A3D4A !important;
+                      border-radius: 0.75rem !important;
+                      padding-top: 0.25rem !important;
+                      padding-bottom: 0.25rem !important;
+                    }
 
-    .flag-dropdown .selected-flag {
-      border-radius: 0.375rem !important;
-      overflow: hidden;
-      transition: background-color 0.3s ease, border-radius 0.2s ease !important;
-    }
+                    .flag-dropdown .selected-flag {
+                      border-radius: 0.375rem !important;
+                      overflow: hidden;
+                      transition: background-color 0.3s ease, border-radius 0.2s ease !important;
+                    }
 
-    .flag-dropdown:hover .selected-flag,
-    .flag-dropdown.open .selected-flag {
-      background-color: #0D515F !important;
-    }
+                    .flag-dropdown:hover .selected-flag,
+                    .flag-dropdown.open .selected-flag {
+                      background-color: #0D515F !important;
+                    }
 
-    .country-list .dial-code {
-      color: #7AE2CF !important;
-      font-weight: 500;
-      margin-left: 4px;
-    }
-  `}
-</style>
-
+                    .country-list .dial-code {
+                      color: #7AE2CF !important;
+                      font-weight: 500;
+                      margin-left: 4px;
+                    }
+                  `}
+                  </style>
 
                   <PhoneInput
                     country={"in"}
