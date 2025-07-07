@@ -59,3 +59,18 @@ body {
   overflow-x: hidden;
 }
 
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px #06202B inset !important;
+  -webkit-text-fill-color: #F5EEDD !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill:focus {
+  box-shadow: 0 0 0px 1000px #06202B inset !important;
+  -webkit-text-fill-color: #F5EEDD !important;
+}
+
+input:-webkit-autofill::first-line {
+  font-family: inherit !important;
+}
+

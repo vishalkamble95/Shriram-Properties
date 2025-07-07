@@ -64,7 +64,7 @@ const Location = () => {
         {/* Section Heading */}
         <div className="flex items-center mb-6">
           <div className="w-1 h-8 bg-gradient-to-b from-[#077A7D] to-[#06202B] rounded-full mr-3"></div>
-          <h2 className="text-2xl font-bold text-[#06202B] tracking-wide drop-shadow">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#06202B] tracking-wide drop-shadow">
             {locationData.heading || "Prime Location"}
           </h2>
         </div>
@@ -78,17 +78,19 @@ const Location = () => {
 
         {/* Map Display */}
         <div className="rounded-2xl overflow-hidden shadow-xl border border-[#077A7D]/30 w-full h-64 md:h-80 mb-6 bg-[#7AE2CF]/10 backdrop-blur-sm">
-          {locationData.map ? (
-            <div
-              dangerouslySetInnerHTML={renderMap()}
-              className="w-full h-full"
-            />
-          ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center bg-[#7AE2CF]/10 text-[#06202B]">
-              <MapIcon size={40} className="mb-2 text-[#077A7D]" />
-              <p>Map not available</p>
-            </div>
-          )}
+          <div className="w-full h-full scale-[0.84] md:scale-100 origin-top-left">
+            {locationData.map ? (
+              <div
+                dangerouslySetInnerHTML={renderMap()}
+                className="w-full h-full"
+              />
+            ) : (
+              <div className="w-full h-full flex flex-col items-center justify-center bg-[#7AE2CF]/10 text-[#06202B]">
+                <MapIcon size={40} className="mb-2 text-[#077A7D]" />
+                <p>Map not available</p>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* CTA Button */}

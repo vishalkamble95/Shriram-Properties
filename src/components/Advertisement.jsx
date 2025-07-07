@@ -77,7 +77,7 @@ const Advertisement = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-[#06202B]">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#06202B]">
             {pageInfo.heading || "Featured Advertisements"}
           </h2>
           {pageInfo.subheading && (

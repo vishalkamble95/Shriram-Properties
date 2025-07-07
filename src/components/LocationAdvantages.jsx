@@ -188,9 +188,9 @@ const LocationAdvantages = () => {
                   <ChevronRight size={20} />
                 </button>
               </div>
-              <button
-                onClick={openDialog}
-                className="relative group px-8 py-3 rounded-full bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] text-white font-semibold text-base hover:from-[#077A7D]/90 hover:to-[#7AE2CF]/90 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-[#077A7D]/30 order-2 sm:order-none overflow-hidden"
+              <a
+                href="#contact"
+                className="relative group px-8 py-3 rounded-full bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] text-white font-semibold text-base hover:from-[#077A7D]/90 hover:to-[#7AE2CF]/90 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-[#077A7D]/30 order-2 sm:order-none overflow-hidden text-center inline-block"
               >
                 <span className="relative z-10">
                   Enquiry About All Locations
@@ -198,7 +198,7 @@ const LocationAdvantages = () => {
 
                 {/* Shine sweep effect */}
                 <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
-              </button>
+              </a>
             </div>
           </div>
         </div>

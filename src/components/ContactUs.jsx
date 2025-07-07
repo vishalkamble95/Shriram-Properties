@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   MapPin,
   Phone,
@@ -10,6 +10,8 @@ import {
   AlertCircle,
 } from "lucide-react";
 import config from "../../config";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const ContactUs = () => {
   // States for form submission
@@ -107,6 +109,17 @@ const ContactUs = () => {
     }
   };
 
+  // Auto-hide success message after 3 seconds
+  useEffect(() => {
+    if (submitStatus === "success") {
+      const timer = setTimeout(() => {
+        setSubmitStatus("");
+      }, 5000); // 5 seconds
+
+      return () => clearTimeout(timer); // Cleanup on unmount
+    }
+  }, [submitStatus]);
+
   return (
     <div
       className="bg-gradient-to-br from-[#06202B] via-[#077A7D] to-[#7AE2CF] py-16 px-4 sm:px-8"
@@ -136,13 +149,17 @@ const ContactUs = () => {
           </div>
 
           {submitStatus === "success" && (
-            <div className="mb-8 bg-[#077A7D]/10 border border-[#077A7D]/30 text-[#F5EEDD] p-5 rounded-xl flex items-start shadow-inner shadow-[#077A7D]/10 backdrop-blur-md">
-              <div className="bg-[#077A7D]/30 rounded-full p-2 mr-3 mt-1">
-                <Send size={16} className="text-[#7AE2CF]" />
+            <div className="mb-8 bg-gradient-to-r from-[#077A7D]/10 to-[#7AE2CF]/10 border border-[#077A7D]/40 text-[#F5EEDD] px-6 py-5 sm:px-8 sm:py-6 rounded-2xl flex items-start gap-4 shadow-xl shadow-[#077A7D]/20 backdrop-blur-lg animate-fade-in transition-all duration-300">
+              <div className="bg-[#077A7D]/30 rounded-full p-3 sm:p-3.5 mt-1 flex-shrink-0 shadow-md shadow-[#7AE2CF]/20">
+                <Send size={20} className="text-[#7AE2CF]" />
               </div>
-              <div>
-                <p className="font-semibold">Thank you for your message!</p>
-                <p>We'll get back to you shortly.</p>
+              <div className="text-sm sm:text-base leading-relaxed">
+                <p className="font-semibold text-[#F5EEDD] mb-1">
+                  Thank you for your message!
+                </p>
+                <p className="text-[#F5EEDD]/90">
+                  We'll get back to you shortly.
+                </p>
               </div>
             </div>
           )}
@@ -273,26 +290,179 @@ const ContactUs = () => {
                 >
                   Phone Number <span className="text-[#7AE2CF]">*</span>
                 </label>
+
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-4 z-10 pointer-events-none">
-                    <div className="bg-white/10 rounded-full p-1.5 shadow-md">
-                      <Phone size={18} className="text-white" />
+                  {/* Flag replaces icon on the left */}
+                  <div
+                    className="absolute inset-y-0 left-0 flex items-center pl-3 z-10"
+                    style={{ pointerEvents: "none" }}
+                  >
+                    <div
+                      className="rounded-full shadow-md transition-all duration-300"
+                      style={{
+                        background:
+                          "linear-gradient(to right, #06202Bcc, #077A7Db3)",
+                        padding: "6px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {/* PhoneInput renders the flag on top, this area remains just spacing */}
                     </div>
                   </div>
-                  <input
-                    type="tel"
-                    id="phone_number"
-                    name="phone_number"
+                  <style>
+  {`
+    .country-list {
+      background-color: #06202B !important;
+      color: #F5EEDD !important;
+      z-index: 50 !important;
+      border-radius: 0.75rem;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      white-space: normal !important;
+      max-height: 180px !important;
+      width: 245px !important;
+      min-width: 245px !important;
+      max-width: 245px !important;
+      scrollbar-width: thin !important;
+      scrollbar-color: #7AE2CF transparent !important;
+    }
+
+    /* ✅ Scrollbar styling for WebKit browsers (Chrome, Safari, Edge) */
+    .country-list::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+      background: transparent !important;
+    }
+
+    .country-list::-webkit-scrollbar-track {
+      background: transparent !important;
+    }
+
+    .country-list::-webkit-scrollbar-thumb {
+      background-color: #7AE2CF !important;
+      border-radius: 4px;
+      border: none !important;
+      background-clip: padding-box;
+    }
+
+    /* ✅ Positioning on tablet/smaller screens */
+    @media (max-width: 1024px) {
+      .country-list {
+        right: auto !important;
+        left: 0 !important;
+        transform: none !important;
+        position: absolute !important;
+      }
+    }
+
+    .country-list .country {
+      padding-top: 0.4rem !important;
+      padding-bottom: 0.4rem !important;
+      flex-shrink: 0 !important;
+      min-width: 100% !important;
+    }
+
+    .country-list .country:hover,
+    .country-list .country.highlight {
+      background-color: #0A3D4A !important;
+      color: #F5EEDD !important;
+    }
+
+    .flag-dropdown {
+      border: none !important;
+      background: transparent !important;
+      padding-top: 0.25rem !important;
+      padding-bottom: 0.25rem !important;
+      transition: background-color 0.3s ease, padding 0.2s ease !important;
+    }
+
+    .flag-dropdown:hover {
+      background-color: #0D515F !important;
+      border-radius: 0.75rem !important;
+      padding-top: 0.25rem !important;
+      padding-bottom: 0.25rem !important;
+    }
+
+    .flag-dropdown.open {
+      background-color: #0A3D4A !important;
+      border-radius: 0.75rem !important;
+      padding-top: 0.25rem !important;
+      padding-bottom: 0.25rem !important;
+    }
+
+    .flag-dropdown .selected-flag {
+      border-radius: 0.375rem !important;
+      overflow: hidden;
+      transition: background-color 0.3s ease, border-radius 0.2s ease !important;
+    }
+
+    .flag-dropdown:hover .selected-flag,
+    .flag-dropdown.open .selected-flag {
+      background-color: #0D515F !important;
+    }
+
+    .country-list .dial-code {
+      color: #7AE2CF !important;
+      font-weight: 500;
+      margin-left: 4px;
+    }
+  `}
+</style>
+
+
+                  <PhoneInput
+                    country={"in"}
                     value={formData.phone_number}
-                    onChange={handleInputChange}
-                    className={`w-full bg-gradient-to-r from-[#06202B]/80 to-[#077A7D]/70 text-white border ${
-                      formErrors.phone_number
-                        ? "border-red-500"
-                        : "border-[#7AE2CF]/40"
-                    } rounded-2xl pl-12 pr-4 py-3 placeholder-[#F5EEDD]/50 focus:outline-none focus:ring-2 focus:ring-[#077A7D] focus:border-[#077A7D] transition-all duration-300 backdrop-blur-md shadow-sm`}
-                    placeholder="Your phone number*"
+                    onChange={(phone) =>
+                      handleInputChange({
+                        target: { name: "phone_number", value: phone },
+                      })
+                    }
+                    inputProps={{
+                      name: "phone_number",
+                      required: true,
+                      autoFocus: false,
+                    }}
+                    specialLabel=""
+                    inputStyle={{
+                      width: "100%",
+                      background:
+                        "linear-gradient(to right, #06202Bcc, #077A7Db3)",
+                      borderRadius: "1rem",
+                      border: formErrors.phone_number
+                        ? "1px solid red"
+                        : "1px solid #7AE2CF66",
+                      color: "white",
+                      paddingLeft: "3.25rem", // Matches pl-12 (48px) + internal padding
+                      paddingRight: "1rem",
+                      height: "3rem",
+                      backdropFilter: "blur(6px)",
+                      boxShadow: "0 1px 2px rgba(7, 122, 125, 0.2)",
+                    }}
+                    buttonStyle={{
+                      background: "transparent",
+                      border: "none",
+                      position: "absolute",
+                      left: "0.75rem",
+                      top: "0.1rem",
+                      zIndex: 20,
+                    }}
+                    dropdownStyle={{
+                      backgroundColor: "#06202B",
+                      color: "#F5EEDD",
+                      zIndex: 50,
+                      border: "1px solid #7AE2CF66",
+                      borderRadius: "12px",
+                      marginTop: "6px",
+                      boxShadow: "0 8px 16px rgba(7, 122, 125, 0.3)",
+                      width: "max-content",
+                      minWidth: "240px",
+                    }}
                   />
                 </div>
+
                 {formErrors.phone_number && (
                   <p className="mt-2 text-red-400 text-sm flex items-center">
                     <AlertCircle size={14} className="mr-1" />

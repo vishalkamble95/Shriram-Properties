@@ -193,7 +193,7 @@ const Blogs = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-[#F5EEDD] tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#F5EEDD] tracking-tight mb-4">
             <span className="bg-gradient-to-r from-[#7AE2CF] to-[#F5EEDD] bg-clip-text text-transparent">
               Latest Insights
             </span>

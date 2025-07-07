@@ -156,7 +156,7 @@ const PropertyLayouts = () => {
           <div>
             {/* Section Header */}
             <div className="mb-12 text-center max-w-2xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-[#F5EEDD] mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#F5EEDD] mb-4">
                 {getCurrentHeading()}
               </h2>
               <p className="text-[#7AE2CF]">

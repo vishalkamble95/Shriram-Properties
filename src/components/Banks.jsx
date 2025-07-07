@@ -96,7 +96,7 @@ const Banks = () => {
               Financial Partners
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-extrabold text-[#F5EEDD] leading-tight tracking-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#F5EEDD] leading-tight tracking-tight mb-4">
               {heading || "Approved Home Loan Partners"}
             </h2>
 

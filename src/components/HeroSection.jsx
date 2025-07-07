@@ -24,7 +24,7 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
   return (
     <section className="relative bg-[#06202B]">
       {/* Hero Image Container - Significantly reduced height on mobile */}
-      <div className="h-[60vh] md:h-screen w-full relative overflow-hidden">
+      <div className="h-auto md:h-screen w-full relative overflow-hidden">
         {loading ? (
           <div className="h-full w-full bg-[#5b9aa0]/10 animate-pulse"></div>
         ) : (
@@ -48,18 +48,18 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
             </div>
 
             {/* Mobile Images */}
-            <div className="md:hidden h-full w-full">
+            <div className="md:hidden w-full relative">
               {propertyData.hero_banner_img?.mobile?.map((img, index) => (
                 <div
                   key={index}
-                  className={`absolute inset-0 transition-opacity duration-1000 ${
+                  className={`relative w-full transition-opacity duration-1000 ${
                     index === currentImageIndex ? "opacity-100" : "opacity-0"
                   }`}
                 >
                   <img
                     src={img}
                     alt={`${propertyData.property_name} - View ${index + 1}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-auto object-cover"
                   />
                 </div>
               ))}
@@ -88,7 +88,7 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
 
       {/* Content Overlay - Reduced margins for compact and professional spacing */}
       <div className="flex flex-col justify-center items-center text-[#06202B] pt-12 pb-12 px-4 sm:px-6 md:px-10 bg-[#F5EEDD]">
-        {/* Right Content */}
+        {/* Content */}
         <div className="text-center md:text-left w-full max-w-6xl mb-8">
           {loading ? (
             <>
@@ -144,7 +144,7 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
                 Project Highlights
               </h4>
               <div className="flex flex-wrap justify-center gap-2">
-                {["MahaRERA Approved", "Bank Approved", "Special Offer"].map(
+                {["MahaRERA Approved", "Bank Approved", "Special Offer", "Prime Location", "Modern Design", "Future-Ready"].map(
                   (label, index) => (
                     <div
                       key={index}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MessageCircle, Phone, User } from "lucide-react";
+import { MessageCircle, Phone, User, ChevronUp } from "lucide-react";
 import seodata from "../../seodata.json";
 import { ContactDialog } from "./Contact";
 import useContact from "../hooks/useContact";
@@ -43,16 +43,16 @@ const FloatingButtons = () => {
 
   return (
     <>
-      <div className="fixed bottom-12 left-8 z-50 flex flex-col-reverse items-start gap-4">
+      <div className="fixed bottom-10 left-6 sm:bottom-12 sm:left-8 z-50 flex flex-col items-center gap-4">
         {/* Expanded buttons */}
         {isExpanded && (
-          <div className="flex flex-col-reverse gap-3 transition-all duration-300 ease-in-out">
+          <div className="flex flex-col gap-3 transition-all duration-300 ease-in-out items-center">
             {buttons.map((button) => (
               <a
                 key={button.id}
                 href={button?.href}
                 onClick={button?.openDialog}
-                className={`p-3 rounded-full shadow-lg text-white transition-all duration-300 border border-[#055154] ${button.color}`}
+                className={`w-12 h-12 flex items-center justify-center rounded-full shadow-lg text-white transition-all duration-300 border border-[#055154] ${button.color}`}
                 target={button.id === "whatsapp" ? "_blank" : "_self"}
                 rel={button.id === "whatsapp" ? "noopener noreferrer" : ""}
               >
@@ -61,6 +61,15 @@ const FloatingButtons = () => {
             ))}
           </div>
         )}
+
+        {/* Scroll to top button — square, centered under all */}
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          aria-label="Scroll to top"
+          className="w-10 h-10 flex items-center justify-center rounded-md shadow-lg bg-[#7AE2CF] text-[#06202B] border border-[#055154] hover:bg-[#077A7D] hover:text-white transition-all duration-300"
+        >
+          <ChevronUp size={20} className="transition-transform duration-200" />
+        </button>
 
         {/* Main toggle button - hidden by commenting */}
         {/*

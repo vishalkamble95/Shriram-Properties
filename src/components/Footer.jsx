@@ -118,7 +118,19 @@ const Footer = () => {
     );
   }
 
+  console.log("Footer Data:", footerData);
+  
   const { social_icons, g_setting } = footerData;
+
+  const getIconColorClass = (icon) => {
+  const iconName = icon.toLowerCase();
+  if (iconName.includes("facebook")) return "text-[#1877F2]";   // Facebook Blue
+  if (iconName.includes("linkedin")) return "text-[#0077B5]";   // LinkedIn Blue
+  if (iconName.includes("instagram")) return "text-[#E4405F]";  // Instagram Pink
+  if (iconName.includes("youtube")) return "text-[#FF0000]";    // YouTube Red
+  if (iconName.includes("twitter")) return "text-[#1DA1F2]";    // Twitter Blue
+  return "text-white"; // Default fallback
+};
 
   return (
     <footer className="bg-[#06202B] text-[#F5EEDD] relative overflow-hidden">
@@ -185,7 +197,7 @@ const Footer = () => {
                     href={icon.social_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-xl bg-[#077A7D]/30 backdrop-blur-sm flex items-center justify-center shadow-inner transition-transform duration-300 hover:scale-110 hover:bg-[#7AE2CF]/20 hover:text-[#F5EEDD] text-[#7AE2CF]"
+                    className={`w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center shadow-inner transition-transform duration-300 hover:scale-110 hover:bg-white/20 ${getIconColorClass(icon.social_icon)}`}
                     aria-label={`Visit our ${icon.social_icon
                       .replace("fab fa-", "")
                       .replace("-", " ")}`}
@@ -201,7 +213,7 @@ const Footer = () => {
                     href={icon.social_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-xl bg-[#077A7D]/30 backdrop-blur-sm flex items-center justify-center shadow-inner transition-transform duration-300 hover:scale-110 hover:bg-[#7AE2CF]/20 hover:text-[#F5EEDD] text-[#7AE2CF]"
+                    className={`w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center shadow-inner transition-transform duration-300 hover:scale-110 hover:bg-white/20 ${getIconColorClass(icon.social_icon)}`}
                     aria-label={`Visit our ${icon.social_icon
                       .replace("fab fa-", "")
                       .replace("-", " ")}`}
@@ -264,7 +276,7 @@ const Footer = () => {
                   </a>
                 </div>
               </li>
-              <li className="flex gap-4 items-start">
+              {/* <li className="flex gap-4 items-start">
                 <div className="p-2 bg-[#7AE2CF]/20 rounded-full">
                   <Clock size={20} className="text-[#7AE2CF]" />
                 </div>
@@ -274,7 +286,7 @@ const Footer = () => {
                   </div>
                   <p className="text-[#F5EEDD]">Mon - Sat: 9AM - 7PM</p>
                 </div>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -334,7 +346,7 @@ const Footer = () => {
               </Link>
             </div>
 
-            <div className="flex justify-end order-1 md:order-3 w-full md:w-auto">
+            {/* <div className="flex justify-end order-1 md:order-3 w-full md:w-auto">
               <button
                 onClick={scrollToTop}
                 aria-label="Scroll to top"
@@ -345,7 +357,7 @@ const Footer = () => {
                   className="group-hover:scale-110 transition-transform duration-200"
                 />
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

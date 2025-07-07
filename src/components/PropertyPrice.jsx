@@ -30,7 +30,6 @@ const PropertyPriceTable = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log(data);
 
         setPropertyPrices(data.property_prices);
         if (data.page && data.page.length > 0) {

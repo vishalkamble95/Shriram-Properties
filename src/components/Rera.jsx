@@ -93,7 +93,6 @@ const ReraInformation = () => {
     <>
       <div
         className="relative bg-[#F5EEDD] py-16 px-4 overflow-hidden"
-        id="about"
         style={{
           backgroundImage:
             'linear-gradient(to bottom, rgba(245, 238, 221, 0.9), rgba(245, 238, 221, 0.85)), url("https://via.placeholder.com/1920x1080")',
@@ -249,8 +248,7 @@ const ReraInformation = () => {
                             <li className="flex items-start">
                               <div className="w-2 h-2 rounded-full bg-[#7AE2CF] mt-1.5 mr-3"></div>
                               <span className="text-[#06202B] text-sm">
-                                This project is registered under Maharashtra
-                                MahaRera
+                                This project is registered under MahaRera
                               </span>
                             </li>
                             <li className="flex items-start">
@@ -314,9 +312,9 @@ const ReraInformation = () => {
             Request detailed property documents and specifications for this
             MahaRERA registered project.
           </p>
-          <button
-            onClick={openDialog}
-            className="relative group bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#077A7D]/80 hover:to-[#7AE2CF]/80 text-[#06202B] font-semibold px-8 py-3 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl shadow-[#7AE2CF]/30 mx-auto block overflow-hidden"
+          <a
+            href="#contact"
+            className="relative group inline-block mx-auto bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#077A7D]/80 hover:to-[#7AE2CF]/80 text-[#06202B] font-semibold px-8 py-3 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl shadow-[#7AE2CF]/30 overflow-hidden text-center"
           >
             <span className="relative z-10">Request Property Documents</span>
 
@@ -325,7 +323,7 @@ const ReraInformation = () => {
 
             {/* Shine sweep effect */}
             <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none z-0" />
-          </button>
+          </a>
         </div>
       </div>
 

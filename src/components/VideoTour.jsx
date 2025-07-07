@@ -112,7 +112,7 @@ const VideoTour = () => {
           </div>
         </div> */}
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#F5EEDD] leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#F5EEDD] leading-tight">
               {heading || "Immersive Property Tour"}
             </h2>
 

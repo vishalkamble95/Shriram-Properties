@@ -123,7 +123,7 @@ const PropertyDetails = () => {
         heading={propertyData?.about_builder_title}
         htmlContent={propertyData?.property_specification}
       /> */}
-      <div className="min-h-screen bg-[#06202B] text-white">
+      <div id="about" className="min-h-screen bg-[#06202B] text-white">
         {/* Hero Section with background image */}
         <div className="relative h-96 lg:h-[550px] overflow-hidden">
           {/* <div className="absolute inset-0 bg-gradient-to-b from-[#622569]/80 via-[#5b9aa0]/60 to-[#b8a9c9] z-10"></div> */}
@@ -149,7 +149,7 @@ const PropertyDetails = () => {
             </div>
             <div className="max-w-7xl mx-auto text-center sm:text-left">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#F5EEDD] drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)] tracking-tight">
-                {propertyData?.property_name}
+                {propertyData?.property_name?.replace(/\.$/, "")}
               </h1>
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 mt-5">
                 <span className="px-4 py-1.5 bg-[#077A7D]/50 text-[#F5EEDD] text-sm sm:text-base font-medium rounded-full flex items-center backdrop-blur-sm shadow-md transition">
@@ -206,7 +206,8 @@ const PropertyDetails = () => {
                         <div className="flex items-center mb-6">
                           <div className="w-1 h-8 bg-gradient-to-b from-[#077A7D] to-[#7AE2CF] rounded-full mr-6"></div>
                           <h2 className="text-2xl font-bold text-[#F5EEDD]">
-                            Property Overview
+                            {propertyData?.property_name?.replace(/\.$/, "") ||
+                              "SMP Amberwood"}
                           </h2>
                         </div>
                         <div className="relative rounded-xl bg-[#06202B]/50 backdrop-blur-md border border-[#F5EEDD]/20 shadow-lg px-4 py-5 sm:px-6 sm:py-6 md:px-8 md:py-6 overflow-hidden">
@@ -226,7 +227,7 @@ const PropertyDetails = () => {
                         <div className="flex items-center mb-6">
                           <div className="w-1 h-8 bg-gradient-to-b from-[#077A7D] to-[#7AE2CF] rounded-full mr-3"></div>
                           <h2 className="text-2xl font-bold text-[#F5EEDD]">
-                            Property Information
+                            Why Choose SMP Amberwood?
                           </h2>
                         </div>
                         <div className="relative rounded-xl bg-[#06202B]/50 backdrop-blur-md border border-[#F5EEDD]/20 shadow-lg p-6 overflow-hidden">
@@ -246,8 +247,8 @@ const PropertyDetails = () => {
                         <div className="flex items-center mb-6">
                           <div className="w-1 h-8 bg-gradient-to-b from-[#077A7D] to-[#7AE2CF] rounded-full mr-3"></div>
                           <h2 className="text-2xl font-bold text-[#F5EEDD]">
-                            {propertyData?.about_builder_title ||
-                              "About Builder"}
+                            {propertyData?.builder_name ||
+                              "SMP & NAMARATA GROUP"}
                           </h2>
                         </div>
                         <div className="relative rounded-xl bg-[#06202B]/50 backdrop-blur-md border border-[#F5EEDD]/20 shadow-lg p-6 overflow-hidden">
@@ -336,17 +337,18 @@ const PropertyDetails = () => {
                 <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
               </button>
 
-              <button
-                onClick={openDialog}
-                className="relative group w-full sm:w-60 py-3 px-6 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#066568] hover:to-[#64c9b9] active:from-[#044e50] active:to-[#4db0a0] rounded-lg text-[#06202B] font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#077A7D]/20 overflow-hidden"
+              <a
+                href="#contact"
+                className="relative group w-full sm:w-60 py-3 px-6 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#066568] hover:to-[#64c9b9] active:from-[#044e50] active:to-[#4db0a0] rounded-lg text-[#06202B] font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#077A7D]/20 overflow-hidden text-center"
               >
                 <span className="relative z-10 flex items-center">
                   <Phone size={18} className="mr-2" />
                   Contact
                 </span>
+
                 {/* Shine sweep effect */}
                 <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
-              </button>
+              </a>
             </div>
           </div>
         </div>

@@ -158,7 +158,7 @@ const Amenities = () => {
       <div className="w-full mx-auto px-6 sm:px-8 lg:px-16 py-16 bg-gradient-to-b from-[#06202B] via-[#06202B]/95 to-[#077A7D]/90">
         <div className="flex items-center mb-8 px-2 sm:px-0">
           <div className="w-1 h-8 sm:h-10 bg-gradient-to-b from-[#077A7D] to-[#7AE2CF] rounded-full mr-4 shadow-md"></div>
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#F5EEDD] tracking-tight leading-snug drop-shadow-sm">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#F5EEDD] tracking-tight leading-snug drop-shadow-sm">
             {heading || "Premium Amenities"}
           </h2>
         </div>

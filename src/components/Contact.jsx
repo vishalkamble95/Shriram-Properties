@@ -132,7 +132,7 @@ export const ContactDialog = ({ isOpen, onClose }) => {
       setTimeout(() => {
         setSubmitStatus(null);
         onClose();
-      }, 3000);
+      }, 4000);
     } catch (error) {
       setSubmitStatus("error");
       setErrorMessage(
@@ -171,9 +171,9 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                 className="h-12 max-w-[120px] mb-3"
               />
             )}
-            <h1 className="text-[#06202B] text-lg sm:text-xl md:text-2xl font-semibold">
+            <h2 className="text-[#06202B] text-3xl sm:text-4xl font-semibold">
               {data.hero_banner_heading}
-            </h1>
+            </h2>
             <h3 className="text-lg sm:text-xl font-semibold text-[#077A7D] mt-2">
               Contact Us
             </h3>

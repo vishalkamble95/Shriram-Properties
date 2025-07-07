@@ -39,6 +39,7 @@ function Navbar({ propertyData, loading, openDialog }) {
     { id: "about", label: "About", to: "about" },
     { id: "price", label: "Pricing", to: "price" },
     { id: "gallery", label: "Gallery", to: "gallery" },
+    { id: "blog", label: "Blog", to: "blogs-section" },
     { id: "contact", label: "Contact", to: "contact" },
   ];
 
@@ -70,7 +71,7 @@ function Navbar({ propertyData, loading, openDialog }) {
           <div className="flex items-center space-x-6">
             <div className="flex items-center text-[#06202B] font-medium">
               <Calendar size={16} className="mr-2 text-[#077A7D]" />
-              <span>RERA Registered</span>
+              <span>MAHARERA Registered</span>
             </div>
             <a
               href={`tel:${contact?.footer_phone}`}
@@ -106,7 +107,7 @@ function Navbar({ propertyData, loading, openDialog }) {
                     />
                     <div className="ml-3 hidden lg:block">
                       <h1 className="text-white font-semibold text-lg">
-                        {propertyData.property_name}
+                        {propertyData.property_name?.replace(/\.$/, "")}
                       </h1>
                       <p className="text-[#F5EEDD] text-xs">Premium Property</p>
                     </div>
