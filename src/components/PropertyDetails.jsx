@@ -123,7 +123,7 @@ const PropertyDetails = () => {
         heading={propertyData?.about_builder_title}
         htmlContent={propertyData?.property_specification}
       /> */}
-      <div id="about" className="min-h-screen bg-[#06202B] text-white">
+      <div className="min-h-screen bg-[#06202B] text-white shadow-[inset_0_12px_18px_#00000050,inset_0_-12px_18px_#00000050]">
         {/* Hero Section with background image */}
         <div className="relative h-96 lg:h-[550px] overflow-hidden">
           {/* <div className="absolute inset-0 bg-gradient-to-b from-[#622569]/80 via-[#5b9aa0]/60 to-[#b8a9c9] z-10"></div> */}
@@ -168,7 +168,7 @@ const PropertyDetails = () => {
         >
           <div id="why-choose-us">
             {/* Tab Content */}
-            <div className="bg-[#077A7D]/30 rounded-xl shadow-xl backdrop-blur-sm mb-14 overflow-hidden border border-[#7AE2CF]/40">
+            <div className="bg-[#077A7D]/30 rounded-xl shadow-xl backdrop-blur-sm mb-10 overflow-hidden border border-[#7AE2CF]/40">
               <div className="flex flex-col gap-2">
                 {/* Overview Section */}
                 <div id="overview" className="w-full px-4 sm:px-6 lg:px-8 pt-6">
@@ -273,15 +273,15 @@ const PropertyDetails = () => {
             </div>
 
             {/* Specifications Section */}
-            <div className="w-full space-y-8 px-4 sm:px-6 lg:px-12 py-10 bg-gradient-to-br from-[#077A7D]/40 to-[#7AE2CF]/30 rounded-2xl shadow-2xl border border-[#F5EEDD]/20 backdrop-blur-md transition-all duration-300 text-center">
+            {/* <div className="w-full space-y-8 px-4 sm:px-6 lg:px-12 py-10 bg-gradient-to-br from-[#077A7D]/40 to-[#7AE2CF]/30 rounded-2xl shadow-2xl border border-[#F5EEDD]/20 backdrop-blur-md transition-all duration-300 text-center">
               <h3 className="text-2xl sm:text-3xl font-bold text-[#F5EEDD] mb-10 flex items-center space-x-3 justify-center">
                 <Building size={26} className="text-[#7AE2CF]" />
                 <span className="bg-[#077A7D]/10 text-[#7AE2CF] px-5 py-2 text-base rounded-full border border-[#7AE2CF]/20 shadow-sm">
                   Property Specifications
                 </span>
-              </h3>
+              </h3> */}
 
-              <div className="flex flex-wrap justify-center gap-6">
+              {/* <div className="flex flex-wrap justify-center gap-6">
                 {[
                   {
                     label: "Property Type",
@@ -326,9 +326,9 @@ const PropertyDetails = () => {
                     )}
                   </div>
                 ))}
-              </div>
+              </div> */}
 
-              <div className="mt-8 flex flex-col sm:flex-row sm:justify-center sm:items-center gap-4">
+              {/* <div className="mt-8 flex flex-col sm:flex-row sm:justify-center sm:items-center gap-4">
                 <button
                   onClick={openDialog}
                   className="relative group w-full sm:w-60 py-3 px-6 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#066568] hover:to-[#64c9b9] active:from-[#044e50] active:to-[#4db0a0] rounded-lg text-[#06202B] font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#077A7D]/20 overflow-hidden"
@@ -336,25 +336,25 @@ const PropertyDetails = () => {
                   <span className="relative z-10 flex items-center">
                     <Download size={18} className="mr-2" />
                     Download Brochure
-                  </span>
+                  </span> */}
                   {/* Shine sweep effect */}
-                  <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
-                </button>
+                  {/* <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+                </button> */}
 
-                <a
+                {/* <a
                   href="#contact"
                   className="relative group w-full sm:w-60 py-3 px-6 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#066568] hover:to-[#64c9b9] active:from-[#044e50] active:to-[#4db0a0] rounded-lg text-[#06202B] font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#077A7D]/20 overflow-hidden text-center"
                 >
                   <span className="relative z-10 flex items-center">
                     <Phone size={18} className="mr-2" />
                     Contact
-                  </span>
+                  </span> */}
 
                   {/* Shine sweep effect */}
-                  <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+                  {/* <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
                 </a>
-              </div>
-            </div>
+              </div> */}
+            {/* </div> */}
           </div>
         </div>
       </div>
