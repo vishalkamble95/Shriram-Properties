@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Home, Building, Calendar, MapPin, Tag } from "lucide-react";
+import {
+  Home,
+  Building,
+  Download,
+  Phone,
+  Calendar,
+  MapPin,
+  Tag,
+} from "lucide-react";
 
 function HeroSection({ propertyData, loading, error, openDialog }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -48,18 +56,20 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
             </div>
 
             {/* Mobile Images */}
-            <div className="md:hidden w-full relative">
+            <div className="md:hidden w-full h-screen relative overflow-hidden">
               {propertyData.hero_banner_img?.mobile?.map((img, index) => (
                 <div
                   key={index}
-                  className={`relative w-full transition-opacity duration-1000 ${
-                    index === currentImageIndex ? "opacity-100" : "opacity-0"
+                  className={`absolute inset-0 transition-opacity duration-1000 ${
+                    index === currentImageIndex
+                      ? "opacity-100 z-10"
+                      : "opacity-0 z-0"
                   }`}
                 >
                   <img
                     src={img}
                     alt={`${propertyData.property_name} - View ${index + 1}`}
-                    className="w-full h-auto object-cover"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               ))}
@@ -112,102 +122,87 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
           )}
         </div>
 
-        {/* Cards Section */}
-        <div className="w-full max-w-6xl mb-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 bg-[#7AE2CF]/10 p-6 sm:p-8 md:p-10 rounded-2xl">
-            {/* Card 1 */}
-            <div className="bg-white shadow-md hover:shadow-xl border border-[#7AE2CF]/30 p-5 md:p-6 rounded-2xl transition-transform hover:scale-[1.015] flex flex-col items-center justify-center text-center space-y-2">
-              <Building className="text-[#077A7D]" size={24} />
-              <p className="text-sm font-medium text-[#06202B]">
-                {propertyData.builder_name}
-              </p>
-              <div className="flex items-center justify-center text-sm text-[#06202B]">
-                <MapPin size={14} className="mr-1" />
-                <span>{propertyData.location}</span>
-              </div>
-            </div>
+        {/* Specifications Section */}
+        <div className="w-full space-y-8 px-4 sm:px-6 lg:px-12 py-10 bg-gradient-to-br from-[#F5EEDD] to-[#7AE2CF]/10 rounded-2xl shadow-xl border border-[#5b9aa0]/10 backdrop-blur-md transition-all duration-300 text-center">
+          <h3 className="text-2xl sm:text-3xl font-bold text-[#06202B] mb-10 flex items-center space-x-3 justify-center">
+            <Building size={26} className="text-[#077A7D]" />
+            <span className="bg-[#7AE2CF]/10 text-[#077A7D] px-5 py-2 text-base rounded-full border border-[#7AE2CF]/30 shadow-sm">
+              Property Specifications
+            </span>
+          </h3>
 
-            {/* Card 2 */}
-            <div className="bg-white shadow-md hover:shadow-xl border border-[#7AE2CF]/30 p-5 md:p-6 rounded-2xl transition-transform hover:scale-[1.015] flex flex-col items-center justify-center text-center space-y-2">
-              <Home className="text-[#077A7D]" size={24} />
-              <p className="text-sm font-medium text-[#06202B]">
-                {propertyData.property_type_price_range_text}
-              </p>
-              <span className="text-base font-semibold text-[#06202B]">
-                {propertyData.property_area_min_max}
-              </span>
-            </div>
-
-            {/* Card 3 */}
-            <div className="bg-white shadow-md hover:shadow-xl border border-[#7AE2CF]/30 p-5 md:p-6 rounded-2xl transition-transform hover:scale-[1.015] flex flex-col items-center justify-center text-center space-y-3">
-              <h4 className="text-sm font-semibold text-[#06202B]">
-                Project Highlights
-              </h4>
-              <div className="flex flex-wrap justify-center gap-2">
-                {["MahaRERA Approved", "Bank Approved", "Special Offer", "Prime Location", "Modern Design", "Future-Ready"].map(
-                  (label, index) => (
-                    <div
-                      key={index}
-                      className="bg-[#077A7D] backdrop-blur-sm px-3 py-1 rounded-full flex items-center border border-[#7AE2CF]/20 shadow-sm hover:scale-105 transition-transform"
-                    >
-                      <Tag size={12} className="text-white mr-2" />
-                      <span className="text-xs font-medium text-white">
-                        {label}
-                      </span>
-                    </div>
-                  )
+          <div className="flex flex-wrap justify-center gap-6">
+            {[
+              {
+                label: "Property Type",
+                value: propertyData?.property_type_price_range_text,
+              },
+              {
+                label: "Developer",
+                value: propertyData?.builder_name,
+              },
+              {
+                label: "Project Status",
+                value: propertyData?.property_status ?? "Active",
+                badge: true,
+              },
+              {
+                label: "Location",
+                value:
+                  propertyData?.property_location_name || "Pune, Maharashtra",
+                badge: true,
+              },
+              {
+                label: "Last Updated",
+                value: propertyData?.property_last_updated,
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="w-[90%] sm:w-[45%] md:w-[30%] xl:w-[18%] max-w-[300px] bg-white/90 border border-[#5b9aa0]/20 rounded-2xl p-6 backdrop-blur-md shadow-md hover:shadow-lg transition-all duration-300 text-center"
+              >
+                <span className="text-sm font-medium text-[#077A7D] mb-1 block">
+                  {item.label}
+                </span>
+                {item.badge ? (
+                  <span className="inline-block px-3 py-1 bg-[#7AE2CF]/20 text-[#06202B] border border-[#7AE2CF]/30 text-xs font-semibold rounded-md">
+                    {item.value}
+                  </span>
+                ) : (
+                  <span className="text-[#06202B] font-semibold text-base">
+                    {item.value}
+                  </span>
                 )}
               </div>
-            </div>
-
-            {/* Card 4 */}
-            <div className="bg-white shadow-md hover:shadow-xl border border-[#7AE2CF]/30 p-5 md:p-6 rounded-2xl transition-transform hover:scale-[1.015] flex flex-col items-center justify-center text-center space-y-3">
-              <div className="flex items-center justify-center space-x-2 text-[#06202B]">
-                <Calendar className="text-[#077A7D]" size={16} />
-                <h3 className="text-sm font-medium">Last Updated:</h3>
-              </div>
-              <p className="text-sm text-[#06202B]">
-                {new Date(
-                  propertyData.property_last_updated
-                ).toLocaleDateString()}
-              </p>
-            </div>
-
-            {/* Error Message */}
-            {error && (
-              <div className="col-span-full text-[#06202B] text-sm bg-[#7AE2CF]/40 p-4 rounded-md border border-[#077A7D]/30">
-                {error}
-              </div>
-            )}
+            ))}
           </div>
-        </div>
 
-        {/* CTA Buttons */}
-        <div className="w-full max-w-4xl mt-2 mb-8 flex flex-col md:flex-row gap-4 px-4">
-          {/* Book Site Visit Button */}
-          <button
-            onClick={openDialog}
-            className="relative group w-full md:w-1/2 bg-gradient-to-r from-[#077A7D] via-[#7AE2CF] to-[#F5EEDD] text-[#06202B] font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 flex items-center justify-center text-base shadow-md hover:shadow-lg hover:scale-105 overflow-hidden"
-          >
-            <span className="relative z-10 flex items-center">
-              <Calendar className="mr-2" size={18} />
-              Book Site Visit
-            </span>
+          <div className="mt-8 flex flex-col sm:flex-row sm:justify-center sm:items-center gap-4">
+            <button
+              onClick={openDialog}
+              className="relative group w-full sm:w-60 py-3 px-6 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#066568] hover:to-[#64c9b9] active:from-[#044e50] active:to-[#4db0a0] rounded-lg text-white font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#077A7D]/20 overflow-hidden"
+            >
+              <span className="relative z-10 flex items-center">
+                <Download size={18} className="mr-2" />
+                Download Brochure
+              </span>
+              {/* Shine sweep effect */}
+              <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/50 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+            </button>
 
-            {/* Shine sweep effect */}
-            <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/30 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
-          </button>
+            <a
+              href="#contact"
+              className="relative group w-full sm:w-60 py-3 px-6 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#066568] hover:to-[#64c9b9] active:from-[#044e50] active:to-[#4db0a0] rounded-lg text-white font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#077A7D]/20 overflow-hidden text-center"
+            >
+              <span className="relative z-10 flex items-center">
+                <Phone size={18} className="mr-2 text-white" />
+                Contact
+              </span>
 
-          {/* View Details Link */}
-          <a
-            href="#price"
-            className="relative group w-full md:w-1/2 border border-[#06202B]/20 bg-white/60 hover:bg-[#F5EEDD]/80 text-[#06202B] font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 flex items-center justify-center text-base shadow-md hover:shadow-lg hover:scale-105 overflow-hidden"
-          >
-            <span className="relative z-10">View Details</span>
-
-            {/* Shine sweep effect */}
-            <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/20 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
-          </a>
+              {/* Shine sweep effect */}
+              <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/50 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+            </a>
+          </div>
         </div>
       </div>
     </section>

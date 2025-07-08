@@ -22,7 +22,7 @@ const FloatingButtons = () => {
       id: "whatsapp",
       icon: <MessageCircle size={20} />,
       label: "WhatsApp",
-      href: `https://wa.me/918181817136?text=I%20am%20interested%20in%20${seodata?.data?.property_name}`,
+      href: `https://wa.me/918181817136?text=I%20am%20interested%20in%20${seodata?.data?.og_title}`,
       color: "bg-[#077A7D] hover:bg-[#06686a] active:bg-[#055154]",
     },
     {

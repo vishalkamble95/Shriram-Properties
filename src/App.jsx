@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import FloatingButtons from "./components/FloatingButtons";
 import { Loader } from "lucide-react";
 import ScrollManager from "./ScrollManager";
+import ThankYou from './components/ThankYou';
 
 // Import static SEO data directly
 import seoData from "../public/seodata.json";
@@ -35,6 +36,7 @@ function App() {
             <Route path="/" element={<HomePage />} exact />
             <Route path="/blogs/:id" element={<BlogContent />} exact />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/thank-you" element={<ThankYou />} />
           </Routes>
           <FloatingButtons />
           <Footer />

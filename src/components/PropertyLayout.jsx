@@ -303,10 +303,12 @@ const PropertyLayouts = () => {
                                     Price
                                   </p>
                                   <p className="text-lg font-semibold text-[#F5EEDD]">
-                                    {
-                                      activeLayouts[currentSlide]
-                                        ?.unit_layout_price
-                                    }
+                                    {activeLayouts[
+                                      currentSlide
+                                    ]?.unit_layout_price?.endsWith("*")
+                                      ? activeLayouts[currentSlide]
+                                          ?.unit_layout_price
+                                      : `${activeLayouts[currentSlide]?.unit_layout_price}*`}
                                   </p>
                                 </div>
                               </div>

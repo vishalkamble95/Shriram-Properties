@@ -166,189 +166,194 @@ const PropertyDetails = () => {
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16"
           id="property-details"
         >
-          {/* Tab Content */}
-          <div className="bg-[#077A7D]/30 rounded-xl shadow-xl backdrop-blur-sm mb-14 overflow-hidden border border-[#7AE2CF]/40">
-            <div className="flex flex-col gap-2">
-              {/* Overview Section */}
-              <div id="overview" className="w-full px-4 sm:px-6 lg:px-8 pt-6">
-                {/* Navigation + Content Wrapper */}
-                <div className="flex flex-col space-y-4">
-                  {/* Navigation Tabs */}
-                  <div className="w-full flex justify-center">
-                    <nav className="flex flex-wrap justify-center items-center gap-2 max-w-xl w-full bg-[#7AE2CF]/10 border border-[#F5EEDD]/20 rounded-xl px-4 py-2 shadow-md backdrop-blur-sm">
-                      {["overview", "information", "about_builder"].map(
-                        (tab) => (
-                          <button
-                            key={tab}
-                            onClick={() => {
-                              setActiveTab(tab);
-                              window.location.hash = tab;
-                            }}
-                            className={`text-sm sm:text-base font-medium px-4 py-2 rounded-full transition-all duration-200 whitespace-nowrap ${
-                              activeTab === tab
-                                ? "bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] text-[#06202B] shadow-md"
-                                : "text-[#F5EEDD] hover:bg-[#7AE2CF]/10 hover:text-white underline underline-offset-4"
-                            }`}
-                          >
-                            {tab
-                              .replace("_", " ")
-                              .replace(/\b\w/g, (l) => l.toUpperCase())}
-                          </button>
-                        )
-                      )}
-                    </nav>
-                  </div>
+          <div id="why-choose-us">
+            {/* Tab Content */}
+            <div className="bg-[#077A7D]/30 rounded-xl shadow-xl backdrop-blur-sm mb-14 overflow-hidden border border-[#7AE2CF]/40">
+              <div className="flex flex-col gap-2">
+                {/* Overview Section */}
+                <div id="overview" className="w-full px-4 sm:px-6 lg:px-8 pt-6">
+                  {/* Navigation + Content Wrapper */}
+                  <div className="flex flex-col space-y-4">
+                    {/* Navigation Tabs */}
+                    <div className="w-full flex justify-center">
+                      <nav className="flex flex-wrap justify-center items-center gap-2 max-w-xl w-full bg-[#7AE2CF]/10 border border-[#F5EEDD]/20 rounded-xl px-4 py-2 shadow-md backdrop-blur-sm">
+                        {["overview", "information", "about_builder"].map(
+                          (tab) => (
+                            <button
+                              key={tab}
+                              onClick={() => {
+                                setActiveTab(tab);
+                                window.location.hash = tab;
+                              }}
+                              className={`text-sm sm:text-base font-medium px-4 py-2 rounded-full transition-all duration-200 whitespace-nowrap ${
+                                activeTab === tab
+                                  ? "bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] text-[#06202B] shadow-md"
+                                  : "text-[#F5EEDD] hover:bg-[#7AE2CF]/10 hover:text-white underline underline-offset-4"
+                              }`}
+                            >
+                              {tab
+                                .replace("_", " ")
+                                .replace(/\b\w/g, (l) => l.toUpperCase())}
+                            </button>
+                          )
+                        )}
+                      </nav>
+                    </div>
 
-                  {/* Content Area */}
-                  <div className="w-full">
-                    {activeTab === "overview" && (
-                      <div className="px-4 py-6 sm:px-6 sm:py-6 md:px-8 md:py-8">
-                        <div className="flex items-center mb-6">
-                          <div className="w-1 h-8 bg-gradient-to-b from-[#077A7D] to-[#7AE2CF] rounded-full mr-6"></div>
-                          <h2 className="text-2xl font-bold text-[#F5EEDD]">
-                            {propertyData?.property_name?.replace(/\.$/, "") ||
-                              "SMP Amberwood"}
-                          </h2>
+                    {/* Content Area */}
+                    <div className="w-full">
+                      {activeTab === "overview" && (
+                        <div className="px-4 py-6 sm:px-6 sm:py-6 md:px-8 md:py-8">
+                          <div className="flex items-center mb-6">
+                            <div className="w-1 h-8 bg-gradient-to-b from-[#077A7D] to-[#7AE2CF] rounded-full mr-6"></div>
+                            <h2 className="text-2xl font-bold text-[#F5EEDD]">
+                              {propertyData?.property_name?.replace(
+                                /\.$/,
+                                ""
+                              ) || "SMP Amberwood"}
+                            </h2>
+                          </div>
+                          <div className="relative rounded-xl bg-[#06202B]/50 backdrop-blur-md border border-[#F5EEDD]/20 shadow-lg px-4 py-5 sm:px-6 sm:py-6 md:px-8 md:py-6 overflow-hidden">
+                            <div
+                              className="text-[#F5EEDD] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth"
+                              style={{ maxHeight: "300px" }}
+                              dangerouslySetInnerHTML={createMarkup(
+                                propertyData?.property_description
+                              )}
+                            />
+                            <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-[#06202B] via-[#06202B]/80 to-transparent pointer-events-none transition-opacity duration-500" />
+                          </div>
                         </div>
-                        <div className="relative rounded-xl bg-[#06202B]/50 backdrop-blur-md border border-[#F5EEDD]/20 shadow-lg px-4 py-5 sm:px-6 sm:py-6 md:px-8 md:py-6 overflow-hidden">
-                          <div
-                            className="text-[#F5EEDD] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth"
-                            style={{ maxHeight: "300px" }}
-                            dangerouslySetInnerHTML={createMarkup(
-                              propertyData?.property_description
-                            )}
-                          />
-                          <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-[#06202B] via-[#06202B]/80 to-transparent pointer-events-none transition-opacity duration-500" />
+                      )}
+                      {activeTab === "information" && (
+                        <div className="p-6 md:p-8">
+                          <div className="flex items-center mb-6">
+                            <div className="w-1 h-8 bg-gradient-to-b from-[#077A7D] to-[#7AE2CF] rounded-full mr-3"></div>
+                            <h2 className="text-2xl font-bold text-[#F5EEDD]">
+                              Why Choose SMP Amberwood?
+                            </h2>
+                          </div>
+                          <div className="relative rounded-xl bg-[#06202B]/50 backdrop-blur-md border border-[#F5EEDD]/20 shadow-lg p-6 overflow-hidden">
+                            <div
+                              className="text-[#F5EEDD] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth"
+                              style={{ maxHeight: "300px" }}
+                              dangerouslySetInnerHTML={createMarkup(
+                                propertyData?.property_information
+                              )}
+                            />
+                            <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-[#06202B] via-[#06202B]/80 to-transparent pointer-events-none transition-opacity duration-500" />
+                          </div>
                         </div>
-                      </div>
-                    )}
-                    {activeTab === "information" && (
-                      <div className="p-6 md:p-8">
-                        <div className="flex items-center mb-6">
-                          <div className="w-1 h-8 bg-gradient-to-b from-[#077A7D] to-[#7AE2CF] rounded-full mr-3"></div>
-                          <h2 className="text-2xl font-bold text-[#F5EEDD]">
-                            Why Choose SMP Amberwood?
-                          </h2>
+                      )}
+                      {activeTab === "about_builder" && (
+                        <div className="p-6 md:p-8">
+                          <div className="flex items-center mb-6">
+                            <div className="w-1 h-8 bg-gradient-to-b from-[#077A7D] to-[#7AE2CF] rounded-full mr-3"></div>
+                            <h2 className="text-2xl font-bold text-[#F5EEDD]">
+                              {propertyData?.builder_name ||
+                                "SMP & NAMARATA GROUP"}
+                            </h2>
+                          </div>
+                          <div className="relative rounded-xl bg-[#06202B]/50 backdrop-blur-md border border-[#F5EEDD]/20 shadow-lg p-6 overflow-hidden">
+                            <div
+                              className="text-[#F5EEDD] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth"
+                              style={{ maxHeight: "300px" }}
+                              dangerouslySetInnerHTML={createMarkup(
+                                propertyData?.property_specification
+                              )}
+                            />
+                            <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-[#06202B] via-[#06202B]/80 to-transparent pointer-events-none transition-opacity duration-500" />
+                          </div>
                         </div>
-                        <div className="relative rounded-xl bg-[#06202B]/50 backdrop-blur-md border border-[#F5EEDD]/20 shadow-lg p-6 overflow-hidden">
-                          <div
-                            className="text-[#F5EEDD] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth"
-                            style={{ maxHeight: "300px" }}
-                            dangerouslySetInnerHTML={createMarkup(
-                              propertyData?.property_information
-                            )}
-                          />
-                          <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-[#06202B] via-[#06202B]/80 to-transparent pointer-events-none transition-opacity duration-500" />
-                        </div>
-                      </div>
-                    )}
-                    {activeTab === "about_builder" && (
-                      <div className="p-6 md:p-8">
-                        <div className="flex items-center mb-6">
-                          <div className="w-1 h-8 bg-gradient-to-b from-[#077A7D] to-[#7AE2CF] rounded-full mr-3"></div>
-                          <h2 className="text-2xl font-bold text-[#F5EEDD]">
-                            {propertyData?.builder_name ||
-                              "SMP & NAMARATA GROUP"}
-                          </h2>
-                        </div>
-                        <div className="relative rounded-xl bg-[#06202B]/50 backdrop-blur-md border border-[#F5EEDD]/20 shadow-lg p-6 overflow-hidden">
-                          <div
-                            className="text-[#F5EEDD] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth"
-                            style={{ maxHeight: "300px" }}
-                            dangerouslySetInnerHTML={createMarkup(
-                              propertyData?.property_specification
-                            )}
-                          />
-                          <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-[#06202B] via-[#06202B]/80 to-transparent pointer-events-none transition-opacity duration-500" />
-                        </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Specifications Section */}
-          <div className="w-full space-y-8 px-4 sm:px-6 lg:px-12 py-10 bg-gradient-to-br from-[#077A7D]/40 to-[#7AE2CF]/30 rounded-2xl shadow-2xl border border-[#F5EEDD]/20 backdrop-blur-md transition-all duration-300 text-center">
-            <h3 className="text-2xl sm:text-3xl font-bold text-[#F5EEDD] mb-10 flex items-center space-x-3 justify-center">
-              <Building size={26} className="text-[#7AE2CF]" />
-              <span className="bg-[#077A7D]/10 text-[#7AE2CF] px-5 py-2 text-base rounded-full border border-[#7AE2CF]/20 shadow-sm">
-                Property Specifications
-              </span>
-            </h3>
+            {/* Specifications Section */}
+            <div className="w-full space-y-8 px-4 sm:px-6 lg:px-12 py-10 bg-gradient-to-br from-[#077A7D]/40 to-[#7AE2CF]/30 rounded-2xl shadow-2xl border border-[#F5EEDD]/20 backdrop-blur-md transition-all duration-300 text-center">
+              <h3 className="text-2xl sm:text-3xl font-bold text-[#F5EEDD] mb-10 flex items-center space-x-3 justify-center">
+                <Building size={26} className="text-[#7AE2CF]" />
+                <span className="bg-[#077A7D]/10 text-[#7AE2CF] px-5 py-2 text-base rounded-full border border-[#7AE2CF]/20 shadow-sm">
+                  Property Specifications
+                </span>
+              </h3>
 
-            <div className="flex flex-wrap justify-center gap-6">
-              {[
-                {
-                  label: "Property Type",
-                  value: propertyData?.property_type_price_range,
-                },
-                {
-                  label: "Developer",
-                  value: propertyData?.builder_name,
-                },
-                {
-                  label: "Project Status",
-                  value: propertyData?.property_status,
-                  badge: true,
-                },
-                {
-                  label: "Location",
-                  value:
-                    propertyData?.property_location_name || "Pune, Maharashtra",
-                  badge: true,
-                },
-                {
-                  label: "Last Updated",
-                  value: propertyData?.last_updated,
-                },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="w-[90%] sm:w-[45%] md:w-[30%] xl:w-[18%] max-w-[300px] bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md shadow-md hover:shadow-lg transition-all duration-300 text-center"
+              <div className="flex flex-wrap justify-center gap-6">
+                {[
+                  {
+                    label: "Property Type",
+                    value: propertyData?.property_type_price_range,
+                  },
+                  {
+                    label: "Developer",
+                    value: propertyData?.builder_name,
+                  },
+                  {
+                    label: "Project Status",
+                    value: propertyData?.property_status,
+                    badge: true,
+                  },
+                  {
+                    label: "Location",
+                    value:
+                      propertyData?.property_location_name ||
+                      "Pune, Maharashtra",
+                    badge: true,
+                  },
+                  {
+                    label: "Last Updated",
+                    value: propertyData?.last_updated,
+                  },
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className="w-[90%] sm:w-[45%] md:w-[30%] xl:w-[18%] max-w-[300px] bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md shadow-md hover:shadow-lg transition-all duration-300 text-center"
+                  >
+                    <span className="text-sm font-medium text-[#7AE2CF] mb-1 block">
+                      {item.label}
+                    </span>
+                    {item.badge ? (
+                      <span className="inline-block px-3 py-1 bg-[#F5EEDD]/10 text-[#F5EEDD] border border-[#F5EEDD]/20 text-xs font-semibold rounded-md">
+                        {item.value}
+                      </span>
+                    ) : (
+                      <span className="text-white font-semibold text-base">
+                        {item.value}
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 flex flex-col sm:flex-row sm:justify-center sm:items-center gap-4">
+                <button
+                  onClick={openDialog}
+                  className="relative group w-full sm:w-60 py-3 px-6 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#066568] hover:to-[#64c9b9] active:from-[#044e50] active:to-[#4db0a0] rounded-lg text-[#06202B] font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#077A7D]/20 overflow-hidden"
                 >
-                  <span className="text-sm font-medium text-[#7AE2CF] mb-1 block">
-                    {item.label}
+                  <span className="relative z-10 flex items-center">
+                    <Download size={18} className="mr-2" />
+                    Download Brochure
                   </span>
-                  {item.badge ? (
-                    <span className="inline-block px-3 py-1 bg-[#F5EEDD]/10 text-[#F5EEDD] border border-[#F5EEDD]/20 text-xs font-semibold rounded-md">
-                      {item.value}
-                    </span>
-                  ) : (
-                    <span className="text-white font-semibold text-base">
-                      {item.value}
-                    </span>
-                  )}
-                </div>
-              ))}
-            </div>
+                  {/* Shine sweep effect */}
+                  <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+                </button>
 
-            <div className="mt-8 flex flex-col sm:flex-row sm:justify-center sm:items-center gap-4">
-              <button
-                onClick={openDialog}
-                className="relative group w-full sm:w-60 py-3 px-6 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#066568] hover:to-[#64c9b9] active:from-[#044e50] active:to-[#4db0a0] rounded-lg text-[#06202B] font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#077A7D]/20 overflow-hidden"
-              >
-                <span className="relative z-10 flex items-center">
-                  <Download size={18} className="mr-2" />
-                  Download Brochure
-                </span>
-                {/* Shine sweep effect */}
-                <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
-              </button>
+                <a
+                  href="#contact"
+                  className="relative group w-full sm:w-60 py-3 px-6 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#066568] hover:to-[#64c9b9] active:from-[#044e50] active:to-[#4db0a0] rounded-lg text-[#06202B] font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#077A7D]/20 overflow-hidden text-center"
+                >
+                  <span className="relative z-10 flex items-center">
+                    <Phone size={18} className="mr-2" />
+                    Contact
+                  </span>
 
-              <a
-                href="#contact"
-                className="relative group w-full sm:w-60 py-3 px-6 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#066568] hover:to-[#64c9b9] active:from-[#044e50] active:to-[#4db0a0] rounded-lg text-[#06202B] font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#077A7D]/20 overflow-hidden text-center"
-              >
-                <span className="relative z-10 flex items-center">
-                  <Phone size={18} className="mr-2" />
-                  Contact
-                </span>
-
-                {/* Shine sweep effect */}
-                <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
-              </a>
+                  {/* Shine sweep effect */}
+                  <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+                </a>
+              </div>
             </div>
           </div>
         </div>

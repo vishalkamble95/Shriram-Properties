@@ -12,12 +12,15 @@ import {
 import config from "../../config";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { useNavigate } from "react-router-dom";
 
 const ContactUs = () => {
   // States for form submission
   const [submitting, setSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // null, "success", "error"
   const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   // Form state with keys matching the input names
   const [formData, setFormData] = useState({
@@ -39,6 +42,42 @@ const ContactUs = () => {
     }
   };
 
+  // ✅ Enhanced phone number validator
+  const validatePhoneNumber = (phone) => {
+    const trimmed = phone.replace(/\D/g, "");
+
+    const rules = {
+      91: 10, // India
+      971: 9, // UAE
+      1: 10, // US/Canada
+      44: 10, // UK
+      61: 9, // Australia
+    };
+
+    for (const code in rules) {
+      if (trimmed.startsWith(code)) {
+        const nationalNumber = trimmed.slice(code.length);
+        return nationalNumber.length === rules[code];
+      }
+    }
+
+    // If country code is unknown, fallback: accept if length is reasonable
+    return trimmed.length >= 8 && trimmed.length <= 15;
+  };
+
+  const handlePhoneChange = (phone) => {
+    setFormData((prev) => ({ ...prev, phone_number: phone }));
+
+    if (!validatePhoneNumber(phone)) {
+      setFormErrors((prev) => ({
+        ...prev,
+        phone_number: "Please enter a valid phone number",
+      }));
+    } else {
+      setFormErrors((prev) => ({ ...prev, phone_number: "" }));
+    }
+  };
+
   // Validate form fields
   const validateForm = () => {
     const errors = {};
@@ -52,8 +91,8 @@ const ContactUs = () => {
     // Email validation is commented out in the original code
     if (!formData.phone_number.trim()) {
       errors.phone_number = "Phone number is required";
-    } else if (!/^[0-9]{10}$/.test(formData.phone_number.replace(/\s/g, ""))) {
-      errors.phone_number = "Please enter a valid 10-digit phone number";
+    } else if (!validatePhoneNumber(formData.phone_number)) {
+      errors.phone_number = "Please enter a valid phone number";
     }
     // Message validation is commented out in the original code
 
@@ -91,7 +130,7 @@ const ContactUs = () => {
       }
 
       // Success: clear the form and show a success message
-      setSubmitStatus("success");
+      // setSubmitStatus("success");
       setFormData({
         first_name: "",
         last_name: "",
@@ -99,6 +138,10 @@ const ContactUs = () => {
         phone_number: "",
         message: "",
       });
+
+      // ✅ Redirect to Thank You page (respects basename)
+      navigate("/thank-you"); // ✅ Manual full path
+
     } catch (error) {
       setSubmitStatus("error");
       setErrorMessage(
@@ -110,15 +153,15 @@ const ContactUs = () => {
   };
 
   // Auto-hide success message after 3 seconds
-  useEffect(() => {
-    if (submitStatus === "success") {
-      const timer = setTimeout(() => {
-        setSubmitStatus("");
-      }, 5000); // 5 seconds
+  // useEffect(() => {
+  //   if (submitStatus === "success") {
+  //     const timer = setTimeout(() => {
+  //       setSubmitStatus("");
+  //     }, 5000); // 5 seconds
 
-      return () => clearTimeout(timer); // Cleanup on unmount
-    }
-  }, [submitStatus]);
+  //     return () => clearTimeout(timer); // Cleanup on unmount
+  //   }
+  // }, [submitStatus]);
 
   return (
     <div
@@ -148,7 +191,7 @@ const ContactUs = () => {
             </h3>
           </div>
 
-          {submitStatus === "success" && (
+          {/* {submitStatus === "success" && (
             <div className="mb-8 bg-gradient-to-r from-[#077A7D]/10 to-[#7AE2CF]/10 border border-[#077A7D]/40 text-[#F5EEDD] px-6 py-5 sm:px-8 sm:py-6 rounded-2xl flex items-start gap-4 shadow-xl shadow-[#077A7D]/20 backdrop-blur-lg animate-fade-in transition-all duration-300">
               <div className="bg-[#077A7D]/30 rounded-full p-3 sm:p-3.5 mt-1 flex-shrink-0 shadow-md shadow-[#7AE2CF]/20">
                 <Send size={20} className="text-[#7AE2CF]" />
@@ -162,7 +205,7 @@ const ContactUs = () => {
                 </p>
               </div>
             </div>
-          )}
+          )} */}
 
           {submitStatus === "error" && (
             <div className="mb-8 bg-red-500/10 border border-red-500/30 text-red-200 p-5 rounded-xl flex items-start shadow-inner shadow-red-500/10 backdrop-blur-md">
@@ -293,7 +336,7 @@ const ContactUs = () => {
 
                 <div className="relative">
                   <style>
-                  {`
+                    {`
                     .country-list {
                       background-color: #06202B !important;
                       color: #F5EEDD !important;
@@ -395,11 +438,7 @@ const ContactUs = () => {
                   <PhoneInput
                     country={"in"}
                     value={formData.phone_number}
-                    onChange={(phone) =>
-                      handleInputChange({
-                        target: { name: "phone_number", value: phone },
-                      })
-                    }
+                    onChange={(phone) => handlePhoneChange(phone)}
                     inputProps={{
                       name: "phone_number",
                       required: true,

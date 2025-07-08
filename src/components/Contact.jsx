@@ -11,6 +11,9 @@ import {
   X,
 } from "lucide-react";
 import config from "../../config";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import { useNavigate } from "react-router-dom";
 
 export const ContactDialog = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -20,6 +23,8 @@ export const ContactDialog = ({ isOpen, onClose }) => {
     phone_number: "",
     message: "",
   });
+
+  const navigate = useNavigate();
 
   const [formErrors, setFormErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -69,6 +74,42 @@ export const ContactDialog = ({ isOpen, onClose }) => {
     }
   };
 
+  // ✅ Enhanced phone number validator
+  const validatePhoneNumber = (phone) => {
+    const trimmed = phone.replace(/\D/g, "");
+
+    const rules = {
+      91: 10, // India
+      971: 9, // UAE
+      1: 10, // US/Canada
+      44: 10, // UK
+      61: 9, // Australia
+    };
+
+    for (const code in rules) {
+      if (trimmed.startsWith(code)) {
+        const nationalNumber = trimmed.slice(code.length);
+        return nationalNumber.length === rules[code];
+      }
+    }
+
+    // If country code is unknown, fallback: accept if length is reasonable
+    return trimmed.length >= 8 && trimmed.length <= 15;
+  };
+
+  const handlePhoneChange = (phone) => {
+    setFormData((prev) => ({ ...prev, phone_number: phone }));
+
+    if (!validatePhoneNumber(phone)) {
+      setFormErrors((prev) => ({
+        ...prev,
+        phone_number: "Please enter a valid phone number",
+      }));
+    } else {
+      setFormErrors((prev) => ({ ...prev, phone_number: "" }));
+    }
+  };
+
   const validateForm = () => {
     const errors = {};
 
@@ -82,8 +123,8 @@ export const ContactDialog = ({ isOpen, onClose }) => {
 
     if (!formData.phone_number.trim()) {
       errors.phone_number = "Phone number is required";
-    } else if (!/^[0-9]{10}$/.test(formData.phone_number.replace(/\s/g, ""))) {
-      errors.phone_number = "Please enter a valid 10-digit phone number";
+    } else if (!validatePhoneNumber(formData.phone_number)) {
+      errors.phone_number = "Please enter a valid phone number";
     }
 
     return errors;
@@ -119,7 +160,7 @@ export const ContactDialog = ({ isOpen, onClose }) => {
       }
 
       // Success
-      setSubmitStatus("success");
+      // setSubmitStatus("success");
       setFormData({
         first_name: "",
         last_name: "",
@@ -128,11 +169,14 @@ export const ContactDialog = ({ isOpen, onClose }) => {
         message: "",
       });
 
+      // ✅ Redirect to Thank You page (respects basename)
+      navigate("/thank-you"); // ✅ Manual full path
+
       // Close dialog after success (optional)
-      setTimeout(() => {
-        setSubmitStatus(null);
-        onClose();
-      }, 4000);
+      // setTimeout(() => {
+      //   setSubmitStatus(null);
+      //   onClose();
+      // }, 4000);
     } catch (error) {
       setSubmitStatus("error");
       setErrorMessage(
@@ -181,12 +225,12 @@ export const ContactDialog = ({ isOpen, onClose }) => {
         </div>
 
         <div className="p-6">
-          {submitStatus === "success" && (
+          {/* {submitStatus === "success" && (
             <div className="mb-6 bg-[#077A7D]/10 border border-[#077A7D] text-[#077A7D] p-4 rounded-lg flex items-center">
               <CheckCircle size={18} className="mr-2" />
               Thank you for your message! We'll get back to you shortly.
             </div>
-          )}
+          )} */}
 
           {submitStatus === "error" && (
             <div className="mb-6 bg-red-100 border border-red-700 text-red-700 p-4 rounded-lg flex items-center">
@@ -296,24 +340,147 @@ export const ContactDialog = ({ isOpen, onClose }) => {
               >
                 Phone Number
               </label>
+
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <Phone size={16} className="text-[#077A7D]" />
-                </div>
-                <input
-                  type="tel"
-                  id="phone_number"
-                  name="phone_number"
+                <style>
+                  {`
+                    .country-list {
+                      background-color: #F5EEDD !important;
+                      color: #06202B !important;
+                      z-index: 50 !important;
+                      border-radius: 0.75rem;
+                      overflow-y: auto !important;
+                      overflow-x: hidden !important;
+                      white-space: normal !important;
+                      max-height: 180px !important;
+                      width: 245px !important;
+                      min-width: 245px !important;
+                      max-width: 245px !important;
+                      scrollbar-width: thin !important;
+                      scrollbar-color: #077A7D transparent !important;
+                      box-shadow: 0 4px 12px rgba(7, 122, 125, 0.15);
+                      border: 1px solid #7AE2CF66;
+                    }
+
+                    .country-list::-webkit-scrollbar {
+                      height: 6px;
+                      width: 6px;
+                      background: transparent !important;
+                    }
+
+                    .country-list::-webkit-scrollbar-thumb {
+                      background-color: #077A7D !important;
+                      border-radius: 4px;
+                    }
+
+                    .country-list .country {
+                      padding: 0.5rem 0.75rem !important;
+                      transition: background-color 0.2s ease;
+                      border-radius: 0.375rem;
+                    }
+
+                    .country-list .country:hover,
+                    .country-list .country.highlight {
+                      background-color: #e0f8f5 !important;
+                      color: #06202B !important;
+                    }
+
+                    .flag-dropdown {
+                      background: transparent !important;
+                      border: none !important;
+                      transition: background-color 0.3s ease;
+                    }
+
+                    // .flag-dropdown:hover,
+                    // .flag-dropdown.open {
+                    //   background-color: #f0fdfa !important;
+                    //   border-radius: 0.5rem !important;
+                    // }
+
+                    /* Completely neutralize flag dropdown hover effect */
+                    .react-tel-input .flag-dropdown:hover,
+                    .react-tel-input .flag-dropdown.open,
+                    .react-tel-input .flag-dropdown:hover .selected-flag,
+                    .react-tel-input .flag-dropdown.open .selected-flag {
+                      background-color: transparent !important;
+                      box-shadow: none !important;
+                      border: none !important;
+                    }
+
+                    .react-tel-input .flag-dropdown {
+                      display: flex !important;
+                      align-items: center !important;
+                      height: 100% !important;
+                      top: 0 !important;
+                    }
+
+                    .flag-dropdown .selected-flag {
+                      border-radius: 0.375rem !important;
+                      overflow: hidden;
+                    }
+
+                    // .flag-dropdown:hover .selected-flag,
+                    // .flag-dropdown.open .selected-flag {
+                    //   background-color: #f0fdfa !important;
+                    // }
+
+                    .country-list .dial-code {
+                      color: #077A7D !important;
+                      font-weight: 500;
+                      margin-left: 4px;
+                    }
+
+                    .search-box {
+                      display: none !important;
+                    }
+                  `}
+                </style>
+
+                <PhoneInput
+                  country={"in"}
                   value={formData.phone_number}
-                  onChange={handleInputChange}
-                  className={`w-full bg-[#F5EEDD] text-[#06202B] border ${
-                    formErrors.phone_number
-                      ? "border-red-700"
-                      : "border-[#7AE2CF]"
-                  } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#077A7D] focus:border-transparent`}
-                  placeholder="Your phone number*"
+                  onChange={(phone) => handlePhoneChange(phone)}
+                  inputProps={{
+                    name: "phone_number",
+                    required: true,
+                    autoFocus: false,
+                  }}
+                  specialLabel=""
+                  inputStyle={{
+                    width: "100%",
+                    background: "#F5EEDD",
+                    color: "#06202B",
+                    border: formErrors.phone_number
+                      ? "1px solid #b91c1c"
+                      : "1px solid #7AE2CF",
+                    paddingLeft: "3rem",
+                    paddingRight: "1rem",
+                    height: "2.5rem",
+                    borderRadius: "0.5rem",
+                    fontSize: "0.875rem",
+                  }}
+                  buttonStyle={{
+                    background: "transparent",
+                    border: "none",
+                    position: "absolute",
+                    left: "0.75rem",
+                    top: "0.25rem",
+                    zIndex: 20,
+                  }}
+                  dropdownStyle={{
+                    backgroundColor: "#06202B",
+                    color: "#F5EEDD",
+                    zIndex: 50,
+                    border: "1px solid #7AE2CF66",
+                    borderRadius: "12px",
+                    marginTop: "6px",
+                    boxShadow: "0 8px 16px rgba(7, 122, 125, 0.3)",
+                    width: "max-content",
+                    minWidth: "240px",
+                  }}
                 />
               </div>
+
               {formErrors.phone_number && (
                 <p className="mt-1 text-red-700 text-xs flex items-center">
                   <AlertCircle size={12} className="mr-1" />

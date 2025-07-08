@@ -118,19 +118,17 @@ const Footer = () => {
     );
   }
 
-  console.log("Footer Data:", footerData);
-  
   const { social_icons, g_setting } = footerData;
 
   const getIconColorClass = (icon) => {
-  const iconName = icon.toLowerCase();
-  if (iconName.includes("facebook")) return "text-[#1877F2]";   // Facebook Blue
-  if (iconName.includes("linkedin")) return "text-[#0077B5]";   // LinkedIn Blue
-  if (iconName.includes("instagram")) return "text-[#E4405F]";  // Instagram Pink
-  if (iconName.includes("youtube")) return "text-[#FF0000]";    // YouTube Red
-  if (iconName.includes("twitter")) return "text-[#1DA1F2]";    // Twitter Blue
-  return "text-white"; // Default fallback
-};
+    const iconName = icon.toLowerCase();
+    if (iconName.includes("facebook")) return "text-[#1877F2]"; // Facebook Blue
+    if (iconName.includes("linkedin")) return "text-[#0077B5]"; // LinkedIn Blue
+    if (iconName.includes("instagram")) return "text-[#E4405F]"; // Instagram Pink
+    if (iconName.includes("youtube")) return "text-[#FF0000]"; // YouTube Red
+    if (iconName.includes("twitter")) return "text-[#1DA1F2]"; // Twitter Blue
+    return "text-white"; // Default fallback
+  };
 
   return (
     <footer className="bg-[#06202B] text-[#F5EEDD] relative overflow-hidden">
@@ -156,10 +154,10 @@ const Footer = () => {
 
         <div className="mb-6 text-center">
           <p className="text-xs sm:text-sm break-words text-[#F5EEDD] leading-relaxed">
-            <span className="block sm:inline">
+            {/* <span className="block sm:inline">
               Agent MahaRera: {footerData?.g_setting?.footer_agent_rera}
             </span>
-            <span className="hidden sm:inline"> | </span>
+            <span className="hidden sm:inline"> | </span> */}
             <span className="block sm:inline">
               Project MahaRera: {reraData?.rera_id || "Comming Soon"}
             </span>{" "}
@@ -197,7 +195,9 @@ const Footer = () => {
                     href={icon.social_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center shadow-inner transition-transform duration-300 hover:scale-110 hover:bg-white/20 ${getIconColorClass(icon.social_icon)}`}
+                    className={`w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center shadow-inner transition-transform duration-300 hover:scale-110 hover:bg-white/20 ${getIconColorClass(
+                      icon.social_icon
+                    )}`}
                     aria-label={`Visit our ${icon.social_icon
                       .replace("fab fa-", "")
                       .replace("-", " ")}`}
@@ -213,7 +213,9 @@ const Footer = () => {
                     href={icon.social_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center shadow-inner transition-transform duration-300 hover:scale-110 hover:bg-white/20 ${getIconColorClass(icon.social_icon)}`}
+                    className={`w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center shadow-inner transition-transform duration-300 hover:scale-110 hover:bg-white/20 ${getIconColorClass(
+                      icon.social_icon
+                    )}`}
                     aria-label={`Visit our ${icon.social_icon
                       .replace("fab fa-", "")
                       .replace("-", " ")}`}
@@ -232,11 +234,22 @@ const Footer = () => {
               Links
             </h3>
             <ul className="space-y-4 pl-4">
-              {["property-details", "about-builder", "layouts", "location"].map(
+              {["property-details", "why-choose-us", "layouts", "location"].map(
                 (href, i) => (
                   <li key={href}>
                     <a
                       href={`#${href}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const target = document.getElementById(href);
+                        if (target) {
+                          target.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                          });
+                          history.pushState(null, "", `#${href}`); // Update URL manually
+                        }
+                      }}
                       className="group text-[#F5EEDD] hover:text-[#7AE2CF] flex items-center gap-3 transition duration-200"
                     >
                       <span className="w-2 h-2 rounded-full bg-[#7AE2CF] group-hover:scale-125 transition-transform"></span>
