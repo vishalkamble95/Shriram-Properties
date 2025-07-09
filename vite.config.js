@@ -9,7 +9,7 @@ import fs from 'fs';
 const seoData = JSON.parse(fs.readFileSync('./seodata.json', 'utf-8'));
 
 export default defineConfig({
-  base: '/SMP-Amberwood/',
+  base: '/',
   plugins: [
     react(),
     tailwindcss(),
@@ -40,12 +40,8 @@ export default defineConfig({
       },
     })
   ],
-  // define: {
-  // 'import.meta.env.VITE_H1': JSON.stringify(seoData.data.title || ''),
-  // 'import.meta.env.VITE_H2': JSON.stringify( seoData.data.meta_description || ''),
-  // },
   define: {
-    'import.meta.env.VITE_API_URL': JSON.stringify('https://www.buyindiahomes.in/api'),
-    'import.meta.env.VITE_SLUG_URL': JSON.stringify('smp-amberwoodrahatani.com'),
+  'import.meta.env.VITE_H1': JSON.stringify(seoData.data.title || ''),
+  'import.meta.env.VITE_H2': JSON.stringify( seoData.data.meta_description || ''),
   },
 });
