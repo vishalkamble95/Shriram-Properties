@@ -36,7 +36,7 @@ function Navbar({ propertyData, loading, openDialog }) {
 
   const navItems = [
     { id: "home", label: "Home", to: "home" },
-    { id: "about",    label: "About",   to: "property-details" },
+    { id: "about", label: "About", to: "property-details" },
     { id: "price", label: "Pricing", to: "price" },
     { id: "gallery", label: "Gallery", to: "gallery" },
     { id: "blog", label: "Blog", to: "blogs-section" },
