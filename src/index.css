@@ -74,3 +74,28 @@ input:-webkit-autofill::first-line {
   font-family: inherit !important;
 }
 
+@layer components {
+  .rich-content h2 {
+    @apply text-lg font-semibold text-[#7AE2CF] mb-2;
+  }
+
+  .rich-content p {
+    @apply text-sm text-[#F5EEDD] mb-3 leading-relaxed;
+  }
+
+  .rich-content ul {
+    @apply list-disc pl-5 text-sm text-[#F5EEDD] mb-3;
+  }
+
+  .rich-content li {
+    @apply mb-1;
+  }
+
+  .rich-content strong {
+    @apply font-bold text-[#7AE2CF];
+  }
+
+  .rich-content a {
+    @apply text-[#7AE2CF] underline hover:text-[#F5EEDD];
+  }
+}

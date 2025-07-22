@@ -151,7 +151,7 @@ const BlogContent = () => {
           {/* Blog Full Content */}
           <div className="bg-[#06202B]/60 rounded-xl p-6 mb-10 shadow-md border border-[#7AE2CF]/20 relative">
             <div
-              className="prose max-w-none text-[#F5EEDD]/90 prose-p:leading-relaxed"
+              className="prose max-w-none text-[#F5EEDD]/90 prose-p:leading-relaxed rich-content"
               style={{
                 maxHeight: expanded ? "none" : "18rem",
                 overflow: "hidden",

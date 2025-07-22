@@ -215,7 +215,7 @@ const PropertyDetails = () => {
                           </div>
                           <div className="relative rounded-xl bg-[#06202B]/50 backdrop-blur-md border border-[#F5EEDD]/20 shadow-lg px-4 py-5 sm:px-6 sm:py-6 md:px-8 md:py-6 overflow-hidden">
                             <div
-                              className="text-[#F5EEDD] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth"
+                              className="text-[#F5EEDD] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth rich-content"
                               style={{ maxHeight: "300px" }}
                               dangerouslySetInnerHTML={createMarkup(
                                 propertyData?.property_description
@@ -240,7 +240,7 @@ const PropertyDetails = () => {
                           </div>
                           <div className="relative rounded-xl bg-[#06202B]/50 backdrop-blur-md border border-[#F5EEDD]/20 shadow-lg p-6 overflow-hidden">
                             <div
-                              className="text-[#F5EEDD] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth"
+                              className="text-[#F5EEDD] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth rich-content"
                               style={{ maxHeight: "300px" }}
                               dangerouslySetInnerHTML={createMarkup(
                                 propertyData?.property_information
@@ -261,7 +261,7 @@ const PropertyDetails = () => {
                           </div>
                           <div className="relative rounded-xl bg-[#06202B]/50 backdrop-blur-md border border-[#F5EEDD]/20 shadow-lg p-6 overflow-hidden">
                             <div
-                              className="text-[#F5EEDD] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth"
+                              className="text-[#F5EEDD] text-sm leading-relaxed overflow-y-auto pr-4 custom-scrollbar scroll-smooth rich-content"
                               style={{ maxHeight: "300px" }}
                               dangerouslySetInnerHTML={createMarkup(
                                 propertyData?.property_specification
