@@ -223,9 +223,9 @@ const PropertyLayouts = () => {
           <div className="relative max-w-6xl mx-auto">
             {activeLayouts.length === 0 ? (
               <div className="bg-[#06202B]/80 backdrop-blur-sm border border-[#7AE2CF] p-10 rounded-2xl text-center shadow-lg">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#7AE2CF]/20 flex items-center justify-center">
+                {/* <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#7AE2CF]/20 flex items-center justify-center">
                   <AlertTriangle size={24} className="text-[#077A7D]" />
-                </div>
+                </div> */}
                 <p className="text-[#F5EEDD] text-lg mb-2 font-semibold">
                   No layouts available
                 </p>

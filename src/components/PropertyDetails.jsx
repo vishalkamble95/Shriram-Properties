@@ -230,7 +230,12 @@ const PropertyDetails = () => {
                           <div className="flex items-center mb-6">
                             <div className="w-1 h-8 bg-gradient-to-b from-[#077A7D] to-[#7AE2CF] rounded-full mr-3"></div>
                             <h2 className="text-2xl font-bold text-[#F5EEDD]">
-                              Why Choose SMP Amberwood?
+                              Why Choose{" "}
+                              {propertyData?.property_name?.replace(
+                                /\.$/,
+                                ""
+                              ) || "SMP Amberwood"}
+                              ?
                             </h2>
                           </div>
                           <div className="relative rounded-xl bg-[#06202B]/50 backdrop-blur-md border border-[#F5EEDD]/20 shadow-lg p-6 overflow-hidden">
@@ -281,7 +286,7 @@ const PropertyDetails = () => {
                 </span>
               </h3> */}
 
-              {/* <div className="flex flex-wrap justify-center gap-6">
+            {/* <div className="flex flex-wrap justify-center gap-6">
                 {[
                   {
                     label: "Property Type",
@@ -328,7 +333,7 @@ const PropertyDetails = () => {
                 ))}
               </div> */}
 
-              {/* <div className="mt-8 flex flex-col sm:flex-row sm:justify-center sm:items-center gap-4">
+            {/* <div className="mt-8 flex flex-col sm:flex-row sm:justify-center sm:items-center gap-4">
                 <button
                   onClick={openDialog}
                   className="relative group w-full sm:w-60 py-3 px-6 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#066568] hover:to-[#64c9b9] active:from-[#044e50] active:to-[#4db0a0] rounded-lg text-[#06202B] font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#077A7D]/20 overflow-hidden"
@@ -337,11 +342,11 @@ const PropertyDetails = () => {
                     <Download size={18} className="mr-2" />
                     Download Brochure
                   </span> */}
-                  {/* Shine sweep effect */}
-                  {/* <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+            {/* Shine sweep effect */}
+            {/* <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
                 </button> */}
 
-                {/* <a
+            {/* <a
                   href="#contact"
                   className="relative group w-full sm:w-60 py-3 px-6 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#066568] hover:to-[#64c9b9] active:from-[#044e50] active:to-[#4db0a0] rounded-lg text-[#06202B] font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#077A7D]/20 overflow-hidden text-center"
                 >
@@ -350,8 +355,8 @@ const PropertyDetails = () => {
                     Contact
                   </span> */}
 
-                  {/* Shine sweep effect */}
-                  {/* <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+            {/* Shine sweep effect */}
+            {/* <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
                 </a>
               </div> */}
             {/* </div> */}

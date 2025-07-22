@@ -149,7 +149,7 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
               {
                 label: "Location",
                 value:
-                  propertyData?.property_location_name || "Pune, Maharashtra",
+                  propertyData?.location || "Pune, Maharashtra",
                 badge: true,
               },
               {
