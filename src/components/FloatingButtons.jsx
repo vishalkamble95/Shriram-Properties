@@ -23,20 +23,23 @@ const FloatingButtons = () => {
       icon: <MessageCircle size={20} />,
       label: "WhatsApp",
       href: `https://wa.me/918181817136?text=I%20am%20interested%20in%20${seodata?.data?.og_title}`,
-      color: "bg-[#077A7D] hover:bg-[#06686a] active:bg-[#055154]",
+      color:
+        "bg-[#0F766E] hover:bg-[#CBD5E1] text-white hover:text-[#0E1A24] border border-[#0E1A24]",
     },
     {
       id: "phone",
       icon: <Phone size={20} />,
       label: "Call",
       href: `tel:${contact?.footer_phone}`,
-      color: "bg-[#077A7D] hover:bg-[#06686a] active:bg-[#055154]",
+      color:
+        "bg-[#0F766E] hover:bg-[#CBD5E1] text-white hover:text-[#0E1A24] border border-[#0E1A24]",
     },
     {
       id: "contact",
       icon: <User size={20} />,
       label: "Contact",
-      color: "bg-[#077A7D] hover:bg-[#06686a] active:bg-[#055154]",
+      color:
+        "bg-[#0F766E] hover:bg-[#CBD5E1] text-white hover:text-[#0E1A24] border border-[#0E1A24]",
       openDialog: () => openDialog(),
     },
   ];
@@ -52,7 +55,7 @@ const FloatingButtons = () => {
                 key={button.id}
                 href={button?.href}
                 onClick={button?.openDialog}
-                className={`w-12 h-12 flex items-center justify-center rounded-full shadow-lg text-white transition-all duration-300 border border-[#055154] ${button.color}`}
+                className={`w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all duration-300 ${button.color}`}
                 target={button.id === "whatsapp" ? "_blank" : "_self"}
                 rel={button.id === "whatsapp" ? "noopener noreferrer" : ""}
               >
@@ -66,7 +69,7 @@ const FloatingButtons = () => {
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Scroll to top"
-          className="w-10 h-10 flex items-center justify-center rounded-md shadow-lg bg-[#7AE2CF] text-[#06202B] border border-[#055154] hover:bg-[#077A7D] hover:text-white transition-all duration-300"
+          className="w-10 h-10 flex items-center justify-center rounded-md shadow-lg bg-[#FACC15] text-[#0E1A24] border border-[#0E1A24] hover:bg-[#0E1A24] hover:text-[#FACC15] transition-all duration-300"
         >
           <ChevronUp size={20} className="transition-transform duration-200" />
         </button>
@@ -75,7 +78,7 @@ const FloatingButtons = () => {
         {/*
         <button
           onClick={toggleExpand}
-          className="p-4 rounded-full bg-[#077A7D] text-white shadow-lg border border-[#055154] hover:bg-[#06686a] active:bg-[#055154] transition-all duration-300 ease-in-out transform hover:scale-105"
+          className="p-4 rounded-full bg-[#0F766E] text-white shadow-lg border border-[#0E1A24] hover:bg-[#CBD5E1] hover:text-[#0E1A24] transition-all duration-300 ease-in-out transform hover:scale-105"
           aria-label="Toggle floating menu"
         >
           <svg

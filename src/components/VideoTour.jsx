@@ -11,7 +11,7 @@ import {
   Tag,
   X,
 } from "lucide-react";
-import config from "../../config";
+import { API } from "../../config";
 
 const VideoTour = () => {
   const [videos, setVideos] = useState([]);
@@ -26,9 +26,7 @@ const VideoTour = () => {
     const fetchVideos = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-          `${config.API_URL}/video?website=${config.SLUG_URL}`
-        );
+        const response = await fetch(API.VIDEO());
 
         if (!response.ok) {
           throw new Error("Failed to fetch video data");
@@ -94,191 +92,181 @@ const VideoTour = () => {
   }
 
   return (
-    <div className="bg-[#06202B] relative overflow-hidden">
-      {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#077A7D]/40 to-[#06202B]/95 z-0"></div>
+    <div className="bg-[#0E1A24] relative overflow-hidden">
+      {/* Overlay Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0F766E]/40 to-[#0E1A24]/95 z-0" />
 
-      {/* Main content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-12 py-12 sm:py-16 md:py-20 lg:py-24">
-        <div className="flex flex-col lg:flex-row items-center lg:items-center gap-12 lg:gap-16">
-          {/* ✅ Left Content Area */}
-          <div className="w-full lg:w-2/5 text-center lg:text-left flex flex-col items-center lg:items-start space-y-6">
-            {/* <div className="flex items-center justify-center lg:justify-start gap-2">
-          <div className="bg-[#5b9aa0]/10 border border-[#5b9aa0]/30 px-3 py-1 rounded-full flex items-center gap-1">
-            <Film size={14} className="text-[#5b9aa0]" />
-            <span className="text-[#5b9aa0] text-sm font-medium">
-              Virtual Experience
-            </span>
-          </div>
-        </div> */}
+      {/* Main Wrapper */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-12 py-16 sm:py-16 lg:py-20 space-y-16">
+        {/* Header Content */}
+        <div className="text-center max-w-3xl mx-auto space-y-4 sm:space-y-6 mb-10">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#FACC15] drop-shadow-sm">
+            {heading || "Immersive Property Tour"}
+          </h2>
+          <div className="w-16 h-1 bg-gradient-to-r from-[#FACC15] to-[#0F766E] mx-auto rounded-full" />
+          <p className="text-[#CBD5E1]/90 text-base sm:text-lg leading-relaxed">
+            Experience our premium property from anywhere in the world. Our
+            virtual tour puts you in control, allowing you to explore every
+            detail and envision your future home.
+          </p>
+        </div>
 
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#F5EEDD] leading-tight">
-              {heading || "Immersive Property Tour"}
-            </h2>
+        {/* Horizontal Separator */}
+        <div className="mb-8 border-t border-[#CBD5E1]/20 w-full max-w-5xl mx-auto"></div>
 
-            <div className="w-16 h-1 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] rounded-full"></div>
-
-            <p className="text-[#F5EEDD]/90 text-base sm:text-lg leading-relaxed max-w-xl">
-              Experience our premium property from anywhere in the world. Our
-              virtual tour puts you in control, allowing you to explore every
-              detail and envision your future home.
-            </p>
-
-            <div className="space-y-3">
-              <div className="flex items-center justify-center lg:justify-start gap-3">
-                <Clock size={20} className="text-[#7AE2CF]" />
-                <span className="text-[#F5EEDD] text-sm sm:text-base">
-                  Available 24/7 for your convenience
-                </span>
-              </div>
-              <div className="flex items-center justify-center lg:justify-start gap-3">
-                <Tag size={20} className="text-[#7AE2CF]" />
-                <span className="text-[#F5EEDD] text-sm sm:text-base">
-                  High-definition quality visuals
-                </span>
-              </div>
+        {/* Feature + CTA Row */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8 mb-8 max-w-5xl mx-auto text-center sm:text-left">
+          {/* Features */}
+          <div className="space-y-4 sm:w-2/3 flex flex-col items-center sm:items-start">
+            <div className="flex items-center gap-3">
+              <Clock size={20} className="text-[#FACC15]" />
+              <span className="text-[#CBD5E1] text-sm sm:text-base">
+                Available 24/7 for your convenience
+              </span>
             </div>
+            <div className="flex items-center gap-3">
+              <Tag size={20} className="text-[#FACC15]" />
+              <span className="text-[#CBD5E1] text-sm sm:text-base">
+                High-definition quality visuals
+              </span>
+            </div>
+          </div>
 
+          {/* CTA */}
+          <div className="sm:w-auto flex justify-center sm:justify-end">
             <a
               href={`https://www.youtube.com/watch?v=${videos[0]?.youtube_video_id}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative group inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] text-white font-medium text-sm sm:text-base hover:from-[#077A7D]/90 hover:to-[#7AE2CF]/90 active:from-[#077A7D]/80 active:to-[#7AE2CF]/80 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#077A7D]/30 overflow-hidden"
+              className="relative group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-[#FACC15] to-[#FFE87A] text-[#0E1A24] font-bold text-sm sm:text-base hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-[#FACC15]/40 overflow-hidden zoom-pulse"
             >
               <span className="relative z-10">View All Tours on YouTube</span>
               <ExternalLink size={16} className="relative z-10" />
-
-              {/* Shine sweep effect */}
-              <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none z-0" />
+              <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine z-0" />
             </a>
           </div>
+        </div>
 
-          {/* ✅ Right Video Player Area */}
-          <div className="w-full lg:w-3/5">
-            <div className="bg-[#F5EEDD]/10 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl border border-[#7AE2CF]/20">
-              {/* Video Thumbnail */}
-              <div className="relative aspect-video group overflow-hidden rounded-xl">
-                {/* Thumbnail Image */}
-                <img
-                  src={`https://img.youtube.com/vi/${activeVideo?.youtube_video_id}/maxresdefault.jpg`}
-                  alt="Video thumbnail"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-
-                {/* Gradient Overlay + Button */}
-                <div className="absolute inset-0 pointer-events-none">
-                  <div
-                    className="w-full h-full bg-gradient-to-t from-black/90 via-black/40 to-transparent 
-                opacity-0 group-hover:opacity-100 
-                transition-opacity duration-300 
-                flex items-center justify-center pointer-events-auto"
-                  >
-                    <button
-                      onClick={() => openModal(activeVideo, activeIndex)}
-                      className="h-16 w-16 sm:h-20 sm:w-20 rounded-full 
-                  bg-gradient-to-br from-[#077A7D] to-[#7AE2CF] 
-                  text-white shadow-xl 
-                  hover:scale-110 hover:shadow-[#077A7D]/40 
-                  transition-transform duration-300 
-                  flex items-center justify-center"
-                      aria-label="Play video"
-                    >
-                      <Play size={32} fill="currentColor" className="ml-1" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Metadata */}
-              <div className="p-4 sm:p-6">
-                <div className="flex flex-col sm:flex-row items-center sm:items-center justify-center sm:justify-between text-center sm:text-left mb-4 gap-4 sm:gap-0">
-                  <div className="flex items-center gap-2 text-[#F5EEDD]">
-                    <Youtube size={20} className="text-[#7AE2CF]" />
-                    <span className="font-medium tracking-wide text-sm sm:text-base">
-                      Featured Tour
-                    </span>
-                  </div>
-                  <button
-                    onClick={() => openModal(activeVideo, activeIndex)}
-                    className="px-4 py-2 bg-[#077A7D]/90 hover:bg-[#7AE2CF]/90 text-white rounded-lg transition-colors duration-300 flex items-center gap-2 text-sm sm:text-base shadow-sm hover:shadow-md"
-                  >
-                    <span>Watch Now</span>
-                    <Play size={16} />
-                  </button>
-                </div>
-
-                {/* Thumbnails if multiple videos */}
-                {videos.length > 1 && (
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
-                    {videos.map((video, index) => (
-                      <button
-                        key={video.id}
-                        onClick={() => {
-                          setActiveVideo(video);
-                          setActiveIndex(index);
-                        }}
-                        className={`relative aspect-video rounded-xl overflow-hidden transition-all duration-300 group ${
-                          activeVideo?.id === video.id
-                            ? "border-2 border-[#077A7D] shadow-lg shadow-[#077A7D]/30 scale-105"
-                            : "opacity-80 hover:opacity-100 border border-[#F5EEDD]/20 hover:scale-105"
-                        }`}
-                      >
-                        <img
-                          src={`https://img.youtube.com/vi/${video.youtube_video_id}/mqdefault.jpg`}
-                          alt={`Thumbnail ${index + 1}`}
-                          className="w-full h-full object-cover"
-                        />
-                        {activeVideo?.id === video.id && (
-                          <div className="absolute inset-0 bg-black/30" />
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                )}
+        {/* Video Section */}
+        <div className="bg-[#CBD5E1]/5 backdrop-blur-lg rounded-3xl overflow-hidden shadow-2xl border border-[#0F766E]/20 p-4 sm:p-8 lg:p-10">
+          {/* Active Video */}
+          <div className="relative aspect-video group overflow-hidden rounded-xl">
+            <img
+              src={`https://img.youtube.com/vi/${activeVideo?.youtube_video_id}/maxresdefault.jpg`}
+              alt="Video thumbnail"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="w-full h-full bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <button
+                  onClick={() => openModal(activeVideo, activeIndex)}
+                  className="h-16 w-16 sm:h-20 sm:w-20 rounded-full bg-gradient-to-br from-[#FACC15] to-[#FFE87A] text-[#0E1A24] shadow-lg hover:scale-110 transition-transform duration-300 flex items-center justify-center"
+                  aria-label="Play video"
+                >
+                  <Play size={32} fill="currentColor" className="ml-1" />
+                </button>
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Video Modal */}
-      {showModal && (
-        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center px-4 py-10">
-          <div className="relative bg-[#06202B] rounded-2xl overflow-hidden w-full max-w-4xl border border-[#7AE2CF]/20 shadow-2xl shadow-black/70">
-            {/* Close Button in Top-Right */}
-            <button
-              onClick={closeModal}
-              className="absolute top-4 right-4 p-2 bg-[#7AE2CF]/20 text-white rounded-full hover:text-red-400 hover:bg-[#7AE2CF]/40 transition-colors z-50"
-              aria-label="Close modal"
-            >
-              <X size={20} />
-            </button>
-
-            {/* Video */}
-            <div className="relative aspect-video">
-              <iframe
-                src={`https://www.youtube.com/embed/${activeVideo.youtube_video_id}?autoplay=1`}
-                title="Virtual Tour"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full rounded-t-2xl"
-              />
-            </div>
-
-            {/* Footer Metadata */}
-            <div className="p-4 bg-[#7AE2CF]/10 border-t border-[#7AE2CF]/20 flex items-center justify-between">
-              <div className="flex items-center gap-2 text-white text-sm sm:text-base">
-                <Youtube size={18} className="text-[#7AE2CF]" />
-                <span>
-                  Tour <span className="font-semibold">{activeIndex + 1}</span>{" "}
-                  of <span className="font-semibold">{videos.length}</span>
+          {/* Video Info */}
+          <div className="mt-8 text-center sm:text-left space-y-6">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-2 text-[#CBD5E1]">
+                <Youtube size={20} className="text-[#FACC15]" />
+                <span className="font-semibold tracking-wide text-sm sm:text-base">
+                  Featured Tour
                 </span>
               </div>
+              <button
+                onClick={() => openModal(activeVideo, activeIndex)}
+                className="px-5 py-2 rounded-lg bg-gradient-to-r from-[#FACC15] to-[#0F766E] text-[#0E1A24] font-semibold text-sm sm:text-base shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center gap-2 zoom-pulse"
+              >
+                <span>Watch Now</span>
+                <Play size={16} />
+              </button>
             </div>
+
+            {/* Thumbnails */}
+            {videos.length > 1 && (
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {videos.map((video, index) => (
+                  <button
+                    key={video.id}
+                    onClick={() => {
+                      setActiveVideo(video);
+                      setActiveIndex(index);
+                    }}
+                    className={`relative aspect-video rounded-xl overflow-hidden transition-all duration-300 group ${
+                      activeVideo?.id === video.id
+                        ? "border-2 border-[#FACC15] shadow-md scale-105"
+                        : "opacity-80 hover:opacity-100 border border-[#CBD5E1]/20 hover:scale-105"
+                    }`}
+                  >
+                    <img
+                      src={`https://img.youtube.com/vi/${video.youtube_video_id}/mqdefault.jpg`}
+                      alt={`Thumbnail ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                    {activeVideo?.id === video.id && (
+                      <div className="absolute inset-0 bg-black/30" />
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
-      )}
+
+        {/* Video Modal */}
+        {showModal && (
+          <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center px-4 py-10">
+            <div className="relative bg-[#0E1A24] rounded-2xl overflow-hidden w-full max-w-4xl border border-[#0F766E]/20 shadow-2xl">
+              <button
+                onClick={closeModal}
+                className="absolute top-4 right-4 p-2 bg-[#0F766E]/20 text-white rounded-full hover:text-red-400 hover:bg-[#0F766E]/40 transition-colors z-50"
+                aria-label="Close modal"
+              >
+                <X size={20} />
+              </button>
+              <div className="relative aspect-video">
+                <iframe
+                  src={`https://www.youtube.com/embed/${activeVideo.youtube_video_id}?autoplay=1`}
+                  title="Virtual Tour"
+                  frameBorder="0"
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full rounded-t-2xl"
+                />
+              </div>
+              <div className="p-4 bg-[#FACC15]/10 border-t border-[#FACC15]/20 flex items-center justify-between">
+                <div className="flex items-center gap-2 text-white text-sm sm:text-base">
+                  <Youtube size={18} className="text-[#FACC15]" />
+                  <span>
+                    Tour{" "}
+                    <span className="font-semibold">{activeIndex + 1}</span> of{" "}
+                    <span className="font-semibold">{videos.length}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Shine Animation */}
+      <style>
+        {`
+      @keyframes shine {
+        0% { transform: translateX(-100%); opacity: 0; }
+        50% { opacity: 1; }
+        100% { transform: translateX(100%); opacity: 0; }
+      }
+      .animate-shine {
+        animation: shine 2s infinite linear;
+      }
+    `}
+      </style>
     </div>
   );
 };

@@ -60,14 +60,14 @@ body {
 }
 
 input:-webkit-autofill {
-  box-shadow: 0 0 0px 1000px #06202B inset !important;
-  -webkit-text-fill-color: #F5EEDD !important;
+  box-shadow: 0 0 0px 1000px #06202b inset !important;
+  -webkit-text-fill-color: #f5eedd !important;
   transition: background-color 5000s ease-in-out 0s;
 }
 
 input:-webkit-autofill:focus {
-  box-shadow: 0 0 0px 1000px #06202B inset !important;
-  -webkit-text-fill-color: #F5EEDD !important;
+  box-shadow: 0 0 0px 1000px #06202b inset !important;
+  -webkit-text-fill-color: #f5eedd !important;
 }
 
 input:-webkit-autofill::first-line {
@@ -76,15 +76,15 @@ input:-webkit-autofill::first-line {
 
 @layer components {
   .rich-content h2 {
-    @apply text-lg font-semibold text-[#7AE2CF] mb-2;
+    @apply text-lg font-semibold text-[#FACC15] mb-2;
   }
 
   .rich-content p {
-    @apply text-sm text-[#F5EEDD] mb-3 leading-relaxed;
+    @apply text-sm text-[#CBD5E1] mb-3 leading-relaxed;
   }
 
   .rich-content ul {
-    @apply list-disc pl-5 text-sm text-[#F5EEDD] mb-3;
+    @apply list-disc pl-5 text-sm text-[#CBD5E1] mb-3;
   }
 
   .rich-content li {
@@ -92,10 +92,23 @@ input:-webkit-autofill::first-line {
   }
 
   .rich-content strong {
-    @apply font-bold text-[#7AE2CF];
+    @apply font-bold text-[#FACC15];
   }
 
   .rich-content a {
-    @apply text-[#7AE2CF] underline hover:text-[#F5EEDD];
+    @apply text-[#eab308] underline hover:text-[#FACC15];
   }
+}
+
+@keyframes zoomPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.zoom-pulse {
+  animation: zoomPulse 2s ease-in-out infinite;
 }

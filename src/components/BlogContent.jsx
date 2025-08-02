@@ -1,17 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  Calendar,
-  Clock,
-  ChevronDown,
-  ChevronUp,
-  Share2,
-  Bookmark,
-  MessageSquare,
-  Eye,
-  Heart,
-  ArrowLeft,
-} from "lucide-react";
-import config from "../../config";
+import { Calendar, ArrowLeft } from "lucide-react";
+import { API, WEBSITE_DOMAIN } from "../../config";
 import { useParams, useNavigate } from "react-router-dom";
 import { ContactDialog } from "./Contact";
 
@@ -19,28 +8,18 @@ const BlogContent = () => {
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [expanded, setExpanded] = useState(false);
-  const navigate = useNavigate();
-
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   const openDialog = () => setIsOpen(true);
   const closeDialog = () => setIsOpen(false);
 
-  const { id } = useParams();
-
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        setLoading(true);
-        const response = await fetch(
-          `${config.API_URL}/blogs/${id}?website=${config.SLUG_URL}`
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch blog data");
-        }
-
+        const response = await fetch(API.BLOGS_DETAIL(id, WEBSITE_DOMAIN));
+        if (!response.ok) throw new Error("Failed to fetch blog");
         const data = await response.json();
         setBlog(data.blogs[0]);
         setLoading(false);
@@ -57,154 +36,99 @@ const BlogContent = () => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
-      month: "long",
+      month: "short",
       day: "numeric",
     });
   };
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#06202B] via-[#077A7D] to-[#06202B] p-4">
-        <div className="w-16 h-16 border-4 border-[#7AE2CF] border-t-transparent rounded-full animate-spin"></div>
-        <p className="mt-4 text-[#F5EEDD]/80">Loading blog content...</p>
+      <div className="min-h-screen flex items-center justify-center bg-[#0E1A24] text-[#CBD5E1]">
+        <div className="animate-spin w-12 h-12 border-4 border-[#FACC15] border-t-transparent rounded-full"></div>
+        <span className="ml-4">Loading...</span>
       </div>
     );
   }
 
-  if (error) {
+  if (error || !blog) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#06202B] via-[#077A7D] to-[#06202B] p-4">
-        <div className="bg-[#F5EEDD]/10 rounded-lg shadow-lg max-w-2xl w-full p-6 border border-[#7AE2CF]/20 backdrop-blur-md">
-          <h2 className="text-xl text-red-500 font-medium mb-2">
-            Error Loading Content
-          </h2>
-          <p className="text-[#F5EEDD]/80">{error}</p>
-          <button
-            className="mt-4 px-4 py-2 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] text-white rounded-md hover:from-[#077A7D]/90 hover:to-[#7AE2CF]/90 transition-colors shadow-md"
-            onClick={() => window.location.reload()}
-          >
-            Try Again
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  if (!blog) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#06202B] via-[#077A7D] to-[#06202B] p-4">
-        <div className="bg-[#F5EEDD]/10 rounded-lg shadow-lg max-w-2xl w-full p-6 border border-[#7AE2CF]/20 backdrop-blur-md">
-          <h2 className="text-xl text-[#F5EEDD] font-medium mb-2">
-            No Blog Found
-          </h2>
-          <p className="text-[#F5EEDD]/80">
-            The requested blog content could not be found.
-          </p>
-          <button
-            className="mt-4 px-4 py-2 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] text-white rounded-md hover:from-[#077A7D]/90 hover:to-[#7AE2CF]/90 transition-colors shadow-md"
-            onClick={() => navigate(-1)}
-          >
-            Return to Blogs
-          </button>
-        </div>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#0E1A24] text-[#CBD5E1] p-6">
+        <h2 className="text-2xl font-semibold text-red-500 mb-2">Error</h2>
+        <p className="mb-4">{error || "No blog found."}</p>
+        <button
+          className="px-5 py-2 bg-[#0F766E] text-white rounded hover:bg-[#0F766E]/90 transition"
+          onClick={() => navigate(-1)}
+        >
+          Go Back
+        </button>
       </div>
     );
   }
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-b from-[#06202B] via-[#077A7D] to-[#06202B] py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+      <div className="bg-[#0E1A24] min-h-screen text-[#CBD5E1] py-10 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto">
+          {/* Back Button */}
           <button
-            className="mb-8 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 text-[#F5EEDD]/80 hover:text-[#7AE2CF] hover:bg-white/20 transition-all duration-300 shadow-sm border border-white/10"
             onClick={() => navigate(-1)}
+            className="mb-6 inline-flex items-center text-sm text-[#FACC15] hover:text-[#eab308] hover:underline transition"
           >
-            <ArrowLeft size={18} />
-            <span>Back to Articles</span>
+            <ArrowLeft className="w-4 h-4 mr-1" />
+            Back to Articles
           </button>
 
-          {/* Blog Header with Background Image */}
-          <div className="relative rounded-2xl overflow-hidden mb-10 shadow-xl group">
+          {/* Blog Header Image */}
+          <div className="rounded-lg overflow-hidden shadow-md border border-[#CBD5E1]/10 mb-8">
             <img
               src={blog.post_photo}
               alt={blog.post_title}
-              className="w-full h-64 sm:h-96 object-cover scale-100 group-hover:scale-105 transition-transform duration-500"
+              className="w-full h-64 object-cover"
             />
-            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 z-20">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#F5EEDD]/90 text-[#06202B] rounded-full text-xs sm:text-sm font-semibold backdrop-blur-sm border border-white/60 shadow-md">
-                <Calendar size={14} />
-                <span>{formatDate(blog.created_at)}</span>
-              </div>
-              <h1 className="text-xl sm:text-3xl md:text-4xl font-extrabold text-white mt-3 sm:mt-4 tracking-tight leading-snug drop-shadow-[0_3px_6px_rgba(0,0,0,0.6)]">
-                {blog.post_title}
-              </h1>
-            </div>
           </div>
 
-          {/* Blog Short Description */}
-          <div className="bg-[#06202B]/60 rounded-xl p-6 mb-6 shadow-md border border-[#7AE2CF]/20">
-            <p className="text-[#F5EEDD]/90 text-lg leading-relaxed font-medium">
-              {blog.post_content_short}
-            </p>
+          {/* Date */}
+          <div className="flex items-center gap-2 text-sm text-[#0E1A24] bg-[#FACC15] px-3 py-1 rounded-full font-medium w-fit mb-4">
+            <Calendar size={14} />
+            {formatDate(blog.created_at)}
           </div>
 
-          {/* Blog Full Content */}
-          <div className="bg-[#06202B]/60 rounded-xl p-6 mb-10 shadow-md border border-[#7AE2CF]/20 relative">
+          {/* Title */}
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#FACC15] mb-4">
+            {blog.post_title}
+          </h1>
+
+          {/* Short Description */}
+          <p className="mb-6 text-[#CBD5E1]/90 leading-relaxed font-medium">
+            {blog.post_content_short}
+          </p>
+
+          {/* Full Blog Content */}
+          <div className="bg-[#0F1F2B] p-6 rounded-lg border border-[#CBD5E1]/10 shadow-inner mb-12">
             <div
-              className="prose max-w-none text-[#F5EEDD]/90 prose-p:leading-relaxed rich-content"
-              style={{
-                maxHeight: expanded ? "none" : "18rem",
-                overflow: "hidden",
-                transition: "max-height 0.5s ease",
-              }}
-            >
-              <div
-                className="blog-content"
-                dangerouslySetInnerHTML={{ __html: blog.post_content }}
-              />
-            </div>
-
-            {/* Gradient overlay */}
-            {!expanded && (
-              <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#06202B] to-transparent pointer-events-none"></div>
-            )}
-
-            {/* Read More / Less */}
-            <div className="flex justify-center mt-4">
-              <button
-                onClick={() => setExpanded(!expanded)}
-                className="flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] text-white font-medium hover:from-[#077A7D]/90 hover:to-[#7AE2CF]/90 active:scale-95 transition-all duration-300 shadow-md"
-              >
-                <span>{expanded ? "Read Less" : "Read More"}</span>
-                {expanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-              </button>
-            </div>
+              className="prose prose-invert rich-content max-w-none prose-p:leading-relaxed prose-a:text-[#FACC15] hover:prose-a:text-[#0F766E]"
+              dangerouslySetInnerHTML={{ __html: blog.post_content }}
+            />
           </div>
 
-          {/* Call to Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-14">
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4">
             <button
               onClick={openDialog}
-              className="relative group flex-1 py-4 text-center rounded-xl bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] text-white font-semibold hover:from-[#077A7D]/90 hover:to-[#7AE2CF]/90 transition-all duration-300 shadow-lg overflow-hidden"
+              className="flex-1 py-3 px-4 rounded bg-[#FACC15] text-[#0E1A24] font-semibold hover:bg-[#eab308] transition"
             >
-              <span className="relative z-10">
-                Check Pricing & Availability
-              </span>
-              {/* Shine sweep effect */}
-              <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+              Check Pricing & Availability
             </button>
-
             <button
               onClick={openDialog}
-              className="relative group flex-1 py-4 text-center rounded-xl border-2 border-[#7AE2CF] bg-transparent text-[#7AE2CF] font-semibold hover:bg-[#7AE2CF]/10 hover:text-white transition-all duration-300 shadow-sm overflow-hidden"
+              className="flex-1 py-3 px-4 rounded border border-[#FACC15] text-[#FACC15] font-semibold hover:bg-[#FACC15]/20 hover:text-[#FACC15] transition"
             >
-              <span className="relative z-10">Contact for Site Visit</span>
-              {/* Shine sweep effect */}
-              <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+              Contact for Site Visit
             </button>
           </div>
         </div>
       </div>
+
       <ContactDialog isOpen={isOpen} onClose={closeDialog} />
     </>
   );

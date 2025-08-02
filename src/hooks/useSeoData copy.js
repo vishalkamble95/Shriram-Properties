@@ -1,7 +1,5 @@
-// First, let's create a custom hook to fetch the SEO data
-
 import { useState, useEffect } from "react";
-import config from "../../config";
+import { API, WEBSITE_DOMAIN } from "../../config"; // Adjust path if needed
 
 export function useSeoData() {
   const [seoData, setSeoData] = useState(null);
@@ -12,9 +10,9 @@ export function useSeoData() {
     const fetchSeoData = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/seodata.json`
-        );
+
+        // Fetch dynamic SEO data from API
+        const response = await fetch(API.SEO_DETAIL(WEBSITE_DOMAIN));
 
         if (!response.ok) {
           throw new Error(`Failed to fetch SEO data: ${response.status}`);
@@ -25,16 +23,15 @@ export function useSeoData() {
         if (data.success) {
           setSeoData(data.data);
 
-          // Update the document title
           document.title = data.data.title || "SMP Amberwood";
 
-          // Update meta description
           updateMetaTag("description", data.data.meta_description);
-
-          // Update keywords
           updateMetaTag("keywords", data.data.keywords);
+          updateMetaTag("og:title", data.data.og_title);
+          updateMetaTag("og:description", data.data.og_description);
+          updateMetaTag("og:image", data.data.og_image);
+          updateMetaTag("og:type", data.data.og_type || "website");
 
-          // Update favicon
           if (data.data.favicon) {
             const link =
               document.querySelector('link[rel="icon"]') ||
@@ -47,13 +44,6 @@ export function useSeoData() {
             }
           }
 
-          // Update Open Graph tags
-          updateMetaTag("og:title", data.data.og_title);
-          updateMetaTag("og:description", data.data.og_description);
-          updateMetaTag("og:image", data.data.og_image);
-          updateMetaTag("og:type", data.data.og_type || "website");
-
-          // Add JSON-LD script
           if (data.data.script_1) {
             addJsonLdScript(data.data.script_1, "seo-jsonld-1");
           }
@@ -73,17 +63,11 @@ export function useSeoData() {
     };
 
     fetchSeoData();
-
-    // return () => {
-    //   // Cleanup function if needed
-    // };
   }, []);
 
-  // Helper function to update meta tags
   const updateMetaTag = (name, content) => {
     if (!content) return;
 
-    // Check if meta tag already exists
     let metaTag =
       document.querySelector(`meta[name="${name}"]`) ||
       document.querySelector(`meta[property="${name}"]`);
@@ -101,14 +85,10 @@ export function useSeoData() {
     metaTag.setAttribute("content", content);
   };
 
-  // Helper function to add JSON-LD scripts
   const addJsonLdScript = (jsonContent, id) => {
     try {
-      // Remove existing script if it exists
       const existingScript = document.getElementById(id);
-      if (existingScript) {
-        existingScript.remove();
-      }
+      if (existingScript) existingScript.remove();
 
       const script = document.createElement("script");
       script.id = id;

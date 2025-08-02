@@ -10,7 +10,7 @@ import {
   CheckCircle,
   X,
 } from "lucide-react";
-import config from "../../config";
+import { API } from "../../config";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
@@ -38,9 +38,7 @@ export const ContactDialog = ({ isOpen, onClose }) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-          `${config.API_URL}/header?website=${config.SLUG_URL}`
-        );
+        const response = await fetch(API.HEADER());
 
         if (!response.ok) {
           throw new Error("Failed to fetch header data");
@@ -143,16 +141,13 @@ export const ContactDialog = ({ isOpen, onClose }) => {
     setSubmitStatus(null);
 
     try {
-      const response = await fetch(
-        `${config.API_URL}/contact?website=${config.SLUG_URL}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(API.postContactUs, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -191,18 +186,18 @@ export const ContactDialog = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#06202B]/80 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0E1A24]/80 backdrop-blur-sm"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           onClose();
         }
       }}
     >
-      <div className="bg-[#F5EEDD] rounded-lg w-full max-w-md shadow-2xl animate-fadeIn">
-        <div className="relative p-5 border-b border-[#7AE2CF] flex flex-col items-center text-center">
+      <div className="bg-[#CBD5E1] rounded-lg w-full max-w-md shadow-2xl animate-fadeIn">
+        <div className="relative p-5 border-b border-[#0F766E] flex flex-col items-center text-center">
           <button
             onClick={onClose}
-            className="absolute top-10 right-5 text-[#077A7D] hover:text-[#06202B] transition-colors"
+            className="absolute top-10 right-5 text-[#FACC15] hover:text-[#0E1A24] transition-colors"
           >
             <X size={24} />
           </button>
@@ -215,10 +210,10 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                 className="h-12 max-w-[120px] mb-3"
               />
             )}
-            <h2 className="text-[#06202B] text-3xl sm:text-4xl font-semibold">
+            <h2 className="text-[#0E1A24] text-3xl sm:text-4xl font-semibold">
               {data.hero_banner_heading}
             </h2>
-            <h3 className="text-lg sm:text-xl font-semibold text-[#077A7D] mt-2">
+            <h3 className="text-lg sm:text-xl font-semibold text-[#0F766E] mt-2">
               Contact Us
             </h3>
           </div>
@@ -244,13 +239,13 @@ export const ContactDialog = ({ isOpen, onClose }) => {
               <div>
                 <label
                   htmlFor="first_name"
-                  className="block text-[#06202B] mb-2 text-sm font-medium"
+                  className="block text-[#0E1A24] mb-2 text-sm font-medium"
                 >
                   First Name
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <User size={16} className="text-[#077A7D]" />
+                    <User size={16} className="text-[#FACC15]" />
                   </div>
                   <input
                     type="text"
@@ -258,11 +253,11 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                     name="first_name"
                     value={formData.first_name}
                     onChange={handleInputChange}
-                    className={`w-full bg-[#F5EEDD] text-[#06202B] border ${
+                    className={`w-full bg-[#CBD5E1] text-[#0E1A24] border ${
                       formErrors.first_name
                         ? "border-red-700"
-                        : "border-[#7AE2CF]"
-                    } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#077A7D] focus:border-transparent`}
+                        : "border-[#0F766E]"
+                    } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FACC15] focus:border-transparent`}
                     placeholder="First Name*"
                   />
                   {formErrors.first_name && (
@@ -277,13 +272,13 @@ export const ContactDialog = ({ isOpen, onClose }) => {
               <div>
                 <label
                   htmlFor="last_name"
-                  className="block text-[#06202B] mb-2 text-sm font-medium"
+                  className="block text-[#0E1A24] mb-2 text-sm font-medium"
                 >
                   Last Name
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <User size={16} className="text-[#077A7D]" />
+                    <User size={16} className="text-[#FACC15]" />
                   </div>
                   <input
                     type="text"
@@ -291,11 +286,11 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                     name="last_name"
                     value={formData.last_name}
                     onChange={handleInputChange}
-                    className={`w-full bg-[#F5EEDD] text-[#06202B] border ${
+                    className={`w-full bg-[#CBD5E1] text-[#0E1A24] border ${
                       formErrors.last_name
                         ? "border-red-700"
-                        : "border-[#7AE2CF]"
-                    } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#077A7D] focus:border-transparent`}
+                        : "border-[#0F766E]"
+                    } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FACC15] focus:border-transparent`}
                     placeholder="Last Name*"
                   />
                   {formErrors.last_name && (
@@ -311,13 +306,13 @@ export const ContactDialog = ({ isOpen, onClose }) => {
             <div className="mb-4">
               <label
                 htmlFor="email_id"
-                className="block text-[#06202B] mb-2 text-sm font-medium"
+                className="block text-[#0E1A24] mb-2 text-sm font-medium"
               >
                 Email Address
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <Mail size={16} className="text-[#077A7D]" />
+                  <Mail size={16} className="text-[#FACC15]" />
                 </div>
                 <input
                   type="email"
@@ -325,9 +320,9 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                   name="email_id"
                   value={formData.email_id}
                   onChange={handleInputChange}
-                  className={`w-full bg-[#F5EEDD] text-[#06202B] border ${
-                    formErrors.email_id ? "border-red-700" : "border-[#7AE2CF]"
-                  } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#077A7D] focus:border-transparent`}
+                  className={`w-full bg-[#CBD5E1] text-[#0E1A24] border ${
+                    formErrors.email_id ? "border-red-700" : "border-[#0F766E]"
+                  } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FACC15] focus:border-transparent`}
                   placeholder="email@example.com"
                 />
               </div>
@@ -336,7 +331,7 @@ export const ContactDialog = ({ isOpen, onClose }) => {
             <div className="mb-4">
               <label
                 htmlFor="phone_number"
-                className="block text-[#06202B] mb-2 text-sm font-medium"
+                className="block text-[#0E1A24] mb-2 text-sm font-medium"
               >
                 Phone Number
               </label>
@@ -344,96 +339,84 @@ export const ContactDialog = ({ isOpen, onClose }) => {
               <div className="relative">
                 <style>
                   {`
-                    .country-list {
-                      background-color: #F5EEDD !important;
-                      color: #06202B !important;
-                      z-index: 50 !important;
-                      border-radius: 0.75rem;
-                      overflow-y: auto !important;
-                      overflow-x: hidden !important;
-                      white-space: normal !important;
-                      max-height: 180px !important;
-                      width: 245px !important;
-                      min-width: 245px !important;
-                      max-width: 245px !important;
-                      scrollbar-width: thin !important;
-                      scrollbar-color: #077A7D transparent !important;
-                      box-shadow: 0 4px 12px rgba(7, 122, 125, 0.15);
-                      border: 1px solid #7AE2CF66;
-                    }
+        .country-list {
+          background-color: #CBD5E1 !important;
+          color: #0E1A24 !important;
+          z-index: 50 !important;
+          border-radius: 0.75rem;
+          overflow-y: auto !important;
+          overflow-x: hidden !important;
+          white-space: normal !important;
+          max-height: 180px !important;
+          width: 245px !important;
+          min-width: 245px !important;
+          max-width: 245px !important;
+          scrollbar-width: thin !important;
+          scrollbar-color: #0F766E transparent !important;
+          box-shadow: 0 4px 12px rgba(15, 118, 110, 0.15);
+          border: 1px solid #0F766E66;
+        }
 
-                    .country-list::-webkit-scrollbar {
-                      height: 6px;
-                      width: 6px;
-                      background: transparent !important;
-                    }
+        .country-list::-webkit-scrollbar {
+          height: 6px;
+          width: 6px;
+          background: transparent !important;
+        }
 
-                    .country-list::-webkit-scrollbar-thumb {
-                      background-color: #077A7D !important;
-                      border-radius: 4px;
-                    }
+        .country-list::-webkit-scrollbar-thumb {
+          background-color: #0F766E !important;
+          border-radius: 4px;
+        }
 
-                    .country-list .country {
-                      padding: 0.5rem 0.75rem !important;
-                      transition: background-color 0.2s ease;
-                      border-radius: 0.375rem;
-                    }
+        .country-list .country {
+          padding: 0.5rem 0.75rem !important;
+          transition: background-color 0.2s ease;
+          border-radius: 0.375rem;
+        }
 
-                    .country-list .country:hover,
-                    .country-list .country.highlight {
-                      background-color: #e0f8f5 !important;
-                      color: #06202B !important;
-                    }
+        .country-list .country:hover,
+        .country-list .country.highlight {
+          background-color: #e0f8f5 !important;
+          color: #0E1A24 !important;
+        }
 
-                    .flag-dropdown {
-                      background: transparent !important;
-                      border: none !important;
-                      transition: background-color 0.3s ease;
-                    }
+        .flag-dropdown {
+          background: transparent !important;
+          border: none !important;
+          transition: background-color 0.3s ease;
+        }
 
-                    // .flag-dropdown:hover,
-                    // .flag-dropdown.open {
-                    //   background-color: #f0fdfa !important;
-                    //   border-radius: 0.5rem !important;
-                    // }
+        .react-tel-input .flag-dropdown:hover,
+        .react-tel-input .flag-dropdown.open,
+        .react-tel-input .flag-dropdown:hover .selected-flag,
+        .react-tel-input .flag-dropdown.open .selected-flag {
+          background-color: transparent !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
 
-                    /* Completely neutralize flag dropdown hover effect */
-                    .react-tel-input .flag-dropdown:hover,
-                    .react-tel-input .flag-dropdown.open,
-                    .react-tel-input .flag-dropdown:hover .selected-flag,
-                    .react-tel-input .flag-dropdown.open .selected-flag {
-                      background-color: transparent !important;
-                      box-shadow: none !important;
-                      border: none !important;
-                    }
+        .react-tel-input .flag-dropdown {
+          display: flex !important;
+          align-items: center !important;
+          height: 100% !important;
+          top: 0 !important;
+        }
 
-                    .react-tel-input .flag-dropdown {
-                      display: flex !important;
-                      align-items: center !important;
-                      height: 100% !important;
-                      top: 0 !important;
-                    }
+        .flag-dropdown .selected-flag {
+          border-radius: 0.375rem !important;
+          overflow: hidden;
+        }
 
-                    .flag-dropdown .selected-flag {
-                      border-radius: 0.375rem !important;
-                      overflow: hidden;
-                    }
+        .country-list .dial-code {
+          color: #0F766E !important;
+          font-weight: 500;
+          margin-left: 4px;
+        }
 
-                    // .flag-dropdown:hover .selected-flag,
-                    // .flag-dropdown.open .selected-flag {
-                    //   background-color: #f0fdfa !important;
-                    // }
-
-                    .country-list .dial-code {
-                      color: #077A7D !important;
-                      font-weight: 500;
-                      margin-left: 4px;
-                    }
-
-                    .search-box {
-                      display: none !important;
-                    }
-                  `}
+        .search-box {
+          display: none !important;
+        }
+      `}
                 </style>
 
                 <PhoneInput
@@ -448,11 +431,11 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                   specialLabel=""
                   inputStyle={{
                     width: "100%",
-                    background: "#F5EEDD",
-                    color: "#06202B",
+                    background: "#CBD5E1",
+                    color: "#0E1A24",
                     border: formErrors.phone_number
                       ? "1px solid #b91c1c"
-                      : "1px solid #7AE2CF",
+                      : "1px solid #0F766E",
                     paddingLeft: "3rem",
                     paddingRight: "1rem",
                     height: "2.5rem",
@@ -468,13 +451,13 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                     zIndex: 20,
                   }}
                   dropdownStyle={{
-                    backgroundColor: "#06202B",
-                    color: "#F5EEDD",
+                    backgroundColor: "#0E1A24",
+                    color: "#CBD5E1",
                     zIndex: 50,
-                    border: "1px solid #7AE2CF66",
+                    border: "1px solid #0F766E66",
                     borderRadius: "12px",
                     marginTop: "6px",
-                    boxShadow: "0 8px 16px rgba(7, 122, 125, 0.3)",
+                    boxShadow: "0 8px 16px rgba(15, 118, 110, 0.3)",
                     width: "max-content",
                     minWidth: "240px",
                   }}
@@ -492,13 +475,13 @@ export const ContactDialog = ({ isOpen, onClose }) => {
             <div className="mb-5">
               <label
                 htmlFor="message"
-                className="block text-[#06202B] mb-2 text-sm font-medium"
+                className="block text-[#0E1A24] mb-2 text-sm font-medium"
               >
                 Your Message
               </label>
               <div className="relative">
                 <div className="absolute top-3 left-3 pointer-events-none">
-                  <MessageSquare size={16} className="text-[#077A7D]" />
+                  <MessageSquare size={16} className="text-[#FACC15]" />
                 </div>
                 <textarea
                   id="message"
@@ -506,29 +489,29 @@ export const ContactDialog = ({ isOpen, onClose }) => {
                   value={formData.message}
                   onChange={handleInputChange}
                   rows="3"
-                  className={`w-full bg-[#F5EEDD] text-[#06202B] border ${
-                    formErrors.message ? "border-red-700" : "border-[#7AE2CF]"
-                  } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#077A7D] focus:border-transparent`}
+                  className={`w-full bg-[#CBD5E1] text-[#0E1A24] border ${
+                    formErrors.message ? "border-red-700" : "border-[#0F766E]"
+                  } rounded-lg pl-10 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FACC15] focus:border-transparent`}
                   placeholder="Tell us about your requirements..."
                 ></textarea>
               </div>
             </div>
 
-            <div className="flex items-center justify-end pt-4 border-t border-[#7AE2CF]">
+            <div className="flex items-center justify-end pt-4 border-t border-[#0F766E]">
               <button
                 type="button"
                 onClick={onClose}
-                className="mr-3 px-4 py-2 text-[#077A7D] hover:text-[#06202B] transition-colors text-sm font-medium"
+                className="mr-3 px-4 py-2 text-[#0F766E] hover:text-[#0E1A24] transition-colors text-sm font-medium"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={submitting}
-                className={`relative group py-2 px-4 rounded-lg bg-gradient-to-r from-[#7AE2CF] to-[#077A7D] text-white text-sm font-medium transition-all duration-300 flex items-center overflow-hidden ${
+                className={`relative group py-2 px-4 rounded-lg bg-gradient-to-r from-[#FACC15] to-[#0F766E] text-[#0E1A24] text-sm font-medium transition-all duration-300 flex items-center overflow-hidden ${
                   submitting
                     ? "opacity-60 cursor-not-allowed"
-                    : "hover:from-[#7AE2CF]/90 hover:to-[#077A7D]/90"
+                    : "hover:from-[#FACC15]/90 hover:to-[#0F766E]/90"
                 }`}
               >
                 {submitting ? (
@@ -561,11 +544,11 @@ const ContactDialogButton = () => {
     <>
       <button
         onClick={openDialog}
-        className="relative group py-2 px-4 rounded-lg bg-[#077A7D] text-[#F5EEDD] font-medium hover:bg-[#06686a] active:bg-[#06202B] transition-all duration-300 overflow-hidden"
+        className="relative group py-2 px-4 rounded-lg bg-[#0F766E] text-[#FACC15] font-medium hover:bg-[#0E1A24] active:bg-[#0E1A24] transition-all duration-300 overflow-hidden"
       >
         <span className="relative z-10">Contact Us</span>
         {/* Shine sweep effect */}
-        <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#F5EEDD]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+        <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#CBD5E1]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
       </button>
 
       <ContactDialog isOpen={isOpen} onClose={closeDialog} />

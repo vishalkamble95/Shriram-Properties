@@ -8,7 +8,7 @@ import {
   X,
   Camera,
 } from "lucide-react";
-import config from "../../config";
+import { API } from "../../config";
 
 // Lightbox component that renders into a portal
 const Lightbox = ({ images, currentIndex, setCurrentIndex, closeLightbox }) => {
@@ -128,17 +128,33 @@ const Gallery = () => {
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [carouselIndex, setCarouselIndex] = useState(0);
 
-  const imagesPerRow = 4;
+  const useImagesToShow = () => {
+    const [count, setCount] = useState(1);
+
+    useEffect(() => {
+      const updateCount = () => {
+        const width = window.innerWidth;
+        if (width >= 1024) setCount(3); // Desktop
+        else if (width >= 640) setCount(2); // Tablet
+        else setCount(1); // Mobile
+      };
+
+      updateCount(); // Initial run
+      window.addEventListener("resize", updateCount);
+      return () => window.removeEventListener("resize", updateCount);
+    }, []);
+
+    return count;
+  };
+
+  const imagesToShow = useImagesToShow(); // Responsive count
 
   useEffect(() => {
     const fetchGallery = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-          `${config.API_URL}/gallary?website=${config.SLUG_URL}`
-        );
+        const response = await fetch(API.GALLERY());
         if (!response.ok) throw new Error("Failed to fetch gallery data");
         const data = await response.json();
         setImages(data.property_photos);
@@ -152,12 +168,16 @@ const Gallery = () => {
     fetchGallery();
   }, []);
 
+  // Auto-slide every 4 seconds ONLY if Lightbox is not open
   useEffect(() => {
+    if (!images.length || selectedImage) return;
+
     const interval = setInterval(() => {
-      setCarouselIndex((prev) => (prev + imagesPerRow) % images.length);
-    }, 2000);
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 4000);
+
     return () => clearInterval(interval);
-  }, [images]);
+  }, [images, selectedImage]);
 
   const openLightbox = (image, index) => {
     setSelectedImage(image);
@@ -170,79 +190,106 @@ const Gallery = () => {
     document.body.style.overflow = "auto";
   };
 
-  const currentImages = images.slice(
-    carouselIndex,
-    carouselIndex + imagesPerRow
-  );
-  if (currentImages.length < imagesPerRow) {
-    currentImages.push(...images.slice(0, imagesPerRow - currentImages.length));
-  }
+  const slideLeft = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
+
+  const slideRight = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  // Display only a sliding window of images
+  const getVisibleImages = () => {
+    if (!images || images.length === 0) return [];
+    const visible = [];
+    for (let i = 0; i < imagesToShow; i++) {
+      visible.push(images[(currentIndex + i) % images.length]);
+    }
+    return visible.filter(Boolean); // Filters out undefined values
+  };
+
+  const visibleImages = getVisibleImages();
 
   return (
-    <div
-      className="bg-gradient-to-b from-[#06202B] via-[#077A7D] to-[#06202B] py-12 px-6 md:px-12 lg:px-20"
-      id="gallery"
-    >
-      {/* Header Section */}
-      <div className="mb-10 text-center">
-        <div className="flex items-center justify-center mb-4 relative">
-          <div className="w-1 h-10 bg-gradient-to-b from-[#7AE2CF] to-[#F5EEDD] rounded-full mr-3 shadow-lg animate-pulse"></div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#F5EEDD] drop-shadow-md tracking-tight">
-            {heading || "Property Gallery"}
-          </h2>
-        </div>
-        <p className="text-[#7AE2CF] text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-          Explore the stunning views of this premium property, designed to
-          inspire and impress.
-        </p>
+  <div
+    className="relative bg-gradient-to-b from-[#0E1A24] via-[#0F766E] to-[#0E1A24] py-16 px-4 sm:px-10 lg:px-20"
+    id="gallery"
+  >
+    {/* Header */}
+    <div className="mb-12 text-center">
+      <div className="flex items-center justify-center mb-4">
+        <div className="w-1 h-10 bg-gradient-to-b from-[#FACC15] to-[#CBD5E1] rounded-full mr-3 animate-pulse shadow-lg"></div>
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-[#CBD5E1] tracking-tight drop-shadow-md">
+          {heading || "Property Gallery"}
+        </h2>
       </div>
+      <p className="text-[#FACC15] text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+        Explore the stunning views of this premium property, designed to
+        inspire and impress.
+      </p>
+    </div>
+
+    {/* Carousel */}
+    <div className="relative flex items-center justify-center w-full max-w-7xl mx-auto">
+      {/* Left Arrow */}
+      <button
+        onClick={slideLeft}
+        className="absolute z-10 p-2 sm:p-3 lg:p-4 rounded-full bg-gradient-to-b from-[#FACC15] to-[#CBD5E1]
+        text-[#0E1A24] shadow-lg hover:shadow-[#FACC15]/40 transition duration-300
+        top-1/2 -translate-y-1/2
+        left-0 sm:left-[-2rem] lg:left-[-3rem]"
+      >
+        <ChevronLeft />
+      </button>
 
       {/* Gallery Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 px-6 sm:px-10 lg:px-10 py-10">
-        {currentImages.map((img, index) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full px-4 sm:px-6 lg:px-8">
+        {visibleImages.map((img, index) => (
           <div
             key={img.id}
+            className="cursor-pointer overflow-hidden rounded-2xl bg-gradient-to-tr from-[#0F766E] via-[#0E1A24] to-[#FACC15] 
+            p-[6px] shadow-2xl hover:shadow-[#FACC15]/40 transition-transform duration-300"
             onClick={() =>
-              openLightbox(img, (carouselIndex + index) % images.length)
+              openLightbox(img, (currentIndex + index) % images.length)
             }
-            className="cursor-pointer aspect-square bg-gradient-to-br from-[#077A7D] via-[#06202B] to-[#7AE2CF] p-[8px] shadow-xl hover:shadow-[#7AE2CF]/40 transition-all duration-300"
-            style={{
-              borderTopRightRadius: "1.25rem",
-              borderBottomLeftRadius: "1.25rem",
-              borderTopLeftRadius: "0px",
-              borderBottomRightRadius: "0px",
-            }}
           >
-            <div
-              className="w-full h-full bg-[#F5EEDD] overflow-hidden flex items-center justify-center"
-              style={{
-                borderTopRightRadius: "1rem",
-                borderBottomLeftRadius: "1rem",
-                borderTopLeftRadius: "0px",
-                borderBottomRightRadius: "0px",
-              }}
-            >
+            <div className="bg-[#CBD5E1] rounded-2xl overflow-hidden">
               <img
                 src={img.photo}
-                alt={`Property image`}
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105 hover:rotate-[0.3deg]"
+                alt="Property"
+                className="w-full h-[250px] sm:h-[300px] lg:h-[350px] object-cover hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>
         ))}
       </div>
 
-      {/* Lightbox Component */}
-      {selectedImage && (
-        <Lightbox
-          images={images}
-          currentIndex={currentIndex}
-          setCurrentIndex={setCurrentIndex}
-          closeLightbox={closeLightbox}
-        />
-      )}
+      {/* Right Arrow */}
+      <button
+        onClick={slideRight}
+        className="absolute z-10 p-2 sm:p-3 lg:p-4 rounded-full bg-gradient-to-b from-[#FACC15] to-[#CBD5E1]
+        text-[#0E1A24] shadow-lg hover:shadow-[#FACC15]/40 transition duration-300
+        top-1/2 -translate-y-1/2
+        right-0 sm:right-[-2rem] lg:right-[-3rem]"
+      >
+        <ChevronRight />
+      </button>
     </div>
-  );
+
+    {/* Lightbox */}
+    {selectedImage && (
+      <Lightbox
+        images={images}
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
+        closeLightbox={closeLightbox}
+      />
+    )}
+  </div>
+);
+
 };
 
 export default Gallery;

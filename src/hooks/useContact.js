@@ -1,6 +1,7 @@
 // src/hooks/useContact.js
 import { useState, useEffect } from "react";
-import config from "../../config.js";
+import { API } from "../../config";
+
 export default function useContact() {
   const [contact, setContact] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -12,9 +13,7 @@ export default function useContact() {
       setError(null);
 
       try {
-        const response = await fetch(
-          `${config.API_URL}/footer?website=${config.SLUG_URL}`
-        );
+        const response = await fetch(API.CONTACT_US());
 
         if (!response.ok) {
           throw new Error("Failed to fetch footer data");
@@ -34,12 +33,3 @@ export default function useContact() {
 
   return { contact, loading, error };
 }
-
-// import useContact from "../hooks/useContact";
-
-
-// const { contact, loading, error } = useContact();
-//  const { contact } = useContact();
-
-// {  contact?.footer_phone}
-//{`tel:${contact?.footer_phone}`}

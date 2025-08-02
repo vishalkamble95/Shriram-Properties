@@ -15,7 +15,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { ContactDialog } from "./Contact";
-import config from "../../config";
+import { API } from "../../config";
 import { QRCodeCanvas } from "qrcode.react";
 
 const ReraInformation = () => {
@@ -33,9 +33,7 @@ const ReraInformation = () => {
     const fetchReraData = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-          `${config.API_URL}/rera?website=${config.SLUG_URL}`
-        );
+        const response = await fetch(API.MAHARERA());
 
         if (!response.ok) {
           throw new Error("Failed to fetch RERA data");
@@ -91,239 +89,154 @@ const ReraInformation = () => {
 
   return (
     <>
-      <div
-        className="relative bg-[#F5EEDD] py-16 px-4 overflow-hidden"
-        style={{
-          backgroundImage:
-            'linear-gradient(to bottom, rgba(245, 238, 221, 0.9), rgba(245, 238, 221, 0.85)), url("https://via.placeholder.com/1920x1080")',
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        {/* Accent elements */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#077A7D]/20 rounded-full blur-3xl -mr-32 -mt-32"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#06202B]/10 rounded-full blur-3xl -ml-32 -mb-32"></div>
-        {displayed.map((reraData) => {
-          return (
-            <>
-              <div className="max-w-6xl mx-auto relative z-10 mb-6">
-                <div className="bg-white/50 rounded-xl overflow-hidden shadow-lg shadow-[#06202B]/10 border border-[#06202B]/10">
-                  <div className="p-6 flex flex-col md:flex-wrap md:flex-row md:items-center md:justify-between gap-4 md:gap-y-2">
-                    <div>
-                      <h2 className="text-2xl sm:text-3xl font-bold text-[#06202B] text-center md:text-left w-full md:w-auto">
-                        {pageInfo?.heading || "RERA Information"}
-                      </h2>
-                      <h3 className="text-lg sm:text-xl font-semibold text-[#077A7D] text-center md:text-left w-full md:w-auto">
-                        {reraData.phase_name}
-                      </h3>
-                    </div>
+      <div className="relative bg-[#0E1A24] text-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        {/* Decorative Blurs */}
+        <div className="absolute top-0 right-0 w-72 h-72 bg-[#FACC15]/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#0F766E]/10 rounded-full blur-3xl -ml-32 -mb-32"></div>
 
-                    {pageInfo?.subheading && (
-                      <p className="text-[#06202B]/70 text-center md:text-left w-full md:w-auto">
-                        {pageInfo.subheading}
-                      </p>
-                    )}
-                    <div className="flex justify-center md:justify-end w-full md:w-auto">
-                      <div className="inline-flex items-center bg-[#7AE2CF]/10 border border-[#7AE2CF]/40 px-3 py-1 rounded-full text-sm">
-                        <CheckCircle
-                          size={14}
-                          className="text-[#077A7D] mr-2"
-                        />
-                        <span className="text-[#077A7D]">
-                          MahaRERA Registered Project
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col md:flex-row gap-8">
-                    <div className="md:w-full flex justify-center flex-wrap gap-4">
-                      <div className="mb-8 p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-                        {/* Card 1 - MahaRERA ID */}
-                        <div className="flex h-full items-center rounded-2xl bg-white/70 backdrop-blur-md border border-[#06202B]/10 shadow-md overflow-hidden px-4 py-6">
-                          <div className="flex-shrink-0 mr-4">
-                            <div className="w-10 h-10 rounded-full bg-[#7AE2CF]/20 flex items-center justify-center shadow-md">
-                              <FileText size={22} className="text-[#06202B]" />
-                            </div>
-                          </div>
-                          <div className="flex flex-col justify-center">
-                            <span className="block text-xs md:text-sm text-[#077A7D] tracking-wide mb-1">
-                              MahaRERA ID
-                            </span>
-                            <p className="text-[#06202B] font-semibold text-sm md:text-lg">
-                              {reraData.rera_id}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Card 2 - Completion Date */}
-                        <div className="flex h-full items-center rounded-2xl bg-white/70 backdrop-blur-md border border-[#06202B]/10 shadow-md overflow-hidden px-4 py-6">
-                          <div className="flex-shrink-0 mr-4">
-                            <div className="w-10 h-10 rounded-full bg-[#7AE2CF]/20 flex items-center justify-center shadow-md">
-                              <Calendar size={22} className="text-[#06202B]" />
-                            </div>
-                          </div>
-                          <div className="flex flex-col justify-center">
-                            <span className="block text-xs md:text-sm text-[#077A7D] tracking-wide mb-1">
-                              Completion Date
-                            </span>
-                            <p className="text-[#06202B] font-semibold text-sm md:text-lg">
-                              {formatDate(reraData.completion_date)}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Card 3 - Project Area */}
-                        <div className="flex h-full items-center rounded-2xl bg-white/70 backdrop-blur-md border border-[#06202B]/10 shadow-md overflow-hidden px-4 py-6">
-                          <div className="flex-shrink-0 mr-4">
-                            <div className="w-10 h-10 rounded-full bg-[#7AE2CF]/20 flex items-center justify-center shadow-md">
-                              <MapPin size={22} className="text-[#06202B]" />
-                            </div>
-                          </div>
-                          <div className="flex flex-col justify-center">
-                            <span className="block text-xs md:text-sm text-[#077A7D] tracking-wide mb-1">
-                              Project Area
-                            </span>
-                            <p className="text-[#06202B] font-semibold text-sm md:text-lg">
-                              {reraData.total_area.toLocaleString()} sq.m
-                              <span className="text-[#06202B]/70 text-sm ml-1">
-                                ({reraData.total_acre} Acre)
-                              </span>
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Card 4 - Towers & Units */}
-                        <div className="flex h-full items-center rounded-2xl bg-white/70 backdrop-blur-md border border-[#06202B]/10 shadow-md overflow-hidden px-4 py-6">
-                          <div className="flex-shrink-0 mr-4">
-                            <div className="w-10 h-10 rounded-full bg-[#7AE2CF]/20 flex items-center justify-center shadow-md">
-                              <Building size={22} className="text-[#06202B]" />
-                            </div>
-                          </div>
-                          <div className="flex flex-col justify-center">
-                            <span className="block text-xs md:text-sm text-[#077A7D] tracking-wide mb-1">
-                              Towers & Units
-                            </span>
-                            <p className="text-[#06202B] font-semibold text-sm md:text-lg">
-                              {reraData.total_tower} Towers ·{" "}
-                              {reraData.total_units} Units
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="max-w-6xl mx-auto relative z-10 mb-6">
-                <div className="bg-[#077A7D]/10 rounded-xl overflow-hidden shadow-lg shadow-[#06202B]/10 border border-[#06202B]/10">
-                  {/* RERA Header Card */}
-                  <div className="bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] p-6 border-b border-[#06202B]/10">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <Tag size={18} className="text-[#06202B] mr-2" />
-                        <h3 className="text-lg font-medium text-[#06202B]">
-                          MahaRERA Registration Details
-                        </h3>
-                      </div>
-                      <div className="flex space-x-2">
-                        <span className="inline-block w-2 h-2 rounded-full bg-[#06202B]"></span>
-                        <span className="inline-block w-6 h-2 rounded-full bg-[#077A7D]"></span>
-                        <span className="inline-block w-2 h-2 rounded-full bg-[#06202B]"></span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* MahaRERA Info */}
-                  <div className="p-6">
-                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 p-6 rounded-2xl bg-white/60 backdrop-blur-md border border-[#06202B]/10 shadow-lg">
-                      <div className="w-full md:w-2/3">
-                        <h4 className="text-[#06202B] font-semibold mb-4 flex items-center">
-                          <FileText size={18} className="text-[#077A7D] mr-2" />
-                          MahaRera Compliance Information
-                        </h4>
-                        <div className="bg-[#077A7D]/10 p-5 rounded-xl border border-[#06202B]/10 shadow-inner">
-                          <ul className="space-y-3">
-                            <li className="flex items-start">
-                              <div className="w-2 h-2 rounded-full bg-[#7AE2CF] mt-1.5 mr-3"></div>
-                              <span className="text-[#06202B] text-sm">
-                                This project is registered under MahaRera
-                              </span>
-                            </li>
-                            <li className="flex items-start">
-                              <div className="w-2 h-2 rounded-full bg-[#7AE2CF] mt-1.5 mr-3"></div>
-                              <span className="text-[#06202B] text-sm">
-                                MahaRera Registration:{" "}
-                                <span className="text-[#077A7D] font-medium">
-                                  {reraData.rera_id}
-                                </span>
-                              </span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div className="w-full md:w-auto flex justify-center md:justify-end">
-                        <div className="bg-white p-3 rounded-xl shadow-md">
-                          <QRCodeCanvas
-                            value={reraData.rera_url}
-                            height={120}
-                            width={120}
-                            className="rounded"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mt-6 pt-4 border-t border-[#06202B]/10 flex flex-col md:flex-row justify-between items-center text-xs text-[#06202B]/60">
-                      <p>
-                        Last updated:{" "}
-                        {new Date().toLocaleString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                        })}
-                      </p>
-                      <p>
-                        Source: Maharashtra Real Estate Regulatory Authority
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </>
-          );
-        })}
-        {reraData.length > 2 && (
-          <div className="text-center mt-4">
-            <button
-              onClick={() => setShowAll((prev) => !prev)}
-              className="border border-[#077A7D] text-[#06202B] font-medium px-6 py-2 rounded-md hover:bg-[#077A7D]/10"
+        <div className="max-w-7xl mx-auto relative z-10 space-y-20">
+          {displayed.map((reraData, index) => (
+            <div
+              key={index}
+              className="bg-white/5 border border-white/10 backdrop-blur-lg rounded-3xl shadow-xl p-8 space-y-12"
             >
-              {showAll ? "Show Less" : "Show More"}
-            </button>
+              {/* Header / Overview */}
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div className="space-y-2">
+                  <h2 className="text-3xl sm:text-4xl font-bold text-[#FACC15]">
+                    {pageInfo?.heading || "RERA Information"}
+                  </h2>
+                  <p className="text-lg text-slate-300">
+                    {reraData.phase_name}
+                  </p>
+                  {pageInfo?.subheading && (
+                    <p className="text-sm text-slate-400">
+                      {pageInfo.subheading}
+                    </p>
+                  )}
+                </div>
+                <div className="inline-flex items-center gap-3 px-4 py-2 border border-[#0F766E] bg-[#0F766E]/10 text-[#0F766E] rounded-full text-sm font-medium">
+                  <CheckCircle size={16} />
+                  MahaRERA Registered Project
+                </div>
+              </div>
+
+              {/* Stats and QR */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                {/* Details Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {/* Card 1 */}
+                  <div className="flex items-start gap-4 bg-[#CBD5E1]/5 p-5 rounded-2xl border border-white/10">
+                    <FileText className="text-[#FACC15]" size={24} />
+                    <div>
+                      <p className="text-sm text-slate-300">MahaRERA ID</p>
+                      <p className="font-semibold text-[#FACC15]">
+                        {reraData.rera_id}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Card 2 */}
+                  <div className="flex items-start gap-4 bg-[#CBD5E1]/5 p-5 rounded-2xl border border-white/10">
+                    <Calendar className="text-[#FACC15]" size={24} />
+                    <div>
+                      <p className="text-sm text-slate-300">Completion Date</p>
+                      <p className="font-semibold text-[#FACC15]">
+                        {formatDate(reraData.completion_date)}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Card 3 */}
+                  <div className="flex items-start gap-4 bg-[#CBD5E1]/5 p-5 rounded-2xl border border-white/10">
+                    <MapPin className="text-[#FACC15]" size={24} />
+                    <div>
+                      <p className="text-sm text-slate-300">Project Area</p>
+                      <p className="font-semibold text-[#FACC15]">
+                        {reraData.total_area.toLocaleString()} sq.m
+                        <span className="ml-1 text-slate-400 text-sm">
+                          ({reraData.total_acre} Acre)
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Card 4 */}
+                  <div className="flex items-start gap-4 bg-[#CBD5E1]/5 p-5 rounded-2xl border border-white/10">
+                    <Building className="text-[#FACC15]" size={24} />
+                    <div>
+                      <p className="text-sm text-slate-300">Towers & Units</p>
+                      <p className="font-semibold text-[#FACC15]">
+                        {reraData.total_tower} Towers · {reraData.total_units}{" "}
+                        Units
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* QR & Info */}
+                <div className="flex flex-col items-center justify-center bg-[#0F766E]/10 border border-[#CBD5E1]/20 rounded-2xl p-6 text-center">
+                  <QRCodeCanvas
+                    value={reraData.rera_url}
+                    height={120}
+                    width={120}
+                    className="mb-4 rounded-md"
+                  />
+                  <h4 className="text-[#FACC15] font-semibold text-base mb-1">
+                    MahaRERA Compliance Info
+                  </h4>
+                  <ul className="text-sm text-slate-300 space-y-1">
+                    <li>This project is registered under MahaRERA</li>
+                    <li>
+                      Registration No:{" "}
+                      <span className="text-[#FACC15]">{reraData.rera_id}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Footer Meta */}
+              <div className="flex flex-col md:flex-row justify-between items-center text-xs text-slate-400 border-t border-white/10 pt-4">
+                <p>
+                  Last updated:{" "}
+                  {new Date().toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </p>
+                <p>Source: Maharashtra Real Estate Regulatory Authority</p>
+              </div>
+            </div>
+          ))}
+
+          {/* Show More Button */}
+          {reraData.length > 2 && (
+            <div className="text-center">
+              <button
+                onClick={() => setShowAll((prev) => !prev)}
+                className="text-[#FACC15] border border-[#FACC15] bg-transparent hover:bg-[#FACC15]/20 px-6 py-2 rounded-full font-medium transition"
+              >
+                {showAll ? "Show Less" : "Show More"}
+              </button>
+            </div>
+          )}
+
+          {/* Call to Action */}
+          <div className="text-center mt-12 bg-gradient-to-r from-[#FACC15] to-[#0F766E] rounded-3xl px-8 py-10 text-[#0E1A24] shadow-lg max-w-4xl mx-auto">
+            <h3 className="text-2xl font-bold mb-2">Need More Information?</h3>
+            <p className="text-base text-[#0E1A24]/80 mb-6">
+              Request detailed property documents and specifications for this
+              MahaRERA registered project.
+            </p>
+            <a
+              href="#contact"
+              className="relative group inline-block bg-[#0E1A24] text-white px-8 py-3 rounded-lg font-medium shadow-lg hover:bg-[#0F766E] transition-all duration-300 zoom-pulse overflow-hidden"
+            >
+              <span className="relative z-10">Request Property Documents</span>
+              <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none" />
+            </a>
           </div>
-        )}
-        <div className="max-w-4xl mx-auto mt-10 bg-gradient-to-br from-[#077A7D]/90 to-[#06202B]/90 rounded-2xl p-8 border border-[#06202B]/20 shadow-xl shadow-black/20 text-center">
-          <h4 className="text-[#F5EEDD] text-2xl font-semibold mb-2">
-            Need More Information?
-          </h4>
-          <p className="text-[#F5EEDD]/80 text-base mb-6 leading-relaxed">
-            Request detailed property documents and specifications for this
-            MahaRERA registered project.
-          </p>
-          <a
-            href="#contact"
-            className="relative group inline-block mx-auto bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#077A7D]/80 hover:to-[#7AE2CF]/80 text-[#06202B] font-semibold px-8 py-3 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl shadow-[#7AE2CF]/30 overflow-hidden text-center"
-          >
-            <span className="relative z-10">Request Property Documents</span>
-
-            {/* Subtle glow overlay */}
-            <span className="absolute inset-0 rounded-lg bg-[#06202B]/10 opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-sm z-0"></span>
-
-            {/* Shine sweep effect */}
-            <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none z-0" />
-          </a>
         </div>
       </div>
 

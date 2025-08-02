@@ -45,114 +45,118 @@ function Navbar({ propertyData, loading, openDialog }) {
 
   return (
     <>
-      {/* Top info bar with full-width gradient background */}
-      <div className="bg-[#F5EEDD] text-[#06202B] py-1.5 hidden md:block border-b border-[#7AE2CF] shadow-sm font-serif">
-        <div className="container mx-auto px-6 flex justify-between items-center text-sm leading-relaxed">
-          <div className="flex items-center space-x-6">
-            <div className="flex items-center text-[#06202B] font-medium">
-              <MapPin size={16} className="mr-2 text-[#077A7D]" />
+      {/* Top Info Bar */}
+      <div className="bg-[#0E1A24] text-[#CBD5E1] py-1 hidden md:block border-b border-[#0F766E]/30 font-serif text-sm">
+        <div className="container mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-1.5">
+              <MapPin size={14} className="text-[#FACC15]" />
               <span>{propertyData.location}</span>
             </div>
-            <div className="flex items-center text-[#06202B] font-medium">
-              <Building size={16} className="mr-2 text-[#077A7D]" />
+            <div className="flex items-center gap-1.5">
+              <Building size={14} className="text-[#FACC15]" />
               <span>{propertyData.builder_name}</span>
             </div>
-            <div className="flex items-center text-[#06202B] font-medium">
-              <Star size={16} className="mr-2 text-[#077A7D]" />
+            <div className="flex items-center gap-1.5">
+              <Star size={14} className="text-[#FACC15]" />
               <span>
-                4.8/5
-                <span className="text-[#7AE2CF] font-normal text-xs ml-1">
+                4.8
+                <span className="text-xs text-[#CBD5E1] ml-1">
                   (120 reviews)
                 </span>
               </span>
             </div>
           </div>
-
-          <div className="flex items-center space-x-6">
-            <div className="flex items-center text-[#06202B] font-medium">
-              <Calendar size={16} className="mr-2 text-[#077A7D]" />
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-1.5">
+              <Calendar size={14} className="text-[#FACC15]" />
               <span>MAHARERA Registered</span>
             </div>
             <a
               href={`tel:${contact?.footer_phone}`}
-              className="flex items-center text-[#06202B] hover:text-[#077A7D] transition-colors font-medium"
+              className="flex items-center gap-1.5 text-[#CBD5E1] hover:text-[#FACC15] transition"
             >
-              <Phone size={16} className="mr-2" />
+              <Phone size={14} />
               <span>{contact?.footer_phone}</span>
             </a>
           </div>
         </div>
       </div>
 
-      {/* Main header */}
+      {/* Main Header */}
       <header
-        className={`bg-[#06202B] backdrop-blur-md sticky top-0 z-40 transition-all duration-300 ${
-          scrolled ? "shadow-lg shadow-[#077A7D]/10" : ""
+        className={`bg-[#0E1A24] sticky top-0 z-50 transition-shadow ${
+          scrolled ? "shadow-md shadow-[#0F766E]/20" : ""
         }`}
       >
-        <div className="container mx-auto px-6">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-3 md:space-x-6">
-              <div className="relative">
-                {loading ? (
-                  <div className="h-10 md:h-12 w-32 bg-[#7AE2CF] animate-pulse rounded-md"></div>
-                ) : (
-                  <div className="flex items-center">
-                    <img
-                      width={120}
-                      height={48}
-                      src={propertyData.logo}
-                      alt={propertyData.property_name}
-                      className="h-10 md:h-12 w-auto object-contain"
-                    />
-                    <div className="ml-3 hidden lg:block">
-                      <h1 className="text-white font-semibold text-lg">
-                        {propertyData.property_name?.replace(/\.$/, "")}
-                      </h1>
-                      <p className="text-[#F5EEDD] text-xs">Premium Property</p>
-                    </div>
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-4">
+            {/* Logo + Title */}
+            <div className="flex items-center gap-3 flex-shrink-0">
+              {loading ? (
+                <div className="h-10 w-32 bg-[#CBD5E1] animate-pulse rounded-md" />
+              ) : (
+                <div className="flex items-center">
+                  <img
+                    src={propertyData.logo}
+                    alt={propertyData.property_name}
+                    className="h-10 w-auto object-contain"
+                  />
+                  {/* Title shown only on lg+ */}
+                  <div className="ml-3 hidden lg:block">
+                    <h1 className="text-white text-lg font-semibold">
+                      {propertyData.property_name?.replace(/\.$/, "")}
+                    </h1>
+                    <p className="text-xs text-[#FACC15] font-medium">
+                      Premium Property
+                    </p>
                   </div>
-                )}
+                </div>
+              )}
+            </div>
+
+            {/* Navigation + CTA grouped together for tablet reflow */}
+            <div className="w-full md:flex md:items-center md:justify-between gap-4 hidden">
+              {/* Navigation */}
+              <nav className="flex justify-center flex-wrap gap-2 mt-4 md:mt-0">
+                {navItems.map((item) => (
+                  <a
+                    key={item.id}
+                    href={`#${item.to}`}
+                    onClick={() => handleSetActive(item.id)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                      activeSection === item.id
+                        ? "bg-[#FACC15] text-[#0E1A24] shadow"
+                        : "text-white hover:text-[#FACC15] hover:bg-[#0F766E]/20"
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
+
+              {/* CTA Buttons */}
+              <div className="flex justify-center flex-wrap gap-3 mt-4 md:mt-0">
+                <a
+                  href={`tel:${contact?.footer_phone}`}
+                  className="flex items-center bg-[#0F766E] hover:bg-[#FACC15] text-white hover:text-[#0E1A24] font-bold px-4 py-2 rounded-full transition"
+                >
+                  <Phone size={16} className="mr-2" />
+                  Call Now
+                </a>
+                <button
+                  onClick={openDialog}
+                  className="bg-gradient-to-r from-[#0F766E] to-[#FACC15] hover:opacity-90 text-[#0E1A24] font-semibold px-5 py-2 rounded-full transition shadow"
+                >
+                  Book Site Visit
+                </button>
               </div>
             </div>
-            <nav className="hidden md:block">
-              <ul className="flex space-x-2">
-                {navItems.map((item) => (
-                  <li key={item.id}>
-                    <a
-                      href={`#${item.to}`}
-                      onClick={() => handleSetActive(item.id)}
-                      className={`px-3 lg:px-4 py-2 text-xs font-medium transition-colors rounded-md ${
-                        activeSection === item.id
-                          ? "text-[#06202B] bg-[#F5EEDD] border border-[#7AE2CF]"
-                          : "text-white hover:text-[#F5EEDD] hover:bg-[#077A7D]/30 border border-[#7AE2CF]"
-                      }`}
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-            <div className="hidden md:flex space-x-3">
-              <a
-                href={`tel:${contact?.footer_phone}`}
-                className="bg-[#077A7D] text-white hover:bg-[#7AE2CF] font-bold py-2 px-4 rounded-lg transition-colors flex items-center text-sm"
-              >
-                <Phone size={14} className="mr-2 text-[#F5EEDD]" />
-                <span>Call Now</span>
-              </a>
-              <button
-                onClick={openDialog}
-                className="bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#077A7D]/90 hover:to-[#7AE2CF]/90 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm shadow-lg shadow-[#077A7D]/30"
-              >
-                Book Site Visit
-              </button>
-            </div>
+
+            {/* Mobile Menu Toggle */}
             <button
-              className="md:hidden text-white focus:outline-none p-2 bg-[#077A7D] rounded-lg"
               onClick={toggleMenu}
-              aria-label="Toggle menu"
+              className="md:hidden text-white p-2 rounded-md bg-[#0F766E] hover:bg-[#FACC15]/80 transition"
             >
               {menuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -160,125 +164,99 @@ function Navbar({ propertyData, loading, openDialog }) {
         </div>
       </header>
 
-      {/* Mobile menu overlay */}
+      {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 bg-[#06202B] backdrop-blur-md z-50 transition-all duration-300 ${
+        className={`fixed inset-0 z-50 transition-all duration-300 bg-[#0E1A24] backdrop-blur-lg ${
           menuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         } md:hidden`}
       >
-        <div className="flex flex-col h-full">
-          <div className="flex justify-between items-center p-6 border-b border-[#7AE2CF]">
-            <div className="flex items-center space-x-3">
+        <div className="h-full flex flex-col">
+          <div className="p-6 flex justify-between items-center border-b border-[#CBD5E1]/20">
+            <div className="flex items-center gap-3">
               <img
                 src={propertyData.logo}
-                alt={propertyData.property_name}
+                alt="logo"
                 className="h-10 object-contain"
               />
               <div>
-                <h2 className="text-lg text-white font-semibold">
+                <h2 className="text-white text-base font-semibold">
                   {propertyData.property_name}
                 </h2>
-                <p className="text-[#F5EEDD] text-xs font-medium">
-                  Premium Property
-                </p>
+                <p className="text-xs text-[#FACC15]">Premium Property</p>
               </div>
             </div>
             <button
               onClick={toggleMenu}
-              className="p-2 rounded-full hover:bg-[#7AE2CF] bg-[#077A7D]/40"
-              aria-label="Close menu"
+              className="p-2 rounded-full bg-[#FACC15]/10 hover:bg-[#FACC15]/20"
             >
               <X size={20} className="text-white" />
             </button>
           </div>
-          <div className="flex-grow overflow-y-auto pt-4">
-            <ul className="space-y-1 px-4">
+
+          <div className="flex-grow overflow-y-auto">
+            <ul className="p-4 space-y-2">
               {navItems.map((item) => (
                 <li key={item.id}>
                   <a
                     href={`#${item.to}`}
-                    onClick={() => handleSetActive(item.id)}
-                    className={`w-full text-left py-4 px-5 flex justify-between items-center rounded-lg transition-colors ${
+                    onClick={() => {
+                      handleSetActive(item.id);
+                      toggleMenu();
+                    }}
+                    className={`block px-5 py-3 rounded-lg text-sm font-medium ${
                       activeSection === item.id
-                        ? "text-[#06202B] bg-[#F5EEDD] border border-[#7AE2CF] font-medium"
-                        : "text-white hover:text-[#F5EEDD] hover:bg-[#077A7D]/30 border border-[#7AE2CF]"
+                        ? "bg-[#FACC15] text-[#0E1A24]"
+                        : "text-white hover:bg-[#0F766E]/20"
                     }`}
                   >
-                    <span>{item.label}</span>
-                    <ChevronDown
-                      size={16}
-                      className={`transition-transform ${
-                        activeSection === item.id
-                          ? "rotate-180 text-[#7AE2CF]"
-                          : "text-white"
-                      }`}
-                    />
+                    {item.label}
                   </a>
                 </li>
               ))}
             </ul>
-            <div className="p-6 space-y-4 mt-4 border-t border-[#7AE2CF]">
-              <div className="flex items-center">
-                <MapPin
-                  size={18}
-                  className="text-[#7AE2CF] mr-3 flex-shrink-0"
-                />
-                <span className="text-white text-sm">
-                  {propertyData.location}
-                </span>
-              </div>
-              <div className="flex items-center">
-                <Building
-                  size={18}
-                  className="text-[#7AE2CF] mr-3 flex-shrink-0"
-                />
-                <span className="text-white text-sm">
-                  {propertyData.builder_name}
-                </span>
-              </div>
-              <div className="flex items-center">
-                <Star size={18} className="text-[#7AE2CF] mr-3 flex-shrink-0" />
-                <span className="text-white text-sm">
-                  {4.8}/5{" "}
-                  <span className="text-[#F5EEDD] text-xs">(120 reviews)</span>
-                </span>
-              </div>
-              <div className="flex items-center">
-                <Clock
-                  size={18}
-                  className="text-[#7AE2CF] mr-3 flex-shrink-0"
-                />
-                <span className="text-white text-sm">
-                  Last updated:{" "}
-                  {new Date(
-                    propertyData.property_last_updated
-                  ).toLocaleDateString()}
-                </span>
-              </div>
-              <div className="pt-6 space-y-3 sticky bottom-0 pb-8">
-                <button
-                  onClick={openDialog}
-                  className="relative group w-full bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#077A7D]/90 hover:to-[#7AE2CF]/90 text-white font-medium py-3.5 px-4 rounded-lg transition-all shadow-lg shadow-[#077A7D]/20 overflow-hidden"
-                >
-                  <span className="relative z-10">Book Site Visit</span>
-                  {/* Shine sweep effect */}
-                  <span className="absolute inset-0 -left-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
-                </button>
 
-                <a
-                  href={`tel:${contact?.footer_phone}`}
-                  className="relative group w-full flex justify-center items-center bg-[#077A7D] text-white hover:bg-[#7AE2CF] font-bold py-3.5 px-4 rounded-lg transition-all overflow-hidden"
-                >
-                  <span className="relative z-10 flex items-center">
-                    <Phone size={18} className="mr-2 text-[#F5EEDD]" />
-                    Call Now
-                  </span>
-                  {/* Shine sweep effect */}
-                  <span className="absolute inset-0 -left-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
-                </a>
+            <div className="px-6 space-y-4 mt-4 border-t border-[#CBD5E1]/10 pt-4">
+              <div className="text-sm text-white flex items-center gap-2">
+                <MapPin className="text-[#FACC15]" size={18} />
+                {propertyData.location}
               </div>
+              <div className="text-sm text-white flex items-center gap-2">
+                <Building className="text-[#FACC15]" size={18} />
+                {propertyData.builder_name}
+              </div>
+              <div className="text-sm text-white flex items-center gap-2">
+                <Star className="text-[#FACC15]" size={18} />
+                4.8/5{" "}
+                <span className="text-xs text-[#CBD5E1]">(120 reviews)</span>
+              </div>
+              <div className="text-sm text-white flex items-center gap-2">
+                <Clock className="text-[#FACC15]" size={18} />
+                Last updated:{" "}
+                {new Date(
+                  propertyData.property_last_updated
+                ).toLocaleDateString()}
+              </div>
+            </div>
+
+            <div className="p-6 space-y-3 border-t border-[#CBD5E1]/10 mt-4">
+              <button
+                onClick={openDialog}
+                className="relative group w-full flex justify-center items-center gap-2 bg-gradient-to-r from-[#0F766E] to-[#FACC15] text-[#0E1A24] font-bold py-3 rounded-full shadow transition-all duration-300 zoom-pulse overflow-hidden hover:opacity-90"
+              >
+                <span className="relative z-10">Book Site Visit</span>
+                <span className="absolute top-0 left-[-100%] w-[200%] h-full bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+              </button>
+
+              <a
+                href={`tel:${contact?.footer_phone}`}
+                className="relative group w-full flex justify-center items-center gap-2 bg-[#0F766E] text-white font-bold py-3 rounded-full shadow transition-all duration-300 zoom-pulse hover:bg-[#FACC15] hover:text-[#0E1A24] overflow-hidden"
+              >
+                <Phone size={18} className="relative z-10 mr-1" />
+                <span className="relative z-10">Call Now</span>
+                <span className="absolute top-0 left-[-100%] w-[200%] h-full bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+              </a>
             </div>
           </div>
         </div>

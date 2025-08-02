@@ -1,3 +1,4 @@
+// Keep all imports as they are
 import React, { useState, useEffect, useMemo } from "react";
 import {
   Waves,
@@ -21,7 +22,7 @@ import {
   Dog,
 } from "lucide-react";
 import { ContactDialog } from "./Contact";
-import config from "../../config";
+import { API } from "../../config";
 
 const Amenities = () => {
   const [amenities, setAmenities] = useState([]);
@@ -40,9 +41,7 @@ const Amenities = () => {
     const fetchAmenities = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-          `${config.API_URL}/amenities?website=${config.SLUG_URL}`
-        );
+        const response = await fetch(API.AMENITIES());
 
         if (!response.ok) {
           throw new Error("Failed to fetch amenities data");
@@ -65,9 +64,10 @@ const Amenities = () => {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      if (width < 640) setItemsPerSlide(2); // mobile
-      else if (width < 1024) setItemsPerSlide(6); // tablet
-      else setItemsPerSlide(8); // large screen
+      if (width < 640)
+        setItemsPerSlide(2); // mobile: 2 items = 1 per row × 2 rows
+      else if (width < 1024) setItemsPerSlide(3); // tablet
+      else setItemsPerSlide(4); // desktop
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -82,7 +82,7 @@ const Amenities = () => {
     const totalSlides = Math.ceil(amenities.length / itemsPerSlide);
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % totalSlides);
-    }, 2000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [amenities, itemsPerSlide]);
@@ -155,10 +155,10 @@ const Amenities = () => {
 
   return (
     <>
-      <div className="w-full mx-auto px-6 sm:px-8 lg:px-16 py-16 bg-gradient-to-b from-[#06202B] via-[#06202B]/95 to-[#077A7D]/90">
+      <div className="w-full mx-auto px-6 sm:px-8 lg:px-16 py-16 bg-[#0E1A24]">
         <div className="flex items-center mb-8 px-2 sm:px-0">
-          <div className="w-1 h-8 sm:h-10 bg-gradient-to-b from-[#077A7D] to-[#7AE2CF] rounded-full mr-4 shadow-md"></div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#F5EEDD] tracking-tight leading-snug drop-shadow-sm">
+          <div className="w-1 h-8 sm:h-10 bg-gradient-to-b from-[#FACC15] to-[#0F766E] rounded-full mr-4 shadow-md"></div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#CBD5E1] tracking-tight leading-snug drop-shadow-sm">
             {heading || "Premium Amenities"}
           </h2>
         </div>
@@ -168,79 +168,82 @@ const Amenities = () => {
           {currentItems.map((amenity) => (
             <div
               key={amenity.id}
-              className="bg-gradient-to-br from-[#7AE2CF]/10 via-[#077A7D]/10 to-[#F5EEDD]/10 border border-[#7AE2CF]/30 rounded-3xl group hover:border-[#7AE2CF] hover:shadow-xl shadow-md transition-all duration-300 transform hover:-translate-y-1 p-6 flex flex-col items-center text-center"
+              className="bg-[#13212E] border border-[#CBD5E1]/10 group hover:border-[#FACC15] hover:shadow-[0_4px_20px_rgba(250,204,21,0.1)] shadow-lg transition-all duration-300 transform hover:-translate-y-1 p-4 flex flex-col items-center text-center rounded-2xl"
             >
-              <div className="w-28 h-28 sm:w-32 sm:h-32 bg-[#077A7D]/10 rounded-full flex items-center justify-center overflow-hidden mb-4 shadow group-hover:shadow-[#7AE2CF]/30 transition-shadow duration-300">
+              <div className="w-full aspect-square bg-[#CBD5E1]/5 border border-[#CBD5E1]/10 shadow-inner overflow-hidden mb-4 rounded-xl">
                 <img
                   src={amenity.property_amenities_photo}
                   alt={amenity.amenity_name}
-                  className="w-full h-full object-cover rounded-full"
+                  className="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
-              <h3 className="text-[#F5EEDD] text-sm sm:text-base font-semibold group-hover:text-[#7AE2CF] transition-colors duration-300">
+              <h3 className="text-[#CBD5E1] text-sm sm:text-base font-semibold group-hover:text-[#FACC15] transition-colors duration-300">
                 {amenity.amenity_name}
               </h3>
             </div>
           ))}
         </div>
 
-        {/* Dots */}
-        <div className="flex justify-center mt-6 space-x-2">
+        {/* Updated Dots Style */}
+        <div className="flex justify-center mt-8 space-x-2">
           {Array.from({ length: totalSlides }).map((_, index) => (
             <div
               key={index}
-              className={`w-2.5 h-2.5 rounded-full ${
+              className={`h-1 rounded-full transition-all duration-300 ${
                 index === activeSlide
-                  ? "bg-[#077A7D] scale-110"
-                  : "bg-[#7AE2CF]/40"
-              } transition-all duration-300`}
+                  ? "w-8 bg-gradient-to-r from-[#FACC15] to-[#0F766E] shadow-[0_0_6px_#FACC15]"
+                  : "w-4 bg-[#CBD5E1]/30"
+              }`}
             ></div>
           ))}
         </div>
 
         <style>
           {`
-      @keyframes shine {
-        0% {
-          transform: translateX(-100%);
-          opacity: 0;
+        @keyframes shine {
+          0% {
+            transform: translateX(-100%);
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateX(100%);
+            opacity: 0;
+          }
         }
-        50% {
-          opacity: 1;
-        }
-        100% {
-          transform: translateX(100%);
-          opacity: 0;
-        }
-      }
 
-      .animate-shine {
-        animation: shine 2s infinite linear;
-      }
-    `}
+        .animate-shine {
+          animation: shine 2s infinite linear;
+        }
+      `}
         </style>
 
         {/* CTA Section */}
-        <div className="mt-16 text-center px-6 py-12 sm:px-10 md:px-16 bg-gradient-to-br from-[#06202B] via-[#077A7D] to-[#7AE2CF] rounded-3xl border border-[#F5EEDD]/30 shadow-2xl relative overflow-hidden backdrop-blur-xl">
-          {/* Radial glow shimmer */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(122,226,207,0.12)_0%,transparent_75%)] opacity-80 pointer-events-none"></div>
+        <div className="mt-16 text-center px-6 py-8 sm:px-10 md:px-16 bg-[#0E1A24]/60 rounded-2xl border border-[#FACC15]/20 shadow-[0_0_30px_rgba(250,204,21,0.1)] relative overflow-hidden backdrop-blur-md">
+          {/* Decorative Glow Orbs */}
+          <div className="absolute top-[-2rem] left-[-2rem] w-52 h-52 bg-[#FACC15]/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-[-2rem] right-[-2rem] w-52 h-52 bg-[#0F766E]/10 rounded-full blur-3xl"></div>
 
           <div className="relative z-10 max-w-3xl mx-auto">
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#F5EEDD] tracking-tight mb-4 drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]">
-              Want to learn more about our amenities?
+            <h3 className="relative text-2xl sm:text-3xl font-extrabold text-[#CBD5E1] tracking-tight mb-8 inline-block">
+              <span className="relative z-10">Discover Premium Amenities</span>
+              <span className="absolute left-1/2 -translate-x-1/2 bottom-[-6px] w-1/2 h-1 bg-gradient-to-r from-[#0F766E] to-[#FACC15] rounded-full"></span>
             </h3>
-            <p className="text-[#F5EEDD]/90 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-              Discover how our premium amenities can elevate your lifestyle. Our
-              team is ready to assist you at every step.
+            <p className="text-[#CBD5E1]/80 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-10 px-4">
+              Elevate your lifestyle with thoughtfully designed amenities,
+              blending modern aesthetics and functionality. Our team is here to
+              guide you.
             </p>
             <button
               onClick={openDialog}
-              className="relative group overflow-hidden inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] text-[#06202B] font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:scale-105 active:scale-100"
+              className="relative zoom-pulse inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg bg-gradient-to-r from-[#FACC15] to-[#FFE87A] text-[#0E1A24] font-bold text-sm sm:text-base shadow-lg hover:shadow-[0_0_20px_#FACC15] transition-all duration-300 hover:-translate-y-1"
             >
-              <span className="relative z-10">Enquire About Amenities</span>
+              <span className="relative z-10">Explore Amenities</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="relative z-10 h-5 w-5"
+                className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -252,9 +255,6 @@ const Amenities = () => {
                   d="M14 5l7 7m0 0l-7 7m7-7H3"
                 />
               </svg>
-
-              {/* Shine sweep effect */}
-              <span className="absolute left-[-75%] top-0 h-full w-[200%] bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
             </button>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ContactDialog } from "./Contact";
-import config from "../../config";
+import { API } from "../../config";
 import Navbar from "./Navbar";
 import HeroSection from "./HeroSection";
 
@@ -18,9 +18,7 @@ export default function PropertyHeader() {
     async function fetchPropertyData() {
       setLoading(true);
       try {
-        const res = await fetch(
-          `${config.API_URL}/header?website=${config.SLUG_URL}`
-        );
+        const res = await fetch(API.HEADER());
         const data = await res.json();
         setPropertyData(data);
         setError(null);

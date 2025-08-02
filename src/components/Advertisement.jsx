@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Loader, AlertTriangle } from "lucide-react";
-import config from "../../config";
+import { API } from "../../config";
 
 const Advertisement = () => {
   const [ads, setAds] = useState([]);
@@ -11,9 +11,7 @@ const Advertisement = () => {
   useEffect(() => {
     const fetchAds = async () => {
       try {
-        const response = await fetch(
-          `${config.API_URL}/advertisement?website=${config.SLUG_URL}`
-        );
+        const response = await fetch(API.ADVERTISEMENT());
         if (!response.ok) throw new Error("Failed to fetch advertisement data");
 
         const data = await response.json();

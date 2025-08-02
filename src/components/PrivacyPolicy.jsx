@@ -2,9 +2,9 @@ import React from "react";
 
 const PrivacyPolicy = () => {
   return (
-    <div className="min-h-screen bg-[#06202B] text-[#F5EEDD] p-6">
-      <div className="max-w-3xl mx-auto bg-[#077A7D] text-[#F5EEDD] rounded-2xl p-8 shadow-2xl border border-[#7AE2CF]/30 backdrop-blur-lg">
-        <h1 className="text-4xl font-bold mb-6 tracking-tight border-b border-[#7AE2CF]/30 pb-2">
+    <div className="min-h-screen bg-[#0E1A24] text-[#CBD5E1] p-6">
+      <div className="max-w-3xl mx-auto bg-[#0F766E] text-[#CBD5E1] rounded-2xl p-8 shadow-2xl border border-[#FACC15]/30 backdrop-blur-lg">
+        <h1 className="text-4xl font-bold mb-6 tracking-tight border-b border-[#FACC15]/30 pb-2">
           Privacy Policy & Terms of Use
         </h1>
 
@@ -14,7 +14,7 @@ const PrivacyPolicy = () => {
           (MAHARERA) with RERA No: A52100019166. Your privacy is our priority...
         </p>
 
-        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#7AE2CF] pl-3">
+        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#FACC15] pl-3">
           Interpretations and Definitions
         </h2>
         <ul className="list-disc pl-6 mb-6 space-y-2">
@@ -39,14 +39,14 @@ const PrivacyPolicy = () => {
           </li>
         </ul>
 
-        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#7AE2CF] pl-3">
+        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#FACC15] pl-3">
           Website Content Overview
         </h2>
         <p className="mb-6">
           The contents of this landing page, containing details of properties...
         </p>
 
-        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#7AE2CF] pl-3">
+        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#FACC15] pl-3">
           Types of Data Collected
         </h2>
         <h3 className="text-xl font-semibold mb-2">Personal Data</h3>
@@ -61,7 +61,7 @@ const PrivacyPolicy = () => {
           <li>Address, State, Province, ZIP/Postal code, City</li>
         </ul>
 
-        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#7AE2CF] pl-3">
+        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#FACC15] pl-3">
           Uses of Personal Data
         </h2>
         <ul className="list-disc pl-6 mb-6 space-y-2">
@@ -71,42 +71,42 @@ const PrivacyPolicy = () => {
           <li>To manage your requests.</li>
         </ul>
 
-        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#7AE2CF] pl-3">
+        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#FACC15] pl-3">
           Retention of Your Personal Data
         </h2>
         <p className="mb-6">
           We shall retain your Personal Data only as long as necessary...
         </p>
 
-        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#7AE2CF] pl-3">
+        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#FACC15] pl-3">
           Disclosure of Your Personal Data
         </h2>
         <p className="mb-6">
           By using this website, you consent to the collection and use...
         </p>
 
-        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#7AE2CF] pl-3">
+        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#FACC15] pl-3">
           Security of Your Personal Data
         </h2>
         <p className="mb-6">
           The security of your Personal Data is important to us...
         </p>
 
-        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#7AE2CF] pl-3">
+        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#FACC15] pl-3">
           Children's Privacy
         </h2>
         <p className="mb-6">
           Our service does not address anyone under the age of 18...
         </p>
 
-        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#7AE2CF] pl-3">
+        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#FACC15] pl-3">
           Changes to This Privacy Policy
         </h2>
         <p className="mb-6">
           We may update our Privacy Policy from time to time...
         </p>
 
-        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#7AE2CF] pl-3">
+        <h2 className="text-2xl font-semibold mt-6 mb-4 border-l-4 border-[#FACC15] pl-3">
           Contact Us
         </h2>
         <p className="mb-6">
@@ -114,14 +114,14 @@ const PrivacyPolicy = () => {
           us at{" "}
           <a
             href="mailto:info@buyindiahomes.com"
-            className="text-[#7AE2CF] hover:text-white underline transition-colors duration-300"
+            className="text-[#FACC15] hover:text-white underline transition-colors duration-300"
           >
             info@buyindiahomes.com
           </a>
           .
         </p>
 
-        <div className="text-center text-[#F5EEDD]/70 mt-8">
+        <div className="text-center text-[#CBD5E1]/70 mt-8">
           &copy; {new Date().getFullYear()} Buy India Homes Digital Pvt Ltd
         </div>
       </div>

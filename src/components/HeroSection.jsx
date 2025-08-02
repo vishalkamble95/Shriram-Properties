@@ -30,11 +30,11 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
   };
 
   return (
-    <section className="relative bg-[#06202B]">
-      {/* Hero Image Container - Significantly reduced height on mobile */}
-      <div className="h-auto md:h-screen w-full relative overflow-hidden">
+    <section className="relative bg-[#0E1A24]">
+      {/* HERO IMAGE (unchanged layout, still full screen) */}
+      <div className="h-screen w-full relative overflow-hidden">
         {loading ? (
-          <div className="h-full w-full bg-[#5b9aa0]/10 animate-pulse"></div>
+          <div className="h-full w-full bg-[#CBD5E1]/10 animate-pulse"></div>
         ) : (
           <>
             {/* Desktop Images */}
@@ -56,7 +56,7 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
             </div>
 
             {/* Mobile Images */}
-            <div className="md:hidden w-full h-screen relative overflow-hidden">
+            <div className="md:hidden w-full h-full relative overflow-hidden">
               {propertyData.hero_banner_img?.mobile?.map((img, index) => (
                 <div
                   key={index}
@@ -75,19 +75,18 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
               ))}
             </div>
 
-            {/* Image navigation dots - Smaller on mobile */}
+            {/* Navigation Dots */}
             {propertyData.hero_banner_img?.desktop?.length > 1 && (
-              <div className="absolute bottom-2 md:bottom-4 left-0 right-0 flex justify-center space-x-1 md:space-x-2 z-20">
+              <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-20">
                 {propertyData.hero_banner_img.desktop.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => handleImageChange(index)}
-                    className={`h-1 md:h-2 rounded-full transition-all ${
+                    className={`h-2 w-2 rounded-full ${
                       index === currentImageIndex
-                        ? "bg-[#5b9aa0] w-6 md:w-8"
-                        : "bg-white/50 w-1 md:w-2 hover:bg-white/80"
+                        ? "bg-[#FACC15]"
+                        : "bg-white/40 hover:bg-white/70"
                     }`}
-                    aria-label={`View image ${index + 1}`}
                   />
                 ))}
               </div>
@@ -96,113 +95,83 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
         )}
       </div>
 
-      {/* Content Overlay - Reduced margins for compact and professional spacing */}
-      <div className="flex flex-col justify-center items-center text-[#06202B] pt-12 pb-12 px-4 sm:px-6 md:px-10 bg-[#F5EEDD]">
-        {/* Content */}
-        <div className="text-center md:text-left w-full max-w-6xl mb-8">
-          {loading ? (
-            <>
-              <div className="h-6 md:h-12 w-36 md:w-64 bg-[#7AE2CF]/30 animate-pulse rounded mb-4 mx-auto md:mx-0"></div>
-              <div className="h-3 md:h-6 w-24 md:w-48 bg-[#7AE2CF]/30 animate-pulse rounded mb-6 mx-auto md:mx-0"></div>
-            </>
-          ) : (
-            <>
-              <div className="bg-[#06202B]/10 backdrop-blur-md p-6 md:p-8 rounded-xl shadow-lg w-full max-w-3xl mx-auto text-center">
-                <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 text-[#06202B] drop-shadow-md">
-                  {propertyData.hero_banner_heading}
-                </h1>
-                <div className="flex items-center justify-center text-[#077A7D] drop-shadow-sm">
-                  <MapPin size={16} className="mr-2" />
-                  <p className="text-sm md:text-lg font-medium">
-                    {propertyData.location}
-                  </p>
-                </div>
+      {/* CONTENT SECTION (redesigned) */}
+      <div className="bg-[#0E1A24] text-[#CBD5E1] px-4 sm:px-8 md:px-16 lg:px-24 py-16">
+        {/* Heading & Location */}
+        {loading ? (
+          <div className="text-center space-y-4 mb-12">
+            <div className="h-8 w-60 mx-auto bg-[#CBD5E1]/20 rounded animate-pulse" />
+            <div className="h-4 w-40 mx-auto bg-[#CBD5E1]/20 rounded animate-pulse" />
+          </div>
+        ) : (
+          <div className="text-center mb-12">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#FACC15] mb-4">
+              {propertyData.hero_banner_heading}
+            </h1>
+            <div className="flex justify-center items-center gap-2 text-[#0F766E] text-base sm:text-lg font-medium">
+              <MapPin size={20} />
+              <span>{propertyData.location}</span>
+            </div>
+          </div>
+        )}
+
+        {/* Property Specifications Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-7xl mx-auto mb-12">
+          {[
+            {
+              label: "Property Type",
+              value: propertyData?.property_type_price_range_text,
+            },
+            {
+              label: "Developer",
+              value: propertyData?.builder_name,
+            },
+            {
+              label: "Project Status",
+              value: propertyData?.property_status ?? "Active",
+            },
+            {
+              label: "Location",
+              value: propertyData?.location ?? "Pune, Maharashtra",
+            },
+            {
+              label: "Last Updated",
+              value: propertyData?.property_last_updated,
+            },
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="bg-[#0F766E]/10 border border-[#0F766E]/30 rounded-xl p-5 text-center shadow-md hover:shadow-lg transition-all duration-300"
+            >
+              <div className="text-sm text-[#0F766E] font-medium mb-2">
+                {item.label}
               </div>
-            </>
-          )}
+              <div className="text-[#CBD5E1] font-semibold text-base">
+                {item.value}
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* Specifications Section */}
-        <div className="w-full space-y-8 px-4 sm:px-6 lg:px-12 py-10 bg-gradient-to-br from-[#F5EEDD] to-[#7AE2CF]/10 rounded-2xl shadow-xl border border-[#5b9aa0]/10 backdrop-blur-md transition-all duration-300 text-center">
-          <h3 className="text-2xl sm:text-3xl font-bold text-[#06202B] mb-10 flex items-center space-x-3 justify-center">
-            <Building size={26} className="text-[#077A7D]" />
-            <span className="bg-[#7AE2CF]/10 text-[#077A7D] px-5 py-2 text-base rounded-full border border-[#7AE2CF]/30 shadow-sm">
-              Property Specifications
-            </span>
-          </h3>
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+          <button
+            onClick={openDialog}
+            className="relative group flex items-center justify-center gap-2 bg-gradient-to-r from-[#0F766E] to-[#FACC15] text-[#0E1A24] px-6 py-3 rounded-lg font-semibold shadow-lg hover:opacity-90 transition-all duration-300 zoom-pulse overflow-hidden"
+          >
+            <Download size={18} className="relative z-10" />
+            <span className="relative z-10">Download Brochure</span>
+            <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none" />
+          </button>
 
-          <div className="flex flex-wrap justify-center gap-6">
-            {[
-              {
-                label: "Property Type",
-                value: propertyData?.property_type_price_range_text,
-              },
-              {
-                label: "Developer",
-                value: propertyData?.builder_name,
-              },
-              {
-                label: "Project Status",
-                value: propertyData?.property_status ?? "Active",
-                badge: true,
-              },
-              {
-                label: "Location",
-                value:
-                  propertyData?.location || "Pune, Maharashtra",
-                badge: true,
-              },
-              {
-                label: "Last Updated",
-                value: propertyData?.property_last_updated,
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="w-[90%] sm:w-[45%] md:w-[30%] xl:w-[18%] max-w-[300px] bg-white/90 border border-[#5b9aa0]/20 rounded-2xl p-6 backdrop-blur-md shadow-md hover:shadow-lg transition-all duration-300 text-center"
-              >
-                <span className="text-sm font-medium text-[#077A7D] mb-1 block">
-                  {item.label}
-                </span>
-                {item.badge ? (
-                  <span className="inline-block px-3 py-1 bg-[#7AE2CF]/20 text-[#06202B] border border-[#7AE2CF]/30 text-xs font-semibold rounded-md">
-                    {item.value}
-                  </span>
-                ) : (
-                  <span className="text-[#06202B] font-semibold text-base">
-                    {item.value}
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 flex flex-col sm:flex-row sm:justify-center sm:items-center gap-4">
-            <button
-              onClick={openDialog}
-              className="relative group w-full sm:w-60 py-3 px-6 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#066568] hover:to-[#64c9b9] active:from-[#044e50] active:to-[#4db0a0] rounded-lg text-white font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#077A7D]/20 overflow-hidden"
-            >
-              <span className="relative z-10 flex items-center">
-                <Download size={18} className="mr-2" />
-                Download Brochure
-              </span>
-              {/* Shine sweep effect */}
-              <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/50 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
-            </button>
-
-            <a
-              href="#contact"
-              className="relative group w-full sm:w-60 py-3 px-6 bg-gradient-to-r from-[#077A7D] to-[#7AE2CF] hover:from-[#066568] hover:to-[#64c9b9] active:from-[#044e50] active:to-[#4db0a0] rounded-lg text-white font-semibold flex items-center justify-center transition-all duration-200 shadow-lg shadow-[#077A7D]/20 overflow-hidden text-center"
-            >
-              <span className="relative z-10 flex items-center">
-                <Phone size={18} className="mr-2 text-white" />
-                Contact
-              </span>
-
-              {/* Shine sweep effect */}
-              <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#06202B]/50 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
-            </a>
-          </div>
+          <a
+            href="#contact"
+            className="relative group flex items-center justify-center gap-2 border border-[#FACC15] text-[#FACC15] px-6 py-3 rounded-lg font-semibold hover:bg-[#FACC15] hover:text-[#0E1A24] shadow-md transition-all duration-300 zoom-pulse overflow-hidden"
+          >
+            <Phone size={18} className="relative z-10" />
+            <span className="relative z-10">Contact</span>
+            <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none" />
+          </a>
         </div>
       </div>
     </section>

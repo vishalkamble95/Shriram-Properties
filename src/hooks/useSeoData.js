@@ -1,66 +1,64 @@
 import { useState, useEffect } from "react";
-import seoData from "../../public/seodata.json"; // Directly import static SEO data
+import { API, WEBSITE_DOMAIN } from "../../config"; // adjust the path as needed
 
 export function useSeoData() {
+  const [seoData, setSeoData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    try {
-      // Simulate an async operation (if needed)
+    async function fetchSeoData() {
       setLoading(true);
+      try {
+        const response = await fetch(API.SEO_DETAIL(WEBSITE_DOMAIN));
+        const json = await response.json();
 
-      if (seoData.success) {
-        // Update the document title
-        document.title = seoData.data.title || "SMP Amberwood";
+        if (json.success) {
+          setSeoData(json.data);
 
-        // Update meta description
-        updateMetaTag("description", seoData.data.meta_description);
+          document.title = json.data.title || "SMP Amberwood";
 
-        // Update keywords
-        updateMetaTag("keywords", seoData.data.keywords);
+          updateMetaTag("description", json.data.meta_description);
+          updateMetaTag("keywords", json.data.keywords);
+          updateMetaTag("og:title", json.data.og_title);
+          updateMetaTag("og:description", json.data.og_description);
+          updateMetaTag("og:image", json.data.og_image);
+          updateMetaTag("og:type", json.data.og_type || "website");
 
-        // Update favicon
-        if (seoData.data.favicon) {
-          const link =
-            document.querySelector('link[rel="icon"]') ||
-            document.createElement("link");
-          link.type = "image/x-icon";
-          link.rel = "icon";
-          link.href = seoData.data.favicon;
-          if (!document.querySelector('link[rel="icon"]')) {
-            document.head.appendChild(link);
+          if (json.data.favicon) {
+            const link =
+              document.querySelector('link[rel="icon"]') ||
+              document.createElement("link");
+            link.type = "image/x-icon";
+            link.rel = "icon";
+            link.href = json.data.favicon;
+            if (!document.querySelector('link[rel="icon"]')) {
+              document.head.appendChild(link);
+            }
           }
-        }
 
-        // Update Open Graph tags
-        updateMetaTag("og:title", seoData.data.og_title);
-        updateMetaTag("og:description", seoData.data.og_description);
-        updateMetaTag("og:image", seoData.data.og_image);
-        updateMetaTag("og:type", seoData.data.og_type || "website");
-
-        // Add JSON-LD scripts
-        if (seoData.data.script_1) {
-          addJsonLdScript(seoData.data.script_1, "seo-jsonld-1");
+          if (json.data.script_1) {
+            addJsonLdScript(json.data.script_1, "seo-jsonld-1");
+          }
+          if (json.data.script_2) {
+            addJsonLdScript(json.data.script_2, "seo-jsonld-2");
+          }
+        } else {
+          throw new Error("Invalid SEO data format");
         }
-        if (seoData.data.script_2) {
-          addJsonLdScript(seoData.data.script_2, "seo-jsonld-2");
-        }
-      } else {
-        throw new Error("Invalid SEO data format");
+      } catch (err) {
+        setError(err.message);
+        console.error("Error loading SEO data:", err);
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      setError(err.message);
-      console.error("Error loading SEO data:", err);
-    } finally {
-      setLoading(false);
     }
+
+    fetchSeoData();
   }, []);
 
-  // Helper function to update meta tags
   const updateMetaTag = (name, content) => {
     if (!content) return;
-
     let metaTag =
       document.querySelector(`meta[name="${name}"]`) ||
       document.querySelector(`meta[property="${name}"]`);
@@ -78,13 +76,10 @@ export function useSeoData() {
     metaTag.setAttribute("content", content);
   };
 
-  // Helper function to add JSON-LD scripts
   const addJsonLdScript = (jsonContent, id) => {
     try {
       const existingScript = document.getElementById(id);
-      if (existingScript) {
-        existingScript.remove();
-      }
+      if (existingScript) existingScript.remove();
 
       const script = document.createElement("script");
       script.id = id;
@@ -96,5 +91,5 @@ export function useSeoData() {
     }
   };
 
-  return { seoData: seoData.data, loading, error };
+  return { seoData, loading, error };
 }
