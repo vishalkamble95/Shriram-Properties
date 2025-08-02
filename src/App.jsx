@@ -30,7 +30,7 @@ function App() {
         <script type="application/ld+json">{seoData.data.script_2}</script>
       </Helmet>
       <>
-        <Router>
+        <Router basename="/Shriram-Properties">
           <ScrollManager />
           <Routes>
             <Route path="/" element={<HomePage />} exact />
