@@ -19,6 +19,7 @@ const ContactUs = () => {
   const [submitting, setSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // null, "success", "error"
   const [errorMessage, setErrorMessage] = useState("");
+  const [phoneFocused, setPhoneFocused] = useState(false);
 
   const navigate = useNavigate();
 
@@ -126,7 +127,6 @@ const ContactUs = () => {
         throw new Error(errorData.message || "Failed to submit form");
       }
 
-      // Success: clear the form and show a success message
       // setSubmitStatus("success");
       setFormData({
         first_name: "",
@@ -148,54 +148,43 @@ const ContactUs = () => {
     }
   };
 
-  // Auto-hide success message after 3 seconds
-  // useEffect(() => {
-  //   if (submitStatus === "success") {
-  //     const timer = setTimeout(() => {
-  //       setSubmitStatus("");
-  //     }, 5000); // 5 seconds
-
-  //     return () => clearTimeout(timer); // Cleanup on unmount
-  //   }
-  // }, [submitStatus]);
-
   return (
-    <div className="relative bg-[#0E1A24] py-16 px-4 sm:px-8" id="contact">
+    <div className="relative bg-[#222831] py-16 px-4 sm:px-8" id="contact">
       {/* Top shadow divider to separate from previous section */}
       <div className="absolute top-0 left-0 w-full h-6 shadow-[0_-10px_20px_-10px_rgba(0,0,0,0.5)] z-0 pointer-events-none"></div>
       <div className="mb-16 text-center">
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-[#FACC15] mb-4 tracking-tight leading-tight">
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-[#EEEEEE] mb-4 tracking-tight leading-tight">
           Contact Us
         </h2>
-        <div className="w-28 h-1 bg-gradient-to-r from-[#FACC15] to-[#0F766E] mx-auto rounded-full mb-3 animate-pulse shadow-md shadow-[#FACC15]/30"></div>
-        <p className="text-[#CBD5E1]/90 mt-4 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+        <div className="w-28 h-1 bg-gradient-to-r from-[#EEEEEE] to-[#00ADB5] mx-auto rounded-full mb-3 animate-pulse shadow-md shadow-[#EEEEEE]/30"></div>
+        <p className="text-[#EEEEEE]/90 mt-4 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
           We're here to assist you with any inquiries about our properties. Fill
           out the form and our team will get back to you shortly.
         </p>
       </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#0F766E]/10 p-4 sm:p-6 md:p-10 rounded-3xl border border-[#CBD5E1]/20 shadow-2xl relative overflow-hidden backdrop-blur-md">
-          <div className="absolute top-0 right-0 w-52 h-52 bg-[#0F766E]/20 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#CBD5E1]/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl"></div>
+        <div className="bg-[#00ADB5]/10 p-4 sm:p-6 md:p-10 rounded-3xl border border-[#EEEEEE]/20 shadow-2xl relative overflow-hidden backdrop-blur-md">
+          <div className="absolute top-0 right-0 w-52 h-52 bg-[#00ADB5]/20 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#EEEEEE]/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl"></div>
 
           <div className="flex items-center mb-8 relative z-10">
-            <div className="w-1.5 h-8 bg-gradient-to-b from-[#FACC15] to-[#0F766E] rounded-full mr-4 shadow-lg"></div>
-            <h3 className="text-3xl font-bold text-[#FACC15] tracking-tight">
+            <div className="w-1.5 h-8 bg-gradient-to-b from-[#EEEEEE] to-[#00ADB5] rounded-full mr-4 shadow-lg"></div>
+            <h3 className="text-3xl font-bold text-[#EEEEEE] tracking-tight">
               Send Us a Message
             </h3>
           </div>
 
           {submitStatus === "success" && (
-            <div className="mb-8 bg-[#0F766E]/10 border border-[#0F766E]/30 text-[#CBD5E1] px-6 py-5 sm:px-8 sm:py-6 rounded-2xl flex items-start gap-4 shadow-xl shadow-[#0F766E]/20 backdrop-blur-lg animate-fade-in transition-all duration-300">
-              <div className="bg-[#0F766E]/20 rounded-full p-3 sm:p-3.5 mt-1 flex-shrink-0 shadow-md shadow-[#CBD5E1]/20">
-                <Send size={20} className="text-[#FACC15]" />
+            <div className="mb-8 bg-[#00ADB5]/10 border border-[#00ADB5]/30 text-[#EEEEEE] px-6 py-5 sm:px-8 sm:py-6 rounded-2xl flex items-start gap-4 shadow-xl shadow-[#00ADB5]/20 backdrop-blur-lg animate-fade-in transition-all duration-300">
+              <div className="bg-[#00ADB5]/20 rounded-full p-3 sm:p-3.5 mt-1 flex-shrink-0 shadow-md shadow-[#EEEEEE]/20">
+                <Send size={20} className="text-[#EEEEEE]" />
               </div>
               <div className="text-sm sm:text-base leading-relaxed">
-                <p className="font-semibold text-[#FACC15] mb-1">
+                <p className="font-semibold text-[#EEEEEE] mb-1">
                   Thank you for your message!
                 </p>
-                <p className="text-[#CBD5E1]/90">
+                <p className="text-[#EEEEEE]/90">
                   We'll get back to you shortly.
                 </p>
               </div>
@@ -220,14 +209,14 @@ const ContactUs = () => {
               <div>
                 <label
                   htmlFor="first_name"
-                  className="block text-[#FACC15] mb-2 text-sm font-medium"
+                  className="block text-[#EEEEEE] mb-2 text-sm font-medium"
                 >
-                  First Name <span className="text-[#CBD5E1]">*</span>
+                  First Name <span className="text-[#EEEEEE]">*</span>
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 flex items-center pl-4 z-10 pointer-events-none">
-                    <div className="bg-[#0E1A24]/30 rounded-full p-1.5 shadow-md">
-                      <User size={18} className="text-[#CBD5E1]" />
+                    <div className="bg-[#222831]/30 rounded-full p-1.5 shadow-md">
+                      <User size={18} className="text-[#EEEEEE]" />
                     </div>
                   </div>
                   <input
@@ -236,11 +225,11 @@ const ContactUs = () => {
                     name="first_name"
                     value={formData.first_name}
                     onChange={handleInputChange}
-                    className={`w-full bg-gradient-to-r from-[#0E1A24]/80 to-[#0F766E]/70 text-[#CBD5E1] border ${
+                    className={`w-full bg-gradient-to-r from-[#222831]/80 to-[#00ADB5]/70 text-[#EEEEEE] border ${
                       formErrors.first_name
                         ? "border-red-500"
-                        : "border-[#CBD5E1]/40"
-                    } rounded-2xl pl-12 pr-4 py-3 placeholder-[#CBD5E1]/60 focus:outline-none focus:ring-2 focus:ring-[#0F766E] focus:border-[#0F766E] transition-all duration-300 backdrop-blur-md shadow-sm`}
+                        : "border-[#EEEEEE]/40"
+                    } rounded-2xl pl-12 pr-4 py-3 placeholder-[#EEEEEE]/60 focus:outline-none focus:ring-2 focus:ring-[#00ADB5] focus:border-[#00ADB5] transition-all duration-300 backdrop-blur-md shadow-sm`}
                     placeholder="First name*"
                   />
                 </div>
@@ -256,14 +245,14 @@ const ContactUs = () => {
               <div>
                 <label
                   htmlFor="last_name"
-                  className="block text-[#FACC15] mb-2 text-sm font-medium"
+                  className="block text-[#EEEEEE] mb-2 text-sm font-medium"
                 >
-                  Last Name <span className="text-[#CBD5E1]">*</span>
+                  Last Name <span className="text-[#EEEEEE]/70">*</span>
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 flex items-center pl-4 z-10 pointer-events-none">
-                    <div className="bg-[#0E1A24]/30 rounded-full p-1.5 shadow-md">
-                      <User size={18} className="text-[#CBD5E1]" />
+                    <div className="bg-[#393E46]/30 rounded-full p-1.5 shadow-md">
+                      <User size={18} className="text-[#EEEEEE]" />
                     </div>
                   </div>
                   <input
@@ -272,11 +261,11 @@ const ContactUs = () => {
                     name="last_name"
                     value={formData.last_name}
                     onChange={handleInputChange}
-                    className={`w-full bg-gradient-to-r from-[#0E1A24]/80 to-[#0F766E]/70 text-[#CBD5E1] border ${
+                    className={`w-full bg-gradient-to-r from-[#222831]/80 to-[#00ADB5]/70 text-[#EEEEEE] border ${
                       formErrors.last_name
                         ? "border-red-500"
-                        : "border-[#CBD5E1]/40"
-                    } rounded-2xl pl-12 pr-4 py-3 placeholder-[#CBD5E1]/60 focus:outline-none focus:ring-2 focus:ring-[#0F766E] focus:border-[#0F766E] transition-all duration-300 backdrop-blur-md shadow-sm`}
+                        : "border-[#EEEEEE]/40"
+                    } rounded-2xl pl-12 pr-4 py-3 placeholder-[#EEEEEE]/60 focus:outline-none focus:ring-2 focus:ring-[#00ADB5] focus:border-[#00ADB5] transition-all duration-300 backdrop-blur-md shadow-sm`}
                     placeholder="Last name*"
                   />
                 </div>
@@ -294,14 +283,14 @@ const ContactUs = () => {
               <div>
                 <label
                   htmlFor="email_id"
-                  className="block text-[#FACC15] mb-2 text-sm font-medium"
+                  className="block text-[#EEEEEE] mb-2 text-sm font-medium"
                 >
                   Email Address
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 flex items-center pl-4 z-10 pointer-events-none">
-                    <div className="bg-[#0E1A24]/30 rounded-full p-1.5 shadow-md">
-                      <Mail size={18} className="text-[#CBD5E1]" />
+                    <div className="bg-[#393E46]/30 rounded-full p-1.5 shadow-md">
+                      <Mail size={18} className="text-[#EEEEEE]" />
                     </div>
                   </div>
                   <input
@@ -310,11 +299,11 @@ const ContactUs = () => {
                     name="email_id"
                     value={formData.email_id}
                     onChange={handleInputChange}
-                    className={`w-full bg-gradient-to-r from-[#0E1A24]/80 to-[#0F766E]/70 text-[#CBD5E1] border ${
+                    className={`w-full bg-gradient-to-r from-[#222831]/80 to-[#00ADB5]/70 text-[#EEEEEE] border ${
                       formErrors.email_id
                         ? "border-red-500"
-                        : "border-[#CBD5E1]/40"
-                    } rounded-2xl pl-12 pr-4 py-3 placeholder-[#CBD5E1]/60 focus:outline-none focus:ring-2 focus:ring-[#0F766E] focus:border-[#0F766E] transition-all duration-300 backdrop-blur-md shadow-sm`}
+                        : "border-[#EEEEEE]/40"
+                    } rounded-2xl pl-12 pr-4 py-3 placeholder-[#EEEEEE]/60 focus:outline-none focus:ring-2 focus:ring-[#00ADB5] focus:border-[#00ADB5] transition-all duration-300 backdrop-blur-md shadow-sm`}
                     placeholder="email@example.com"
                   />
                 </div>
@@ -324,80 +313,87 @@ const ContactUs = () => {
               <div>
                 <label
                   htmlFor="phone_number"
-                  className="block text-[#FACC15] mb-2 text-sm font-medium"
+                  className="block text-[#EEEEEE] mb-2 text-sm font-medium"
                 >
-                  Phone Number <span className="text-[#CBD5E1]">*</span>
+                  Phone Number <span className="text-[#EEEEEE]/70">*</span>
                 </label>
 
                 <div className="relative">
                   <style>
                     {`
                       .country-list {
-                        background-color: #0E1A24 !important;
-                        color: #CBD5E1 !important;
-                        scrollbar-color: #0F766E transparent !important;
+                        background-color: #222831 !important;
+                        color: #EEEEEE !important;
+                        scrollbar-color: #00ADB5 transparent !important;
                         border-radius: 0.75rem;
                       }
 
                       .country-list::-webkit-scrollbar-thumb {
-                        background-color: #0F766E !important;
+                        background-color: #00ADB5 !important;
                       }
 
                       .country-list .dial-code {
-                        color: #FACC15 !important;
+                        color: #EEEEEE !important;
                       }
 
                       .country-list .country:hover,
                       .country-list .country.highlight {
-                        background-color: #0F766E33 !important;
-                        color: #CBD5E1 !important;
+                        background-color: #00ADB533 !important;
+                        color: #EEEEEE !important;
                       }
 
                       .flag-dropdown:hover {
-                        background-color: #0F766E55 !important;
-                        // border-radius: 0.75rem !important;
+                        background-color: #00ADB555 !important;
                       }
 
                       .flag-dropdown.open {
-                        background-color: #0F766E33 !important;
-                        // border-radius: 0.75rem !important;
+                        background-color: #00ADB533 !important;
                       }
 
                       .flag-dropdown .selected-flag {
-                        background-color: #0F766E11 !important;
+                        background-color: #00ADB511 !important;
                       }
 
                       .flag-dropdown:hover .selected-flag,
                       .flag-dropdown.open .selected-flag {
-                        background-color: #0F766E33 !important;
+                        background-color: #00ADB533 !important;
                       }
                     `}
                   </style>
 
                   <PhoneInput
                     country={"in"}
+                    onlyCountries={["in"]} // ✅ Restricts to India
+                    disableDropdown={true} // ✅ Hides the dropdown
+                    countryCodeEditable={false} // ✅ Prevents editing the +91 code
                     value={formData.phone_number}
                     onChange={(phone) => handlePhoneChange(phone)}
                     inputProps={{
                       name: "phone_number",
                       required: true,
                       autoFocus: false,
+                      onFocus: () => setPhoneFocused(true),
+                      onBlur: () => setPhoneFocused(false),
                     }}
                     specialLabel=""
                     inputStyle={{
                       width: "100%",
                       background:
-                        "linear-gradient(to right, #0E1A24cc, #0F766Eb3)",
+                        "linear-gradient(to right, #222831cc, #00ADB5b3)",
                       borderRadius: "1rem",
                       border: formErrors.phone_number
                         ? "1px solid red"
-                        : "1px solid #CBD5E166",
-                      color: "#CBD5E1",
-                      paddingLeft: "3.25rem",
+                        : "1px solid rgba(238, 238, 238, 0.4)",
+                      outline: phoneFocused ? "2px solid #00ADB5" : "none", // ✅ ring effect
+                      boxShadow: phoneFocused
+                        ? "0 0 0 2px #00ADB5" // ✅ matches Tailwind ring
+                        : "0 1px 2px rgba(15, 118, 110, 0.2)",
+                      color: "#EEEEEE",
+                      paddingLeft: "3rem",
                       paddingRight: "1rem",
                       height: "3rem",
                       backdropFilter: "blur(6px)",
-                      boxShadow: "0 1px 2px rgba(15, 118, 110, 0.2)",
+                      transition: "all 0.3s ease",
                     }}
                     buttonStyle={{
                       background: "transparent",
@@ -423,13 +419,13 @@ const ContactUs = () => {
             <div className="mb-8">
               <label
                 htmlFor="message"
-                className="block text-[#FACC15] mb-2 text-sm font-medium"
+                className="block text-[#EEEEEE] mb-2 text-sm font-medium"
               >
                 Your Message
               </label>
               <div className="relative">
-                <div className="absolute top-4 left-4 z-10 pointer-events-none bg-[#0E1A24]/30 rounded-full p-1.5 shadow-lg">
-                  <MessageSquare size={18} className="text-[#CBD5E1]" />
+                <div className="absolute top-4 left-4 z-10 pointer-events-none bg-[#393E46]/30 rounded-full p-1.5 shadow-lg">
+                  <MessageSquare size={18} className="text-[#EEEEEE]" />
                 </div>
                 <textarea
                   id="message"
@@ -437,11 +433,11 @@ const ContactUs = () => {
                   value={formData.message}
                   onChange={handleInputChange}
                   rows="5"
-                  className={`w-full bg-gradient-to-r from-[#0E1A24]/80 to-[#0F766E]/70 text-[#CBD5E1] placeholder-[#CBD5E1]/60 border ${
+                  className={`w-full bg-gradient-to-r from-[#222831]/80 to-[#00ADB5]/70 text-[#EEEEEE] placeholder-[#EEEEEE]/60 border ${
                     formErrors.message
                       ? "border-red-500"
-                      : "border-[#CBD5E1]/40"
-                  } rounded-2xl pl-12 pr-4 py-4 focus:outline-none focus:ring-2 focus:ring-[#0F766E] focus:border-[#0F766E] transition-all duration-300 shadow-sm backdrop-blur-sm`}
+                      : "border-[#EEEEEE]/40"
+                  } rounded-2xl pl-12 pr-4 py-4 focus:outline-none focus:ring-2 focus:ring-[#00ADB5] focus:border-[#00ADB5] transition-all duration-300 shadow-sm backdrop-blur-sm`}
                   placeholder="Tell us about your requirements..."
                 ></textarea>
               </div>
@@ -451,7 +447,7 @@ const ContactUs = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="relative group w-full py-4 px-6 rounded-full bg-gradient-to-r from-[#FACC15] to-[#CBD5E1] text-[#0E1A24] font-semibold hover:from-[#FACC15]/90 hover:to-[#CBD5E1]/90 active:scale-[.97] transition-all duration-300 flex items-center justify-center shadow-xl shadow-[#FACC15]/30 overflow-hidden zoom-pulse"
+              className="relative group w-full py-4 px-6 rounded-full bg-gradient-to-r from-[#00ADB5] to-[#EEEEEE] text-[#222831] font-semibold hover:from-[#00ADB5]/90 hover:to-[#EEEEEE]/90 active:scale-[.97] transition-all duration-300 flex items-center justify-center shadow-xl shadow-[#00ADB5]/30 overflow-hidden zoom-pulse"
             >
               <span className="relative z-10 flex items-center">
                 {submitting ? (
@@ -463,22 +459,25 @@ const ContactUs = () => {
               </span>
 
               {!submitting && (
-                <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#FACC15]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+                <span className="absolute top-0 left-[-100%] h-full w-[200%] bg-gradient-to-r from-transparent via-[#00ADB5]/40 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
               )}
             </button>
           </form>
         </div>
 
-        <div className="mt-10 bg-gradient-to-br from-[#0F766E]/20 via-[#0E1A24]/30 to-[#CBD5E1]/10 rounded-2xl border border-[#CBD5E1]/30 p-6 shadow-xl shadow-[#0F766E]/30 flex items-center gap-4 text-white backdrop-blur-md transition-all duration-300 hover:shadow-2xl hover:scale-[1.01]">
+        <div className="mt-10 bg-gradient-to-br from-[#222831]/30 via-[#393E46]/30 to-[#00ADB5]/10 rounded-2xl border border-[#EEEEEE]/20 p-6 shadow-xl shadow-[#00ADB5]/30 flex items-center gap-4 text-[#EEEEEE] backdrop-blur-md transition-all duration-300 hover:shadow-2xl hover:scale-[1.01]">
           <div className="flex items-center space-x-3">
-            <div className="p-2 bg-[#0F766E]/10 border border-[#0F766E]/20 rounded-full">
-              <Phone size={22} className="text-[#FACC15]" />
+            <div className="p-2 bg-[#00ADB5]/10 border border-[#00ADB5]/30 rounded-full">
+              <Phone size={22} className="text-[#00ADB5]" />
             </div>
-            <span className="text-sm sm:text-base text-[#CBD5E1]">
+            <span className="text-sm sm:text-base text-[#EEEEEE]/90">
               Need immediate assistance? Call us at{" "}
-              <span className="font-semibold text-[#FACC15]">
+              <a
+                href="tel:+918181817136"
+                className="font-semibold text-[#00ADB5] hover:underline"
+              >
                 +91 8181 817 136
-              </span>
+              </a>
             </span>
           </div>
         </div>

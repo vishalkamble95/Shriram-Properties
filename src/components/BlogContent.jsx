@@ -43,8 +43,8 @@ const BlogContent = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0E1A24] text-[#CBD5E1]">
-        <div className="animate-spin w-12 h-12 border-4 border-[#FACC15] border-t-transparent rounded-full"></div>
+      <div className="min-h-screen flex items-center justify-center bg-[#222831] text-[#EEEEEE]">
+        <div className="animate-spin w-12 h-12 border-4 border-[#00ADB5] border-t-transparent rounded-full"></div>
         <span className="ml-4">Loading...</span>
       </div>
     );
@@ -52,11 +52,11 @@ const BlogContent = () => {
 
   if (error || !blog) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#0E1A24] text-[#CBD5E1] p-6">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#222831] text-[#EEEEEE] p-6">
         <h2 className="text-2xl font-semibold text-red-500 mb-2">Error</h2>
         <p className="mb-4">{error || "No blog found."}</p>
         <button
-          className="px-5 py-2 bg-[#0F766E] text-white rounded hover:bg-[#0F766E]/90 transition"
+          className="px-5 py-2 bg-[#393E46] text-[#EEEEEE] rounded hover:bg-[#00ADB5]/90 transition"
           onClick={() => navigate(-1)}
         >
           Go Back
@@ -67,19 +67,19 @@ const BlogContent = () => {
 
   return (
     <>
-      <div className="bg-[#0E1A24] min-h-screen text-[#CBD5E1] py-10 px-4 sm:px-6 lg:px-8">
+      <div className="bg-[#222831] min-h-screen text-[#EEEEEE] py-10 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           {/* Back Button */}
           <button
             onClick={() => navigate(-1)}
-            className="mb-6 inline-flex items-center text-sm text-[#FACC15] hover:text-[#eab308] hover:underline transition"
+            className="mb-6 inline-flex items-center text-sm text-[#00ADB5] hover:text-[#393E46] hover:underline transition"
           >
             <ArrowLeft className="w-4 h-4 mr-1" />
             Back to Articles
           </button>
 
           {/* Blog Header Image */}
-          <div className="rounded-lg overflow-hidden shadow-md border border-[#CBD5E1]/10 mb-8">
+          <div className="rounded-lg overflow-hidden shadow-md border border-[#EEEEEE]/10 mb-8">
             <img
               src={blog.post_photo}
               alt={blog.post_title}
@@ -88,25 +88,25 @@ const BlogContent = () => {
           </div>
 
           {/* Date */}
-          <div className="flex items-center gap-2 text-sm text-[#0E1A24] bg-[#FACC15] px-3 py-1 rounded-full font-medium w-fit mb-4">
+          <div className="flex items-center gap-2 text-sm text-[#222831] bg-[#00ADB5] px-3 py-1 rounded-full font-medium w-fit mb-4">
             <Calendar size={14} />
             {formatDate(blog.created_at)}
           </div>
 
           {/* Title */}
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#FACC15] mb-4">
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#00ADB5] mb-4">
             {blog.post_title}
           </h1>
 
           {/* Short Description */}
-          <p className="mb-6 text-[#CBD5E1]/90 leading-relaxed font-medium">
+          <p className="mb-6 text-[#EEEEEE]/90 leading-relaxed font-medium">
             {blog.post_content_short}
           </p>
 
           {/* Full Blog Content */}
-          <div className="bg-[#0F1F2B] p-6 rounded-lg border border-[#CBD5E1]/10 shadow-inner mb-12">
+          <div className="bg-[#393E46] p-6 rounded-lg border border-[#EEEEEE]/10 shadow-inner mb-12">
             <div
-              className="prose prose-invert rich-content max-w-none prose-p:leading-relaxed prose-a:text-[#FACC15] hover:prose-a:text-[#0F766E]"
+              className="prose prose-invert rich-content max-w-none prose-p:leading-relaxed prose-a:text-[#00ADB5] hover:prose-a:text-[#393E46]"
               dangerouslySetInnerHTML={{ __html: blog.post_content }}
             />
           </div>
@@ -115,13 +115,13 @@ const BlogContent = () => {
           <div className="flex flex-col sm:flex-row gap-4">
             <button
               onClick={openDialog}
-              className="flex-1 py-3 px-4 rounded bg-[#FACC15] text-[#0E1A24] font-semibold hover:bg-[#eab308] transition"
+              className="flex-1 py-3 px-4 rounded bg-[#00ADB5] text-[#EEEEEE] font-semibold hover:bg-[#393E46] transition"
             >
               Check Pricing & Availability
             </button>
             <button
               onClick={openDialog}
-              className="flex-1 py-3 px-4 rounded border border-[#FACC15] text-[#FACC15] font-semibold hover:bg-[#FACC15]/20 hover:text-[#FACC15] transition"
+              className="flex-1 py-3 px-4 rounded border border-[#00ADB5] text-[#00ADB5] font-semibold hover:bg-[#00ADB5]/20 hover:text-[#00ADB5] transition"
             >
               Contact for Site Visit
             </button>

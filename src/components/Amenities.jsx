@@ -155,10 +155,10 @@ const Amenities = () => {
 
   return (
     <>
-      <div className="w-full mx-auto px-6 sm:px-8 lg:px-16 py-16 bg-[#0E1A24]">
+      <div className="w-full mx-auto px-6 sm:px-8 lg:px-16 py-16 bg-[#222831]">
         <div className="flex items-center mb-8 px-2 sm:px-0">
-          <div className="w-1 h-8 sm:h-10 bg-gradient-to-b from-[#FACC15] to-[#0F766E] rounded-full mr-4 shadow-md"></div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#CBD5E1] tracking-tight leading-snug drop-shadow-sm">
+          <div className="w-1 h-8 sm:h-10 bg-gradient-to-b from-[#00ADB5] to-[#393E46] rounded-full mr-4 shadow-md"></div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#EEEEEE] tracking-tight leading-snug drop-shadow-sm">
             {heading || "Premium Amenities"}
           </h2>
         </div>
@@ -168,16 +168,16 @@ const Amenities = () => {
           {currentItems.map((amenity) => (
             <div
               key={amenity.id}
-              className="bg-[#13212E] border border-[#CBD5E1]/10 group hover:border-[#FACC15] hover:shadow-[0_4px_20px_rgba(250,204,21,0.1)] shadow-lg transition-all duration-300 transform hover:-translate-y-1 p-4 flex flex-col items-center text-center rounded-2xl"
+              className="bg-[#393E46] border border-[#EEEEEE]/10 group hover:border-[#00ADB5] hover:shadow-[0_4px_20px_rgba(0,173,181,0.3)] shadow-lg transition-all duration-300 transform hover:-translate-y-1 p-4 flex flex-col items-center text-center rounded-2xl"
             >
-              <div className="w-full aspect-square bg-[#CBD5E1]/5 border border-[#CBD5E1]/10 shadow-inner overflow-hidden mb-4 rounded-xl">
+              <div className="w-full aspect-square bg-[#00ADB5]/10 border border-[#00ADB5]/30 shadow-inner overflow-hidden mb-4 rounded-xl">
                 <img
                   src={amenity.property_amenities_photo}
                   alt={amenity.amenity_name}
                   className="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
-              <h3 className="text-[#CBD5E1] text-sm sm:text-base font-semibold group-hover:text-[#FACC15] transition-colors duration-300">
+              <h3 className="text-[#EEEEEE] text-sm sm:text-base font-semibold group-hover:text-[#00ADB5] transition-colors duration-300">
                 {amenity.amenity_name}
               </h3>
             </div>
@@ -191,8 +191,8 @@ const Amenities = () => {
               key={index}
               className={`h-1 rounded-full transition-all duration-300 ${
                 index === activeSlide
-                  ? "w-8 bg-gradient-to-r from-[#FACC15] to-[#0F766E] shadow-[0_0_6px_#FACC15]"
-                  : "w-4 bg-[#CBD5E1]/30"
+                  ? "w-8 bg-gradient-to-r from-[#00ADB5] to-[#EEEEEE] shadow-[0_0_6px_#00ADB5]"
+                  : "w-4 bg-[#EEEEEE]/30"
               }`}
             ></div>
           ))}
@@ -200,45 +200,45 @@ const Amenities = () => {
 
         <style>
           {`
-        @keyframes shine {
-          0% {
-            transform: translateX(-100%);
-            opacity: 0;
+          @keyframes shine {
+            0% {
+              transform: translateX(-100%);
+              opacity: 0;
+            }
+            50% {
+              opacity: 1;
+            }
+            100% {
+              transform: translateX(100%);
+              opacity: 0;
+            }
           }
-          50% {
-            opacity: 1;
-          }
-          100% {
-            transform: translateX(100%);
-            opacity: 0;
-          }
-        }
 
-        .animate-shine {
-          animation: shine 2s infinite linear;
-        }
-      `}
+          .animate-shine {
+            animation: shine 2s infinite linear;
+          }
+        `}
         </style>
 
         {/* CTA Section */}
-        <div className="mt-16 text-center px-6 py-8 sm:px-10 md:px-16 bg-[#0E1A24]/60 rounded-2xl border border-[#FACC15]/20 shadow-[0_0_30px_rgba(250,204,21,0.1)] relative overflow-hidden backdrop-blur-md">
+        <div className="mt-16 text-center px-6 py-8 sm:px-10 md:px-16 bg-[#393E46]/80 rounded-2xl border border-[#EEEEEE]/10 shadow-[0_0_30px_rgba(0,173,181,0.15)] relative overflow-hidden backdrop-blur-md">
           {/* Decorative Glow Orbs */}
-          <div className="absolute top-[-2rem] left-[-2rem] w-52 h-52 bg-[#FACC15]/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-[-2rem] right-[-2rem] w-52 h-52 bg-[#0F766E]/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-[-2rem] left-[-2rem] w-52 h-52 bg-[#00ADB5]/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-[-2rem] right-[-2rem] w-52 h-52 bg-[#EEEEEE]/5 rounded-full blur-3xl"></div>
 
           <div className="relative z-10 max-w-3xl mx-auto">
-            <h3 className="relative text-2xl sm:text-3xl font-extrabold text-[#CBD5E1] tracking-tight mb-8 inline-block">
+            <h3 className="relative text-2xl sm:text-3xl font-extrabold text-[#EEEEEE] tracking-tight mb-8 inline-block">
               <span className="relative z-10">Discover Premium Amenities</span>
-              <span className="absolute left-1/2 -translate-x-1/2 bottom-[-6px] w-1/2 h-1 bg-gradient-to-r from-[#0F766E] to-[#FACC15] rounded-full"></span>
+              <span className="absolute left-1/2 -translate-x-1/2 bottom-[-6px] w-1/2 h-1 bg-gradient-to-r from-[#00ADB5] to-[#EEEEEE] rounded-full"></span>
             </h3>
-            <p className="text-[#CBD5E1]/80 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-10 px-4">
+            <p className="text-[#EEEEEE]/80 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-10 px-4">
               Elevate your lifestyle with thoughtfully designed amenities,
               blending modern aesthetics and functionality. Our team is here to
               guide you.
             </p>
             <button
               onClick={openDialog}
-              className="relative zoom-pulse inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg bg-gradient-to-r from-[#FACC15] to-[#FFE87A] text-[#0E1A24] font-bold text-sm sm:text-base shadow-lg hover:shadow-[0_0_20px_#FACC15] transition-all duration-300 hover:-translate-y-1"
+              className="relative zoom-pulse inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg bg-gradient-to-r from-[#00ADB5] to-[#393E46] text-[#EEEEEE] font-bold text-sm sm:text-base shadow-lg hover:shadow-[0_0_20px_#00ADB5] transition-all duration-300 hover:-translate-y-1"
             >
               <span className="relative z-10">Explore Amenities</span>
               <svg

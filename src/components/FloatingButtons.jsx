@@ -5,7 +5,7 @@ import { ContactDialog } from "./Contact";
 import useContact from "../hooks/useContact";
 
 const FloatingButtons = () => {
-  const [isExpanded, setIsExpanded] = useState(true); // Set to true by default since toggle is hidden
+  const [isExpanded, setIsExpanded] = useState(false); // Set to true by default since toggle is hidden
   const [isOpen, setIsOpen] = useState(false);
 
   const openDialog = () => setIsOpen(true);
@@ -20,86 +20,75 @@ const FloatingButtons = () => {
   const buttons = [
     {
       id: "whatsapp",
-      icon: <MessageCircle size={20} />,
+      icon: <MessageCircle size={18} />,
       label: "WhatsApp",
-      href: `https://wa.me/918181817136?text=I%20am%20interested%20in%20${seodata?.data?.og_title}`,
-      color:
-        "bg-[#0F766E] hover:bg-[#CBD5E1] text-white hover:text-[#0E1A24] border border-[#0E1A24]",
+      href: `https://wa.me/918181817136?text=I%20am%20interested%20in%20${encodeURIComponent(
+        seodata?.data?.property_name
+      )}`,
+      action: null,
     },
     {
       id: "phone",
-      icon: <Phone size={20} />,
+      icon: <Phone size={18} />,
       label: "Call",
       href: `tel:${contact?.footer_phone}`,
-      color:
-        "bg-[#0F766E] hover:bg-[#CBD5E1] text-white hover:text-[#0E1A24] border border-[#0E1A24]",
+      action: null,
     },
     {
       id: "contact",
-      icon: <User size={20} />,
+      icon: <User size={18} />,
       label: "Contact",
-      color:
-        "bg-[#0F766E] hover:bg-[#CBD5E1] text-white hover:text-[#0E1A24] border border-[#0E1A24]",
-      openDialog: () => openDialog(),
+      action: () => openDialog(),
     },
   ];
 
   return (
     <>
-      <div className="fixed bottom-10 left-6 sm:bottom-12 sm:left-8 z-50 flex flex-col items-center gap-4">
+      <div className="fixed bottom-10 left-6 sm:bottom-12 sm:left-8 z-50 flex flex-col items-start gap-3">
         {/* Expanded buttons */}
         {isExpanded && (
-          <div className="flex flex-col gap-3 transition-all duration-300 ease-in-out items-center">
+          <div className="flex flex-col gap-2 transition-all duration-500 ease-out animate-slide-up">
             {buttons.map((button) => (
               <a
                 key={button.id}
-                href={button?.href}
-                onClick={button?.openDialog}
-                className={`w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all duration-300 ${button.color}`}
+                href={button?.href || "#"}
+                onClick={button?.action || undefined}
+                className="flex items-center gap-3 px-4 py-2 rounded-lg shadow-lg border border-[#00ADB5]/30
+                         bg-[#222831]/40 backdrop-blur-md text-[#EEEEEE]
+                         hover:bg-[#00ADB5]/80 hover:text-[#222831] transition-all duration-300"
                 target={button.id === "whatsapp" ? "_blank" : "_self"}
                 rel={button.id === "whatsapp" ? "noopener noreferrer" : ""}
               >
                 {button.icon}
+                <span className="text-sm font-medium">{button.label}</span>
               </a>
             ))}
           </div>
         )}
 
-        {/* Scroll to top button — square, centered under all */}
+        {/* Expand toggle button */}
+        <button
+          onClick={toggleExpand}
+          aria-label="Toggle menu"
+          className="flex items-center justify-center px-4 py-2 rounded-lg shadow-lg border border-[#00ADB5]/30
+                   bg-[#00ADB5]/80 text-[#EEEEEE] backdrop-blur-md
+                   hover:bg-[#EEEEEE] hover:text-[#222831] transition-all duration-300"
+        >
+          {isExpanded ? "×" : "+"}
+        </button>
+
+        {/* Scroll to top button */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Scroll to top"
-          className="w-10 h-10 flex items-center justify-center rounded-md shadow-lg bg-[#FACC15] text-[#0E1A24] border border-[#0E1A24] hover:bg-[#0E1A24] hover:text-[#FACC15] transition-all duration-300"
+          className="flex items-center justify-center px-3 py-2 rounded-lg shadow-lg border border-[#00ADB5]/30
+                   bg-[#EEEEEE]/90 text-[#222831] backdrop-blur-md
+                   hover:bg-[#222831] hover:text-[#EEEEEE] transition-all duration-300"
         >
-          <ChevronUp size={20} className="transition-transform duration-200" />
+          <ChevronUp size={18} />
         </button>
-
-        {/* Main toggle button - hidden by commenting */}
-        {/*
-        <button
-          onClick={toggleExpand}
-          className="p-4 rounded-full bg-[#0F766E] text-white shadow-lg border border-[#0E1A24] hover:bg-[#CBD5E1] hover:text-[#0E1A24] transition-all duration-300 ease-in-out transform hover:scale-105"
-          aria-label="Toggle floating menu"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className={`w-6 h-6 transition-transform duration-300 ${
-              isExpanded ? "rotate-45" : ""
-            }`}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            />
-          </svg>
-        </button>
-        */}
       </div>
+
       <ContactDialog isOpen={isOpen} onClose={closeDialog} />
     </>
   );

@@ -21,16 +21,38 @@ function Navbar({ propertyData, loading, openDialog }) {
 
   // Handle scroll effect for sticky header styling
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+    const onScroll = () => {
+      const scrollPos = window.scrollY + 100; // Offset for header height
+      let currentSection = "home"; // default
+
+      navItems.forEach(({ id, to }) => {
+        const section = document.getElementById(to);
+        if (section && section.offsetTop <= scrollPos) {
+          currentSection = id;
+        }
+      });
+
+      setActiveSection(currentSection);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
+
   const handleSetActive = (section) => {
-    setActiveSection(section);
+    const targetId = navItems.find((item) => item.id === section)?.to;
+    const target = document.getElementById(targetId);
+    if (target) {
+      const yOffset = -80;
+      const y =
+        target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    } else {
+      console.warn("Target element not found for id:", targetId);
+    }
+
     setMenuOpen(false);
   };
 
@@ -39,29 +61,29 @@ function Navbar({ propertyData, loading, openDialog }) {
     { id: "about", label: "About", to: "property-details" },
     { id: "price", label: "Pricing", to: "price" },
     { id: "gallery", label: "Gallery", to: "gallery" },
-    { id: "blog", label: "Blog", to: "blogs-section" },
+    { id: "blog", label: "Blog", to: "blog" },
     { id: "contact", label: "Contact", to: "contact" },
   ];
 
   return (
     <>
       {/* Top Info Bar */}
-      <div className="bg-[#0E1A24] text-[#CBD5E1] py-1 hidden md:block border-b border-[#0F766E]/30 font-serif text-sm">
+      <div className="bg-[#222831] text-[#EEEEEE] py-1 hidden md:block border-b border-[#00ADB5]/30 font-serif text-sm">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-1.5">
-              <MapPin size={14} className="text-[#FACC15]" />
+              <MapPin size={14} className="text-[#00ADB5]" />
               <span>{propertyData.location}</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <Building size={14} className="text-[#FACC15]" />
+              <Building size={14} className="text-[#00ADB5]" />
               <span>{propertyData.builder_name}</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <Star size={14} className="text-[#FACC15]" />
+              <Star size={14} className="text-[#00ADB5]" />
               <span>
                 4.8
-                <span className="text-xs text-[#CBD5E1] ml-1">
+                <span className="text-xs text-[#EEEEEE] ml-1">
                   (120 reviews)
                 </span>
               </span>
@@ -69,12 +91,12 @@ function Navbar({ propertyData, loading, openDialog }) {
           </div>
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-1.5">
-              <Calendar size={14} className="text-[#FACC15]" />
+              <Calendar size={14} className="text-[#00ADB5]" />
               <span>MAHARERA Registered</span>
             </div>
             <a
               href={`tel:${contact?.footer_phone}`}
-              className="flex items-center gap-1.5 text-[#CBD5E1] hover:text-[#FACC15] transition"
+              className="flex items-center gap-1.5 text-[#EEEEEE] hover:text-[#00ADB5] transition"
             >
               <Phone size={14} />
               <span>{contact?.footer_phone}</span>
@@ -85,8 +107,8 @@ function Navbar({ propertyData, loading, openDialog }) {
 
       {/* Main Header */}
       <header
-        className={`bg-[#0E1A24] sticky top-0 z-50 transition-shadow ${
-          scrolled ? "shadow-md shadow-[#0F766E]/20" : ""
+        className={`bg-[#222831] sticky top-0 z-50 transition-shadow ${
+          scrolled ? "shadow-md shadow-[#00ADB5]/20" : ""
         }`}
       >
         <div className="container mx-auto px-6 py-4">
@@ -94,7 +116,7 @@ function Navbar({ propertyData, loading, openDialog }) {
             {/* Logo + Title */}
             <div className="flex items-center gap-3 flex-shrink-0">
               {loading ? (
-                <div className="h-10 w-32 bg-[#CBD5E1] animate-pulse rounded-md" />
+                <div className="h-10 w-32 bg-[#EEEEEE] animate-pulse rounded-md" />
               ) : (
                 <div className="flex items-center">
                   <img
@@ -104,10 +126,10 @@ function Navbar({ propertyData, loading, openDialog }) {
                   />
                   {/* Title shown only on lg+ */}
                   <div className="ml-3 hidden lg:block">
-                    <h1 className="text-white text-lg font-semibold">
+                    <h1 className="text-[#EEEEEE] text-lg font-semibold">
                       {propertyData.property_name?.replace(/\.$/, "")}
                     </h1>
-                    <p className="text-xs text-[#FACC15] font-medium">
+                    <p className="text-xs text-[#00ADB5] font-medium">
                       Premium Property
                     </p>
                   </div>
@@ -126,8 +148,8 @@ function Navbar({ propertyData, loading, openDialog }) {
                     onClick={() => handleSetActive(item.id)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                       activeSection === item.id
-                        ? "bg-[#FACC15] text-[#0E1A24] shadow"
-                        : "text-white hover:text-[#FACC15] hover:bg-[#0F766E]/20"
+                        ? "bg-[#00ADB5] text-[#222831] shadow"
+                        : "text-[#EEEEEE] hover:text-[#00ADB5] hover:bg-[#393E46]/20"
                     }`}
                   >
                     {item.label}
@@ -137,16 +159,26 @@ function Navbar({ propertyData, loading, openDialog }) {
 
               {/* CTA Buttons */}
               <div className="flex justify-center flex-wrap gap-3 mt-4 md:mt-0">
-                <a
-                  href={`tel:${contact?.footer_phone}`}
-                  className="flex items-center bg-[#0F766E] hover:bg-[#FACC15] text-white hover:text-[#0E1A24] font-bold px-4 py-2 rounded-full transition"
-                >
-                  <Phone size={16} className="mr-2" />
-                  Call Now
-                </a>
+                {/** Sanitize phone number and ensure fallback */}
+                {(() => {
+                  const phoneNumber =
+                    contact?.footer_phone?.replace(/\s+/g, "") ||
+                    "918181817136";
+                  return (
+                    <a
+                      href={`tel:${phoneNumber}`}
+                      title={`Call ${phoneNumber}`} // Tooltip on hover
+                      className="flex items-center bg-[#393E46] hover:bg-[#00ADB5] text-[#EEEEEE] hover:text-[#222831] font-bold px-4 py-2 rounded-full transition"
+                    >
+                      <Phone size={16} className="mr-2" />
+                      Call Now
+                    </a>
+                  );
+                })()}
+
                 <button
                   onClick={openDialog}
-                  className="bg-gradient-to-r from-[#0F766E] to-[#FACC15] hover:opacity-90 text-[#0E1A24] font-semibold px-5 py-2 rounded-full transition shadow"
+                  className="bg-gradient-to-r from-[#393E46] to-[#00ADB5] hover:opacity-90 text-[#222831] font-semibold px-5 py-2 rounded-full transition shadow"
                 >
                   Book Site Visit
                 </button>
@@ -156,7 +188,7 @@ function Navbar({ propertyData, loading, openDialog }) {
             {/* Mobile Menu Toggle */}
             <button
               onClick={toggleMenu}
-              className="md:hidden text-white p-2 rounded-md bg-[#0F766E] hover:bg-[#FACC15]/80 transition"
+              className="md:hidden text-[#EEEEEE] p-2 rounded-md bg-[#393E46] hover:bg-[#00ADB5]/80 transition"
             >
               {menuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -166,14 +198,14 @@ function Navbar({ propertyData, loading, openDialog }) {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 z-50 transition-all duration-300 bg-[#0E1A24] backdrop-blur-lg ${
+        className={`fixed inset-0 z-50 transition-all duration-300 bg-[#222831] backdrop-blur-lg ${
           menuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         } md:hidden`}
       >
         <div className="h-full flex flex-col">
-          <div className="p-6 flex justify-between items-center border-b border-[#CBD5E1]/20">
+          <div className="p-6 flex justify-between items-center border-b border-[#EEEEEE]/20">
             <div className="flex items-center gap-3">
               <img
                 src={propertyData.logo}
@@ -181,17 +213,17 @@ function Navbar({ propertyData, loading, openDialog }) {
                 className="h-10 object-contain"
               />
               <div>
-                <h2 className="text-white text-base font-semibold">
+                <h2 className="text-[#EEEEEE] text-base font-semibold">
                   {propertyData.property_name}
                 </h2>
-                <p className="text-xs text-[#FACC15]">Premium Property</p>
+                <p className="text-xs text-[#00ADB5]">Premium Property</p>
               </div>
             </div>
             <button
               onClick={toggleMenu}
-              className="p-2 rounded-full bg-[#FACC15]/10 hover:bg-[#FACC15]/20"
+              className="p-2 rounded-full bg-[#00ADB5]/10 hover:bg-[#00ADB5]/20"
             >
-              <X size={20} className="text-white" />
+              <X size={20} className="text-[#EEEEEE]" />
             </button>
           </div>
 
@@ -201,14 +233,11 @@ function Navbar({ propertyData, loading, openDialog }) {
                 <li key={item.id}>
                   <a
                     href={`#${item.to}`}
-                    onClick={() => {
-                      handleSetActive(item.id);
-                      toggleMenu();
-                    }}
+                    onClick={() => handleSetActive(item.id)}
                     className={`block px-5 py-3 rounded-lg text-sm font-medium ${
                       activeSection === item.id
-                        ? "bg-[#FACC15] text-[#0E1A24]"
-                        : "text-white hover:bg-[#0F766E]/20"
+                        ? "bg-[#00ADB5] text-[#222831]"
+                        : "text-[#EEEEEE] hover:bg-[#393E46]/20"
                     }`}
                   >
                     {item.label}
@@ -217,22 +246,22 @@ function Navbar({ propertyData, loading, openDialog }) {
               ))}
             </ul>
 
-            <div className="px-6 space-y-4 mt-4 border-t border-[#CBD5E1]/10 pt-4">
-              <div className="text-sm text-white flex items-center gap-2">
-                <MapPin className="text-[#FACC15]" size={18} />
+            <div className="px-6 space-y-4 mt-4 border-t border-[#EEEEEE]/10 pt-4">
+              <div className="text-sm text-[#EEEEEE] flex items-center gap-2">
+                <MapPin className="text-[#00ADB5]" size={18} />
                 {propertyData.location}
               </div>
-              <div className="text-sm text-white flex items-center gap-2">
-                <Building className="text-[#FACC15]" size={18} />
+              <div className="text-sm text-[#EEEEEE] flex items-center gap-2">
+                <Building className="text-[#00ADB5]" size={18} />
                 {propertyData.builder_name}
               </div>
-              <div className="text-sm text-white flex items-center gap-2">
-                <Star className="text-[#FACC15]" size={18} />
+              <div className="text-sm text-[#EEEEEE] flex items-center gap-2">
+                <Star className="text-[#00ADB5]" size={18} />
                 4.8/5{" "}
-                <span className="text-xs text-[#CBD5E1]">(120 reviews)</span>
+                <span className="text-xs text-[#EEEEEE]/90">(120 reviews)</span>
               </div>
-              <div className="text-sm text-white flex items-center gap-2">
-                <Clock className="text-[#FACC15]" size={18} />
+              <div className="text-sm text-[#EEEEEE] flex items-center gap-2">
+                <Clock className="text-[#00ADB5]" size={18} />
                 Last updated:{" "}
                 {new Date(
                   propertyData.property_last_updated
@@ -240,23 +269,32 @@ function Navbar({ propertyData, loading, openDialog }) {
               </div>
             </div>
 
-            <div className="p-6 space-y-3 border-t border-[#CBD5E1]/10 mt-4">
+            <div className="p-6 space-y-3 border-t border-[#EEEEEE]/10 mt-4">
+              {/* Book Site Visit */}
               <button
                 onClick={openDialog}
-                className="relative group w-full flex justify-center items-center gap-2 bg-gradient-to-r from-[#0F766E] to-[#FACC15] text-[#0E1A24] font-bold py-3 rounded-full shadow transition-all duration-300 zoom-pulse overflow-hidden hover:opacity-90"
+                className="relative group w-full flex justify-center items-center gap-2 bg-gradient-to-r from-[#393E46] to-[#00ADB5] text-[#222831] font-bold py-3 rounded-full shadow transition-all duration-300 zoom-pulse overflow-hidden hover:opacity-90"
               >
                 <span className="relative z-10">Book Site Visit</span>
                 <span className="absolute top-0 left-[-100%] w-[200%] h-full bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
               </button>
 
-              <a
-                href={`tel:${contact?.footer_phone}`}
-                className="relative group w-full flex justify-center items-center gap-2 bg-[#0F766E] text-white font-bold py-3 rounded-full shadow transition-all duration-300 zoom-pulse hover:bg-[#FACC15] hover:text-[#0E1A24] overflow-hidden"
-              >
-                <Phone size={18} className="relative z-10 mr-1" />
-                <span className="relative z-10">Call Now</span>
-                <span className="absolute top-0 left-[-100%] w-[200%] h-full bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
-              </a>
+              {/* Call Now */}
+              {(() => {
+                const phoneNumber =
+                  contact?.footer_phone?.replace(/\s+/g, "") || "918181817136";
+                return (
+                  <a
+                    href={`tel:${phoneNumber}`}
+                    title={`Call ${phoneNumber}`} // Works as tooltip on desktop and long-press info on mobile
+                    className="relative group w-full flex justify-center items-center gap-2 bg-[#393E46] text-[#EEEEEE] font-bold py-3 rounded-full shadow transition-all duration-300 zoom-pulse hover:bg-[#00ADB5] hover:text-[#222831] overflow-hidden"
+                  >
+                    <Phone size={18} className="relative z-10 mr-1" />
+                    <span className="relative z-10">Call Now</span>
+                    <span className="absolute top-0 left-[-100%] w-[200%] h-full bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 animate-shine pointer-events-none" />
+                  </a>
+                );
+              })()}
             </div>
           </div>
         </div>

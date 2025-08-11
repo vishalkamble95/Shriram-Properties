@@ -92,20 +92,44 @@ const PropertyLayouts = () => {
 
     if (layouts.length === 0) return null;
 
+    // Updated bg colors based on palette:
     const bgColor =
       type === "unit"
-        ? "bg-[#1F2937]"
+        ? "bg-[#393E46]" // medium dark grayish blue
         : type === "floor"
-        ? "bg-[#0F766E]"
-        : "bg-[#1E293B]";
+        ? "bg-[#00ADB5]" // bright teal
+        : "bg-[#EEEEEE]"; // off-white
 
-    const textColor = type === "floor" ? "text-white" : "text-[#CBD5E1]";
+    // Text colors matching backgrounds:
+    const textColor =
+      type === "floor"
+        ? "text-[#222831]" // darkest for bright bg
+        : type === "master"
+        ? "text-[#222831]" // dark text on light bg
+        : "text-[#EEEEEE]"; // light text on dark bg
+
+    // Heading accent colors:
+    const headingColor =
+      type === "floor" ? "#EEEEEE" : type === "master" ? "#00ADB5" : "#00ADB5";
+
+    // Button colors (background & text) per section type:
+    const buttonBg =
+      type === "floor" ? "#222831" : type === "master" ? "#00ADB5" : "#00ADB5";
+
+    const buttonText = type === "floor" ? "#00ADB5" : "#222831";
+
+    const buttonHoverBg = type === "floor" ? "#393E46" : "#008B99";
 
     return (
       <div className={`py-12 px-4 md:px-10 ${bgColor} rounded-2xl mb-10`}>
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-[#FACC15] mb-2">{heading}</h2>
-          <p className={`${textColor}`}>
+          <h2
+            className="text-3xl font-bold mb-2"
+            style={{ color: headingColor }}
+          >
+            {heading}
+          </h2>
+          <p className={textColor}>
             {type === "unit" &&
               "Explore premium unit layouts with space efficiency and comfort."}
             {type === "floor" &&
@@ -116,7 +140,13 @@ const PropertyLayouts = () => {
         </div>
 
         <div className="relative max-w-6xl mx-auto">
-          <div className="aspect-video bg-black/20 rounded-xl overflow-hidden border border-[#CBD5E1]/30 shadow-lg">
+          <div
+            className={`aspect-video rounded-xl overflow-hidden border shadow-lg ${
+              type === "master"
+                ? "border-[#00ADB5]/40 bg-[#EEEEEE]"
+                : "border-[#00ADB5]/40 bg-black/10"
+            }`}
+          >
             <img
               src={layout.layout_image}
               alt={layout.layout_name}
@@ -128,13 +158,15 @@ const PropertyLayouts = () => {
             <>
               <button
                 onClick={() => handleSlide(type, "prev")}
-                className="absolute left-3 top-1/2 -translate-y-1/2 bg-[#FACC15] text-[#0E1A24] p-2 rounded-full shadow hover:bg-[#eab308] transition"
+                style={{ backgroundColor: buttonBg, color: buttonText }}
+                className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full shadow transition hover:brightness-90"
               >
                 <ArrowLeft size={20} />
               </button>
               <button
                 onClick={() => handleSlide(type, "next")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 bg-[#FACC15] text-[#0E1A24] p-2 rounded-full shadow hover:bg-[#eab308] transition"
+                style={{ backgroundColor: buttonBg, color: buttonText }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full shadow transition hover:brightness-90"
               >
                 <ArrowRight size={20} />
               </button>
@@ -143,14 +175,15 @@ const PropertyLayouts = () => {
 
           <button
             onClick={() => setExpandedImage(layout.layout_image)}
-            className="absolute top-3 right-3 bg-[#FACC15]/90 text-[#0E1A24] p-2 rounded-lg hover:scale-105 transition"
+            style={{ backgroundColor: buttonBg, color: buttonText }}
+            className="absolute top-3 right-3 p-2 rounded-lg transition hover:scale-105"
           >
             <Maximize2 size={20} />
           </button>
         </div>
 
         <div className="mt-6 text-center">
-          <h3 className="text-2xl font-semibold text-white mb-2">
+          <h3 className={`text-2xl font-semibold mb-2 ${textColor}`}>
             {layout.layout_name}
           </h3>
           <div className={`${textColor} text-sm space-y-1`}>
@@ -164,7 +197,8 @@ const PropertyLayouts = () => {
 
           <button
             onClick={openDialog}
-            className="mt-5 inline-block px-6 py-2 bg-[#FACC15] text-[#0E1A24] font-semibold rounded-lg shadow hover:bg-[#eab308] transition zoom-pulse"
+            style={{ backgroundColor: buttonBg, color: buttonText }}
+            className="mt-5 inline-block px-6 py-2 font-semibold rounded-lg shadow transition hover:brightness-90 zoom-pulse"
           >
             Enquire Now
           </button>
@@ -175,10 +209,10 @@ const PropertyLayouts = () => {
 
   if (loading) {
     return (
-      <div className="bg-[#0E1A24] min-h-[300px] flex items-center justify-center p-10">
+      <div className="bg-[#222831] min-h-[300px] flex items-center justify-center p-10">
         <div className="text-center">
-          <Loader size={32} className="animate-spin text-[#FACC15]" />
-          <p className="text-[#CBD5E1] mt-3">Loading layouts...</p>
+          <Loader size={32} className="animate-spin text-[#00ADB5]" />
+          <p className="text-[#00ADB5] mt-3">Loading layouts...</p>
         </div>
       </div>
     );
@@ -186,7 +220,7 @@ const PropertyLayouts = () => {
 
   if (error) {
     return (
-      <div className="bg-[#0E1A24] p-10 text-center text-red-300">
+      <div className="bg-[#222831] p-10 text-center text-red-400">
         <AlertTriangle size={24} className="inline mr-2" />
         {error}
       </div>
@@ -194,7 +228,7 @@ const PropertyLayouts = () => {
   }
 
   return (
-    <div className="bg-[#0E1A24] py-14 px-4 md:px-10">
+    <div className="bg-[#222831] py-14 px-4 md:px-10" id="layouts">
       <LayoutSection
         type="unit"
         layouts={unitLayouts}
@@ -213,20 +247,21 @@ const PropertyLayouts = () => {
 
       {expandedImage && (
         <div
-          className="fixed inset-0 bg-[#0E1A24]/90 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-[#222831]/90 flex items-center justify-center z-50"
           onClick={() => setExpandedImage(null)}
         >
           <div className="relative" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setExpandedImage(null)}
-              className="absolute top-2 right-2 bg-[#FACC15]/90 p-2 rounded-full"
+              className="absolute top-2 right-2 p-2 rounded-full"
+              style={{ backgroundColor: "#00ADB5", color: "#222831" }}
             >
-              <X size={20} className="text-[#0E1A24]" />
+              <X size={20} />
             </button>
             <img
               src={expandedImage}
               alt="Expanded layout"
-              className="max-w-full max-h-screen rounded-lg border border-[#CBD5E1]/30 shadow-lg"
+              className="max-w-full max-h-screen rounded-lg border border-[#00ADB5]/40 shadow-lg"
             />
           </div>
         </div>

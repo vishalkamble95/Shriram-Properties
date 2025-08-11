@@ -95,22 +95,22 @@ const LocationAdvantages = () => {
   return (
     <>
       {loading ? (
-        <div className="min-h-[400px] bg-[#F8FAFC] flex items-center justify-center">
-          <Loader size={28} className="text-[#0F766E] animate-spin" />
+        <div className="min-h-[400px] bg-[#EEEEEE] flex items-center justify-center">
+          <Loader size={28} className="text-[#00ADB5] animate-spin" />
         </div>
       ) : error ? (
-        <div className="bg-[#F8FAFC] p-6">
+        <div className="bg-[#EEEEEE] p-6">
           <p className="text-red-500 bg-red-100 p-4 rounded-md">
             Error: {error}
           </p>
         </div>
       ) : (
-        <section className="bg-[#F8FAFC] py-16 px-4 sm:px-10">
+        <section className="bg-[#EEEEEE] py-16 px-4 sm:px-10">
           <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#0F766E] mb-2">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#00ADB5] mb-2">
               {heading}
             </h2>
-            <p className="text-[#64748B] text-sm sm:text-base mb-10">
+            <p className="text-[#393E46] text-sm sm:text-base mb-10">
               Key destinations and connectivity around the project
             </p>
           </div>
@@ -120,25 +120,25 @@ const LocationAdvantages = () => {
               {slides[currentSlide].map((item, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-xl border border-[#E2E8F0] p-6 shadow-md hover:shadow-lg transition duration-300"
+                  className="bg-white rounded-xl border border-[#393E46] p-6 shadow-md hover:shadow-lg transition duration-300"
                 >
                   <div className="flex items-center gap-4 mb-3">
-                    <div className="bg-[#E0F2F1] text-[#0F766E] rounded-full p-2">
+                    <div className="bg-[#00ADB5]/20 text-[#00ADB5] rounded-full p-2">
                       {getLocationIcon(item.location)}
                     </div>
                     <div>
-                      <h4 className="text-lg font-semibold text-[#1E293B]">
+                      <h4 className="text-lg font-semibold text-[#222831]">
                         {item.location}
                       </h4>
-                      <p className="text-xs text-[#475569]">{item.distance}</p>
+                      <p className="text-xs text-[#393E46]">{item.distance}</p>
                     </div>
                   </div>
-                  <p className="text-sm text-[#475569] mb-4 leading-relaxed">
+                  <p className="text-sm text-[#393E46] mb-4 leading-relaxed">
                     {item.description}
                   </p>
                   <button
                     onClick={openDialog}
-                    className="text-[#0F766E] text-sm font-medium underline hover:text-[#FACC15]"
+                    className="text-[#00ADB5] text-sm font-medium underline hover:text-[#222831]"
                   >
                     View on map
                   </button>
@@ -157,7 +157,7 @@ const LocationAdvantages = () => {
                       (prev) => (prev - 1 + slides.length) % slides.length
                     )
                   }
-                  className="p-3 rounded-full bg-white border border-[#CBD5E1] hover:bg-[#FACC15]/30 text-[#0F766E] shadow"
+                  className="p-3 rounded-full bg-white border border-[#393E46] hover:bg-[#00ADB5]/20 text-[#00ADB5] shadow"
                 >
                   <ChevronLeft size={20} />
                 </button>
@@ -165,14 +165,14 @@ const LocationAdvantages = () => {
                   onClick={() =>
                     setCurrentSlide((prev) => (prev + 1) % slides.length)
                   }
-                  className="p-3 rounded-full bg-white border border-[#CBD5E1] hover:bg-[#FACC15]/30 text-[#0F766E] shadow"
+                  className="p-3 rounded-full bg-white border border-[#393E46] hover:bg-[#00ADB5]/20 text-[#00ADB5] shadow"
                 >
                   <ChevronRight size={20} />
                 </button>
               </div>
               <button
                 onClick={openDialog}
-                className="mt-2 px-8 py-3 rounded-full bg-[#FACC15] text-[#1E293B] font-semibold hover:bg-[#eab308] shadow zoom-pulse"
+                className="mt-2 px-8 py-3 rounded-full bg-[#00ADB5] text-[#EEEEEE] font-semibold hover:bg-[#222831] hover:text-[#EEEEEE] shadow zoom-pulse"
               >
                 Enquire About All Locations
               </button>
@@ -181,7 +181,7 @@ const LocationAdvantages = () => {
             <div className="mt-10 flex justify-center">
               <button
                 onClick={openDialog}
-                className="px-8 py-3 rounded-full bg-[#FACC15] text-[#1E293B] font-semibold hover:bg-[#eab308] shadow zoom-pulse"
+                className="px-8 py-3 rounded-full bg-[#00ADB5] text-[#EEEEEE] font-semibold hover:bg-[#222831] hover:text-[#EEEEEE] shadow zoom-pulse"
               >
                 Enquire About All Locations
               </button>

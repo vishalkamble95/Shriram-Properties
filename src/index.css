@@ -76,15 +76,15 @@ input:-webkit-autofill::first-line {
 
 @layer components {
   .rich-content h2 {
-    @apply text-lg font-semibold text-[#FACC15] mb-2;
+    @apply text-lg font-semibold text-[#00ADB5] mb-2; /* teal */
   }
 
   .rich-content p {
-    @apply text-sm text-[#CBD5E1] mb-3 leading-relaxed;
+    @apply text-sm text-[#EEEEEE] mb-3 leading-relaxed; /* off-white */
   }
 
   .rich-content ul {
-    @apply list-disc pl-5 text-sm text-[#CBD5E1] mb-3;
+    @apply list-disc pl-5 text-sm text-[#EEEEEE] mb-3; /* off-white */
   }
 
   .rich-content li {
@@ -92,16 +92,17 @@ input:-webkit-autofill::first-line {
   }
 
   .rich-content strong {
-    @apply font-bold text-[#FACC15];
+    @apply font-bold text-[#00ADB5]; /* teal */
   }
 
   .rich-content a {
-    @apply text-[#eab308] underline hover:text-[#FACC15];
+    @apply text-[#00ADB5] underline hover:text-[#393E46]; /* teal and dark slate */
   }
 }
 
 @keyframes zoomPulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {

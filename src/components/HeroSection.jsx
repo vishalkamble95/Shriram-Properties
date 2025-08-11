@@ -30,11 +30,11 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
   };
 
   return (
-    <section className="relative bg-[#0E1A24]">
+    <section className="relative bg-[#222831]">
       {/* HERO IMAGE (unchanged layout, still full screen) */}
       <div className="h-screen w-full relative overflow-hidden">
         {loading ? (
-          <div className="h-full w-full bg-[#CBD5E1]/10 animate-pulse"></div>
+          <div className="h-full w-full bg-[#EEEEEE]/10 animate-pulse"></div>
         ) : (
           <>
             {/* Desktop Images */}
@@ -84,8 +84,8 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
                     onClick={() => handleImageChange(index)}
                     className={`h-2 w-2 rounded-full ${
                       index === currentImageIndex
-                        ? "bg-[#FACC15]"
-                        : "bg-white/40 hover:bg-white/70"
+                        ? "bg-[#00ADB5]"
+                        : "bg-[#EEEEEE]/40 hover:bg-[#EEEEEE]/70"
                     }`}
                   />
                 ))}
@@ -96,19 +96,19 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
       </div>
 
       {/* CONTENT SECTION (redesigned) */}
-      <div className="bg-[#0E1A24] text-[#CBD5E1] px-4 sm:px-8 md:px-16 lg:px-24 py-16">
+      <div className="bg-[#222831] text-[#EEEEEE] px-4 sm:px-8 md:px-16 lg:px-24 py-16">
         {/* Heading & Location */}
         {loading ? (
           <div className="text-center space-y-4 mb-12">
-            <div className="h-8 w-60 mx-auto bg-[#CBD5E1]/20 rounded animate-pulse" />
-            <div className="h-4 w-40 mx-auto bg-[#CBD5E1]/20 rounded animate-pulse" />
+            <div className="h-8 w-60 mx-auto bg-[#EEEEEE]/20 rounded animate-pulse" />
+            <div className="h-4 w-40 mx-auto bg-[#EEEEEE]/20 rounded animate-pulse" />
           </div>
         ) : (
           <div className="text-center mb-12">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#FACC15] mb-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#00ADB5] mb-4">
               {propertyData.hero_banner_heading}
             </h1>
-            <div className="flex justify-center items-center gap-2 text-[#0F766E] text-base sm:text-lg font-medium">
+            <div className="flex justify-center items-center gap-2 text-[#00ADB5] text-base sm:text-lg font-medium">
               <MapPin size={20} />
               <span>{propertyData.location}</span>
             </div>
@@ -141,12 +141,12 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
           ].map((item, i) => (
             <div
               key={i}
-              className="bg-[#0F766E]/10 border border-[#0F766E]/30 rounded-xl p-5 text-center shadow-md hover:shadow-lg transition-all duration-300"
+              className="bg-[#393E46]/50 border border-[#00ADB5]/30 rounded-xl p-5 text-center shadow-md hover:shadow-lg transition-all duration-300"
             >
-              <div className="text-sm text-[#0F766E] font-medium mb-2">
+              <div className="text-sm text-[#00ADB5] font-medium mb-2">
                 {item.label}
               </div>
-              <div className="text-[#CBD5E1] font-semibold text-base">
+              <div className="text-[#EEEEEE] font-semibold text-base">
                 {item.value}
               </div>
             </div>
@@ -157,7 +157,7 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
           <button
             onClick={openDialog}
-            className="relative group flex items-center justify-center gap-2 bg-gradient-to-r from-[#0F766E] to-[#FACC15] text-[#0E1A24] px-6 py-3 rounded-lg font-semibold shadow-lg hover:opacity-90 transition-all duration-300 zoom-pulse overflow-hidden"
+            className="relative group flex items-center justify-center gap-2 bg-gradient-to-r from-[#00ADB5] to-[#EEEEEE] text-[#222831] px-6 py-3 rounded-lg font-semibold shadow-lg hover:opacity-90 transition-all duration-300 zoom-pulse overflow-hidden"
           >
             <Download size={18} className="relative z-10" />
             <span className="relative z-10">Download Brochure</span>
@@ -166,7 +166,7 @@ function HeroSection({ propertyData, loading, error, openDialog }) {
 
           <a
             href="#contact"
-            className="relative group flex items-center justify-center gap-2 border border-[#FACC15] text-[#FACC15] px-6 py-3 rounded-lg font-semibold hover:bg-[#FACC15] hover:text-[#0E1A24] shadow-md transition-all duration-300 zoom-pulse overflow-hidden"
+            className="relative group flex items-center justify-center gap-2 border border-[#00ADB5] text-[#00ADB5] px-6 py-3 rounded-lg font-semibold hover:bg-[#00ADB5] hover:text-[#222831] shadow-md transition-all duration-300 zoom-pulse overflow-hidden"
           >
             <Phone size={18} className="relative z-10" />
             <span className="relative z-10">Contact</span>
