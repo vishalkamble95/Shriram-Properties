@@ -20,7 +20,8 @@ export default function useContact() {
         }
 
         const data = await response.json();
-        setContact(data?.g_setting);
+
+        setContact(data?.contact_us);
       } catch (err) {
         setError(err.message || "An unexpected error occurred");
       } finally {

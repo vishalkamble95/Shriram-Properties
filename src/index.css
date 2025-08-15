@@ -76,15 +76,15 @@ input:-webkit-autofill::first-line {
 
 @layer components {
   .rich-content h2 {
-    @apply text-lg font-semibold text-[#00ADB5] mb-2; /* teal */
+    @apply text-xl font-semibold text-[#00ADB5] mb-3; /* slightly bigger teal heading */
   }
 
   .rich-content p {
-    @apply text-sm text-[#EEEEEE] mb-3 leading-relaxed; /* off-white */
+    @apply text-base text-[#EEEEEE] mb-3 leading-relaxed; /* from text-sm to text-base */
   }
 
   .rich-content ul {
-    @apply list-disc pl-5 text-sm text-[#EEEEEE] mb-3; /* off-white */
+    @apply list-disc pl-5 text-base text-[#EEEEEE] mb-3; /* slightly bigger list text */
   }
 
   .rich-content li {
@@ -92,7 +92,7 @@ input:-webkit-autofill::first-line {
   }
 
   .rich-content strong {
-    @apply font-bold text-[#00ADB5]; /* teal */
+    @apply font-bold text-[#00ADB5]; /* teal emphasis */
   }
 
   .rich-content a {

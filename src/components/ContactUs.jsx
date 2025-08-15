@@ -363,8 +363,8 @@ const ContactUs = () => {
 
                   <PhoneInput
                     country={"in"}
-                    onlyCountries={["in"]} // ✅ Restricts to India
-                    disableDropdown={true} // ✅ Hides the dropdown
+                    // onlyCountries={["in"]} // ✅ Restricts to India
+                    // disableDropdown={true} // ✅ Hides the dropdown
                     countryCodeEditable={false} // ✅ Prevents editing the +91 code
                     value={formData.phone_number}
                     onChange={(phone) => handlePhoneChange(phone)}

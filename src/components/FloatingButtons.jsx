@@ -22,16 +22,21 @@ const FloatingButtons = () => {
       id: "whatsapp",
       icon: <MessageCircle size={18} />,
       label: "WhatsApp",
-      href: `https://wa.me/918181817136?text=I%20am%20interested%20in%20${encodeURIComponent(
-        seodata?.data?.property_name
-      )}`,
+      href: contact?.contact_phone
+        ? `https://wa.me/${contact.contact_phone.replace(
+            /\D/g,
+            ""
+          )}?text=I%20am%20interested%20in%20${encodeURIComponent(
+            seodata?.data?.og_title
+          )}`
+        : "#",
       action: null,
     },
     {
       id: "phone",
       icon: <Phone size={18} />,
       label: "Call",
-      href: `tel:${contact?.footer_phone}`,
+      href: contact?.contact_phone ? `tel:${contact.contact_phone}` : "#",
       action: null,
     },
     {

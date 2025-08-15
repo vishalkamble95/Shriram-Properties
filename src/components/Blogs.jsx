@@ -94,7 +94,13 @@ const Blogs = () => {
         }
 
         const data = await response.json();
-        setBlogs(data.blogs);
+
+        // ✅ Sort blogs by created_at (latest first)
+        const sortedBlogs = [...data.blogs].sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
+
+        setBlogs(sortedBlogs);
         setLoading(false);
       } catch (err) {
         setError(err.message);

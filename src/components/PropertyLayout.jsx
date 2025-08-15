@@ -183,9 +183,6 @@ const PropertyLayouts = () => {
         </div>
 
         <div className="mt-6 text-center">
-          <h3 className={`text-2xl font-semibold mb-2 ${textColor}`}>
-            {layout.layout_name}
-          </h3>
           <div className={`${textColor} text-sm space-y-1`}>
             {layout.unit_layout_carpet_area && (
               <p>Carpet Area: {layout.unit_layout_carpet_area}</p>

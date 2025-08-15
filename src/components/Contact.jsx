@@ -164,14 +164,11 @@ export const ContactDialog = ({ isOpen, onClose }) => {
         message: "",
       });
 
-      // ✅ Redirect to Thank You page (respects basename)
-      navigate("/thank-you"); // ✅ Manual full path
+      if (typeof onClose === "function") {
+      onClose();
+    }
 
-      // Close dialog after success (optional)
-      // setTimeout(() => {
-      //   setSubmitStatus(null);
-      //   onClose();
-      // }, 4000);
+      navigate("/thank-you");
     } catch (error) {
       setSubmitStatus("error");
       setErrorMessage(
@@ -322,8 +319,9 @@ export const ContactDialog = ({ isOpen, onClose }) => {
               </label>
               <PhoneInput
                 country={"in"}
-                onlyCountries={["in"]}
-                disableDropdown
+                // onlyCountries={["in"]}
+                // disableDropdown
+                countryCodeEditable={false}
                 value={formData.phone_number}
                 onChange={(phone) => handlePhoneChange(phone)}
                 inputProps={{

@@ -86,6 +86,7 @@ const ReraInformation = () => {
 
   if (!reraData || reraData.length === 0) return null;
   const displayed = showAll ? reraData : reraData.slice(0, 2);
+  console.log("RERA Data:", displayed);
 
   return (
     <>
@@ -104,7 +105,7 @@ const ReraInformation = () => {
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 <div className="space-y-2">
                   <h2 className="text-3xl sm:text-4xl font-bold text-[#00ADB5]">
-                    {pageInfo?.heading || "RERA Information"}
+                    {pageInfo?.heading || "MAHARERA Information"}
                   </h2>
                   <p className="text-lg text-[#EEEEEE]/80">
                     {reraData.phase_name}
@@ -203,11 +204,16 @@ const ReraInformation = () => {
               <div className="flex flex-col md:flex-row justify-between items-center text-xs text-[#EEEEEE]/60 border-t border-[#EEEEEE]/10 pt-4">
                 <p>
                   Last updated:{" "}
-                  {new Date().toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
+                  {reraData?.updated_at
+                    ? new Date(reraData.updated_at).toLocaleDateString(
+                        "en-US",
+                        {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        }
+                      )
+                    : "N/A"}
                 </p>
                 <p>Source: Maharashtra Real Estate Regulatory Authority</p>
               </div>

@@ -83,7 +83,7 @@ const BlogContent = () => {
             <img
               src={blog.post_photo}
               alt={blog.post_title}
-              className="w-full h-64 object-cover"
+              className="w-full h-72 sm:h-96 lg:h-[500px] object-cover"
             />
           </div>
 

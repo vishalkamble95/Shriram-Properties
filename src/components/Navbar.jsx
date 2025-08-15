@@ -95,11 +95,11 @@ function Navbar({ propertyData, loading, openDialog }) {
               <span>MAHARERA Registered</span>
             </div>
             <a
-              href={`tel:${contact?.footer_phone}`}
+              href={`tel:${contact?.contact_phone}`}
               className="flex items-center gap-1.5 text-[#EEEEEE] hover:text-[#00ADB5] transition"
             >
               <Phone size={14} />
-              <span>{contact?.footer_phone}</span>
+              <span>{contact?.contact_phone}</span>
             </a>
           </div>
         </div>
@@ -162,8 +162,7 @@ function Navbar({ propertyData, loading, openDialog }) {
                 {/** Sanitize phone number and ensure fallback */}
                 {(() => {
                   const phoneNumber =
-                    contact?.footer_phone?.replace(/\s+/g, "") ||
-                    "918181817136";
+                    contact?.contact_phone?.replace(/\s+/g, "");
                   return (
                     <a
                       href={`tel:${phoneNumber}`}
@@ -282,7 +281,7 @@ function Navbar({ propertyData, loading, openDialog }) {
               {/* Call Now */}
               {(() => {
                 const phoneNumber =
-                  contact?.footer_phone?.replace(/\s+/g, "") || "918181817136";
+                  contact?.contact_phone?.replace(/\s+/g, "");
                 return (
                   <a
                     href={`tel:${phoneNumber}`}

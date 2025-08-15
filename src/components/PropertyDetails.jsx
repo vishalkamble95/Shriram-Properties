@@ -135,11 +135,16 @@ const PropertyDetails = () => {
                   <Calendar size={16} className="mr-2 text-[#00ADB5]" />
                   {/* Last Updated: {propertyData?.last_updated} */}
                   Last updated:{" "}
-                  {new Date().toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
+                  {propertyData?.last_updated
+                    ? new Date(propertyData.last_updated).toLocaleDateString(
+                        "en-US",
+                        {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        }
+                      )
+                    : "N/A"}
                 </span>
               </div>
             </div>

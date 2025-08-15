@@ -58,7 +58,7 @@ const Banks = () => {
         </h2>
         <p className="text-[#EEEEEE] text-base">
           Explore our curated selection of banking partners offering competitive
-          home loan options.
+          property loan options.
         </p>
       </div>
 

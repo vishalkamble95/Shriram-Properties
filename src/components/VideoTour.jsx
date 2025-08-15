@@ -107,7 +107,7 @@ const VideoTour = () => {
           <p className="text-[#EEEEEE]/90 text-base sm:text-lg leading-relaxed">
             Experience our premium property from anywhere in the world. Our
             virtual tour puts you in control, allowing you to explore every
-            detail and envision your future home.
+            detail and envision your future property.
           </p>
         </div>
 
